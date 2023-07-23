@@ -32,7 +32,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 using Microsoft.VisualStudio.Text.Editor.OptionsExtensionMethods;
 using Microsoft.VisualStudio.Text.Utilities;
 
-using Microsoft.VisualStudio.CodingConventions;
+//using Microsoft.VisualStudio.CodingConventions;
 using Microsoft.VisualStudio.Threading;
 using Microsoft.VisualStudio.Utilities;
 
@@ -49,7 +49,7 @@ using MonoDevelop.Projects.Policies;
 using MonoDevelop.Ide.Gui.Documents;
 
 using AutoSave = MonoDevelop.Ide.Editor.AutoSave;
-using EditorConfigService = MonoDevelop.Ide.Editor.EditorConfigService;
+//using EditorConfigService = MonoDevelop.Ide.Editor.EditorConfigService;
 using DefaultSourceEditorOptions = MonoDevelop.Ide.Editor.DefaultSourceEditorOptions;
 using MonoDevelop.Components;
 using System.Threading;
@@ -86,7 +86,7 @@ namespace MonoDevelop.TextEditor
 		static bool settingZoomLevel;
 
 		PolicyContainer policyContainer;
-		ICodingConventionContext editorConfigContext;
+		//ICodingConventionContext editorConfigContext;
 		bool warnOverwrite;
 		IDisposable textBufferRegistration;
 
@@ -161,7 +161,7 @@ namespace MonoDevelop.TextEditor
 			EditorOperations = (EditorOperationsInterface)Imports.EditorOperationsProvider.GetEditorOperations (TextView);
 			EditorOptions = Imports.EditorOptionsFactoryService.GetOptions (TextView);
 			TextBufferOptions = Imports.EditorOptionsFactoryService.GetOptions (TextView.TextBuffer);
-			UpdateTextEditorOptions (this, EventArgs.Empty);
+			//UpdateTextEditorOptions (this, EventArgs.Empty);
 			contentProviders = new List<IEditorContentProvider> (Imports.EditorContentProviderService.GetContentProvidersForView (TextView));
 
 			TextView.Properties [typeof (DocumentController)] = this;
@@ -199,7 +199,7 @@ namespace MonoDevelop.TextEditor
 			// Content providers can provide additional content
 			NotifyContentChanged ();
 
-			await Load (false);
+			////await Load (false);
 
 			return control;
 		}
@@ -249,11 +249,11 @@ namespace MonoDevelop.TextEditor
 
 			warnOverwrite = false;
 
-			if (editorConfigContext != null) {
-				editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
-				EditorConfigService.RemoveEditConfigContext (TextDocument.FilePath).Ignore ();
-				editorConfigContext = null;
-			}
+			// if (editorConfigContext != null) {
+			// 	editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
+			// 	EditorConfigService.RemoveEditConfigContext (TextDocument.FilePath).Ignore ();
+			// 	editorConfigContext = null;
+			// }
 
 			if (FilePath != TextDocument.FilePath && !string.IsNullOrEmpty (TextDocument.FilePath))
 				AutoSave.RemoveAutoSaveFile (TextDocument.FilePath);
@@ -272,7 +272,7 @@ namespace MonoDevelop.TextEditor
 
 			UpdateTextBufferRegistration ();
 
-			UpdateTextEditorOptions (null, null);
+			//UpdateTextEditorOptions (null, null);
 		}
 
 		protected override void OnOwnerChanged ()
@@ -280,7 +280,7 @@ namespace MonoDevelop.TextEditor
 			base.OnOwnerChanged ();
 
 			if (TextDocument != null) {
-				UpdateTextEditorOptions (null, null);
+				//UpdateTextEditorOptions (null, null);
 				UpdateTextBufferRegistration ();
 			}
 		}
@@ -312,19 +312,19 @@ namespace MonoDevelop.TextEditor
 
 			UnsubscribeFromEvents ();
 
-			if (policyContainer != null)
-				policyContainer.PolicyChanged -= PolicyChanged;
-			if (editorConfigContext != null) {
-				editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
-				EditorConfigService.RemoveEditConfigContext (FilePath).Ignore ();
-			}
+			//if (policyContainer != null)
+			//	policyContainer.PolicyChanged -= PolicyChanged;
+			//if (editorConfigContext != null) {
+				//editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
+				//EditorConfigService.RemoveEditConfigContext (FilePath).Ignore ();
+			//}
 
 			base.OnDispose ();
 		}
 
 		protected virtual void SubscribeToEvents ()
 		{
-			sourceEditorOptions.Changed += UpdateTextEditorOptions;
+			//sourceEditorOptions.Changed += UpdateTextEditorOptions;
 			TextDocument.DirtyStateChanged += HandleTextDocumentDirtyStateChanged;
 			TextBuffer.Changed += HandleTextBufferChanged;
 			TextView.Options.OptionChanged += TextBufferOptionsChanged;
@@ -332,8 +332,8 @@ namespace MonoDevelop.TextEditor
 
 		protected virtual void UnsubscribeFromEvents ()
 		{
-			if (sourceEditorOptions != null)
-				sourceEditorOptions.Changed -= UpdateTextEditorOptions;
+			// if (sourceEditorOptions != null)
+			// 	sourceEditorOptions.Changed -= UpdateTextEditorOptions;
 
 			if (TextDocument != null)
 				TextDocument.DirtyStateChanged -= HandleTextDocumentDirtyStateChanged;
@@ -362,38 +362,38 @@ namespace MonoDevelop.TextEditor
 				sourceEditorOptions.ShowLineNumberMargin);
 		}
 
-		void UpdateTextEditorOptions (object sender, EventArgs e)
-		{
-			UpdateTextEditorOptionsAsync ().Forget ();
-		}
+		// void UpdateTextEditorOptions (object sender, EventArgs e)
+		// {
+		// 	UpdateTextEditorOptionsAsync ().Forget ();
+		// }
 
-		async Task UpdateTextEditorOptionsAsync ()
-		{
-			UpdateLineNumberMarginOption ();
+		// async Task UpdateTextEditorOptionsAsync ()
+		// {
+		// 	UpdateLineNumberMarginOption ();
 
-			var foldMargin = PropertyService.Get<bool> ("ShowFoldMargin");
-			Imports.OutliningManagerService.GetOutliningManager (TextView).Enabled = foldMargin;
+		// 	var foldMargin = PropertyService.Get<bool> ("ShowFoldMargin");
+		// 	Imports.OutliningManagerService.GetOutliningManager (TextView).Enabled = foldMargin;
 
-			var newPolicyContainer = (Owner as IPolicyProvider)?.Policies;
-			if (newPolicyContainer != policyContainer) {
-				if (policyContainer != null)
-					policyContainer.PolicyChanged -= PolicyChanged;
-				policyContainer = newPolicyContainer;
-			}
-			if (policyContainer != null)
-				policyContainer.PolicyChanged += PolicyChanged;
+		// 	var newPolicyContainer = (Owner as IPolicyProvider)?.Policies;
+		// 	if (newPolicyContainer != policyContainer) {
+		// 		if (policyContainer != null)
+		// 			policyContainer.PolicyChanged -= PolicyChanged;
+		// 		policyContainer = newPolicyContainer;
+		// 	}
+		// 	if (policyContainer != null)
+		// 		policyContainer.PolicyChanged += PolicyChanged;
 
-			var newEditorConfigContext = await EditorConfigService.GetEditorConfigContext (FilePath, default);
-			if (newEditorConfigContext != editorConfigContext) {
-				if (editorConfigContext != null)
-					editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
-				editorConfigContext = newEditorConfigContext;
-			}
-			if (editorConfigContext != null)
-				editorConfigContext.CodingConventionsChangedAsync += UpdateOptionsFromEditorConfigAsync;
+		// 	var newEditorConfigContext = await EditorConfigService.GetEditorConfigContext (FilePath, default);
+		// 	if (newEditorConfigContext != editorConfigContext) {
+		// 		if (editorConfigContext != null)
+		// 			editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
+		// 		editorConfigContext = newEditorConfigContext;
+		// 	}
+		// 	if (editorConfigContext != null)
+		// 		editorConfigContext.CodingConventionsChangedAsync += UpdateOptionsFromEditorConfigAsync;
 
-			await UpdateOptionsFromEditorConfigAsync (null, null);
-		}
+		// 	await UpdateOptionsFromEditorConfigAsync (null, null);
+		// }
 
 		void ClearOptionValue(string optionName)
 		{
@@ -438,179 +438,179 @@ namespace MonoDevelop.TextEditor
 #endif
 		}
 
-		private Task UpdateOptionsFromEditorConfigAsync (object sender, CodingConventionsChangedEventArgs args)
-		{
-			// Set base options first, then override with editorconfig values
-			UpdateOptionsFromPolicy ();
+// 		private Task UpdateOptionsFromEditorConfigAsync (object sender, CodingConventionsChangedEventArgs args)
+// 		{
+// 			// Set base options first, then override with editorconfig values
+// 			UpdateOptionsFromPolicy ();
 
-			if (editorConfigContext == null)
-				return Task.CompletedTask;
+// 			if (editorConfigContext == null)
+// 				return Task.CompletedTask;
 
-			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetIndentStyle (out var indentStyle))
-				SetOptionValue (DefaultOptions.ConvertTabsToSpacesOptionName, indentStyle == IndentStyle.Spaces);
-			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetTabWidth (out var tabWidth))
-				SetOptionValue (DefaultOptions.TabSizeOptionName, tabWidth);
-			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetIndentSize (out var indentSize))
-				SetOptionValue (DefaultOptions.IndentSizeOptionName, indentSize);
-			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetLineEnding (out var lineEnding))
-				SetOptionValue (DefaultOptions.NewLineCharacterOptionName, lineEnding);
-			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetAllowTrailingWhitespace (out var allowTrailingWhitespace))
-				SetOptionValue (DefaultOptions.TrimTrailingWhiteSpaceOptionName, !allowTrailingWhitespace);
+// 			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetIndentStyle (out var indentStyle))
+// 				SetOptionValue (DefaultOptions.ConvertTabsToSpacesOptionName, indentStyle == IndentStyle.Spaces);
+// 			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetTabWidth (out var tabWidth))
+// 				SetOptionValue (DefaultOptions.TabSizeOptionName, tabWidth);
+// 			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetIndentSize (out var indentSize))
+// 				SetOptionValue (DefaultOptions.IndentSizeOptionName, indentSize);
+// 			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetLineEnding (out var lineEnding))
+// 				SetOptionValue (DefaultOptions.NewLineCharacterOptionName, lineEnding);
+// 			if (editorConfigContext.CurrentConventions.UniversalConventions.TryGetAllowTrailingWhitespace (out var allowTrailingWhitespace))
+// 				SetOptionValue (DefaultOptions.TrimTrailingWhiteSpaceOptionName, !allowTrailingWhitespace);
 
-			var setVerticalRulers = false;
-			int [] verticalRulers = null;
+// 			var setVerticalRulers = false;
+// 			int [] verticalRulers = null;
 
-			// "Show column ruler" preference still needs to be checked, regardless of whether or not editorconfig
-			// has a setting for where rulers should appear
-			if (PropertyService.Get<bool> ("ShowRuler")) {
-				if (editorConfigContext.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.RulersConvention, out var rulers)) {
-					setVerticalRulers = true;
-					if (!string.IsNullOrEmpty (rulers)) {
-						verticalRulers = Array.ConvertAll (rulers.Split (','), val => {
-							if (int.TryParse (val, out var col))
-								return col;
-							return 0;
-						});
-					}
-				} else if (editorConfigContext.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.MaxLineLengthConvention, out var maxLineLength)) {
-					if (maxLineLength != "off" && int.TryParse (maxLineLength, out var i)) {
-						setVerticalRulers = true;
-						verticalRulers = new [] { i };
-					} else
-						setVerticalRulers = false;
-				}
-			}
+// 			// "Show column ruler" preference still needs to be checked, regardless of whether or not editorconfig
+// 			// has a setting for where rulers should appear
+// 			if (PropertyService.Get<bool> ("ShowRuler")) {
+// 				if (editorConfigContext.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.RulersConvention, out var rulers)) {
+// 					setVerticalRulers = true;
+// 					if (!string.IsNullOrEmpty (rulers)) {
+// 						verticalRulers = Array.ConvertAll (rulers.Split (','), val => {
+// 							if (int.TryParse (val, out var col))
+// 								return col;
+// 							return 0;
+// 						});
+// 					}
+// 				} else if (editorConfigContext.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.MaxLineLengthConvention, out var maxLineLength)) {
+// 					if (maxLineLength != "off" && int.TryParse (maxLineLength, out var i)) {
+// 						setVerticalRulers = true;
+// 						verticalRulers = new [] { i };
+// 					} else
+// 						setVerticalRulers = false;
+// 				}
+// 			}
 
-#if !WINDOWS
-			if (setVerticalRulers)
-				EditorOptions.SetOptionValue (DefaultTextViewOptions.VerticalRulersName, verticalRulers ?? Array.Empty<int> ());
-#endif
+// #if !WINDOWS
+// 			if (setVerticalRulers)
+// 				EditorOptions.SetOptionValue (DefaultTextViewOptions.VerticalRulersName, verticalRulers ?? Array.Empty<int> ());
+// #endif
 
-			return Task.CompletedTask;
-		}
+// 			return Task.CompletedTask;
+// 		}
 
-		private void PolicyChanged (object sender, PolicyChangedEventArgs e)
-			=> UpdateTextEditorOptions (sender, e);
+// 		private void PolicyChanged (object sender, PolicyChangedEventArgs e)
+// 			=> UpdateTextEditorOptions (sender, e);
 
-		protected override object OnGetContent (Type type)
-		{
-			if (contentProviders != null) {
-				foreach (var provider in contentProviders) {
-					var content = provider.GetContent (TextView, type);
-					if (content != null) {
-						return content;
-					}
-				}
-			}
-			return GetIntrinsicType (type);
-		}
+// 		protected override object OnGetContent (Type type)
+// 		{
+// 			if (contentProviders != null) {
+// 				foreach (var provider in contentProviders) {
+// 					var content = provider.GetContent (TextView, type);
+// 					if (content != null) {
+// 						return content;
+// 					}
+// 				}
+// 			}
+// 			return GetIntrinsicType (type);
+// 		}
 
-		protected override IEnumerable<object> OnGetContents (Type type)
-		{
-			if (contentProviders != null) {
-				foreach (var provider in contentProviders) {
-					var contents = provider.GetContents (TextView, type);
-					if (contents != null) {
-						foreach (var content in contents)
-							yield return content;
-					}
-				}
-			}
+// 		protected override IEnumerable<object> OnGetContents (Type type)
+// 		{
+// 			if (contentProviders != null) {
+// 				foreach (var provider in contentProviders) {
+// 					var contents = provider.GetContents (TextView, type);
+// 					if (contents != null) {
+// 						foreach (var content in contents)
+// 							yield return content;
+// 					}
+// 				}
+// 			}
 
-			var intrinsicType = GetIntrinsicType (type);
-			if (intrinsicType != null) {
-				yield return intrinsicType;
-			}
-		}
+// 			var intrinsicType = GetIntrinsicType (type);
+// 			if (intrinsicType != null) {
+// 				yield return intrinsicType;
+// 			}
+// 		}
 
-		object GetIntrinsicType (Type type)
-		{
-			if (type.IsInstanceOfType (TextBuffer))
-				return TextBuffer;
-			if (type.IsInstanceOfType (TextDocument))
-				return TextDocument;
-			if (type.IsInstanceOfType (TextView))
-				return TextView;
-			if (type.IsInstanceOfType (this))
-				return this;
-			return null;
-		}
+// 		object GetIntrinsicType (Type type)
+// 		{
+// 			if (type.IsInstanceOfType (TextBuffer))
+// 				return TextBuffer;
+// 			if (type.IsInstanceOfType (TextDocument))
+// 				return TextDocument;
+// 			if (type.IsInstanceOfType (TextView))
+// 				return TextView;
+// 			if (type.IsInstanceOfType (this))
+// 				return this;
+// 			return null;
+// 		}
 
-		Task Load (bool reloading)
-		{
-			// We actually load initial content at construction time, so this
-			// overload only needs to cover reload and autosave scenarios
+// 		Task Load (bool reloading)
+// 		{
+// 			// We actually load initial content at construction time, so this
+// 			// overload only needs to cover reload and autosave scenarios
 
-			if (warnOverwrite) {
-				warnOverwrite = false;
-				DismissInfoBar ();
-				ShowNotification = false;
-			}
+// 			if (warnOverwrite) {
+// 				warnOverwrite = false;
+// 				DismissInfoBar ();
+// 				ShowNotification = false;
+// 			}
 
-			if (reloading) {
-				TextDocument.Reload ();
-			} else if (AutoSave.AutoSaveExists (FilePath)) {
-				var autosaveContent = AutoSave.LoadAutoSave (FilePath);
+// 			if (reloading) {
+// 				TextDocument.Reload ();
+// 			} else if (AutoSave.AutoSaveExists (FilePath)) {
+// 				var autosaveContent = AutoSave.LoadAutoSave (FilePath);
 
-				MarkDirty ();
-				warnOverwrite = true;
+// 				MarkDirty ();
+// 				warnOverwrite = true;
 
-				// Set editor read-only until user picks one of the above options.
-				var setWritable = !TextView.Options.DoesViewProhibitUserInput ();
-				if (setWritable)
-					TextView.Options.SetOptionValue (DefaultTextViewOptions.ViewProhibitUserInputId, true);
+// 				// Set editor read-only until user picks one of the above options.
+// 				var setWritable = !TextView.Options.DoesViewProhibitUserInput ();
+// 				if (setWritable)
+// 					TextView.Options.SetOptionValue (DefaultTextViewOptions.ViewProhibitUserInputId, true);
 
-				var (primaryMessageText, secondaryMessageText) = SplitMessageString (
-					BrandingService.BrandApplicationName (GettextCatalog.GetString (
-						"<b>An autosave file has been found for this file.</b>\n" +
-						"This could mean that another instance of MonoDevelop is editing this " +
-						"file, or that MonoDevelop crashed with unsaved changes.\n\n" +
-						"Do you want to use the original file, or load from the autosave file?")));
+// 				var (primaryMessageText, secondaryMessageText) = SplitMessageString (
+// 					BrandingService.BrandApplicationName (GettextCatalog.GetString (
+// 						"<b>An autosave file has been found for this file.</b>\n" +
+// 						"This could mean that another instance of MonoDevelop is editing this " +
+// 						"file, or that MonoDevelop crashed with unsaved changes.\n\n" +
+// 						"Do you want to use the original file, or load from the autosave file?")));
 
-				PresentInfobar (
-					primaryMessageText,
-					secondaryMessageText,
-					new InfoBarAction (
-						GetButtonString (GettextCatalog.GetString ("_Use original file")),
-						UseOriginalFile),
-					new InfoBarAction (
-						GetButtonString (GettextCatalog.GetString ("_Load from autosave")),
-						LoadFromAutosave,
-						isDefault: true));
+// 				PresentInfobar (
+// 					primaryMessageText,
+// 					secondaryMessageText,
+// 					new InfoBarAction (
+// 						GetButtonString (GettextCatalog.GetString ("_Use original file")),
+// 						UseOriginalFile),
+// 					new InfoBarAction (
+// 						GetButtonString (GettextCatalog.GetString ("_Load from autosave")),
+// 						LoadFromAutosave,
+// 						isDefault: true));
 
-				void OnActionSelected ()
-				{
-					DismissInfoBar ();
-					if (setWritable)
-						TextView.Options.SetOptionValue (DefaultTextViewOptions.ViewProhibitUserInputId, false);
-				}
+// 				void OnActionSelected ()
+// 				{
+// 					DismissInfoBar ();
+// 					if (setWritable)
+// 						TextView.Options.SetOptionValue (DefaultTextViewOptions.ViewProhibitUserInputId, false);
+// 				}
 
-				void LoadFromAutosave ()
-				{
-					try {
-						AutoSave.RemoveAutoSaveFile (FilePath);
-						ReplaceContent (autosaveContent.Text, autosaveContent.Encoding);
-					} catch (Exception e) {
-						LoggingService.LogError ("Could not load the autosave file", e);
-					} finally {
-						OnActionSelected ();
-					}
-				}
+// 				void LoadFromAutosave ()
+// 				{
+// 					try {
+// 						AutoSave.RemoveAutoSaveFile (FilePath);
+// 						ReplaceContent (autosaveContent.Text, autosaveContent.Encoding);
+// 					} catch (Exception e) {
+// 						LoggingService.LogError ("Could not load the autosave file", e);
+// 					} finally {
+// 						OnActionSelected ();
+// 					}
+// 				}
 
-				void UseOriginalFile ()
-				{
-					try {
-						AutoSave.RemoveAutoSaveFile (FilePath);
-					} catch (Exception e) {
-						LoggingService.LogError ("Could not remove the autosave file", e);
-					} finally {
-						OnActionSelected ();
-					}
-				}
-			}
+// 				void UseOriginalFile ()
+// 				{
+// 					try {
+// 						AutoSave.RemoveAutoSaveFile (FilePath);
+// 					} catch (Exception e) {
+// 						LoggingService.LogError ("Could not remove the autosave file", e);
+// 					} finally {
+// 						OnActionSelected ();
+// 					}
+// 				}
+// 			}
 
-			return Task.CompletedTask;
-		}
+// 			return Task.CompletedTask;
+// 		}
 
 		/// <summary>
 		/// Replace document content with new content. This marks the document as dirty.
@@ -779,7 +779,7 @@ namespace MonoDevelop.TextEditor
 					if (IsDisposed || !File.Exists (FilePath))
 						return;
 
-					Load (true);
+					////Load (true);
 					ShowNotification = false;
 				} catch (Exception ex) {
 					MessageService.ShowError ("Could not reload the file.", ex);

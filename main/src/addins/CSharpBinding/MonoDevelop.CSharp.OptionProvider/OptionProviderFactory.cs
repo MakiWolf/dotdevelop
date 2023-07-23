@@ -30,12 +30,12 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace MonoDevelop.CSharp.OptionProvider
 {
-	[Export (typeof (IDocumentOptionsProviderFactory))]
-	class EditorConfigDocumentOptionsProviderFactory : IDocumentOptionsProviderFactory
-	{
-		public IDocumentOptionsProvider TryCreate (Workspace workspace)
-		{
-			return new CSharpDocumentOptionsProvider ();
-		}
-	}
+	// [Export (typeof (IDocumentOptionsProviderFactory))]
+	// class EditorConfigDocumentOptionsProviderFactory : IDocumentOptionsProviderFactory
+	// {
+	// 	// public IDocumentOptionsProvider TryCreate (Workspace workspace)
+	// 	// {
+	// 	// 	return new CSharpDocumentOptionsProvider ();
+	// 	// }
+	// }
 }

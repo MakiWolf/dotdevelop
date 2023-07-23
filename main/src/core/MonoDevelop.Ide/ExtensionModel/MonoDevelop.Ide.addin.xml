@@ -1,6 +1,6 @@
 <ExtensionModel>
 	<Runtime>
-		<Import assembly="Microsoft.VisualStudio.CodingConventions.dll" />
+		<!--<Import assembly="Microsoft.VisualStudio.CodingConventions.dll" />-->
 		<Import assembly="Microsoft.VisualStudio.Composition.dll" />
 		<Import assembly="Microsoft.VisualStudio.CoreUtility.dll" />
 		<Import assembly="Microsoft.VisualStudio.Language.dll" />
@@ -431,7 +431,7 @@
 		<Assembly file="Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll" />
 		<Assembly file="Microsoft.CodeAnalysis.Workspaces.dll" />
 		<Assembly file="Microsoft.CodeAnalysis.Workspaces.MSBuild.dll" />
-		<Assembly file="Microsoft.VisualStudio.CodingConventions.dll" />
+		<!--<Assembly file="Microsoft.VisualStudio.CodingConventions.dll" />-->
 		<Assembly file="Microsoft.VisualStudio.Language.dll" />
 		<Assembly file="Microsoft.VisualStudio.Language.StandardClassification.dll"/>
 		<Assembly file="Microsoft.VisualStudio.Text.Logic.dll"/>
