@@ -280,10 +280,10 @@ namespace MonoDevelop.Ide.Editor
 			//IdeApp.Preferences.Editor.FollowCodingConventions.Changed += OnFollowCodingConventionsChanged;
 		}
 
-		// void OnFollowCodingConventionsChanged (object sender, EventArgs e)
-		// {
-		// 	UpdateContextOptions (null, null).Ignore ();
-		// }
+		/* void OnFollowCodingConventionsChanged (object sender, EventArgs e)
+		{
+			UpdateContextOptions (null, null).Ignore ();
+		} */
 
 
 		void UpdateFont ()
@@ -319,57 +319,57 @@ namespace MonoDevelop.Ide.Editor
 			return result;
 		}
 
-		// internal void SetContext (ICodingConventionContext context)
-		// {
-		// 	if (this.context == context)
-		// 		return;
-		// 	if (this.context != null)
-		// 		this.context.CodingConventionsChangedAsync -= UpdateContextOptions;
-		// 	this.context = context;
-		// 	context.CodingConventionsChangedAsync += UpdateContextOptions;
-		// 	UpdateContextOptions (null, null).Ignore ();
-		// }
+		/* internal void SetContext (ICodingConventionContext context)
+		{
+			if (this.context == context)
+				return;
+			if (this.context != null)
+				this.context.CodingConventionsChangedAsync -= UpdateContextOptions;
+			this.context = context;
+			context.CodingConventionsChangedAsync += UpdateContextOptions;
+			UpdateContextOptions (null, null).Ignore ();
+		}
 
-		// private Task UpdateContextOptions (object sender, CodingConventionsChangedEventArgs arg)
-		// {
-		// 	if (context == null)
-		// 		return Task.CompletedTask;
+		private Task UpdateContextOptions (object sender, CodingConventionsChangedEventArgs arg)
+		{
+			if (context == null)
+				return Task.CompletedTask;
 
-		// 	bool followCodingConventions = IdeApp.Preferences.Editor.FollowCodingConventions;
+			bool followCodingConventions = IdeApp.Preferences.Editor.FollowCodingConventions;
 
-		// 	defaultEolMarkerFromContext = null;
-		// 	if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetLineEnding (out string eolMarker))
-		// 		defaultEolMarkerFromContext = eolMarker;
+			defaultEolMarkerFromContext = null;
+			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetLineEnding (out string eolMarker))
+				defaultEolMarkerFromContext = eolMarker;
 
-		// 	tabsToSpacesFromContext = null;
-		// 	//if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentStyle (out Microsoft.VisualStudio.CodingConventions.IndentStyle result))
-		// 	//	tabsToSpacesFromContext = result == Microsoft.VisualStudio.CodingConventions.IndentStyle.Spaces;
+			tabsToSpacesFromContext = null;
+			//if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentStyle (out Microsoft.VisualStudio.CodingConventions.IndentStyle result))
+			//	tabsToSpacesFromContext = result == Microsoft.VisualStudio.CodingConventions.IndentStyle.Spaces;
 
-		// 	indentationSizeFromContext = null;
-		// 	if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentSize (out int indentSize)) 
-		// 		indentationSizeFromContext = indentSize;
+			indentationSizeFromContext = null;
+			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentSize (out int indentSize)) 
+				indentationSizeFromContext = indentSize;
 
-		// 	removeTrailingWhitespacesFromContext = null;
-		// 	if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetAllowTrailingWhitespace (out bool allowTrailing))
-		// 		removeTrailingWhitespacesFromContext = !allowTrailing;
+			removeTrailingWhitespacesFromContext = null;
+			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetAllowTrailingWhitespace (out bool allowTrailing))
+				removeTrailingWhitespacesFromContext = !allowTrailing;
 
-		// 	tabSizeFromContext = null;
-		// 	if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetTabWidth (out int tSize))
-		// 		tabSizeFromContext = tSize;
+			tabSizeFromContext = null;
+			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetTabWidth (out int tSize))
+				tabSizeFromContext = tSize;
 
-		// 	rulerColumnFromContext = null;
-		// 	showRulerFromContext = null;
-		// 	if (followCodingConventions && context.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.MaxLineLengthConvention, out string maxLineLength)) {
-		// 		if (maxLineLength != "off" && int.TryParse (maxLineLength, out int i)) {
-		// 			rulerColumnFromContext = i;
-		// 			showRulerFromContext = true;
-		// 		} else {
-		// 			showRulerFromContext = false;
-		// 		}
-		// 	}
-		// 	this.FireChange ();
-		// 	return Task.CompletedTask;
-		// }
+			rulerColumnFromContext = null;
+			showRulerFromContext = null;
+			if (followCodingConventions && context.CurrentConventions.TryGetConventionValue<string> (EditorConfigService.MaxLineLengthConvention, out string maxLineLength)) {
+				if (maxLineLength != "off" && int.TryParse (maxLineLength, out int i)) {
+					rulerColumnFromContext = i;
+					showRulerFromContext = true;
+				} else {
+					showRulerFromContext = false;
+				}
+			}
+			this.FireChange ();
+			return Task.CompletedTask;
+		} */
 
 		#region new options
 
@@ -929,15 +929,15 @@ namespace MonoDevelop.Ide.Editor
 		}
 		#endregion
 		
-		 public void Dispose ()
-		 {
-		// 	IdeServices.FontService.RemoveCallback (UpdateFont);
-		// 	IdeApp.Preferences.ColorScheme.Changed -= OnColorSchemeChanged;
-		// 	IdeApp.Preferences.Editor.FollowCodingConventions.Changed -= OnFollowCodingConventionsChanged;
-		// 	if (context != null)
-		// 		context.CodingConventionsChangedAsync -= UpdateContextOptions;
+		public void Dispose ()
+		{
+			/* IdeServices.FontService.RemoveCallback (UpdateFont);
+			IdeApp.Preferences.ColorScheme.Changed -= OnColorSchemeChanged;
+			IdeApp.Preferences.Editor.FollowCodingConventions.Changed -= OnFollowCodingConventionsChanged;
+			if (context != null)
+				context.CodingConventionsChangedAsync -= UpdateContextOptions; */
 		
-		 }
+		} 
 
 		void OnChanged (EventArgs args)
 		{
