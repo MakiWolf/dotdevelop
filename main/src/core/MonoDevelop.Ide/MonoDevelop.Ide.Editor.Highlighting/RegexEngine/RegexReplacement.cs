@@ -268,11 +268,11 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
             Match match;
 
             if (evaluator == null)
-                throw new ArgumentNullException("evaluator");
+                throw new ArgumentNullException(nameof(evaluator));
             if (count < -1)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             if (startat < 0 || startat > input.Length)
-                throw new ArgumentOutOfRangeException("startat");
+                throw new ArgumentOutOfRangeException(nameof(startat));
 
             if (count == 0)
 				return input.ToString ();

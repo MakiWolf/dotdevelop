@@ -1,4 +1,4 @@
-﻿//
+//
 // CompilationExtensions.cs
 //
 // Author:
@@ -56,7 +56,7 @@ namespace ICSharpCode.NRefactory6.CSharp
 		public static ITypeSymbol GetTypeSymbol(this Compilation compilation, string ns, string name, int arity, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (compilation == null)
-				throw new ArgumentNullException("compilation");
+				throw new ArgumentNullException(nameof(compilation));
 			var nsSymbol = FindNamespace (compilation.GlobalNamespace, ns, cancellationToken);
 			if (nsSymbol == null)
 				return null;

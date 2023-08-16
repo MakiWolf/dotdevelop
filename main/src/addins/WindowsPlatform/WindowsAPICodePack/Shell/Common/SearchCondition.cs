@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (nativeSearchCondition == null)
             {
-                throw new ArgumentNullException("nativeSearchCondition");
+                throw new ArgumentNullException(nameof(nativeSearchCondition));
             }
 
             NativeSearchCondition = nativeSearchCondition;

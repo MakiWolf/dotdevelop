@@ -1,4 +1,4 @@
-﻿//
+//
 // LayoutCache.cs
 //
 // Author:
@@ -41,7 +41,7 @@ namespace Mono.TextEditor
 		public LayoutCache (MonoTextEditor widget)
 		{
 			if (widget == null)
-				throw new ArgumentNullException ("widget");
+				throw new ArgumentNullException (nameof(widget));
 			this.widget = widget;
 		}
 
@@ -73,9 +73,9 @@ namespace Mono.TextEditor
 			public LayoutProxy (LayoutCache layoutCache, Pango.Layout layout)
 			{
 				if (layoutCache == null)
-					throw new ArgumentNullException ("layoutCache");
+					throw new ArgumentNullException (nameof(layoutCache));
 				if (layout == null)
-					throw new ArgumentNullException ("layout");
+					throw new ArgumentNullException (nameof(layout));
 				this.layoutCache = layoutCache;
 				this.layout = layout;
 			}

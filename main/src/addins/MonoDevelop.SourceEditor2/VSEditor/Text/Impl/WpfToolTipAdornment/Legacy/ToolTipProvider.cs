@@ -1,4 +1,4 @@
-﻿//
+//
 //  Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 //
@@ -54,11 +54,11 @@ namespace Microsoft.VisualStudio.Text.AdornmentLibrary.ToolTip.Implementation
         public void ShowToolTip(ITrackingSpan span, object toolTipContent, PopupStyles style)
         {
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
             if (span.TextBuffer != _textView.TextBuffer)
                 throw new ArgumentException("Invalid span");
             if (toolTipContent == null)
-                throw new ArgumentNullException("toolTipContent");
+                throw new ArgumentNullException(nameof(toolTipContent));
 
             var element = toolTipContent as Control;
             if (element == null)

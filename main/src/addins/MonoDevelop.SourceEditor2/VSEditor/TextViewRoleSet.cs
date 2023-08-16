@@ -20,14 +20,14 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (roles == null)
             {
-                throw new ArgumentNullException("roles");
+                throw new ArgumentNullException(nameof(roles));
             }
             this.roles = new List<String>();
             foreach (string role in roles)
             {
                 if (role == null)
                 {
-                    throw new ArgumentNullException("roles");
+                    throw new ArgumentNullException(nameof(roles));
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (textViewRole == null)
             {
-                throw new ArgumentNullException("textViewRole");
+                throw new ArgumentNullException(nameof(textViewRole));
             }
             string upperTextViewRole = textViewRole.ToUpperInvariant();
             foreach (string role in this.roles)
@@ -57,7 +57,7 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (textViewRoles == null)
             {
-                throw new ArgumentNullException("textViewRoles");
+                throw new ArgumentNullException(nameof(textViewRoles));
             }
             foreach (string textViewRole in textViewRoles)
             {
@@ -80,7 +80,7 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (textViewRoles == null)
             {
-                throw new ArgumentNullException("textViewRoles");
+                throw new ArgumentNullException(nameof(textViewRoles));
             }
             foreach (string textViewRole in textViewRoles)
             {
@@ -109,7 +109,7 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (roleSet == null)
             {
-                throw new ArgumentNullException("roleSet");
+                throw new ArgumentNullException(nameof(roleSet));
             }
             var resultRoles = new HashSet<string>(this.roles);
             foreach (string role in roleSet)

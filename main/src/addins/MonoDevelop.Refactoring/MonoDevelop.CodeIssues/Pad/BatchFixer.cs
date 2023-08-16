@@ -1,4 +1,4 @@
-﻿//
+//
 // BatchFixer.cs
 //
 // Author:
@@ -62,7 +62,7 @@ namespace MonoDevelop.CodeIssues
 		public IEnumerable<ActionSummary> TryFixIssues (IEnumerable<ActionSummary> actions)
 		{
 			if (actions == null)
-				throw new ArgumentNullException ("actions");
+				throw new ArgumentNullException (nameof(actions));
 				
 			// enumerate once
 			var actionSummaries = actions as IList<ActionSummary> ?? actions.ToList ();

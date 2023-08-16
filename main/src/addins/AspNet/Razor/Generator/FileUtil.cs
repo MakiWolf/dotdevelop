@@ -1,4 +1,4 @@
-﻿//
+//
 // FileUtil.cs
 //
 // Author:
@@ -115,7 +115,7 @@ namespace MonoDevelop.AspNet.Razor.Generator
 		static string GetFullPath (string path)
 		{
 			if (path == null)
-				throw new ArgumentNullException ("path");
+				throw new ArgumentNullException (nameof(path));
 			if (!isWindows || path.IndexOf ('*') == -1)
 				return Path.GetFullPath (path);
 			else {

@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Runtime.InteropServices;
@@ -33,7 +33,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
         {           
             CoreHelpers.ThrowIfNotVista();
 
-            if (settings == null) { throw new ArgumentNullException("settings"); }
+            if (settings == null) { throw new ArgumentNullException(nameof(settings)); }
 
             GCHandle handle = GCHandle.Alloc(settings.RecoveryData);
 
@@ -144,7 +144,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
         {
             // Throw PlatformNotSupportedException if the user is not running Vista or beyond
             CoreHelpers.ThrowIfNotVista();
-            if (settings == null) { throw new ArgumentNullException("settings"); }
+            if (settings == null) { throw new ArgumentNullException(nameof(settings)); }
 
             HResult hr = AppRestartRecoveryNativeMethods.RegisterApplicationRestart(settings.Command, settings.Restrictions);
 

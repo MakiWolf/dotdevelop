@@ -1,4 +1,4 @@
-﻿//// Copyright (c) 2011 AlphaSierraPapa for the SharpDevelop Team
+//// Copyright (c) 2011 AlphaSierraPapa for the SharpDevelop Team
 //// 
 //// Permission is hereby granted, free of charge, to any person obtaining a copy of this
 //// software and associated documentation files (the "Software"), to deal in the Software
@@ -374,7 +374,7 @@
 //		public string FormatMethodName (MethodDefinition method)
 //		{
 //			if (method == null)
-//				throw new ArgumentNullException ("method");
+//				throw new ArgumentNullException (nameof(method));
 
 //			return (method.IsConstructor) ? FormatTypeName (method.DeclaringType) : method.Name;
 //		}
@@ -382,7 +382,7 @@
 //		public string FormatTypeName (TypeDefinition type)
 //		{
 //			if (type == null)
-//				throw new ArgumentNullException ("type");
+//				throw new ArgumentNullException (nameof(type));
 
 //			return TypeToString (ConvertTypeOptions.DoNotUsePrimitiveTypeNames | ConvertTypeOptions.IncludeTypeParameterDefinitions, type);
 //		}

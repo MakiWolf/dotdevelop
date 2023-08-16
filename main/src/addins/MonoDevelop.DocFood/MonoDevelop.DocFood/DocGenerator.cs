@@ -1,4 +1,4 @@
-﻿// 
+// 
 // DocGenerator.cs
 //  
 // Author:
@@ -403,7 +403,7 @@ namespace MonoDevelop.DocFood
 		void Init (ISymbol member)
 		{
 			if (member == null)
-				throw new ArgumentNullException ("member");
+				throw new ArgumentNullException (nameof(member));
 			FillDocumentation (GetBaseDocumentation (member));
 			//			if (provider != null && !member.Location.IsEmpty && member.BodyRegion.EndLine > 1) {
 			//				LineSegment start = data.Document.GetLine (member.Region.BeginLine);

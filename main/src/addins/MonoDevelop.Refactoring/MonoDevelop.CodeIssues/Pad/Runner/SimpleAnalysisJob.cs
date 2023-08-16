@@ -1,4 +1,4 @@
-﻿//
+//
 // AbstractAnalysisJob.cs
 //
 // Author:
@@ -49,7 +49,7 @@ namespace MonoDevelop.CodeIssues
 		public SimpleAnalysisJob (IList<ProjectFile> files)
 		{
 			if (files == null)
-				throw new ArgumentNullException ("files");
+				throw new ArgumentNullException (nameof(files));
 			this.files = files;
 		}
 

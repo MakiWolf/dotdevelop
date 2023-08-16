@@ -1,4 +1,4 @@
-﻿//
+//
 // TextViewMargin.cs
 //
 // Author:
@@ -277,7 +277,7 @@ namespace Mono.TextEditor
 		public TextViewMargin (MonoTextEditor textEditor)
 		{
 			if (textEditor == null)
-				throw new ArgumentNullException ("textEditor");
+				throw new ArgumentNullException (nameof(textEditor));
 
 			// Overwrite the default margin role
 			if (Accessible != null) {

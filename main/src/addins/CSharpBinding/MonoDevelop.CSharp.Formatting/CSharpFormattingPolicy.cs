@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CSharpFormattingPolicy.cs
 //  
 // Author:
@@ -116,7 +116,7 @@ namespace MonoDevelop.CSharp.Formatting
 		public CSharpFormattingPolicy (OptionSet options)
 		{
 			if (options == null)
-				throw new ArgumentNullException ("options");
+				throw new ArgumentNullException (nameof(options));
 			this.options = options;
 		}
 

@@ -556,7 +556,7 @@ namespace Stetic
 						c = new WidgetComponent (this, cbackend, name, type != null ? GetComponentType (type) : null);
 						((ObjectWrapper)cbackend).Frontend = c;
 					} else if (cbackend == null)
-						throw new System.ArgumentNullException ("cbackend");
+						throw new System.ArgumentNullException (nameof(cbackend));
 					else
 						throw new System.InvalidOperationException ("Invalid component type: " + cbackend.GetType ());
 

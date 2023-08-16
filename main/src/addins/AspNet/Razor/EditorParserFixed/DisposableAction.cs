@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
+// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Microsoft Public License (MS-PL)
 
 using System;
@@ -13,7 +13,7 @@ namespace MonoDevelop.Web.Razor.EditorParserFixed
         {
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
             _action = action;
         }

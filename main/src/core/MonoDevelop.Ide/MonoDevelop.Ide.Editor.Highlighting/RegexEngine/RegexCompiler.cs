@@ -222,7 +222,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
         
             for (int i=0; i<regexes.Length; i++) {
                 if (regexes[i] == null) {
-                    throw new ArgumentNullException("regexes");
+                    throw new ArgumentNullException(nameof(regexes));
                 }
                 String pattern = regexes[i].Pattern;
                 RegexOptions options = regexes[i].Options;

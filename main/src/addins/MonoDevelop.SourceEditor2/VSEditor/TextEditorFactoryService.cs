@@ -121,7 +121,7 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (textEditor == null)
             {
-                throw new ArgumentNullException("textEditor");
+                throw new ArgumentNullException(nameof(textEditor));
             }
 
             if (roles == null) {

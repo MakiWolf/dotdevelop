@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CodeGenerationService.cs
 //  
 // Author:
@@ -258,7 +258,7 @@ namespace MonoDevelop.Refactoring
 		public static void AddAttribute (INamedTypeSymbol cls, string name, params object [] parameters)
 		{
 			if (cls == null)
-				throw new ArgumentNullException ("cls");
+				throw new ArgumentNullException (nameof(cls));
 			bool isOpen;
 			string fileName = cls.Locations.First ().SourceTree.FilePath;
 			var buffer = TextFileProvider.Instance.GetTextEditorData (fileName, out isOpen);

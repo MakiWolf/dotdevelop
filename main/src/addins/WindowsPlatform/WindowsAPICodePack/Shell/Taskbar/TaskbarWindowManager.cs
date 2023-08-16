@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
+// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -135,7 +135,7 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
 
         internal static TaskbarWindow GetTaskbarWindow(System.Windows.UIElement windowsControl, TaskbarProxyWindowType taskbarProxyWindowType)
         {
-            if (windowsControl == null) { throw new ArgumentNullException("windowsControl"); }
+            if (windowsControl == null) { throw new ArgumentNullException(nameof(windowsControl)); }
 
             TaskbarWindow toReturn = _taskbarWindowList.FirstOrDefault(window =>
             {

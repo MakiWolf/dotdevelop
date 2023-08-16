@@ -310,9 +310,9 @@ namespace MonoDevelop.AnalysisCore.Gui
 			public ResultsUpdater (ResultsEditorExtension ext, IReadOnlyList<Result> results, object resultsId, CancellationToken cancellationToken)
 			{
 				if (ext == null)
-					throw new ArgumentNullException ("ext");
+					throw new ArgumentNullException (nameof(ext));
 				if (results == null)
-					throw new ArgumentNullException ("results");
+					throw new ArgumentNullException (nameof(results));
 				this.ext = ext;
 				id = resultsId;
 				this.cancellationToken = cancellationToken;

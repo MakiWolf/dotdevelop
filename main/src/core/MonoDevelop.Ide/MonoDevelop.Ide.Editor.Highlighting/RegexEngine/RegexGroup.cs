@@ -89,7 +89,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
         static internal Group Synchronized(Group inner) {
 #endif
             if (inner == null)
-                throw new ArgumentNullException("inner");
+                throw new ArgumentNullException(nameof(inner));
 
             // force Captures to be computed.
 

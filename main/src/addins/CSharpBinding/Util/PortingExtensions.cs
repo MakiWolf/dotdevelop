@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -114,7 +114,7 @@ namespace Microsoft.CodeAnalysis
 		public static System.ComponentModel.EditorBrowsableState GetEditorBrowsableState (this ISymbol symbol)
 		{
 			if (symbol == null)
-				throw new ArgumentNullException ("symbol");
+				throw new ArgumentNullException (nameof(symbol));
 			var browsableState = symbol.GetAttributes ().FirstOrDefault (attr => attr.AttributeClass.Name == "EditorBrowsableAttribute" && attr.AttributeClass.ContainingNamespace.MetadataName == "System.ComponentModel");
 			if (browsableState != null && browsableState.ConstructorArguments.Length == 1) {
 				try {
@@ -138,7 +138,7 @@ namespace Microsoft.CodeAnalysis
 		public static bool IsEditorBrowsable (this ISymbol symbol)
 		{
 			if (symbol == null)
-				throw new ArgumentNullException ("symbol");
+				throw new ArgumentNullException (nameof(symbol));
 			return GetEditorBrowsableState (symbol) != System.ComponentModel.EditorBrowsableState.Never;
 		}
 

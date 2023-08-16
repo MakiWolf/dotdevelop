@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.ComponentModel;
@@ -35,7 +35,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (shellObject == null)
             {
-                throw new ArgumentNullException("shellObject");
+                throw new ArgumentNullException(nameof(shellObject));
             }
 
             if (_context == null)
@@ -133,7 +133,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         protected virtual void ProcessChangeNotificationEvent(WindowMessageEventArgs e)
         {
             if (!Running) { return; }
-            if (e == null) { throw new ArgumentNullException("e"); }
+            if (e == null) { throw new ArgumentNullException(nameof(e)); }
 
             ChangeNotifyLock notifyLock = new ChangeNotifyLock(e.Message);
 

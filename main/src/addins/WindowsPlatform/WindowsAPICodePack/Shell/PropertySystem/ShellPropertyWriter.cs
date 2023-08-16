@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Runtime.InteropServices;
@@ -171,7 +171,7 @@ namespace Microsoft.WindowsAPICodePack.Shell.PropertySystem
         /// <param name="allowTruncatedValue">True to allow truncation (default); otherwise False.</param>
         public void WriteProperty(IShellProperty shellProperty, object value, bool allowTruncatedValue)
         {
-            if (shellProperty == null) { throw new ArgumentNullException("shellProperty"); }
+            if (shellProperty == null) { throw new ArgumentNullException(nameof(shellProperty)); }
             WriteProperty(shellProperty.PropertyKey, value, allowTruncatedValue);
         }
 
@@ -195,7 +195,7 @@ namespace Microsoft.WindowsAPICodePack.Shell.PropertySystem
         /// <param name="allowTruncatedValue">True to allow truncation (default); otherwise False.</param>
         public void WriteProperty<T>(ShellProperty<T> shellProperty, T value, bool allowTruncatedValue)
         {
-            if (shellProperty == null) { throw new ArgumentNullException("shellProperty"); }
+            if (shellProperty == null) { throw new ArgumentNullException(nameof(shellProperty)); }
             WriteProperty(shellProperty.PropertyKey, value, allowTruncatedValue);
         }
 

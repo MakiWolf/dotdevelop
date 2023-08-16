@@ -1,4 +1,4 @@
-﻿// 
+// 
 // PathedDocumentTextEditorExtension.cs
 //  
 // Author:
@@ -372,7 +372,7 @@ namespace MonoDevelop.CSharp
 			public DataProvider (PathedDocumentTextEditorExtension ext, object tag)
 			{
 				if (ext == null)
-					throw new ArgumentNullException ("ext");
+					throw new ArgumentNullException (nameof(ext));
 				this.ext = ext;
 				this.tag = tag;
 				Reset ();

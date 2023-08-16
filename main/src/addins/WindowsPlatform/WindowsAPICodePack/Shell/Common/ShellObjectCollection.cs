@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections;
@@ -326,7 +326,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <param name="arrayIndex">The index into the array at which copying will commence.</param>
         public void CopyTo(ShellObject[] array, int arrayIndex)
         {
-            if (array == null) { throw new ArgumentNullException("array"); }
+            if (array == null) { throw new ArgumentNullException(nameof(array)); }
             if (array.Length < arrayIndex + content.Count)
             {
                 throw new ArgumentException(LocalizedMessages.ShellObjectCollectionArrayTooSmall, "array");

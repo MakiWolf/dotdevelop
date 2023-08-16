@@ -71,15 +71,15 @@ namespace Microsoft.VisualStudio.Text.Editor.Implementation
         {
             if (textView == null)
             {
-                throw new ArgumentNullException("textView");
+                throw new ArgumentNullException(nameof(textView));
             }
             if (textViewConnectionListeners == null)
             {
-                throw new ArgumentNullException("textViewConnectionListeners");
+                throw new ArgumentNullException(nameof(textViewConnectionListeners));
             }
             if (guardedOperations == null)
             {
-                throw new ArgumentNullException("guardedOperations");
+                throw new ArgumentNullException(nameof(guardedOperations));
             }
 
             _textView = textView;

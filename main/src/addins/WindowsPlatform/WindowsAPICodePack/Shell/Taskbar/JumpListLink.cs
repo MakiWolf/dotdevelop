@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Runtime.InteropServices;
@@ -25,12 +25,12 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
         {
             if (string.IsNullOrEmpty(pathValue))
             {
-                throw new ArgumentNullException("pathValue", LocalizedMessages.JumpListLinkPathRequired);
+                throw new ArgumentNullException(nameof(pathValue), LocalizedMessages.JumpListLinkPathRequired);
             }
 
             if (string.IsNullOrEmpty(titleValue))
             {
-                throw new ArgumentNullException("titleValue", LocalizedMessages.JumpListLinkTitleRequired);
+                throw new ArgumentNullException(nameof(titleValue), LocalizedMessages.JumpListLinkTitleRequired);
             }
 
             Path = pathValue;
@@ -48,7 +48,7 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value", LocalizedMessages.JumpListLinkTitleRequired);
+                    throw new ArgumentNullException(nameof(value), LocalizedMessages.JumpListLinkTitleRequired);
                 }
 
                 title = value;
@@ -66,7 +66,7 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value", LocalizedMessages.JumpListLinkTitleRequired);
+                    throw new ArgumentNullException(nameof(value), LocalizedMessages.JumpListLinkTitleRequired);
                 }
 
                 path = value;

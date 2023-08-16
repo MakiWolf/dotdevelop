@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.Language.Intellisense.Implementation
         {
             if (triggerPoint == null)
             {
-                throw new ArgumentNullException("triggerPoint");
+                throw new ArgumentNullException(nameof(triggerPoint));
             }
 
             this.triggerPoint = triggerPoint;

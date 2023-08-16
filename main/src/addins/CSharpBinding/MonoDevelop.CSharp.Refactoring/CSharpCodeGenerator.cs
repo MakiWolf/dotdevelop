@@ -1,4 +1,4 @@
-﻿// 
+// 
 // CSharpCodeGenerator.cs
 //  
 // Author:
@@ -322,7 +322,7 @@ namespace MonoDevelop.CSharp.Refactoring
 		static void AppendReturnType(StringBuilder result, CodeGenerationOptions options, ITypeSymbol type)
 		{
 			if (type == null)
-				throw new ArgumentNullException("type");
+				throw new ArgumentNullException(nameof(type));
 			result.Append(CSharpAmbience.SafeMinimalDisplayString (type, options.SemanticModel, options.Part.SourceSpan.Start, Ambience.LabelFormat));
 
 			//			var implementingType = options.Part;

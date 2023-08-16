@@ -85,9 +85,9 @@ namespace MonoDevelop.CodeActions
 		internal CodeRefactoringDescriptor (Type codeActionType, ExportCodeRefactoringProviderAttribute attr)
 		{
 			if (codeActionType == null)
-				throw new ArgumentNullException ("codeActionType");
+				throw new ArgumentNullException (nameof(codeActionType));
 			if (attr == null)
-				throw new ArgumentNullException ("attr");
+				throw new ArgumentNullException (nameof(attr));
 			this.codeActionType = codeActionType;
 			this.attr = attr;
 		}

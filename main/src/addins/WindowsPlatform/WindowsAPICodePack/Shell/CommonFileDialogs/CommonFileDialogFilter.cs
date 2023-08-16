@@ -45,7 +45,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             if (string.IsNullOrEmpty(extensionList))
             {
-                throw new ArgumentNullException("extensionList");
+                throw new ArgumentNullException(nameof(extensionList));
             }
 
             this.rawDisplayName = rawDisplayName;
@@ -85,7 +85,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
                 rawDisplayName = value;
             }

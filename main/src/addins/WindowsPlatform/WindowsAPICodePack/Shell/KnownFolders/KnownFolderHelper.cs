@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
+// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Diagnostics;
@@ -147,7 +147,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (parsingName == null)
             {
-                throw new ArgumentNullException("parsingName");
+                throw new ArgumentNullException(nameof(parsingName));
             }
 
             IntPtr pidl = IntPtr.Zero;

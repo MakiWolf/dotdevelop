@@ -275,7 +275,7 @@ namespace Stetic
 		public void AttachObject (object ob)
 		{
 			if (ob == null)
-				throw new ArgumentNullException ("ob");
+				throw new ArgumentNullException (nameof(ob));
 			
 			syncing = true;
 			this.obj = ob;

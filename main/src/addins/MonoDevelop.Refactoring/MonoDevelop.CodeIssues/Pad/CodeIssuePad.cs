@@ -253,9 +253,9 @@ namespace MonoDevelop.CodeIssues
 		void SetNode (TreeNavigator navigator, IIssueTreeNode node)
 		{
 			if (navigator == null)
-				throw new ArgumentNullException ("navigator");
+				throw new ArgumentNullException (nameof (navigator));
 			if (node == null)
-				throw new ArgumentNullException ("node");
+				throw new ArgumentNullException (nameof (node));
 			
 			navigator.SetValue (nodeField, node);
 			Debug.Assert (!nodePositions.ContainsKey (node));

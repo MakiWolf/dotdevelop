@@ -48,7 +48,7 @@ namespace MonoDevelop.JSon
 		public JSonIndentEngine (Ide.Editor.TextEditor editor)
 		{
 			if (editor == null)
-				throw new ArgumentNullException ("editor");
+				throw new ArgumentNullException (nameof(editor));
 			this.editor = editor;
 			Reset ();
 		}

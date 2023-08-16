@@ -200,7 +200,7 @@ namespace MonoDevelop.CSharp
 		public override Task<MonoDevelop.Ide.CodeCompletion.TooltipInformation> GetTooltip (CancellationToken token, Microsoft.CodeAnalysis.ISymbol entity)
 		{
 			if (entity == null)
-				throw new ArgumentNullException ("entity");
+				throw new ArgumentNullException (nameof(entity));
 			return SourceEditor.LanguageItemTooltipProvider.CreateTooltipInformation (token, null, null, entity, false, true);
 		}
 

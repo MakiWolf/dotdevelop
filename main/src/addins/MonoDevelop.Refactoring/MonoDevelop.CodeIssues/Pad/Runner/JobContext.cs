@@ -38,11 +38,11 @@ namespace MonoDevelop.CodeIssues
 		public JobContext(IAnalysisJob job, AnalysisJobQueue queue, CodeAnalysisBatchRunner runner)
 		{
 			if (job == null)
-				throw new ArgumentNullException ("job");
+				throw new ArgumentNullException (nameof(job));
 			if (queue == null)
-				throw new ArgumentNullException ("queue");
+				throw new ArgumentNullException (nameof(queue));
 			if (runner == null)
-				throw new ArgumentNullException ("runner");
+				throw new ArgumentNullException (nameof(runner));
 			this.job = job;
 			this.queue = queue;
 			this.runner = runner;
