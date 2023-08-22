@@ -300,7 +300,7 @@
 		</Condition>
 		<SeparatorItem id = "Separator3" />
 		<Condition id = "Branding" value = "MonoDevelop">
-			<LinkItem id = "ReportBug" _label = "Report Problem..." link = "http://xamar.in/r/file_studio_bug" />
+			<LinkItem id = "ReportBug" _label = "Report Problem..." link = "https://github.com/dotdevelop/dotdevelop/issues" />
 		</Condition>
 		<SeparatorItem id = "DiagnosticToolsSeparator" />
 		<CommandItem id = "MonoDevelop.Ide.Commands.HelpCommands.OpenLogDirectory" />
