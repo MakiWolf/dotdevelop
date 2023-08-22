@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-  <id type="desktop">monodevelop.desktop</id>
+  <id type="desktop">dotdevelop.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.1 and MIT</project_license>
-  <name>MonoDevelop</name>
+  <name>DotDevelop</name>
   <summary>Full-Featured IDE for Mono and Gtk#</summary>
   <description>
     <p>
-      MonoDevelop is a full-featured integrated development
+      DotDevelop is a full-featured integrated development
       environment (IDE) for Mono and Gtk# primarily designed
       for C# and other .NET languages. It allows to quickly
       create desktop and ASP.NET Web applications.
