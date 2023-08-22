@@ -6,7 +6,7 @@ using Mono.Addins.Description;
 [assembly:Addin ("DesignerSupport", 
         Namespace = "MonoDevelop",
         Version = MonoDevelop.BuildInfo.Version,
-        Category = "MonoDevelop Core")]
+        Category = "DotDevelop Core")]
 
 [assembly:AddinName ("Visual Designer Support")]
 [assembly:AddinDescription ("Supporting services and pads for visual design tools")]

@@ -2,7 +2,7 @@
 
 using System.Reflection;
 
-[assembly: AssemblyProduct ("MonoDevelop")]
+[assembly: AssemblyProduct ("DotDevelop")]
 [assembly: AssemblyTitle ("Visual Designer Support")]
 [assembly: AssemblyDescription ("Supporting services and pads for visual design tools.")]
 [assembly: AssemblyVersion ("2.6")]

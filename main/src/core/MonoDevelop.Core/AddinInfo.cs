@@ -6,7 +6,7 @@ using Mono.Addins;
         Namespace = "MonoDevelop", 
         Version = MonoDevelop.BuildInfo.Version,
         CompatVersion = MonoDevelop.BuildInfo.CompatVersion,
-        Category = "MonoDevelop Core")]
+        Category = "DotDevelop Core")]
 
-[assembly:AddinName ("MonoDevelop Runtime")]
-[assembly:AddinDescription ("Provides the core services of the MonoDevelop platform")]
+[assembly:AddinName ("DotDevelop Runtime")]
+[assembly:AddinDescription ("Provides the core services of the DotDevelop platform")]

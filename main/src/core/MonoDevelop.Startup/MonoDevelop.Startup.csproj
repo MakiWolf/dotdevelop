@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{DA8EDEA6-7DA8-435D-B1A0-F3A0CA07F424}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>MonoDevelop</AssemblyName>
+    <AssemblyName>DotDevelop</AssemblyName>
     <ApplicationIcon>..\..\..\theme-icons\Windows\monodevelop.ico</ApplicationIcon>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <Commandlineparameters>-no-redirect</Commandlineparameters>
