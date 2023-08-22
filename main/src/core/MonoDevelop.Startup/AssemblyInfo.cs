@@ -8,11 +8,11 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("MonoDevelop")]
+[assembly: AssemblyTitle("DotDevelop")]
 [assembly: AssemblyDescription("A full-featured IDE for Mono and Gtk#.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MonoDevelop")]
+[assembly: AssemblyProduct("DotDevelop")]
 [assembly: AssemblyCopyright("(c) 2004 MonoDevelop Team and Mike Krueger 2000-2003")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -2,7 +2,7 @@
 
 using System.Reflection;
 
-[assembly: AssemblyProduct ("MonoDevelop")]
+[assembly: AssemblyProduct ("DotDevelop")]
 [assembly: AssemblyTitle ("XML Editor")]
 [assembly: AssemblyDescription ("XML Editor")]
 [assembly: AssemblyVersion ("2.6")]

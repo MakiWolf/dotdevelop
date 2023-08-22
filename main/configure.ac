@@ -1,4 +1,4 @@
-AC_INIT([monodevelop], m4_esyscmd_s([grep ^Version ../version.config|cut -d '=' -f 2|tr -d '\n']), [monodevelop-list@lists.ximian.com])
+AC_INIT([dotdevelop], m4_esyscmd_s([grep ^Version ../version.config|cut -d '=' -f 2|tr -d '\n']), [monodevelop-list@lists.ximian.com])
 AC_PREREQ(2.53)
 AM_INIT_AUTOMAKE([1.10 tar-ustar])
 AM_MAINTAINER_MODE
@@ -79,7 +79,7 @@ AM_CONDITIONAL(ENABLE_WINDOWSPLATFORM, [test x$enable_windowsplatform = xyes])
 dnl Intl
 ALL_LINGUAS="cs da de es fr ja pt_BR tr pl it zh_TW zh_CN ru sl ca gl pt sv nl id hu nb ko uk"
 AC_SUBST(ALL_LINGUAS)
-GETTEXT_PACKAGE=monodevelop
+GETTEXT_PACKAGE=dotdevelop
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 

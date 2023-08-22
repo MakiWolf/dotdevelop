@@ -3,9 +3,9 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyProduct ("MonoDevelop")]
-[assembly: AssemblyTitle ("MonoDevelop Ide")]
-[assembly: AssemblyDescription ("The MonoDevelop IDE application.")]
+[assembly: AssemblyProduct ("DotDevelop")]
+[assembly: AssemblyTitle ("DotDevelop Ide")]
+[assembly: AssemblyDescription ("The DotDevelop IDE application.")]
 [assembly: AssemblyVersion ("2.6")]
 [assembly: AssemblyCopyright ("LGPL")]
 

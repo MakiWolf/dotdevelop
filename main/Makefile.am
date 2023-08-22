@@ -52,7 +52,7 @@ buildinfodir = $(MD_ASSEMBLY_DIR)
 buildinfo_DATA = $(buildinfo)
 
 desktopdir = $(datadir)/applications
-desktop_DATA = monodevelop.desktop
+desktop_DATA = dotdevelop.desktop
 
 appdatadir = $(datadir)/appdata
 appdata_DATA = monodevelop.appdata.xml

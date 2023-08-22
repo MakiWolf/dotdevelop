@@ -6,9 +6,9 @@ using Mono.Addins;
             Namespace = "MonoDevelop", 
             Version = MonoDevelop.BuildInfo.Version,
             CompatVersion = MonoDevelop.BuildInfo.CompatVersion,
-            Category = "MonoDevelop Core")]
+            Category = "DotDevelop Core")]
 
-[assembly:AddinName ("MonoDevelop Ide")]
-[assembly:AddinDescription ("The MonoDevelop IDE application")]
+[assembly:AddinName ("DotDevelop Ide")]
+[assembly:AddinDescription ("The DotDevelop IDE application")]
 
 [assembly:AddinDependency ("Core", MonoDevelop.BuildInfo.Version)]
