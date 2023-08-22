@@ -42,8 +42,8 @@ namespace MonoDevelop.Core
 		static XDocument brandingDocument;
 		static XDocument localizedBrandingDocument;
 
-		static string applicationName = "MonoDevelop";
-		static string applicationLongName = "MonoDevelop";
+		static string applicationName = "DotDevelop";
+		static string applicationLongName = "DotDevelop";
 
 		public static readonly string SuiteName;
 		public static readonly string ProfileDirectoryName;
@@ -56,7 +56,7 @@ namespace MonoDevelop.Core
 			}
 			set {
 				if (string.IsNullOrEmpty (value))
-					value = "MonoDevelop";
+					value = "DotDevelop";
 
 				if (applicationName != value) {
 					applicationName = value;
@@ -71,7 +71,7 @@ namespace MonoDevelop.Core
 			}
 			set {
 				if (string.IsNullOrEmpty (value))
-					value = "MonoDevelop";
+					value = "DotDevelop";
 
 				if (applicationLongName != value) {
 					applicationLongName = value;
@@ -217,17 +217,17 @@ namespace MonoDevelop.Core
 
 		public static string BrandApplicationName (string s)
 		{
-			return s.Replace ("MonoDevelop", ApplicationName);
+			return s.Replace ("DotDevelop", ApplicationName);
 		}
 
 		public static string BrandApplicationLongName (string s)
 		{
-			return s.Replace ("MonoDevelop", ApplicationLongName);
+			return s.Replace ("DotDevelop", ApplicationLongName);
 		}
 
 		public static string BrandEnvironmentVariable (string envVar)
 		{
-			return envVar.Replace ("MONODEVELOP", ProfileDirectoryName.ToUpper ());
+			return envVar.Replace ("DOTDEVELOP", ProfileDirectoryName.ToUpper ());
 		}
 
 		public static event EventHandler ApplicationNameChanged;

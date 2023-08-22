@@ -299,7 +299,7 @@
 			<LinkItem id = "Mono" _label = "Mono Project" description = "A free .NET implementation effort, worth visiting" link = "http://www.mono-project.com" />
 		</Condition>
 		<SeparatorItem id = "Separator3" />
-		<Condition id = "Branding" value = "MonoDevelop">
+		<Condition id = "Branding" value = "DotDevelop">
 			<LinkItem id = "ReportBug" _label = "Report Problem..." link = "https://github.com/dotdevelop/dotdevelop/issues" />
 		</Condition>
 		<SeparatorItem id = "DiagnosticToolsSeparator" />
