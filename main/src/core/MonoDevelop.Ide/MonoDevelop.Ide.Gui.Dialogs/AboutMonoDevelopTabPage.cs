@@ -113,7 +113,11 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				Markup = string.Format ("<b>{0}</b>", GettextCatalog.GetString ("Copyright")),
 				MarginTop = 6,
 			});
-
+			
+			infoBox.PackStart (new Xwt.Label () {
+				Text = "© 2020–" + DateTime.Now.Year + " DotDevelop contributors",
+				MarginLeft = 12
+			});
 			infoBox.PackStart (new Xwt.Label () {
 				Text = (DateTime.Now.Year == 2016 ? "© 2016" : "© 2016–" + DateTime.Now.Year) + " Microsoft Corp.",
 				MarginLeft = 12
@@ -126,7 +130,6 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				Text = "© 2004–" + DateTime.Now.Year + " MonoDevelop contributors",
 				MarginLeft = 12
 			});
-
 			this.ShowAll ();
 		}
 	}
