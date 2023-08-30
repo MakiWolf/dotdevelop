@@ -340,6 +340,46 @@
 				category="netcore/app/general"/>
 		</Condition>
 		</Condition>
+
+		<!-- Include templates for dotnet-sdk-7.0		-->
+		<Condition id="DotNetCoreSdkInstalled" sdkVersion="7.0">
+		<Template
+			id="Microsoft.Common.Console.CSharp"
+			templateId="Microsoft.Common.Console.CSharp.7.0"
+			_overrideName="Console Application"
+			_overrideDescription="Creates a new .NET Core console project."
+			path="${DotNetCoreSdk.7.0.Templates.Common.ProjectTemplates.nupkg}"
+			icon="md-netcore-console-project"
+			imageId="md-netcore-console-project"
+			wizard="MonoDevelop.DotNetCore.ProjectTemplateWizard"
+			condition="UseNetCore70=true"
+			category="netcore/app/general"/>
+		<Template
+			id="Microsoft.Common.Console.FSharp"
+			templateId="Microsoft.Common.Console.FSharp.7.0"
+			_overrideName="Console Application"
+			_overrideDescription="Creates a new .NET Core console project."
+			path="${DotNetCoreSdk.7.0.Templates.Common.ProjectTemplates.nupkg}"
+			icon="md-netcore-console-project"
+			imageId="md-netcore-console-project"
+			wizard="MonoDevelop.DotNetCore.ProjectTemplateWizard"
+			condition="UseNetCore70=true"
+			category="netcore/app/general"/>
+		<Condition id="FeatureSwitch" name="VBNetDotnetCoreTemplates">
+			<Template
+				id="Microsoft.Common.Console.VisualBasic"
+				templateId="Microsoft.Common.Console.VisualBasic.7.0"
+				_overrideName="Console Application"
+				_overrideDescription="Creates a new .NET Core console project."
+				overrideLanguage="VBNet"
+				path="${DotNetCoreSdk.7.0.Templates.Common.ProjectTemplates.nupkg}"
+				icon="md-netcore-console-project"
+				imageId="md-netcore-console-project"
+				wizard="MonoDevelop.DotNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/general"/>
+		</Condition>
+		</Condition>
 		
 		<!--
 			.NET Standard library project in Multiplatform - Library category.

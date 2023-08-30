@@ -33,6 +33,7 @@ namespace MonoDevelop.DotNetCore.Templating
 {
 	class DotNetCoreProjectTemplateWizard : TemplateWizard
 	{
+		const string defaultParameterNetCore70 = "UseNetCore70";
 		const string defaultParameterNetCore60 = "UseNetCore60";
 		const string defaultParameterNetCore50 = "UseNetCore50";
 		const string defaultParameterNetCore30 = "UseNetCore30";
