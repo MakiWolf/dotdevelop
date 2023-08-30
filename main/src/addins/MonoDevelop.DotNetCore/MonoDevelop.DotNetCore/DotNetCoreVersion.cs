@@ -44,6 +44,8 @@ namespace MonoDevelop.DotNetCore
 		internal static readonly DotNetCoreVersion MinimumSupportedSdkVersion60 = new DotNetCoreVersion (6, 0, 6);
 
 		internal static readonly DotNetCoreVersion MinimumSupportedSdkVersion70 = new DotNetCoreVersion (7, 0, 7);
+
+		internal static readonly DotNetCoreVersion MinimumSupportedSdkVersion80 = new DotNetCoreVersion (8, 0, 8);
 		internal DotNetCoreVersion (int major, int minor, int patch)
 			: this (new Version (major, minor, patch))
 		{
@@ -259,6 +261,9 @@ namespace MonoDevelop.DotNetCore
 				return version >= MinimumSupportedSdkVersion70;
 			}
 
+			if (version.Major == 8) {
+				return version >= MinimumSupportedSdkVersion80;
+			}
 
 
 			return false;
