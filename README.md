@@ -12,26 +12,7 @@ It was refactored to compile / run again on Linux. Other platforms will follow.
 
 **Contributors**
 
-To hack around, use a Ubuntu 20.04 machine and follow the steps below,
-
-1. Acquire all dependencies,
-
-```
-sudo apt install intltool fsharp gtk-sharp2
-```
-
-2. Check out the code and compile,
-
-```
-git clone -b main https://github.com/dotdevelop/dotdevelop.git
-
-cd dotdevelop/
-
-./configure --profile=gnome
-
-make
-
-```
+[Building from Source](Building.md)
 
 > Take a look at [the CI manifest](https://github.com/dotdevelop/dotdevelop/blob/main/.github/workflows/monodevelop.yml) in case the latest steps differ from above.
 >
