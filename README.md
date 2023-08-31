@@ -14,8 +14,12 @@ It was refactored to compile / run again on Linux. Other platforms will follow.
 
 [Building from Source](Building.md)
 
-> Take a look at [the CI manifest](https://github.com/dotdevelop/dotdevelop/blob/main/.github/workflows/monodevelop.yml) in case the latest steps differ from above.
->
+Discussion, Bugs, Patches
+-------------------------
+
+https://github.com/dotdevelop/dotdevelop/issues/new *(submit bugs and patches here)*
+https://github.com/dotdevelop/community/issues/9 *(temporary link to the roadmap thread, should be replaced in the future with a proper roadmap)
+
 > Other Linux distributions/versions require different ways to acquire dependencies. Open [a new issue
 ](https://github.com/dotdevelop/dotdevelop/issues) and point out which Linux distribution/version you use, so others might help.
 
@@ -134,10 +138,3 @@ References
 **[Gnome Human Interface Guidelines (HIG)](https://developer.gnome.org/hig/stable/)**
 
 **[freedesktop.org standards](http://freedesktop.org/Standards/)**
-
-Discussion, Bugs, Patches
--------------------------
-
-https://github.com/dotdevelop/dotdevelop/issues/new *(submit bugs and patches here)*
-https://github.com/dotdevelop/community/issues/9 *(temporary link to the roadmap thread, should be replaced in the future with a proper roadmap)
-
