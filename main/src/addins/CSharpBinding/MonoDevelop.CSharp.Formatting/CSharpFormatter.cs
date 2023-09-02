@@ -47,7 +47,7 @@ using MonoDevelop.Projects.Policies;
 using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Options;
 using MonoDevelop.CSharp.OptionProvider;
-using Microsoft.VisualStudio.CodingConventions;
+//using Microsoft.VisualStudio.CodingConventions;
 using System.Linq;
 using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
@@ -143,7 +143,7 @@ namespace MonoDevelop.CSharp.Formatting
 			var textPolicy = policyParent.Get<TextStylePolicy> (chain);
 			var optionSet = policy.CreateOptions (textPolicy);
 
-			if (input is IReadonlyTextDocument doc) {
+			/* if (input is IReadonlyTextDocument doc) {
 				try {
 					var conventions = EditorConfigService.GetEditorConfigContext (doc.FileName).WaitAndGetResult ();
 					if (conventions != null)
@@ -151,12 +151,12 @@ namespace MonoDevelop.CSharp.Formatting
 				} catch (Exception e) {
 					LoggingService.LogError ("Error while loading coding conventions.", e);
 				}
-			}
+			} */
 
 			return new StringTextSource (FormatText (optionSet, input.Text, startOffset, startOffset + length));
 		}
 
-		sealed class DocumentOptions : IDocumentOptions
+		/* sealed class DocumentOptions : IDocumentOptions
 		{
 			readonly OptionSet optionSet;
 			readonly ICodingConventionsSnapshot codingConventionsSnapshot;
@@ -164,13 +164,13 @@ namespace MonoDevelop.CSharp.Formatting
 				new ConditionalWeakTable<IReadOnlyDictionary<string, object>, IReadOnlyDictionary<string, string>> ();
 
 
-			public DocumentOptions (OptionSet optionSet, ICodingConventionsSnapshot codingConventionsSnapshot)
+			 public DocumentOptions (OptionSet optionSet, ICodingConventionsSnapshot codingConventionsSnapshot)
 			{
 				this.optionSet = optionSet;
 				this.codingConventionsSnapshot = codingConventionsSnapshot;
 			}
 
-			public bool TryGetDocumentOption (OptionKey option, out object value)
+			 public bool TryGetDocumentOption (OptionKey option, out object value)
 			{
 				if (codingConventionsSnapshot != null) {
 					var editorConfigPersistence = option.Option.StorageLocations.OfType<IEditorConfigStorageLocation> ().SingleOrDefault ();
@@ -198,8 +198,8 @@ namespace MonoDevelop.CSharp.Formatting
 				var result = optionSet.GetOption (option);
 				value = result;
 				return true;
-			}
-		}
+			} 
+		} */
 
 		sealed class FormattingDocumentOptionSet : OptionSet
 		{
