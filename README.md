@@ -12,29 +12,14 @@ It was refactored to compile / run again on Linux. Other platforms will follow.
 
 **Contributors**
 
-To hack around, use a Ubuntu 20.04 machine and follow the steps below,
+[Building from Source](Building.md)
 
-1. Acquire all dependencies,
+Discussion, Bugs, Patches
+-------------------------
 
-```
-sudo apt install intltool fsharp gtk-sharp2
-```
+https://github.com/dotdevelop/dotdevelop/issues/new *(submit bugs and patches here)*
+https://github.com/dotdevelop/community/issues/9 *(temporary link to the roadmap thread, should be replaced in the future with a proper roadmap)
 
-2. Check out the code and compile,
-
-```
-git clone -b main https://github.com/dotdevelop/dotdevelop.git
-
-cd dotdevelop/
-
-./configure --profile=gnome
-
-make
-
-```
-
-> Take a look at [the CI manifest](https://github.com/dotdevelop/dotdevelop/blob/main/.github/workflows/monodevelop.yml) in case the latest steps differ from above.
->
 > Other Linux distributions/versions require different ways to acquire dependencies. Open [a new issue
 ](https://github.com/dotdevelop/dotdevelop/issues) and point out which Linux distribution/version you use, so others might help.
 
@@ -153,10 +138,3 @@ References
 **[Gnome Human Interface Guidelines (HIG)](https://developer.gnome.org/hig/stable/)**
 
 **[freedesktop.org standards](http://freedesktop.org/Standards/)**
-
-Discussion, Bugs, Patches
--------------------------
-
-https://github.com/dotdevelop/dotdevelop/issues/new *(submit bugs and patches here)*
-https://github.com/dotdevelop/community/issues/9 *(temporary link to the roadmap thread, should be replaced in the future with a proper roadmap)
-
