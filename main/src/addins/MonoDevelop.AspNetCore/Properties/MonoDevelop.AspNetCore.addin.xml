@@ -379,7 +379,7 @@
 				templateId="Microsoft.Web.Razor.Library.CSharp.7.0"
 				_overrideName="Razor Class Library"
 				_overrideDescription="A project for creating a Razor class library that targets .NET Standard."
-				path="${DotNetCoreSdk.6.0.Templates.Web.ProjectTemplates.nupkg}"
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
 				icon="md-netcore-empty-project"
 				imageId="md-netcore-empty-project"
 				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"

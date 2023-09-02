@@ -2243,7 +2243,7 @@
 			category="netcore/test/general" />
 		<Template
 			id="Microsoft.Test.xUnit.FSharp"
-			templateId="Microsoft.Test.xUnit.FSharp.5.0"
+			templateId="Microsoft.Test.xUnit.FSharp.6.0"
 			_overrideName="xUnit Test Project"
 			_overrideDescription="Creates a new xUnit test project."
 			path="${DotNetCoreSdk.6.0.Templates.Test.ProjectTemplates.nupkg}"
@@ -2355,7 +2355,7 @@
 			category="netcore/test/general" />
 		<Template
 			id="Microsoft.Test.xUnit.FSharp"
-			templateId="Microsoft.Test.xUnit.FSharp.5.0"
+			templateId="Microsoft.Test.xUnit.FSharp.7.0"
 			_overrideName="xUnit Test Project"
 			_overrideDescription="Creates a new xUnit test project."
 			path="${DotNetCoreSdk.7.0.Templates.Test.ProjectTemplates.nupkg}"
@@ -2467,7 +2467,7 @@
 			category="netcore/test/general" />
 		<Template
 			id="Microsoft.Test.xUnit.FSharp"
-			templateId="Microsoft.Test.xUnit.FSharp.5.0"
+			templateId="Microsoft.Test.xUnit.FSharp.8.0"
 			_overrideName="xUnit Test Project"
 			_overrideDescription="Creates a new xUnit test project."
 			path="${DotNetCoreSdk.8.0.Templates.Test.ProjectTemplates.nupkg}"
