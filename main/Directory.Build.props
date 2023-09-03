@@ -12,15 +12,15 @@
     <ReferencesVSEditor Condition=" '$(OS)' == 'UNIX' ">$(RootDirectory)\msbuild\ReferencesVSEditor.Gtk.props</ReferencesVSEditor>
     <ReferencesGtk>$(RootDirectory)\msbuild\ReferencesGtk.props</ReferencesGtk>
     <NuGetVersionAllocationAnalyzer>1.0.0.9</NuGetVersionAllocationAnalyzer>
-    <NuGetVersionCecil>0.10.1</NuGetVersionCecil>
+    <NuGetVersionCecil>0.10.1</NuGetVersionCecil> <!--https://www.nuget.org/packages/Mono.Cecil-->
     <NuGetVersionErrorProneNetStructs>0.1.2</NuGetVersionErrorProneNetStructs>
-    <NuGetVersionMicrosoftTemplateEngine>3.0.0-rc1.19464.2</NuGetVersionMicrosoftTemplateEngine>
+    <NuGetVersionMicrosoftTemplateEngine>3.0.0-rc1.19464.2</NuGetVersionMicrosoftTemplateEngine><!--Microsoft.TemplateEngine.Edge and Microsoft.TemplateEngine.Orchestrator.RunnableProjects-->
     <NuGetVersionMicrosoftTestPlatform>16.2.0</NuGetVersionMicrosoftTestPlatform>
     <NuGetVersionMonoDevelopAnalyzers>0.1.0.2</NuGetVersionMonoDevelopAnalyzers>
-    <NuGetVersionNewtonsoftJson>12.0.2</NuGetVersionNewtonsoftJson>
+    <NuGetVersionNewtonsoftJson>13.0.3</NuGetVersionNewtonsoftJson><!--https://www.nuget.org/packages/Newtonsoft.Json-->
     <NuGetVersionNuGet>5.8.0</NuGetVersionNuGet>
     <NuGetVersionNUnit2>2.7.0</NuGetVersionNUnit2>
-    <NuGetVersionNUnit3>3.9.0</NuGetVersionNUnit3>
+    <NuGetVersionNUnit3>3.13.3</NuGetVersionNUnit3><!--https://www.nuget.org/packages/NUnit-->
     <NuGetVersionVSCodeDebugProtocol>15.8.20719.1</NuGetVersionVSCodeDebugProtocol>
     <NuGetVersionVSComposition>15.8.112</NuGetVersionVSComposition>
     <NuGetVersionVSEditor>16.4.280</NuGetVersionVSEditor>
