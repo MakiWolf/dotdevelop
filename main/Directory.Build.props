@@ -11,18 +11,18 @@
     <ReferencesVSEditor Condition=" '$(OS)' == 'MAC' ">$(RootDirectory)\msbuild\ReferencesVSEditor.Mac.props</ReferencesVSEditor>
     <ReferencesVSEditor Condition=" '$(OS)' == 'UNIX' ">$(RootDirectory)\msbuild\ReferencesVSEditor.Gtk.props</ReferencesVSEditor>
     <ReferencesGtk>$(RootDirectory)\msbuild\ReferencesGtk.props</ReferencesGtk>
-    <NuGetVersionAllocationAnalyzer>1.0.0.9</NuGetVersionAllocationAnalyzer>
+    <NuGetVersionAllocationAnalyzer>1.0.0.9</NuGetVersionAllocationAnalyzer><!--ClrHeapAllocationAnalyzer-->
     <NuGetVersionCecil>0.10.1</NuGetVersionCecil> <!--https://www.nuget.org/packages/Mono.Cecil-->
-    <NuGetVersionErrorProneNetStructs>0.1.2</NuGetVersionErrorProneNetStructs>
+    <NuGetVersionErrorProneNetStructs>0.1.2</NuGetVersionErrorProneNetStructs><!-- ErrorProne.NET.Structs-->
     <NuGetVersionMicrosoftTemplateEngine>3.0.0-rc1.19464.2</NuGetVersionMicrosoftTemplateEngine><!--Microsoft.TemplateEngine.Edge and Microsoft.TemplateEngine.Orchestrator.RunnableProjects-->
-    <NuGetVersionMicrosoftTestPlatform>16.2.0</NuGetVersionMicrosoftTestPlatform>
+    <NuGetVersionMicrosoftTestPlatform>16.11.0</NuGetVersionMicrosoftTestPlatform><!--Microsoft.TestPlatform and Microsoft.TestPlatform.TranslationLayer-->
     <NuGetVersionMonoDevelopAnalyzers>0.1.0.2</NuGetVersionMonoDevelopAnalyzers>
     <NuGetVersionNewtonsoftJson>13.0.3</NuGetVersionNewtonsoftJson><!--https://www.nuget.org/packages/Newtonsoft.Json-->
-    <NuGetVersionNuGet>5.8.0</NuGetVersionNuGet>
-    <NuGetVersionNUnit2>2.7.0</NuGetVersionNUnit2>
-    <NuGetVersionNUnit3>3.13.3</NuGetVersionNUnit3><!--https://www.nuget.org/packages/NUnit-->
-    <NuGetVersionVSCodeDebugProtocol>15.8.20719.1</NuGetVersionVSCodeDebugProtocol>
-    <NuGetVersionVSComposition>15.8.112</NuGetVersionVSComposition>
-    <NuGetVersionVSEditor>16.4.280</NuGetVersionVSEditor>
+    <NuGetVersionNuGet>5.8.0</NuGetVersionNuGet><!--NuGet.PackageManagement and NuGet.Frameworks and NuGet.Indexing-->
+    <NuGetVersionNUnit2>2.7.1</NuGetVersionNUnit2><!--NUnit and NUnitV2.Core and NUnit.Runners-->
+    <NuGetVersionNUnit3>3.16.3</NuGetVersionNUnit3><!--NUnit.Engine-->
+    <NuGetVersionVSCodeDebugProtocol>15.8.20719.1</NuGetVersionVSCodeDebugProtocol><!--Microsoft.VisualStudio.Shared.VSCodeDebugProtocol-->
+    <NuGetVersionVSComposition>15.8.118</NuGetVersionVSComposition><!--Microsoft.VisualStudio.Composition -->
+    <NuGetVersionVSEditor>16.4.280</NuGetVersionVSEditor><!--Microsoft.VisualStudio.CoreUtility and Microsoft.VisualStudio.Text.Data and Microsoft.VisualStudio.Text.Logic and Microsoft.VisualStudio.Text.UI and Microsoft.VisualStudio.Language and Microsoft.VisualStudio.Language.Intellisense and Microsoft.VisualStudio.Language.NavigateTo.Interfaces and -->
   </PropertyGroup>
 </Project>
