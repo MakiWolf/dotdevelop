@@ -84,6 +84,351 @@
 		would cause the Razor template to be last in the New Project dialog if both 1.1 and 2.x templates
 		are available. -->
 		
+		
+		<!-- Include templates for SdkVersion 8.0		-->		
+		<Condition id="AspNetCoreSdkInstalled" sdkVersion="8.0">
+			<Template
+				id="Microsoft.Web.Empty.CSharp"
+				templateId="Microsoft.Web.Empty.CSharp.8.0"
+				_overrideName="Empty"
+				_overrideDescription="An empty project template for creating an ASP.NET Core application. This template does not have any content in it."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Empty.FSharp"
+				templateId="Microsoft.Web.Empty.FSharp.8.0"
+				_overrideName="Empty"
+				_overrideDescription="An empty project template for creating an ASP.NET Core application. This template does not have any content in it."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.WebApi.CSharp"
+				templateId="Microsoft.Web.WebApi.CSharp.8.0"
+				_overrideName="API"
+				_overrideDescription="A project template for creating an ASP.NET Core application with an example Controller for a RESTful HTTP service. This template can also be used for ASP.NET Core MVC Views and Controllers."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.WebApi.FSharp"
+				templateId="Microsoft.Web.WebApi.FSharp.8.0"
+				_overrideName="API"
+				_overrideDescription="A project template for creating an ASP.NET Core application with an example Controller for a RESTful HTTP service. This template can also be used for ASP.NET Core MVC Views and Controllers."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="FSharpWebApi"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Worker.Empty.CSharp"
+				templateId="Microsoft.Worker.Empty.CSharp.8.0"
+				_overrideName="Worker Service"
+				_overrideDescription="An empty project template for creating a worker service."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="AspNetCoreWorker"
+				condition="UseNetCore80=true"
+				category="netcore/app/general"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.RazorPages.CSharp"
+				templateId="Microsoft.Web.RazorPages.CSharp.8.0"
+				_overrideName="Web Application"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Razor Pages content."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="RazorPages"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Mvc.CSharp"
+				templateId="Microsoft.Web.Mvc.CSharp.8.0"
+				_overrideName="Web Application (Model-View-Controller)"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Core MVC Views and Controllers. This template can also be used for RESTful HTTP services."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Mvc.FSharp"
+				templateId="Microsoft.Web.Mvc.FSharp.8.0"
+				_overrideName="Web Application (Model-View-Controller)"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Core MVC Views and Controllers. This template can also be used for RESTful HTTP services."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Blazor.Server.CSharp"
+				templateId="Microsoft.Web.Blazor.Server.CSharp.8.0"
+				_overrideName="Blazor Server App"
+				_overrideDescription="A project template for creating a Blazor server app that runs server-side inside an ASP.NET Core app and handles user interactions over a SignalR connection. This template can be used for web apps with rich dynamic user interfaces (UIs)."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="AspNetCoreBlazor"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Razor.Library.CSharp"
+				templateId="Microsoft.Web.Razor.Library.CSharp.8.0"
+				_overrideName="Razor Class Library"
+				_overrideDescription="A project for creating a Razor class library that targets .NET Standard."
+				path="${DotNetCoreSdk.8.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.Angular.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.Angular.CSharp.8.0"
+				_overrideName="Angular"
+				_overrideDescription="A project template for creating an ASP.NET Core application with Angular."
+				path="${DotNetCoreSdk.8.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.React.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.React.CSharp.8.0"
+				_overrideName="React.js"
+				_overrideDescription="A project template for creating an ASP.NET Core application with React.js."
+				path="${DotNetCoreSdk.8.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.ReactRedux.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.ReactRedux.CSharp.8.0"
+				_overrideName="React.js and Redux"
+				_overrideDescription="A project template for creating an ASP.NET Core application with React.js and Redux."
+				path="${DotNetCoreSdk.8.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore80=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+		</Condition>
+		<!-- end of sdkVersion 8.0 templates -->
+
+		<!-- Include templates for SdkVersion 7.0		-->		
+		<Condition id="AspNetCoreSdkInstalled" sdkVersion="7.0">
+			<Template
+				id="Microsoft.Web.Empty.CSharp"
+				templateId="Microsoft.Web.Empty.CSharp.7.0"
+				_overrideName="Empty"
+				_overrideDescription="An empty project template for creating an ASP.NET Core application. This template does not have any content in it."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Empty.FSharp"
+				templateId="Microsoft.Web.Empty.FSharp.7.0"
+				_overrideName="Empty"
+				_overrideDescription="An empty project template for creating an ASP.NET Core application. This template does not have any content in it."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.WebApi.CSharp"
+				templateId="Microsoft.Web.WebApi.CSharp.7.0"
+				_overrideName="API"
+				_overrideDescription="A project template for creating an ASP.NET Core application with an example Controller for a RESTful HTTP service. This template can also be used for ASP.NET Core MVC Views and Controllers."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.WebApi.FSharp"
+				templateId="Microsoft.Web.WebApi.FSharp.7.0"
+				_overrideName="API"
+				_overrideDescription="A project template for creating an ASP.NET Core application with an example Controller for a RESTful HTTP service. This template can also be used for ASP.NET Core MVC Views and Controllers."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="FSharpWebApi"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Worker.Empty.CSharp"
+				templateId="Microsoft.Worker.Empty.CSharp.7.0"
+				_overrideName="Worker Service"
+				_overrideDescription="An empty project template for creating a worker service."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="AspNetCoreWorker"
+				condition="UseNetCore70=true"
+				category="netcore/app/general"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.RazorPages.CSharp"
+				templateId="Microsoft.Web.RazorPages.CSharp.7.0"
+				_overrideName="Web Application"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Razor Pages content."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="RazorPages"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Mvc.CSharp"
+				templateId="Microsoft.Web.Mvc.CSharp.7.0"
+				_overrideName="Web Application (Model-View-Controller)"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Core MVC Views and Controllers. This template can also be used for RESTful HTTP services."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Mvc.FSharp"
+				templateId="Microsoft.Web.Mvc.FSharp.7.0"
+				_overrideName="Web Application (Model-View-Controller)"
+				_overrideDescription="A project template for creating an ASP.NET Core application with example ASP.NET Core MVC Views and Controllers. This template can also be used for RESTful HTTP services."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Blazor.Server.CSharp"
+				templateId="Microsoft.Web.Blazor.Server.CSharp.7.0"
+				_overrideName="Blazor Server App"
+				_overrideDescription="A project template for creating a Blazor server app that runs server-side inside an ASP.NET Core app and handles user interactions over a SignalR connection. This template can be used for web apps with rich dynamic user interfaces (UIs)."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				supportedParameters="AspNetCoreBlazor"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Razor.Library.CSharp"
+				templateId="Microsoft.Web.Razor.Library.CSharp.7.0"
+				_overrideName="Razor Class Library"
+				_overrideDescription="A project for creating a Razor class library that targets .NET Standard."
+				path="${DotNetCoreSdk.7.0.Templates.Web.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.Angular.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.Angular.CSharp.7.0"
+				_overrideName="Angular"
+				_overrideDescription="A project template for creating an ASP.NET Core application with Angular."
+				path="${DotNetCoreSdk.7.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.React.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.React.CSharp.7.0"
+				_overrideName="React.js"
+				_overrideDescription="A project template for creating an ASP.NET Core application with React.js."
+				path="${DotNetCoreSdk.7.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+			<Template
+				id="Microsoft.Web.Spa.ReactRedux.CSharp"
+				templateId="Microsoft.DotNet.Web.Spa.ProjectTemplates.ReactRedux.CSharp.7.0"
+				_overrideName="React.js and Redux"
+				_overrideDescription="A project template for creating an ASP.NET Core application with React.js and Redux."
+				path="${DotNetCoreSdk.7.0.Templates.Web.Spa.ProjectTemplates.nupkg}"
+				icon="md-netcore-empty-project"
+				imageId="md-netcore-empty-project"
+				wizard="MonoDevelop.AspNetCore.ProjectTemplateWizard"
+				condition="UseNetCore70=true"
+				category="netcore/app/aspnet"
+				formatExclude="*.min.css|*.min.js|*.map"
+				defaultParameters="IncludeLaunchSettings=true" />
+		</Condition>
+		<!-- end of sdkVersion 7.0 templates -->
+		
 		<!-- Include templates for SdkVersion 6.0		-->		
 		<Condition id="AspNetCoreSdkInstalled" sdkVersion="6.0">
 			<Template
