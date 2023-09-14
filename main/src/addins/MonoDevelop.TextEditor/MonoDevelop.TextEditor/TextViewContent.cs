@@ -32,7 +32,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 using Microsoft.VisualStudio.Text.Editor.OptionsExtensionMethods;
 using Microsoft.VisualStudio.Text.Utilities;
 
-using Microsoft.VisualStudio.CodingConventions;
+//using Microsoft.VisualStudio.CodingConventions;
 using Microsoft.VisualStudio.Threading;
 using Microsoft.VisualStudio.Utilities;
 
@@ -49,7 +49,7 @@ using MonoDevelop.Projects.Policies;
 using MonoDevelop.Ide.Gui.Documents;
 
 using AutoSave = MonoDevelop.Ide.Editor.AutoSave;
-using EditorConfigService = MonoDevelop.Ide.Editor.EditorConfigService;
+//using EditorConfigService = MonoDevelop.Ide.Editor.EditorConfigService;
 using DefaultSourceEditorOptions = MonoDevelop.Ide.Editor.DefaultSourceEditorOptions;
 using MonoDevelop.Components;
 using System.Threading;
@@ -86,7 +86,7 @@ namespace MonoDevelop.TextEditor
 		static bool settingZoomLevel;
 
 		PolicyContainer policyContainer;
-		ICodingConventionContext editorConfigContext;
+		//ICodingConventionContext editorConfigContext;
 		bool warnOverwrite;
 		IDisposable textBufferRegistration;
 
@@ -161,7 +161,7 @@ namespace MonoDevelop.TextEditor
 			EditorOperations = (EditorOperationsInterface)Imports.EditorOperationsProvider.GetEditorOperations (TextView);
 			EditorOptions = Imports.EditorOptionsFactoryService.GetOptions (TextView);
 			TextBufferOptions = Imports.EditorOptionsFactoryService.GetOptions (TextView.TextBuffer);
-			UpdateTextEditorOptions (this, EventArgs.Empty);
+			//UpdateTextEditorOptions (this, EventArgs.Empty);
 			contentProviders = new List<IEditorContentProvider> (Imports.EditorContentProviderService.GetContentProvidersForView (TextView));
 
 			TextView.Properties [typeof (DocumentController)] = this;
@@ -199,7 +199,7 @@ namespace MonoDevelop.TextEditor
 			// Content providers can provide additional content
 			NotifyContentChanged ();
 
-			await Load (false);
+			////await Load (false);
 
 			return control;
 		}
@@ -249,11 +249,11 @@ namespace MonoDevelop.TextEditor
 
 			warnOverwrite = false;
 
-			if (editorConfigContext != null) {
+			/* if (editorConfigContext != null) {
 				editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
 				EditorConfigService.RemoveEditConfigContext (TextDocument.FilePath).Ignore ();
 				editorConfigContext = null;
-			}
+			} */
 
 			if (FilePath != TextDocument.FilePath && !string.IsNullOrEmpty (TextDocument.FilePath))
 				AutoSave.RemoveAutoSaveFile (TextDocument.FilePath);
@@ -272,7 +272,7 @@ namespace MonoDevelop.TextEditor
 
 			UpdateTextBufferRegistration ();
 
-			UpdateTextEditorOptions (null, null);
+			//UpdateTextEditorOptions (null, null);
 		}
 
 		protected override void OnOwnerChanged ()
@@ -280,7 +280,7 @@ namespace MonoDevelop.TextEditor
 			base.OnOwnerChanged ();
 
 			if (TextDocument != null) {
-				UpdateTextEditorOptions (null, null);
+				//UpdateTextEditorOptions (null, null);
 				UpdateTextBufferRegistration ();
 			}
 		}
@@ -312,19 +312,19 @@ namespace MonoDevelop.TextEditor
 
 			UnsubscribeFromEvents ();
 
-			if (policyContainer != null)
+			/* if (policyContainer != null)
 				policyContainer.PolicyChanged -= PolicyChanged;
 			if (editorConfigContext != null) {
 				editorConfigContext.CodingConventionsChangedAsync -= UpdateOptionsFromEditorConfigAsync;
 				EditorConfigService.RemoveEditConfigContext (FilePath).Ignore ();
-			}
+			} */
 
 			base.OnDispose ();
 		}
 
 		protected virtual void SubscribeToEvents ()
 		{
-			sourceEditorOptions.Changed += UpdateTextEditorOptions;
+			//sourceEditorOptions.Changed += UpdateTextEditorOptions;
 			TextDocument.DirtyStateChanged += HandleTextDocumentDirtyStateChanged;
 			TextBuffer.Changed += HandleTextBufferChanged;
 			TextView.Options.OptionChanged += TextBufferOptionsChanged;
@@ -332,8 +332,8 @@ namespace MonoDevelop.TextEditor
 
 		protected virtual void UnsubscribeFromEvents ()
 		{
-			if (sourceEditorOptions != null)
-				sourceEditorOptions.Changed -= UpdateTextEditorOptions;
+			// if (sourceEditorOptions != null)
+			// 	sourceEditorOptions.Changed -= UpdateTextEditorOptions;
 
 			if (TextDocument != null)
 				TextDocument.DirtyStateChanged -= HandleTextDocumentDirtyStateChanged;
@@ -362,7 +362,7 @@ namespace MonoDevelop.TextEditor
 				sourceEditorOptions.ShowLineNumberMargin);
 		}
 
-		void UpdateTextEditorOptions (object sender, EventArgs e)
+		/* void UpdateTextEditorOptions (object sender, EventArgs e)
 		{
 			UpdateTextEditorOptionsAsync ().Forget ();
 		}
@@ -393,7 +393,7 @@ namespace MonoDevelop.TextEditor
 				editorConfigContext.CodingConventionsChangedAsync += UpdateOptionsFromEditorConfigAsync;
 
 			await UpdateOptionsFromEditorConfigAsync (null, null);
-		}
+		} */
 
 		void ClearOptionValue(string optionName)
 		{
@@ -438,7 +438,7 @@ namespace MonoDevelop.TextEditor
 #endif
 		}
 
-		private Task UpdateOptionsFromEditorConfigAsync (object sender, CodingConventionsChangedEventArgs args)
+/* 		private Task UpdateOptionsFromEditorConfigAsync (object sender, CodingConventionsChangedEventArgs args)
 		{
 			// Set base options first, then override with editorconfig values
 			UpdateOptionsFromPolicy ();
@@ -610,7 +610,7 @@ namespace MonoDevelop.TextEditor
 			}
 
 			return Task.CompletedTask;
-		}
+		} */
 
 		/// <summary>
 		/// Replace document content with new content. This marks the document as dirty.
@@ -779,7 +779,7 @@ namespace MonoDevelop.TextEditor
 					if (IsDisposed || !File.Exists (FilePath))
 						return;
 
-					Load (true);
+					////Load (true);
 					ShowNotification = false;
 				} catch (Exception ex) {
 					MessageService.ShowError ("Could not reload the file.", ex);

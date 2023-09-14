@@ -88,7 +88,7 @@
     <PackageReference Include="Microsoft.Build.Locator" Version="1.1.2" PrivateAssets="runtime" />
     <PackageReference Include="Microsoft.CodeAnalysis.EditorFeatures" Version="$(NuGetVersionRoslyn)" PrivateAssets="runtime" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="$(NuGetVersionRoslyn)" PrivateAssets="runtime" />
-    <PackageReference Include="Microsoft.VisualStudio.CodingConventions" Version="1.1.20180503.2" PrivateAssets="runtime" />
+    <!--<PackageReference Include="Microsoft.VisualStudio.CodingConventions" Version="1.1.20180503.2" PrivateAssets="runtime" />-->
 <!--    <PackageReference Include="Microsoft.VisualStudio.Composition" Version="$(NuGetVersionVSComposition)" ExcludeAssets="all" />-->
     <PackageReference Include="Microsoft.VisualStudio.Composition" Version="$(NuGetVersionVSComposition)" PrivateAssets="runtime" />
     <!-- Need the net45 version, see https://github.com/mono/mono/issues/12461 -->
@@ -97,18 +97,18 @@
 <!--      <NuGetPackageId>Microsoft.VisualStudio.Composition</NuGetPackageId>-->
 <!--      <Private>true</Private>-->
 <!--    </Reference>-->
-    <PackageReference Include="Mono.Cecil" Version="$(NuGetVersionCecil)" PrivateAssets="runtime" />
+    <PackageReference Include="Mono.Cecil" Version="0.11.5" PrivateAssets="runtime" />
     <PackageReference Include="MonoDevelopDev.Analyzers" Version="$(NuGetVersionMonoDevelopAnalyzers)" />
     <PackageReference Include="Newtonsoft.Json" Version="$(NuGetVersionNewtonsoftJson)" PrivateAssets="runtime" />
-    <PackageReference Include="SharpZipLib" Version="1.2.0" PrivateAssets="runtime" />
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="1.1.12" PrivateAssets="runtime,build" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" PrivateAssets="runtime" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" PrivateAssets="runtime,build" />
     <PackageReference Include="StreamJsonRpc" Version="1.5.43" PrivateAssets="runtime" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" PrivateAssets="runtime" />
     <!-- remove this as it conflicts with the one in mscorlib. mono bug? -->
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" ExcludeAssets="all" />
     <!-- update this to a version that doesn't crash -->
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.3.52" ExcludeAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="3.0.0-preview9.19423.4" PrivateAssets="runtime" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.10" PrivateAssets="runtime" />
   </ItemGroup>
   <ItemGroup>
     <IncludeCopyLocal Include="Humanizer.dll" />
@@ -127,7 +127,7 @@
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.ExternalAccess.MonoDevelop.dll" />
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.Features.dll" />
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.FlowAnalysis.Utilities.dll" />
-    <IncludeCopyLocal Include="Microsoft.CodeAnalysis.InteractiveHost.dll" />
+    <!--<IncludeCopyLocal Include="Microsoft.CodeAnalysis.InteractiveHost.dll" />-->
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.Scripting.dll" />
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.VisualBasic.dll" />
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.VisualBasic.EditorFeatures.dll" />
@@ -137,7 +137,7 @@
     <IncludeCopyLocal Include="Microsoft.CodeAnalysis.Workspaces.MSBuild.dll" />
     <IncludeCopyLocal Include="Microsoft.DiaSymReader.dll" />
     <IncludeCopyLocal Include="Microsoft.Extensions.ObjectPool.dll" />
-    <IncludeCopyLocal Include="Microsoft.VisualStudio.CodingConventions.dll" />
+    <!--<IncludeCopyLocal Include="Microsoft.VisualStudio.CodingConventions.dll" />-->
     <IncludeCopyLocal Include="Microsoft.VisualStudio.Composition.dll" />
     <IncludeCopyLocal Include="Microsoft.VisualStudio.Composition.NetFxAttributes.dll" />
     <IncludeCopyLocal Include="Microsoft.VisualStudio.CoreUtility.dll" />
