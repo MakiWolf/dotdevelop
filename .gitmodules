@@ -1,7 +1,7 @@
 [submodule "main/external/debugger-libs"]
 	path = main/external/debugger-libs
-	url = https://github.com/dotdevelop/debugger-libs.git
-	branch = master
+	url = https://github.com/MakiWolf/debugger-libs.git
+	branch = main
 [submodule "main/external/guiunit"]
 	path = main/external/guiunit
 	url = https://github.com/dotdevelop/guiunit.git
