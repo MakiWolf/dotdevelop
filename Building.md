@@ -113,6 +113,8 @@ eg, in a terminal, before starting dotdevelop as above...
 export MSBuildEnableWorkloadResolver=false
 mono ./main/build/bin/MonoDevelop.exe --no-redirect 
 ```
+### CI mainfest
+Take a look at [the CI manifest](https://github.com/dotdevelop/dotdevelop/blob/main/.github/workflows/monodevelop.yml) in case the latest steps differ from above.
 
 ## References
 
