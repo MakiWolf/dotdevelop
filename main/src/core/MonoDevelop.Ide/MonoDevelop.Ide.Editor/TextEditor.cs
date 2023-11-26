@@ -1071,18 +1071,18 @@ namespace MonoDevelop.Ide.Editor
 
 		async void TextEditor_FileNameChanged (object sender, EventArgs e)
 		{
-			fileTypeCondition.SetFileName (FileName);
+			//fileTypeCondition.SetFileName (FileName);
 
 			// This is a sync call to remove from the cache, then async to dispose the context after the load is awaited.
-			EditorConfigService.RemoveEditConfigContext (FileName).Ignore ();
+			//EditorConfigService.RemoveEditConfigContext (FileName).Ignore ();
 
 			// There is no use to try and create a cached context if we won't use it.
-			if (!(Options is DefaultSourceEditorOptions options))
-				return;
+			//if (!(Options is DefaultSourceEditorOptions options))
+			//	return;
 
-			var context = await EditorConfigService.GetEditorConfigContext (FileName);
-			if (context != null)
-				options.SetContext (context);
+			//var context = await EditorConfigService.GetEditorConfigContext (FileName);
+			//if (context != null)
+			//	options.SetContext (context);
 		}
 
 		void TextEditor_MimeTypeChanged (object sender, EventArgs e)
