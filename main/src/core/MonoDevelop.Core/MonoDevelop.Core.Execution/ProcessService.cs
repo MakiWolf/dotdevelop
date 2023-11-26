@@ -168,10 +168,10 @@ namespace MonoDevelop.Core.Execution
 		public ProcessStartInfo CreateProcessStartInfo (string command, string arguments, string workingDirectory, bool redirectStandardInput)
 		{
 			if (command == null)
-				throw new ArgumentNullException("command");
+				throw new ArgumentNullException(nameof(command));
 			
 			if (command.Length == 0)
-				throw new ArgumentException("command");
+				throw new ArgumentException($"\'{nameof(command)}\' cannot be empty", nameof(command));
 		
 			ProcessStartInfo startInfo = null;
 			if(String.IsNullOrEmpty (arguments))

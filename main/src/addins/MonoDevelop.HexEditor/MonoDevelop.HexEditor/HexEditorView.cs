@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HexEditorView.cs
 //  
 // Author:
@@ -147,7 +147,7 @@ namespace MonoDevelop.HexEditor
 			public UndoGroup (HexEditorData data)
 			{
 				if (data == null)
-					throw new ArgumentNullException ("data");
+					throw new ArgumentNullException (nameof(data));
 				this.data = data;
 				data.ByteBuffer.BeginAtomicUndo ();
 			}

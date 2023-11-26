@@ -1,4 +1,4 @@
-﻿//
+//
 // SignatureMarkupCreator.cs
 //
 // Author:
@@ -172,7 +172,7 @@ namespace MonoDevelop.CSharp
 		public string GetMarkup (ITypeSymbol type)
 		{
 			if (type == null)
-				throw new ArgumentNullException ("entity");
+				throw new ArgumentNullException (nameof(type));
 			return GetTypeMarkup (type);
 		}
 
@@ -180,7 +180,7 @@ namespace MonoDevelop.CSharp
 		public string GetMarkup (Microsoft.CodeAnalysis.ISymbol entity)
 		{
 			if (entity == null)
-				throw new ArgumentNullException ("entity");
+				throw new ArgumentNullException (nameof(entity));
 			string result;
 			try {
 				switch (entity.Kind) {
@@ -391,7 +391,7 @@ namespace MonoDevelop.CSharp
 		string GetTypeParameterMarkup (ITypeSymbol t)
 		{
 			if (t == null)
-				throw new ArgumentNullException ("t");
+				throw new ArgumentNullException (nameof(t));
 			var result = StringBuilderCache.Allocate ();
 			var highlightedTypeName = Highlight (FilterEntityName (t.Name), GetThemeColor (userTypes));
 			result.Append (highlightedTypeName);
@@ -486,7 +486,7 @@ namespace MonoDevelop.CSharp
 		string GetTypeMarkup (ITypeSymbol t, bool includeDeclaringTypes = false)
 		{
 			if (t == null)
-				throw new ArgumentNullException ("t");
+				throw new ArgumentNullException (nameof(t));
 			if (t.TypeKind == TypeKind.Error)
 				return GettextCatalog.GetString ("Type can not be resolved.");
 			if (t.TypeKind == TypeKind.Delegate)
@@ -629,7 +629,7 @@ namespace MonoDevelop.CSharp
 		public string GetDelegateInfo (ITypeSymbol type)
 		{
 			if (type == null)
-				throw new ArgumentNullException ("type");
+				throw new ArgumentNullException (nameof(type));
 			var t = type;
 
 			var result = StringBuilderCache.Allocate ();
@@ -704,7 +704,7 @@ namespace MonoDevelop.CSharp
 		string GetLocalVariableMarkup (ILocalSymbol local)
 		{
 			if (local == null)
-				throw new ArgumentNullException ("local");
+				throw new ArgumentNullException (nameof(local));
 
 			var result = StringBuilderCache.Allocate ();
 
@@ -735,7 +735,7 @@ namespace MonoDevelop.CSharp
 		string GetParameterVariableMarkup (IParameterSymbol parameter)
 		{
 			if (parameter == null)
-				throw new ArgumentNullException ("parameter");
+				throw new ArgumentNullException (nameof(parameter));
 
 			var result = StringBuilderCache.Allocate ();
 			AppendParameter (result, parameter);
@@ -756,7 +756,7 @@ namespace MonoDevelop.CSharp
 		string GetFieldMarkup (IFieldSymbol field)
 		{
 			if (field == null)
-				throw new ArgumentNullException ("field");
+				throw new ArgumentNullException (nameof(field));
 
 			var result = StringBuilderCache.Allocate ();
 			bool isEnum = field.ContainingType.TypeKind == TypeKind.Enum;
@@ -806,7 +806,7 @@ namespace MonoDevelop.CSharp
 		string GetMethodMarkup (IMethodSymbol method)
 		{
 			if (method == null)
-				throw new ArgumentNullException ("method");
+				throw new ArgumentNullException (nameof(method));
 
 			var result = StringBuilderCache.Allocate ();
 			AppendModifiers (result, method);
@@ -852,7 +852,7 @@ namespace MonoDevelop.CSharp
 		string GetConstructorMarkup (IMethodSymbol method)
 		{
 			if (method == null)
-				throw new ArgumentNullException ("method");
+				throw new ArgumentNullException (nameof(method));
 
 
 			var result = StringBuilderCache.Allocate ();
@@ -882,7 +882,7 @@ namespace MonoDevelop.CSharp
 		string GetDestructorMarkup (IMethodSymbol method)
 		{
 			if (method == null)
-				throw new ArgumentNullException ("method");
+				throw new ArgumentNullException (nameof(method));
 
 			var result = StringBuilderCache.Allocate ();
 			AppendModifiers (result, method);
@@ -920,7 +920,7 @@ namespace MonoDevelop.CSharp
 		string GetPropertyMarkup (IPropertySymbol property)
 		{
 			if (property == null)
-				throw new ArgumentNullException ("property");
+				throw new ArgumentNullException (nameof(property));
 			var result = StringBuilderCache.Allocate ();
 			AppendModifiers (result, property);
 			result.Append (GetTypeReferenceString (property.Type));
@@ -1544,7 +1544,7 @@ namespace MonoDevelop.CSharp
 		string GetEventMarkup (IEventSymbol evt)
 		{
 			if (evt == null)
-				throw new ArgumentNullException ("evt");
+				throw new ArgumentNullException (nameof(evt));
 			var result = StringBuilderCache.Allocate ();
 			AppendModifiers (result, evt);
 			result.Append (Highlight ("event ", GetThemeColor (modifierColor)));
@@ -1823,7 +1823,7 @@ namespace MonoDevelop.CSharp
 		public string GetArrayIndexerMarkup (IArrayTypeSymbol arrayType)
 		{
 			if (arrayType == null)
-				throw new ArgumentNullException ("arrayType");
+				throw new ArgumentNullException (nameof(arrayType));
 			var result = StringBuilderCache.Allocate ();
 			result.Append (GetTypeReferenceString (arrayType.ElementType));
 			if (BreakLineAfterReturnType) {

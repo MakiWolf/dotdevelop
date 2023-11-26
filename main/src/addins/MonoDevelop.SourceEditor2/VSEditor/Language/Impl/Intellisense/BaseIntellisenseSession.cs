@@ -17,7 +17,7 @@ namespace Microsoft.VisualStudio.Language.Intellisense.Implementation
         {
             if (textView == null)
             {
-                throw new ArgumentNullException("textView");
+                throw new ArgumentNullException(nameof(textView));
             }
 
             this.textView = textView;

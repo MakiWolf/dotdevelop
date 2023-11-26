@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using Microsoft.WindowsAPICodePack.Resources;
@@ -28,7 +28,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (string.IsNullOrEmpty(moduleName))
             {
-                throw new ArgumentNullException("moduleName");
+                throw new ArgumentNullException(nameof(moduleName));
             }
 
             this.moduleName = moduleName;
@@ -46,7 +46,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (string.IsNullOrEmpty(refPath))
             {
-                throw new ArgumentNullException("refPath");
+                throw new ArgumentNullException(nameof(refPath));
             }
 
             string[] refParams = refPath.Split(commaSeparator);
@@ -75,7 +75,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
                 moduleName = value;
             }
@@ -99,7 +99,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 string[] refParams = value.Split(commaSeparator);

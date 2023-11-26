@@ -52,7 +52,7 @@ namespace MonoDevelop.CodeIssues
 		public JobStatus (IAnalysisJob job)
 		{
 			if (job == null)
-				throw new ArgumentNullException ("job");
+				throw new ArgumentNullException (nameof(job));
 			
 			this.job = job;
 		}

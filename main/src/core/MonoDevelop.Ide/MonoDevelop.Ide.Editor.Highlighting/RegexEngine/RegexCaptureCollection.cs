@@ -117,7 +117,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
         /// </devdoc>
         public void CopyTo(Array array, int arrayIndex) {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
 
             for (int i = arrayIndex, j = 0; j < Count; i++, j++) {
                 array.SetValue(this[j], i);

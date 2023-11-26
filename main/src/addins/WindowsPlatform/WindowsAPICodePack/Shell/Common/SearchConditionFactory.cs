@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -348,7 +348,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (conditionToBeNegated == null)
             {
-                throw new ArgumentNullException("conditionToBeNegated");
+                throw new ArgumentNullException(nameof(conditionToBeNegated));
             }
 
             // Same as the native "IConditionFactory:MakeNot" method
@@ -398,7 +398,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (string.IsNullOrEmpty(query))
             {
-                throw new ArgumentNullException("query");
+                throw new ArgumentNullException(nameof(query));
             }
 
             IQueryParserManager nativeQueryParserManager = (IQueryParserManager)new QueryParserManagerCoClass();

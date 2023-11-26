@@ -208,9 +208,9 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
             string cultureKey = null;
 
             if (pattern == null) 
-                throw new ArgumentNullException("pattern");
+                throw new ArgumentNullException(nameof(pattern));
             if (options < RegexOptions.None || ( ((int) options) >> MaxOptionShift) != 0)
-                throw new ArgumentOutOfRangeException("options");
+                throw new ArgumentOutOfRangeException(nameof(options));
             if ((options &   RegexOptions.ECMAScript) != 0
              && (options & ~(RegexOptions.ECMAScript | 
                              RegexOptions.IgnoreCase | 
@@ -435,7 +435,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         ///    </devdoc>
         public static String Escape(String str) {
             if (str==null)
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             
             return RegexParser.Escape(str);
         }
@@ -451,7 +451,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         [SuppressMessage("Microsoft.Naming","CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Unescape", Justification="[....]: already shipped since v1 - can't fix without causing a breaking change")]
         public static String Unescape(String str) {
             if (str==null)
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             
             return RegexParser.Unescape(str);
         }
@@ -645,7 +645,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
             int result = -1;
 
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             // look up name if we have a hashtable of names
             if (capnames != null) {
@@ -733,7 +733,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public bool IsMatch(string input) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return IsMatch(input, UseOptionR() ? input.Length : 0);            
         }
@@ -752,7 +752,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public bool IsMatch(string input, int startat) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
 			return (null == Run(true, -1, input, 0, input.Length, startat, internalMatchTimeout));
         }
@@ -807,7 +807,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public Match Match (string input) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Match(input, UseOptionR() ? input.Length : 0);
         }
@@ -822,7 +822,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public Match Match(string input, int startat) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Run(false, -1, input, 0, input.Length, startat, internalMatchTimeout);
         }
@@ -896,7 +896,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public MatchCollection Matches(string input) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Matches(input, UseOptionR() ? input.Length : 0);
         }
@@ -914,7 +914,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public MatchCollection Matches(string input, int startat) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return new MatchCollection(this, input, 0, input.Length, startat);
         }
@@ -969,7 +969,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
 		public String Replace(string input, String replacement) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Replace(input, replacement, -1, UseOptionR() ? input.Length : 0);
         }
@@ -986,7 +986,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
 		public String Replace(string input, String replacement, int count) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Replace(input, replacement, count, UseOptionR() ? input.Length : 0);
         }
@@ -1004,10 +1004,10 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
 		public String Replace(string input, String replacement, int count, int startat) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             if (replacement == null)
-                throw new ArgumentNullException("replacement");
+                throw new ArgumentNullException(nameof(replacement));
 
             // a little code to grab a cached parsed replacement object
             RegexReplacement repl = (RegexReplacement) replref.Get();
@@ -1049,7 +1049,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public String Replace(string input, MatchEvaluator evaluator) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Replace(input, evaluator, -1, UseOptionR() ? input.Length : 0);
         }
@@ -1060,7 +1060,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public String Replace(string input, MatchEvaluator evaluator, int count) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Replace(input, evaluator, count, UseOptionR() ? input.Length : 0);
         }
@@ -1071,7 +1071,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public String Replace(string input, MatchEvaluator evaluator, int count, int startat) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return RegexReplacement.Replace(evaluator, this, input, count, startat);
         }
@@ -1116,7 +1116,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public string[] Split(string input) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return Split(input, 0, UseOptionR() ? input.Length : 0);
         }
@@ -1127,7 +1127,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         public string[] Split(string input, int count) {
 
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return RegexReplacement.Split(this, input, count, UseOptionR() ? input.Length : 0);
         }
@@ -1137,7 +1137,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
          */
         public string[] Split(string input, int count, int startat) {
             if (input==null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             return RegexReplacement.Split(this, input, count, startat);
         }
@@ -1184,10 +1184,10 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
         [ResourceConsumption(ResourceScope.Machine)]
         private static void CompileToAssemblyInternal (RegexCompilationInfo[] regexinfos, AssemblyName assemblyname, CustomAttributeBuilder[] attributes, String resourceFile) {
             if (assemblyname == null)
-                throw new ArgumentNullException("assemblyname");
+                throw new ArgumentNullException(nameof(assemblyname));
 
             if (regexinfos == null)
-                throw new ArgumentNullException("regexinfos");
+                throw new ArgumentNullException(nameof(regexinfos));
         
             RegexCompiler.CompileToAssembly(regexinfos, assemblyname, attributes, resourceFile);
         }
@@ -1453,7 +1453,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine
          */
         internal void Release(Object obj) {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             // if this reference owns the lock, release it
 

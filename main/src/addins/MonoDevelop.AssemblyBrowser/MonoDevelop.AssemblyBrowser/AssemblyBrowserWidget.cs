@@ -1,4 +1,4 @@
-﻿//
+//
 // AssemblyBrowserWidget.cs
 //
 // Author:
@@ -1208,7 +1208,7 @@ namespace MonoDevelop.AssemblyBrowser
 		public void AddProject (Project project, bool selectReference = true)
 		{
 			if (project == null)
-				throw new ArgumentNullException ("project");
+				throw new ArgumentNullException (nameof(project));
 			if (TreeView == null)
 				return;
 

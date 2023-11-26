@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Drawing;
@@ -107,7 +107,7 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
             }
             if (control == null)
             {
-                throw new ArgumentNullException("control");
+                throw new ArgumentNullException(nameof(control));
             }
 
             WindowHandle = control.Handle;
@@ -128,11 +128,11 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
         {
             if (windowsControl == null)
             {
-                throw new ArgumentNullException("windowsControl");
+                throw new ArgumentNullException(nameof(windowsControl));
             }
             if (parentWindow == null)
             {
-                throw new ArgumentNullException("parentWindow");
+                throw new ArgumentNullException(nameof(parentWindow));
             }
 
             WindowHandle = IntPtr.Zero;

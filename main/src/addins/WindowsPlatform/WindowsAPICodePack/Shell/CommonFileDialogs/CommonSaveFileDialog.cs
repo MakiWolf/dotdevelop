@@ -120,7 +120,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             InitializeNativeFileDialog();

@@ -549,7 +549,7 @@ namespace Mono.TextEditor
 		public IMDSpaceReservationManager GetSpaceReservationManager (string name)
 		{
 			if (name == null)
-				throw new ArgumentNullException ("name");
+				throw new ArgumentNullException (nameof(name));
 
 			return _spaceReservationStack.GetOrCreateManager (name);
 		}

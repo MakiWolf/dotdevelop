@@ -1,4 +1,4 @@
-﻿// 
+// 
 // HelperMethods.cs
 //  
 // Author:
@@ -103,7 +103,7 @@ namespace MonoDevelop.CSharp
 //		public static bool TryResolveAt (this DocumentContext documentContext, DocumentLocation loc, out ResolveResult result, out AstNode node)
 //		{
 //			if (documentContext == null)
-//				throw new ArgumentNullException ("documentContext");
+//				throw new ArgumentNullException (nameof(documentContext));
 //			result = null;
 //			node = null;
 //			var parsedDocument = documentContext.ParsedDocument;

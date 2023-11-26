@@ -44,9 +44,9 @@ namespace ICSharpCode.NRefactory6.CSharp
 			CancellationToken cancellationToken = default (CancellationToken))
 		{
 			if (semanticModel == null)
-				throw new ArgumentNullException("semanticModel");
+				throw new ArgumentNullException(nameof(semanticModel));
 			if (invocationExpression == null)
-				throw new ArgumentNullException("invocationExpression");
+				throw new ArgumentNullException(nameof(invocationExpression));
 			var symbolInfo = semanticModel.GetSymbolInfo(invocationExpression.Expression, cancellationToken);
 			if (argumentFilter == null)
 				argumentFilter = (p, e) => true;

@@ -1,4 +1,4 @@
-﻿//
+//
 //  Copyright (c) Microsoft Corporation. All rights reserved.
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 //
@@ -44,13 +44,13 @@ namespace MonoDevelop.SourceEditor
         public void UpdatePopupAgent(IMDSpaceReservationAgent agent, ITrackingSpan visualSpan, PopupStyles styles)
         {
             if (agent == null)
-                throw new ArgumentNullException("agent");
+                throw new ArgumentNullException(nameof(agent));
             if (visualSpan == null)
-                throw new ArgumentNullException("visualSpan");
+                throw new ArgumentNullException(nameof(visualSpan));
 
             PopupAgent popupAgent = agent as PopupAgent;
             if (popupAgent == null)
-                throw new ArgumentException("The agent is not a PopupAgent", "agent");
+                throw new ArgumentException("The agent is not a PopupAgent", nameof(agent));
 
             popupAgent.SetVisualSpan(visualSpan);
             popupAgent._style = styles;
@@ -66,7 +66,7 @@ namespace MonoDevelop.SourceEditor
         public void AddAgent(IMDSpaceReservationAgent agent)
         {
             if (agent == null)
-                throw new ArgumentNullException("agent");
+                throw new ArgumentNullException(nameof(agent));
 
             _agents.Add(agent);
             this.ChangeAgents(null, agent);
@@ -77,7 +77,7 @@ namespace MonoDevelop.SourceEditor
         public bool RemoveAgent(IMDSpaceReservationAgent agent)
         {
             if (agent == null)
-                throw new ArgumentNullException("agent");
+                throw new ArgumentNullException(nameof(agent));
 
             if (_agents.Remove(agent))
             {

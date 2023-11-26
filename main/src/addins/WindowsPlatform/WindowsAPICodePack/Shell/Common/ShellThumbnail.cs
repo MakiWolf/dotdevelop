@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Drawing;
@@ -39,7 +39,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         {
             if (shellObject == null || shellObject.NativeShellItem == null)
             {
-                throw new ArgumentNullException("shellObject");
+                throw new ArgumentNullException(nameof(shellObject));
             }
 
             shellItemNative = shellObject.NativeShellItem;

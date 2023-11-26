@@ -405,7 +405,7 @@ namespace MonoDevelop.Platform
 		public static string QueryAssociationString (string assoc, AssociationString str, AssociationFlags flags, string extra = null)
 		{
 			if (assoc == null)
-				throw new ArgumentNullException("assoc");
+				throw new ArgumentNullException(nameof(assoc));
 
 			flags |= AssociationFlags.NoTruncate;
 

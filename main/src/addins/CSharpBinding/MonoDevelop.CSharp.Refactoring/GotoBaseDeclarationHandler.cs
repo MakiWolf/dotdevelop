@@ -1,4 +1,4 @@
-﻿//
+//
 // GotoBaseDeclarationHandler.cs
 //
 // Author:
@@ -38,7 +38,7 @@ namespace MonoDevelop.CSharp.Refactoring
 		public static string GetDescription (ISymbol symbol)
 		{
 			if (symbol == null)
-				throw new ArgumentNullException ("symbol");
+				throw new ArgumentNullException (nameof(symbol));
 			switch (symbol.Kind) {
 			case SymbolKind.NamedType:
 				return GettextCatalog.GetString ("Go to _Base Type");
@@ -78,9 +78,9 @@ namespace MonoDevelop.CSharp.Refactoring
 		public static async Task GotoBase (MonoDevelop.Ide.Gui.Document doc, ISymbol symbol)
 		{
 			if (doc == null)
-				throw new ArgumentNullException ("doc");
+				throw new ArgumentNullException (nameof(doc));
 			if (symbol == null)
-				throw new ArgumentNullException ("symbol");
+				throw new ArgumentNullException (nameof(symbol));
 
 			var metadata = Navigation.Counters.CreateNavigateToMetadata ("Base");
 			using (var timer = Navigation.Counters.NavigateTo.BeginTiming (metadata)) {

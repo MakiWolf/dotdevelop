@@ -1186,7 +1186,7 @@ namespace Mono.TextEditor
 			public UndoGroup (TextDocument doc, OperationType operationType)
 			{
 				if (doc == null)
-					throw new ArgumentNullException ("doc");
+					throw new ArgumentNullException (nameof(doc));
 				doc.BeginAtomicUndo (operationType);
 				this.doc = doc;
 			}
@@ -2143,14 +2143,14 @@ namespace Mono.TextEditor
 		public void WriteTextTo (TextWriter writer)
 		{
 			if (writer == null)
-				throw new ArgumentNullException ("writer");
+				throw new ArgumentNullException (nameof(writer));
 			writer.Write (Text);
 		}
 
 		public void WriteTextTo (TextWriter writer, int offset, int length)
 		{
 			if (writer == null)
-				throw new ArgumentNullException ("writer");
+				throw new ArgumentNullException (nameof(writer));
 			writer.Write (GetTextAt (offset, length));
 		}
 
@@ -2468,13 +2468,13 @@ namespace Mono.TextEditor
 				if (currentPosition == -1)
 					throw new ObjectDisposedException("SnapshotSpanToTextReader");
 				if (buffer == null)
-					throw new ArgumentNullException("buffer");
+					throw new ArgumentNullException(nameof(buffer));
 				if (index < 0)
-					throw new ArgumentOutOfRangeException("index");
+					throw new ArgumentOutOfRangeException(nameof(index));
 				if (count < 0)
-					throw new ArgumentOutOfRangeException("count");
+					throw new ArgumentOutOfRangeException(nameof(count));
 				if (((index + count) < 0) || ((index + count) > buffer.Length))
-					throw new ArgumentOutOfRangeException("count");
+					throw new ArgumentOutOfRangeException(nameof(count));
 
 				int charactersToRead = System.Math.Min(this.span.Length - currentPosition, count);
 				this.span.Snapshot.CopyTo(this.span.Start.Position + currentPosition, buffer, index, charactersToRead);

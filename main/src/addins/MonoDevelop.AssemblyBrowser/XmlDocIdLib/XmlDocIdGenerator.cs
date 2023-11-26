@@ -1,4 +1,4 @@
-﻿//using System;
+//using System;
 //using System.Collections.Generic;
 //using System.Text;
 
@@ -21,7 +21,7 @@
 //            MemberReference Member)
 //        {
 //            if (Member == null)
-//                throw new ArgumentNullException("Member");
+//                throw new ArgumentNullException(nameof(Member));
 
 //            StringBuilder stbBuilder = new StringBuilder();
 //            List<string> Path = new List<string>();

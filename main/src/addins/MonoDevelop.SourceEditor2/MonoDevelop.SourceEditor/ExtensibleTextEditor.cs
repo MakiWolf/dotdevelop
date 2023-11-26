@@ -1,4 +1,4 @@
-﻿// ExtendibleTextEditor.cs
+// ExtendibleTextEditor.cs
 //
 // Author:
 //   Mike Krüger <mkrueger@novell.com>
@@ -116,7 +116,7 @@ namespace MonoDevelop.SourceEditor
 			public LastEditorExtension (ExtensibleTextEditor ext)
 			{
 				if (ext == null)
-					throw new ArgumentNullException ("ext");
+					throw new ArgumentNullException (nameof(ext));
 				this.ext = ext;
 			}
 			

@@ -442,7 +442,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             if (place == null)
             {
-                throw new ArgumentNullException("place");
+                throw new ArgumentNullException(nameof(place));
             }
 
             // Get our native dialog
@@ -469,7 +469,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         /// <param name="location">One of the enumeration values that indicates placement of the item in the list.</param>
         public void AddPlace(string path, FileDialogAddPlaceLocation location)
         {
-            if (string.IsNullOrEmpty(path)) { throw new ArgumentNullException("path"); }
+            if (string.IsNullOrEmpty(path)) { throw new ArgumentNullException(nameof(path)); }
 
             // Get our native dialog
             if (nativeDialog == null)
@@ -581,7 +581,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             if (window == null)
             {
-                throw new ArgumentNullException("window");
+                throw new ArgumentNullException(nameof(window));
             }
 
             // Set the parent / owner window
@@ -888,7 +888,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             if (control == null)
             {
-                throw new ArgumentNullException("control");
+                throw new ArgumentNullException(nameof(control));
             }
 
             CommonFileDialogControl dialogControl = null;

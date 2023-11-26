@@ -157,7 +157,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
             RegexReplacement repl;
 
             if (replacement == null)
-                throw new ArgumentNullException("replacement");
+                throw new ArgumentNullException(nameof(replacement));
 
             if (_regex == null)
                 throw new NotSupportedException();
@@ -212,7 +212,7 @@ namespace MonoDevelop.Ide.Editor.Highlighting.RegexEngine {
         static internal Match Synchronized(Match inner) {
 #endif
             if (inner == null)
-                throw new ArgumentNullException("inner");
+                throw new ArgumentNullException(nameof(inner));
 
             int numgroups = inner._matchcount.Length;
 

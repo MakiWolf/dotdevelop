@@ -341,7 +341,7 @@ namespace Mono.TextEditor
 		internal void Initialize (MonoTextEditor editor, TextDocument doc, ITextEditorOptions options, EditMode initialMode)
 		{
 			if (doc == null)
-				throw new ArgumentNullException ("doc");
+				throw new ArgumentNullException (nameof(doc));
 			this.editor = editor;
 			textEditorData = new TextEditorData (doc);
 			textEditorData.RecenterEditor += TextEditorData_RecenterEditor; 

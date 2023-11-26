@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Drawing;
@@ -124,7 +124,7 @@ namespace Microsoft.WindowsAPICodePack.Controls.WindowsForms
         {
             if (shellObject == null)
             {
-                throw new ArgumentNullException("shellObject");
+                throw new ArgumentNullException(nameof(shellObject));
             }
 
             if (explorerBrowserControl == null)

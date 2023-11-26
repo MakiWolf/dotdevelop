@@ -53,9 +53,9 @@ namespace MonoDevelop.Refactoring.Rename
 		public static async Task<bool> Rename (ISymbol symbol, string newName)
 		{
 			if (symbol == null)
-				throw new ArgumentNullException ("symbol");
+				throw new ArgumentNullException (nameof(symbol));
 			if (newName == null)
-				throw new ArgumentNullException ("newName");
+				throw new ArgumentNullException (nameof(newName));
 			try {
 				await new RenameRefactoring ().PerformChangesAsync (symbol, new RenameProperties () { NewName = newName });
 				return true;

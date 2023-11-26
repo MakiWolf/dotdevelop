@@ -48,7 +48,7 @@ namespace Mono.TextEditor.Theatrics
 			if (!IsComposited)
 				throw new InvalidOperationException ("Only works with composited screen. Check Widget.IsComposited.");
 			if (editor == null)
-				throw new ArgumentNullException ("Editor");
+				throw new ArgumentNullException (nameof(Editor));
 			DoubleBuffered = true;
 			Decorated = false;
 			BorderWidth = 0;
@@ -238,7 +238,7 @@ namespace Mono.TextEditor.Theatrics
 			if (!IsComposited)
 				throw new InvalidOperationException ("Only works with composited screen. Check Widget.IsComposited.");
 			if (editor == null)
-				throw new ArgumentNullException ("Editor");
+				throw new ArgumentNullException (nameof(Editor));
 			WidgetFlags |= Gtk.WidgetFlags.NoWindow;
 			this.editor = editor;
 			Events = EventMask.ExposureMask;

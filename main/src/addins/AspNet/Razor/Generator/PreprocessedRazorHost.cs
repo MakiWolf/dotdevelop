@@ -25,7 +25,7 @@ namespace MonoDevelop.AspNet.Razor.Generator
 		public PreprocessedRazorHost (string fullPath) : base (RazorCodeLanguage.GetLanguageByExtension (".cshtml"))
 		{
 			if (fullPath == null)
-				throw new ArgumentNullException ("fullPath");
+				throw new ArgumentNullException (nameof(fullPath));
 
 			FullPath = fullPath;
 			_codeDomProvider = new Microsoft.CSharp.CSharpCodeProvider ();

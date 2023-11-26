@@ -138,7 +138,7 @@ namespace Microsoft.VisualStudio.Language.Intellisense.Implementation
             // Make sure this session is actually in the stack.
             if (session == null)
             {
-                throw new ArgumentNullException("session");
+                throw new ArgumentNullException(nameof(session));
             }
             int sessionIndex = _sessions.IndexOf(session);
             if (sessionIndex == -1)

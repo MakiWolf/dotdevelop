@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -141,7 +141,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// <exception cref="System.ArgumentException">If one of the given canonical names is invalid.</exception>
         public void SetStacks(params string[] canonicalNames)
         {
-            if (canonicalNames == null) { throw new ArgumentNullException("canonicalNames"); }
+            if (canonicalNames == null) { throw new ArgumentNullException(nameof(canonicalNames)); }
             List<PropertyKey> propertyKeyList = new List<PropertyKey>();
 
             foreach (string prop in canonicalNames)

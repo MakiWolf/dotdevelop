@@ -374,7 +374,7 @@ namespace Mono.TextEditor.Theatrics
 		private void Pack (Widget widget, uint duration, Easing easing, Blocking blocking, bool end)
 		{
 			if (widget == null) {
-				throw new ArgumentNullException ("widget");
+				throw new ArgumentNullException (nameof(widget));
 			}
 			
 			AnimatedWidget animated_widget = new AnimatedWidget (widget, duration, easing, blocking, horizontal);
@@ -444,7 +444,7 @@ namespace Mono.TextEditor.Theatrics
 		private void RemoveCore (Widget widget, uint duration, Easing easing, Blocking blocking, bool use_easing, bool use_blocking)
 		{
 			if (widget == null) {
-				throw new ArgumentNullException ("widget");
+				throw new ArgumentNullException (nameof(widget));
 			}
 			
 			AnimatedWidget animated_widget = null;

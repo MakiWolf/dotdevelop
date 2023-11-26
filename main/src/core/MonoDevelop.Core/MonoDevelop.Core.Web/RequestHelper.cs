@@ -1,4 +1,4 @@
-﻿//
+//
 // From NuGet src/Core
 //
 // Copyright (c) 2010-2014 Outercurve Foundation
@@ -383,12 +383,12 @@ namespace MonoDevelop.Core.Web
 		{
 			if (request == null)
 			{
-				throw new ArgumentNullException("request");
+				throw new ArgumentNullException(nameof(request));
 			}
 
 			if (response == null)
 			{
-				throw new ArgumentNullException("response");
+				throw new ArgumentNullException(nameof(response));
 			}
 
 			return !request.KeepAlive && IsNtlmOrKerberos(response.AuthType);

@@ -1,4 +1,4 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Windows;
@@ -55,7 +55,7 @@ namespace Microsoft.WindowsAPICodePack.Taskbar
         /// </remarks>
         public void AddButtons(UIElement control, params ThumbnailToolBarButton[] buttons)
         {
-            if (control == null) { throw new ArgumentNullException("control"); }
+            if (control == null) { throw new ArgumentNullException(nameof(control)); }
             VerifyButtons(buttons);
 
             // Add the buttons to our window manager, which will also create a proxy window

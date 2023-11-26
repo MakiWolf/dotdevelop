@@ -45,7 +45,7 @@ namespace Mono.TextEditor
 		public ActionMargin (MonoTextEditor editor)
 		{
 			if (editor == null)
-				throw new ArgumentNullException ("editor");
+				throw new ArgumentNullException (nameof(editor));
 			this.editor = editor;
 			marginWidth = 20;
 			IsVisible = false;

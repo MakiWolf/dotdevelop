@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using MS.WindowsAPICodePack.Internal;
@@ -59,7 +59,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
         /// render properly on top of an AeroGlass frame. </remarks>
         public void ExcludeControlFromAeroGlass(Control control)
         {
-            if (control == null) { throw new ArgumentNullException("control"); }
+            if (control == null) { throw new ArgumentNullException(nameof(control)); }
 
             if (AeroGlassCompositionEnabled)
             {

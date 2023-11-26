@@ -1,4 +1,4 @@
-﻿//
+//
 // CSharpProjector.cs
 //
 // Author:
@@ -39,9 +39,9 @@ namespace MonoDevelop.AspNet.WebForms.CSharp
 		public Task<Projection> CreateProjection (DocumentInfo info, IReadonlyTextDocument data, bool buildExpressions)
 		{
 			if (info == null)
-				throw new ArgumentNullException ("info");
+				throw new ArgumentNullException (nameof(info));
 			if (data == null)
-				throw new ArgumentNullException ("data");
+				throw new ArgumentNullException (nameof(data));
 			var document = new StringBuilder ();
 
 			WriteUsings (info.Imports, document);
