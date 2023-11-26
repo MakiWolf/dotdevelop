@@ -85,7 +85,7 @@
     <!-- disable this for now, it's absurdly noisy
     <PackageReference Include="ClrHeapAllocationAnalyzer" Version="1.0.0.9" />
     -->
-    <PackageReference Include="Microsoft.Build.Locator" Version="1.1.2" PrivateAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.6.10" PrivateAssets="runtime" />
     <PackageReference Include="Microsoft.CodeAnalysis.EditorFeatures" Version="$(NuGetVersionRoslyn)" PrivateAssets="runtime" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="$(NuGetVersionRoslyn)" PrivateAssets="runtime" />
     <PackageReference Include="Microsoft.VisualStudio.CodingConventions" Version="1.1.20180503.2" PrivateAssets="runtime" />
@@ -100,15 +100,15 @@
     <PackageReference Include="Mono.Cecil" Version="$(NuGetVersionCecil)" PrivateAssets="runtime" />
     <PackageReference Include="MonoDevelopDev.Analyzers" Version="$(NuGetVersionMonoDevelopAnalyzers)" />
     <PackageReference Include="Newtonsoft.Json" Version="$(NuGetVersionNewtonsoftJson)" PrivateAssets="runtime" />
-    <PackageReference Include="SharpZipLib" Version="1.2.0" PrivateAssets="runtime" />
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="1.1.12" PrivateAssets="runtime,build" />
-    <PackageReference Include="StreamJsonRpc" Version="1.5.43" PrivateAssets="runtime" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" PrivateAssets="runtime" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.7" PrivateAssets="runtime,build" />
+    <PackageReference Include="StreamJsonRpc" Version="1.5.68" PrivateAssets="runtime" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" PrivateAssets="runtime" />
     <!-- remove this as it conflicts with the one in mscorlib. mono bug? -->
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" ExcludeAssets="all" />
     <!-- update this to a version that doesn't crash -->
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.3.52" ExcludeAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="3.0.0-preview9.19423.4" PrivateAssets="runtime" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.0" PrivateAssets="runtime" />
   </ItemGroup>
   <ItemGroup>
     <IncludeCopyLocal Include="Humanizer.dll" />
