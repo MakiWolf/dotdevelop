@@ -158,7 +158,7 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			var frame = new Frame ();
 			frame.Add (hBox);
 			frame.BorderWidth = (uint)(Platform.IsWindows ? 5 : 10); // on Windows we need to have smaller border due to ExceptionTypeLabel vertical misalignment
-			frame.Shadow = ShadowType.None;
+//			frame.Shadow = ShadowType.None;
 			frame.ShadowType = ShadowType.None;
 
 			eventBox.Add (frame);
@@ -283,6 +283,7 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			return vbox;
 		}
 
+<<<<<<< HEAD
 		static void StackFrameLayout (CellLayout layout, CellRenderer cr, TreeModel model, TreeIter iter)
 		{
 			var frame = (ExceptionStackFrame)model.GetValue (iter, (int)ModelColumn.StackFrame);
@@ -298,6 +299,68 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 
 			renderer.IsUserCode = (bool)model.GetValue (iter, (int)ModelColumn.IsUserCode);
 		}
+=======
+		class ExpanderWithMinSize : Expander
+		{
+			public ExpanderWithMinSize (string label) : base (label)
+			{
+			}
+
+			protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+			{
+				base.OnGetPreferredHeight (out minimum_height, out natural_height);
+				minimum_height = natural_height = 28;
+			}
+
+		}
+
+		Expander WrapInExpander (string title, Widget widget)
+		{
+			var expander = new ExpanderWithMinSize ($"<b>{GLib.Markup.EscapeText (title)}</b>");
+			expander.Name = "exception_dialog_expander";
+			Gtk.Rc.ParseString (@"style ""exception-dialog-expander""
+{
+	GtkExpander::expander-spacing = 10
+}
+widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
+");
+			expander.Child = widget;
+			expander.Spacing = 0;
+			expander.Show ();
+			expander.CanFocus = false;
+			expander.UseMarkup = true;
+			expander.Expanded = true;
+			expander.Activated += Expander_Activated;
+			expander.ModifyBg (StateType.Prelight, Ide.Gui.Styles.PrimaryBackgroundColor.ToGdkColor ());
+			return expander;
+		}
+
+		void Expander_Activated (object sender, EventArgs e)
+		{
+			if (expanderProperties.Expanded && expanderStacktrace.Expanded)
+				paned.PositionSet = false;
+			else if (expanderStacktrace.Expanded)
+				paned.Position = paned.MaxPosition;
+			else
+				paned.Position = paned.MinPosition;
+		}
+
+//		static void StackFrameLayout (CellLayout layout, CellRenderer cr, ITreeModel model, TreeIter iter)
+//		{
+//			var frame = (ExceptionStackFrame)model.GetValue (iter, (int)ModelColumn.StackFrame);
+//			var renderer = (StackFrameCellRenderer)cr;
+//
+//			renderer.Markup = (string)model.GetValue (iter, (int)ModelColumn.Markup);
+//			renderer.Frame = frame;
+//
+//			if (frame == null) {
+//				renderer.IsUserCode = false;
+//				return;
+//			}
+//
+//			renderer.IsUserCode = (bool)model.GetValue (iter, (int)ModelColumn.IsUserCode);
+//		}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 		Widget CreateStackTraceTreeView ()
 		{
@@ -312,7 +375,11 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 
 			var renderer = new StackFrameCellRenderer (stackTraceTreeView.PangoContext);
 
+<<<<<<< HEAD
 			stackTraceTreeView.AppendColumn ("", renderer, (CellLayoutDataFunc)StackFrameLayout);
+=======
+//			StackTraceTreeView.AppendColumn ("", renderer, (CellLayoutDataFunc)StackFrameLayout);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 			stackTraceTreeView.RowActivated += StackFrameActivated;
 
@@ -751,16 +818,22 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 
 			Pango.FontDescription font = Pango.FontDescription.FromString (Platform.IsWindows ? "9" : "11");
 
-			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-			{
-				using (var layout = new Pango.Layout (widget.PangoContext)) {
-					layout.FontDescription = font;
-					Pango.Rectangle ink, logical;
-					layout.SetMarkup ("<b>" + Text + "</b>");
-					layout.GetPixelExtents (out ink, out logical);
-					width = logical.Width + 10;
-					height = logical.Height + 2;
+//			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+//			{
+//				using (var layout = new Pango.Layout (widget.PangoContext)) {
+//					layout.FontDescription = font;
+//					Pango.Rectangle ink, logical;
+//					layout.SetMarkup ("<b>" + Text + "</b>");
+//					layout.GetPixelExtents (out ink, out logical);
+//					width = logical.Width + 10;
+//					height = logical.Height + 2;
+//
+//					x_offset = 0;
+//					y_offset = 0;
+//				}
+//			}
 
+<<<<<<< HEAD
 					x_offset = 0;
 					y_offset = 0;
 				}
@@ -787,6 +860,40 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 					}
 				}
 			}
+=======
+//			protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+//			{
+//				using (var cr = Gdk.CairoHelper.Create (window)) {
+//					cr.Rectangle (background_area.X, background_area.Y, background_area.Width, background_area.Height);
+//
+//					using (var layout = new Pango.Layout (widget.PangoContext)) {
+//						layout.FontDescription = font;
+//
+//						if ((flags & CellRendererState.Selected) != 0) {
+//							cr.SetSourceRGB (Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor.Red,
+//											 Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor.Green,
+//											 Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor.Blue); // selected
+//							cr.Fill ();
+//							cr.SetSourceRGB (Styles.ExceptionCaughtDialog.TreeSelectedTextColor.Red,
+//											 Styles.ExceptionCaughtDialog.TreeSelectedTextColor.Green,
+//											 Styles.ExceptionCaughtDialog.TreeSelectedTextColor.Blue);
+//						} else {
+//							cr.SetSourceRGB (Styles.ExceptionCaughtDialog.TreeBackgroundColor.Red,
+//											 Styles.ExceptionCaughtDialog.TreeBackgroundColor.Green,
+//											 Styles.ExceptionCaughtDialog.TreeBackgroundColor.Blue); // background
+//							cr.Fill ();
+//							cr.SetSourceRGB (Styles.ExceptionCaughtDialog.TreeTextColor.Red,
+//											 Styles.ExceptionCaughtDialog.TreeTextColor.Green,
+//											 Styles.ExceptionCaughtDialog.TreeTextColor.Blue);
+//						}
+//
+//						layout.SetMarkup (Text);
+//						cr.Translate (cell_area.X + 10, cell_area.Y + 1);
+//						cr.ShowLayout (layout);
+//					}
+//				}
+//			}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		protected override bool OnKeyPressEvent (Gdk.EventKey evnt)
@@ -862,6 +969,7 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			return $"<span foreground='{foregroundColor}'>{markup}</span>";
 		}
 
+<<<<<<< HEAD
 		public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
 		{
 			using (var layout = new Pango.Layout (Context)) {
@@ -912,6 +1020,45 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 				}
 			}
 		}
+=======
+//		public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+//		{
+//			using (var layout = new Pango.Layout (Context)) {
+//				Pango.Rectangle ink, logical;
+//				layout.FontDescription = font;
+//				layout.SetMarkup (GetMethodMarkup (false));
+//				layout.GetPixelExtents (out ink, out logical);
+//
+//				height = logical.Height;
+//				width = 0;
+//				x_offset = 0;
+//				y_offset = 0;
+//			}
+//		}
+
+//		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+//		{
+//			using (var cr = Gdk.CairoHelper.Create (window)) {
+//				Pango.Rectangle ink, logical;
+//				using (var layout = new Pango.Layout (Context)) {
+//					layout.FontDescription = font;
+//					layout.SetMarkup (GetFileMarkup ((flags & CellRendererState.Selected) != 0));
+//					layout.GetPixelExtents (out ink, out logical);
+//					var width = widget.Allocation.Width;
+//					cr.Translate (width - logical.Width - 10, cell_area.Y);
+//					cr.ShowLayout (layout);
+//
+//					cr.IdentityMatrix ();
+//
+//					layout.SetMarkup (GetMethodMarkup ((flags & CellRendererState.Selected) != 0));
+//					layout.Width = (int)((width - logical.Width - 35) * Pango.Scale.PangoScale);
+//					layout.Ellipsize = Pango.EllipsizeMode.Middle;
+//					cr.Translate (cell_area.X + 10, cell_area.Y);
+//					cr.ShowLayout (layout);
+//				}
+//			}
+//		}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 	}
 
 	class ExceptionCaughtMessage : IDisposable
@@ -1067,7 +1214,7 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 				CanFocus = false,
 				Name = "exceptionTypeLabel"
 			};
-			vb.PackStart (typeLabel);
+			vb.PackStart (typeLabel, false, true, 0);
 			messageLabel = new Label {
 				Xalign = 0,
 				NoShowAll = true,
@@ -1075,7 +1222,7 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 				CanFocus = false,
 				Name = "exceptionMessageLabel"
 			};
-			vb.PackStart (messageLabel);
+			vb.PackStart (messageLabel, false, true, 0);
 
 			var detailsBtn = new Xwt.LinkLabel (GettextCatalog.GetString ("Show Details"));
 			var hh = new HBox ();

@@ -19,6 +19,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+<<<<<<< HEAD
+=======
+    <Reference Include="gdk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="nunit.core">
+      <HintPath>..\..\packages\NUnit.Runners.2.6.4\tools\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\..\packages\NUnit.Runners.2.6.4\tools\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
     <Reference Include="System.Xml" />
     <PackageReference Include="NUnitV2.Core" Version="$(NuGetVersionNUnit2)" />
     <PackageReference Include="NUnit" Version="$(NuGetVersionNUnit2)" />

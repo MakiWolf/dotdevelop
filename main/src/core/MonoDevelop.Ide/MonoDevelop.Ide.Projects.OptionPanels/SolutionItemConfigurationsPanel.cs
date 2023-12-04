@@ -99,7 +99,7 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 
 		void OnCopyConfiguration (object sender, EventArgs args)
 		{
-			Gtk.TreeModel foo;
+			Gtk.ITreeModel foo;
 			Gtk.TreeIter iter;
 			if (!configsList.Selection.GetSelected (out foo, out iter))
 				return;
@@ -129,7 +129,7 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 
 		void OnRemoveConfiguration (object sender, EventArgs args)
 		{
-			Gtk.TreeModel foo;
+			Gtk.ITreeModel foo;
 			Gtk.TreeIter iter;
 			if (!configsList.Selection.GetSelected (out foo, out iter))
 				return;
@@ -155,7 +155,7 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 
 		void OnRenameConfiguration (object sender, EventArgs args)
 		{
-			Gtk.TreeModel foo;
+			Gtk.ITreeModel foo;
 			Gtk.TreeIter iter;
 			if (!configsList.Selection.GetSelected (out foo, out iter))
 				return;

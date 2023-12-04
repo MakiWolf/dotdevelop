@@ -153,8 +153,13 @@ namespace MonoDevelop.Ide.CodeTemplates
 			templatesToRemove.Clear ();
 			CodeTemplateService.Templates = templates;
 		}
+<<<<<<< HEAD
 
 		static void RenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		static void RenderIcon (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			CodeTemplate template = (CodeTemplate)model.GetValue (iter, 0);
 
@@ -166,8 +171,13 @@ namespace MonoDevelop.Ide.CodeTemplates
 			}
 
 		}
+<<<<<<< HEAD
 
 		void RenderTemplateName (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		void RenderTemplateName (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			CodeTemplate template = (CodeTemplate)model.GetValue (iter, 0);
 			var crt = (CellRendererText)cell;

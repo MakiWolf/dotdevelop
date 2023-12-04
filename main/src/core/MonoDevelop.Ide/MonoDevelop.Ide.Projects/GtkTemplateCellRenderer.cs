@@ -94,23 +94,36 @@ namespace MonoDevelop.Ide.Projects
 			return Platform.IsMac && (Platform.OSVersion >= MacSystemInformation.Yosemite);
 		}
 
-		public override void GetSize (Widget widget, ref Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-		{
-			base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-			if (TemplateIcon != null) {
-				height = (int)TemplateIcon.Height + ((int)Ypad * 2);
-			} else {
-				height += RenderRecentTemplate ? recentTemplateHeadingTotalYPadding : groupTemplateHeadingTotalYPadding;
-			}
-		}
+//		public override void GetSize (Widget widget, ref Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+//		{
+//			base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+//			if (TemplateIcon != null) {
+//				height = (int)TemplateIcon.Height + ((int)Ypad * 2);
+//			} else {
+//				height += RenderRecentTemplate ? recentTemplateHeadingTotalYPadding : groupTemplateHeadingTotalYPadding;
+//			}
+//		}
 
-		protected override void Render (Drawable window, Widget widget, Rectangle background_area, Rectangle cell_area, Rectangle expose_area, CellRendererState flags)
-		{
-			if (Template == null) {
-				DrawTemplateCategoryText (window, widget, cell_area, flags);
-				return;
-			}
+//		protected override void Render (Drawable window, Widget widget, Rectangle background_area, Rectangle cell_area, Rectangle expose_area, CellRendererState flags)
+//		{
+//			if (Template == null) {
+//				DrawTemplateCategoryText (window, widget, cell_area, flags);
+//				return;
+//			}
+//
+//			using (var ctx = CairoHelper.Create (window)) {
+//				using (var layout = new Pango.Layout (widget.PangoContext)) {
+//
+//					Rectangle iconRect = DrawIcon (ctx, widget, cell_area, flags);
+//
+//					DrawTemplateNameText (window, widget, cell_area, iconRect, flags);
+//					if (RenderRecentTemplate)
+//						DrawCategoryText (ctx, widget, cell_area, iconRect, flags);
+//				}
+//			}
+//		}
 
+<<<<<<< HEAD
 			using (var ctx = CairoHelper.Create (window)) {
 				using (var layout = new Pango.Layout (widget.PangoContext)) {
 
@@ -143,6 +156,28 @@ namespace MonoDevelop.Ide.Projects
 				window.DrawLayout (widget.Style.TextGC (state), textX, textY, layout);
 			}
 		}
+=======
+//		void DrawTemplateCategoryText (Drawable window, Widget widget, Rectangle cell_area, CellRendererState flags)
+//		{
+//			StateType state = GetState (widget, flags);
+//
+//			using (var layout = new Pango.Layout (widget.PangoContext)) {
+//
+//				layout.Ellipsize = Pango.EllipsizeMode.End;
+//				int textPixelWidth = widget.Allocation.Width - ((int)Xpad * 2);
+//				layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
+//
+//				layout.SetMarkup (TemplateCategory);
+//
+//				int w, h;
+//				layout.GetPixelSize (out w, out h);
+//
+//				int textX = cell_area.X + (int)Xpad + categoryTextPaddingX;
+//				int textY = cell_area.Y + (cell_area.Height - h) / 2 + groupTemplateHeadingYOffset;
+//				window.DrawLayout (widget.Style.TextGC (state), textX, textY, layout);
+//			}
+//		}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 		Rectangle DrawIcon (Cairo.Context ctx, Widget widget, Rectangle cell_area, CellRendererState flags)
 		{
@@ -156,25 +191,25 @@ namespace MonoDevelop.Ide.Projects
 			return iconRect;
 		}
 
-		void DrawTemplateNameText (Drawable window, Widget widget, Rectangle cell_area, Rectangle iconRect, CellRendererState flags)
-		{
-			StateType state = GetState (widget, flags);
-
-			using (var layout = new Pango.Layout (widget.PangoContext)) {
-
-				layout.Ellipsize = Pango.EllipsizeMode.End;
-				int textPixelWidth = cell_area.Width - ((int)Xpad * 2) - iconRect.Width - iconTextPadding;
-				layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
-
-				layout.SetMarkup (GLib.Markup.EscapeText (Template.Name));
-
-				int w, h;
-				layout.GetPixelSize (out w, out h);
-				int textY = cell_area.Y + (RenderRecentTemplate ? (2) : (cell_area.Height - h) / 2);
-
-				window.DrawLayout (widget.Style.TextGC (state), iconRect.Right + iconTextPadding, textY, layout);
-			}
-		}
+//		void DrawTemplateNameText (Drawable window, Widget widget, Rectangle cell_area, Rectangle iconRect, CellRendererState flags)
+//		{
+//			StateType state = GetState (widget, flags);
+//
+//			using (var layout = new Pango.Layout (widget.PangoContext)) {
+//
+//				layout.Ellipsize = Pango.EllipsizeMode.End;
+//				int textPixelWidth = cell_area.Width - ((int)Xpad * 2) - iconRect.Width - iconTextPadding;
+//				layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
+//
+//				layout.SetMarkup (GLib.Markup.EscapeText (Template.Name));
+//
+//				int w, h;
+//				layout.GetPixelSize (out w, out h);
+//				int textY = cell_area.Y + (RenderRecentTemplate ? (2) : (cell_area.Height - h) / 2);
+//
+//				window.DrawLayout (widget.Style.TextGC (state), iconRect.Right + iconTextPadding, textY, layout);
+//			}
+//		}
 
 		void DrawCategoryText (Cairo.Context ctx, Widget widget, Rectangle cell_area, Rectangle iconRect, CellRendererState flags)
 		{

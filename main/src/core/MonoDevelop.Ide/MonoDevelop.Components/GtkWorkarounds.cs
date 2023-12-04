@@ -81,6 +81,7 @@ namespace MonoDevelop.Components
 				}
 			}
 
+<<<<<<< HEAD
 			// opt into the fixes on GTK+ >= 2.24.8
 			if (Platform.IsMac && GtkMinorVersion >= 24 && GtkMicroVersion >= 8) {
 				try {
@@ -89,6 +90,16 @@ namespace MonoDevelop.Components
 					// Do nothing, we removed the code which had backwards compat as we depend on a mono with the fix
 				}
 			}
+=======
+			//opt into the fixes on GTK+ >= 2.24.8
+//			if (Platform.IsMac) {
+//				try {
+//					gdk_quartz_set_fix_modifiers (true);
+//				} catch (EntryPointNotFoundException) {
+//					oldMacKeyHacks = true;
+//				}
+//			}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 			keymap.KeysChanged += delegate {
 				mappedKeys.Clear ();
@@ -304,9 +315,13 @@ namespace MonoDevelop.Components
 
 		public static Gdk.ModifierType GetCurrentKeyModifiers ()
 		{
+<<<<<<< HEAD
 			return Xwt.GtkBackend.GtkWorkarounds.GetCurrentKeyModifiers ();
 #if DD_GTK3_CHECK_FOR_REMOVE
 #if WIN32
+=======
+			#if WIN32
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			Gdk.ModifierType mtype = Gdk.ModifierType.None;
 			ModifierKeys mod = Keyboard.Modifiers;
 			if ((mod & ModifierKeys.Shift) > 0)
@@ -318,6 +333,7 @@ namespace MonoDevelop.Components
 			if ((mod & ModifierKeys.Windows) > 0)
 				mtype |= Gdk.ModifierType.Mod2Mask; // Command key
 			return mtype;
+<<<<<<< HEAD
 #elif MAC
 			return GtkMacInterop.ConvertModifierMask (NSEvent.CurrentModifierFlags);
 #else
@@ -326,6 +342,33 @@ namespace MonoDevelop.Components
 			return mtype;
 #endif
 #endif
+=======
+			#else
+			if (Platform.IsMac) {
+				Gdk.ModifierType mtype = Gdk.ModifierType.None;
+				ulong mod;
+				if (IntPtr.Size == 8) {
+					mod = objc_msgSend_NSUInt64 (cls_NSEvent, sel_modifierFlags);
+				} else {
+					mod = objc_msgSend_NSUInt32 (cls_NSEvent, sel_modifierFlags);
+				}
+				if ((mod & (1 << 17)) != 0)
+					mtype |= Gdk.ModifierType.ShiftMask;
+				if ((mod & (1 << 18)) != 0)
+					mtype |= Gdk.ModifierType.ControlMask;
+				if ((mod & (1 << 19)) != 0)
+					mtype |= Gdk.ModifierType.Mod1Mask; // Alt key
+				if ((mod & (1 << 20)) != 0)
+					mtype |= Gdk.ModifierType.Mod2Mask; // Command key
+				return mtype;
+			}
+			else {
+				Gdk.ModifierType mtype;
+				Gtk.Global.GetCurrentEventState (out mtype);
+				return mtype;
+			}
+			#endif
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		public static void GetPageScrollPixelDeltas (this Gdk.EventScroll evt, double pageSizeX, double pageSizeY,
@@ -815,8 +858,12 @@ namespace MonoDevelop.Components
 		// per-instance delegates.
 		public static void FixContainerLeak (Gtk.Container c)
 		{
+<<<<<<< HEAD
 			Xwt.GtkBackend.GtkWorkarounds.FixContainerLeak (c);
 #if DD_GTK3_CHECK_FOR_REMOVE
+=======
+return;
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			if (containerLeakFixed) {
 				return;
 			}
@@ -989,8 +1036,8 @@ namespace MonoDevelop.Components
 
 			public void ConnectTo (Gtk.Label label)
 			{
-				var signal = GLib.Signal.Lookup (label, "activate-link", typeof(ActivateLinkEventArgs));
-				signal.AddDelegate (new EventHandler<ActivateLinkEventArgs> (HandleLink));
+//				var signal = GLib.Signal.Lookup (label, "activate-link", typeof(ActivateLinkEventArgs));
+//				signal.AddDelegate (new EventHandler<ActivateLinkEventArgs> (HandleLink));
 			}
 
 			class ActivateLinkEventArgs : GLib.SignalArgs
@@ -1056,7 +1103,7 @@ namespace MonoDevelop.Components
 #endif
 		//the GTK# version of this has 'out' instead of 'ref', preventing passing the x,y values in
 		public static bool GetTooltipContext (this TreeView tree, ref int x, ref int y, bool keyboardTip,
-			out TreeModel model, out TreePath path, out Gtk.TreeIter iter)
+			out ITreeModel model, out TreePath path, out Gtk.TreeIter iter)
 		{
 			return Xwt.GtkBackend.GtkWorkarounds.GetTooltipContext (tree, ref x, ref y, keyboardTip, out model,
 				out path, out iter);
@@ -1246,6 +1293,7 @@ namespace MonoDevelop.Components
 		[DllImport (PangoUtil.LIBGTK, CallingConvention = CallingConvention.Cdecl)]
 		static extern void gtk_object_set_data (IntPtr raw, IntPtr key, IntPtr data);
 
+<<<<<<< HEAD
 		public static void SetData<T> (Gtk.Object gtkobject, string key, T data) where T: struct
 		{
 			IntPtr pkey = GLib.Marshaller.StringToPtrGStrdup (key);
@@ -1261,6 +1309,22 @@ namespace MonoDevelop.Components
 		public static void SetTransparentBgHint (this Widget widget, bool enable)
 		{
 			Xwt.GtkBackend.GtkWorkarounds.SetTransparentBgHint (widget,enable);
+=======
+//		public static void SetData<T> (Gtk.Object gtkobject, string key, T data) where T: struct
+//		{
+//			IntPtr pkey = GLib.Marshaller.StringToPtrGStrdup (key);
+//			IntPtr pdata = Marshal.AllocHGlobal(Marshal.SizeOf(data));
+//			Marshal.StructureToPtr(data, pdata, false);
+//			gtk_object_set_data (gtkobject.Handle, pkey, pdata);
+//			Marshal.FreeHGlobal(pdata);
+//			GLib.Marshaller.Free (pkey);
+//			gtkobject.Data [key] = data;
+//		}
+
+		public static void SetTransparentBgHint (this Widget widget, bool enable)
+		{
+			//SetData (widget, "transparent-bg-hint", enable);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		public static void SetMarkup (this Gtk.TextView view, string pangoMarkup)

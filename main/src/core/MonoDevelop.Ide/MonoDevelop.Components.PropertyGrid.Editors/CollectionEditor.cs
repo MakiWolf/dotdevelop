@@ -66,7 +66,11 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 		public override bool EditsReadOnlyObject {
 			get { return true; }
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		protected override string GetValueText ()
 		{
 			return MonoDevelop.Core.GettextCatalog.GetString ("(Collection)");
@@ -93,8 +97,7 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 			var dialog = new Gtk.Dialog () {
 				Title = displayName + " Editor",
 				Modal = true,
-				AllowGrow = true,
-				AllowShrink = true,
+				Resizable = true,
 			};
 			IdeTheme.ApplyTheme (dialog);
 			var toplevel = this.Container.GetNativeWidget<Gtk.Widget> ().Toplevel as Gtk.Window;
@@ -106,7 +109,7 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 
 			//three columns for items, sorting, PropGrid
 			HBox hBox = new HBox ();
-			dialog.VBox.PackStart (hBox, true, true, 5);
+			dialog.ContentArea.PackStart (hBox, true, true, 5);
 
 			//propGrid at end
 			grid = new PropertyGrid (base.EditorManager) {
@@ -277,7 +280,11 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 				if (MonoDevelop.Ide.MessageService.ShowCustomDialog (dialog, toplevel) == (int)ResponseType.Ok) {
 					DesignerTransaction tran = CreateTransaction (Instance);
 					object old = collection;
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					try {
 						collection.Clear ();
 						foreach (object[] o in itemStore)
@@ -289,6 +296,41 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 					}
 				}
 			}
+<<<<<<< HEAD
+=======
+		}
+		
+		//This and EndTransaction are from Mono internal class System.ComponentModel.ReflectionPropertyDescriptor
+		// Lluis Sanchez Gual (lluis@ximian.com), (C) Novell, Inc, MIT X11 license
+		DesignerTransaction CreateTransaction (object obj)
+		{
+			IComponent com = obj as IComponent;
+			if (com == null || com.Site == null) return null;
+			
+			IDesignerHost dh = (IDesignerHost) com.Site.GetService (typeof(IDesignerHost));
+			if (dh == null) return null;
+			
+			DesignerTransaction tran = dh.CreateTransaction ();
+			IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
+			if (ccs != null)
+				ccs.OnComponentChanging (com, Property);
+			return tran;
+		}
+		
+		void EndTransaction (object obj, DesignerTransaction tran, object oldValue, object newValue, bool commit)
+		{
+			if (tran == null) return;
+			
+			if (commit) {
+				IComponent com = obj as IComponent;
+				IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
+				if (ccs != null)
+					ccs.OnComponentChanged (com, Property, oldValue, newValue);
+				tran.Commit ();
+			}
+			else
+				tran.Cancel ();
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		//This and EndTransaction are from Mono internal class System.ComponentModel.ReflectionPropertyDescriptor
@@ -350,7 +392,7 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 		}
 
 		//generally useful function... why not in model already?
-		static bool IterPrev (TreeModel model, ref TreeIter iter)
+		static bool IterPrev (ITreeModel model, ref TreeIter iter)
 		{
 			TreePath tp = model.GetPath (iter);
 			return tp.Prev() && model.GetIter (out iter, tp);

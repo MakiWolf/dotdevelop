@@ -37,10 +37,13 @@ using MonoDevelop.Ide.Gui;
 using MonoDevelop.Core;
 using System.Threading.Tasks;
 using MonoDevelop.Ide.Projects;
+<<<<<<< HEAD
 using System.Collections.Generic;
 #if GTK3
  using TreeModel = Gtk.ITreeModel;
 #endif
+=======
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 namespace MonoDevelop.Ide.Projects
 {
@@ -81,8 +84,29 @@ namespace MonoDevelop.Ide.Projects
 			actionHandler.PerformShowMenu += PerformShowMenu;
 		}
 
+<<<<<<< HEAD
 		async void NextButtonClicked (object sender, EventArgs e) => await MoveToNextPage ();
 
+=======
+		void ProjectCreationFailed (object obj, EventArgs args) => ShowProjectCreationAccessibityNotification (true);
+		void ProjectCreated(object obj, EventArgs args) => ShowProjectCreationAccessibityNotification (false);
+		async void NextButtonClicked (object sender, EventArgs e) => await MoveToNextPage ();
+
+		void ShowProjectCreationAccessibityNotification (bool hasError)
+		{
+			var projectTemplate = controller.SelectedTemplate;
+
+			string messageText;
+
+			if (hasError)
+				messageText = GettextCatalog.GetString ("{0} failed to create", projectTemplate.Name);
+			else
+				messageText = GettextCatalog.GetString ("{0} successfully created", projectTemplate.Name);
+
+			this.Accessible.MakeAccessibilityAnnouncement (messageText);
+		}
+
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		public void ShowDialog ()
 		{
 			MessageService.ShowCustomDialog (this, IdeServices.DesktopService.GetFocusedTopLevelWindow ());
@@ -109,7 +133,7 @@ namespace MonoDevelop.Ide.Projects
 				MoveToNextPage ().Ignore();
 		}
 
-		void SetTemplateCategoryCellData (TreeViewColumn col, CellRenderer renderer, TreeModel model, TreeIter it)
+		void SetTemplateCategoryCellData (TreeViewColumn col, CellRenderer renderer, ITreeModel model, TreeIter it)
 		{
 			var categoryTextRenderer = (GtkTemplateCategoryCellRenderer)renderer;
 			categoryTextRenderer.Category = (TemplateCategory)model.GetValue (it, TemplateCategoryColumn);
@@ -117,7 +141,7 @@ namespace MonoDevelop.Ide.Projects
 			categoryTextRenderer.CategoryName = model.GetValue (it, TemplateCategoryNameColumn) as string;
 		}
 
-		static void SetTemplateTextCellData (TreeViewColumn col, CellRenderer renderer, TreeModel model, TreeIter it)
+		static void SetTemplateTextCellData (TreeViewColumn col, CellRenderer renderer, ITreeModel model, TreeIter it)
 		{
 			var template = (SolutionTemplate)model.GetValue (it, TemplateColumn);
 			var templateTextRenderer = (GtkTemplateCellRenderer)renderer;
@@ -126,7 +150,7 @@ namespace MonoDevelop.Ide.Projects
 			templateTextRenderer.TemplateCategory = model.GetValue (it, TemplateOwnCategoryNameColumn) as string;
 		}
 
-		static void SetLanguageCellData (TreeViewColumn col, CellRenderer renderer, TreeModel model, TreeIter it)
+		static void SetLanguageCellData (TreeViewColumn col, CellRenderer renderer, ITreeModel model, TreeIter it)
 		{
 			var template = (SolutionTemplate)model.GetValue (it, TemplateColumn);
 			var language = (string)model.GetValue (it, TemplateA11yLanguageNameColumn);
@@ -137,6 +161,7 @@ namespace MonoDevelop.Ide.Projects
 
 		void HandlePopup (SolutionTemplate template, uint eventTime)
 		{
+<<<<<<< HEAD
 			var engine = Platform.IsMac ? Xwt.Toolkit.NativeEngine : Xwt.Toolkit.CurrentEngine;
 			var xwtParent = Xwt.Toolkit.CurrentEngine.WrapWidget (templatesTreeView);
 			engine.Invoke (() => {
@@ -155,6 +180,25 @@ namespace MonoDevelop.Ide.Projects
 				}
 
 			});
+=======
+			if (popupMenu == null) {
+				popupMenu = new Menu ();
+				popupMenu.AttachToWidget (this, null);
+			}
+			ClearPopupMenuItems ();
+			AddLanguageMenuItems (popupMenu, template);
+			popupMenu.ModifyBg (StateType.Normal, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToGdkColor ());
+			popupMenu.ShowAll ();
+
+			MenuPositionFunc posFunc = (Menu m, out int x, out int y, out bool pushIn) => {
+				Gdk.Rectangle rect = languageCellRenderer.GetLanguageRect ();
+				Gdk.Rectangle screenRect = GtkUtil.ToScreenCoordinates (templatesTreeView, templatesTreeView.GdkWindow, rect);
+				x = screenRect.X;
+				y = screenRect.Bottom;
+				pushIn = false;
+			};
+			popupMenu.Popup (null, null, posFunc, 0, eventTime);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		[GLib.ConnectBefore]
@@ -223,7 +267,7 @@ namespace MonoDevelop.Ide.Projects
 			}
 		}
 
-		bool TemplateCategoriesTreeViewSelection (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		bool TemplateCategoriesTreeViewSelection (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
 			TreeIter iter;
 			if (model.GetIter (out iter, path)) {
@@ -236,7 +280,7 @@ namespace MonoDevelop.Ide.Projects
 			return true;
 		}
 
-		bool TemplatesTreeViewSelection (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		bool TemplatesTreeViewSelection (TreeSelection selection, ITreeModel model, TreePath path, bool path_currently_selected)
 		{
 			TreeIter iter;
 			if (model.GetIter (out iter, path)) {
@@ -375,15 +419,22 @@ namespace MonoDevelop.Ide.Projects
 			templateTextRenderer.RenderRecentTemplate = false;
 			languageCellRenderer.RenderRecentTemplate = false;
 			foreach (TemplateCategory subCategory in category.Categories) {
+<<<<<<< HEAD
 				var iter = templatesTreeStore.AppendValues (
 					subCategory.Name,
 					null,
 					null,
 					subCategory.Name,
+=======
+				templatesListStore.AppendValues (
+					MarkupTopLevelCategoryName (subCategory.Name),
+					null,
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					null);
 
 				foreach (SolutionTemplate template in subCategory.Templates) {
 					if (template.HasProjects || controller.IsNewSolution) {
+<<<<<<< HEAD
 						string language = GetLanguageForTemplate (template);
 						templatesTreeStore.AppendValues (
 							iter,
@@ -392,6 +443,12 @@ namespace MonoDevelop.Ide.Projects
 							template,
 							subCategory.Name,
 							language);
+=======
+						templatesListStore.AppendValues (
+							template.Name,
+							GetIcon (template.IconId, IconSize.Dnd),
+							template);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					}
 				}
 			}
@@ -508,9 +565,15 @@ namespace MonoDevelop.Ide.Projects
 		{
 			TreeIter iter = TreeIter.Zero;
 			// recent templates entry is always the first one and has no category assigned to it
+<<<<<<< HEAD
 			if (templateCategoriesTreeStore.GetIterFirst (out iter) && templateCategoriesTreeStore.GetValue (iter, TemplateCategoryColumn) == null) {
 				templateCategoriesTreeView.Selection.SelectIter (iter);
 				TreePath path = templateCategoriesTreeStore.GetPath (iter);
+=======
+			if (templateCategoriesListStore.GetIterFirst (out iter) && templateCategoriesListStore.GetValue (iter, TemplateCategoryColumn) == null) {
+				templateCategoriesTreeView.Selection.SelectIter (iter);
+				TreePath path = templateCategoriesListStore.GetPath (iter);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 				templateCategoriesTreeView.ScrollToCell (path, null, true, 1, 0);
 			}
 		}
@@ -670,7 +733,11 @@ namespace MonoDevelop.Ide.Projects
 
 		void TreeViewRowActivated (object o, RowActivatedArgs args)
 		{
+<<<<<<< HEAD
 			if (CanMoveToNextPage && !isLastPressedKeySpace &&
+=======
+			if (CanMoveToNextPage && !isLastPressedKeySpace && 
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			    IsSolutionTemplateOnActivatedRow ((Gtk.TreeView)o, args))
 				MoveToNextPage ().Ignore();
 			isLastPressedKeySpace = false;
@@ -678,7 +745,7 @@ namespace MonoDevelop.Ide.Projects
 
 		bool IsSolutionTemplateOnActivatedRow (TreeView treeView, RowActivatedArgs args)
 		{
-			TreeModel model = treeView.Model;
+			ITreeModel model = treeView.Model;
 			TreeIter iter;
 			if (model.GetIter (out iter, args.Path)) {
 				var template = model.GetValue (iter, TemplateColumn) as SolutionTemplate;

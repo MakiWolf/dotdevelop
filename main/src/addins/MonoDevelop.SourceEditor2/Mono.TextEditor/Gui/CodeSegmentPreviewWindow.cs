@@ -72,8 +72,65 @@ namespace Mono.TextEditor
 		
 		protected override void OnDestroyed ()
 		{
+<<<<<<< HEAD
 			editor = null;
 			base.OnDestroyed ();
 		}
+=======
+			layout = layout.Kill ();
+			informLayout = informLayout.Kill ();
+			fontDescription = fontDescription.Kill ();
+			fontInform = fontInform.Kill ();
+//			if (textGC != null) {
+//				textGC.Dispose ();
+//				textBgGC.Dispose ();
+//				foldGC.Dispose ();
+//				foldBgGC.Dispose ();
+//				textGC = textBgGC = foldGC = foldBgGC = null;
+//			}
+			editor = null;
+			base.OnDestroyed ();
+		}
+		
+		protected override bool OnKeyPressEvent (EventKey evnt)
+		{
+//			Console.WriteLine (evnt.Key);
+			return base.OnKeyPressEvent (evnt);
+		}
+		
+//		Gdk.GC textGC, foldGC, textBgGC, foldBgGC;
+		
+//		protected override bool OnExposeEvent (Gdk.EventExpose ev)
+//		{
+//			if (textGC == null) {
+//				var plainText = SyntaxHighlightingService.GetColor (editor.EditorTheme, EditorThemeColors.Foreground);
+//				textGC = plainText.CreateGC (ev.Window);
+//
+//				plainText = SyntaxHighlightingService.GetColor (editor.EditorTheme, EditorThemeColors.Background);
+//				textBgGC = plainText.CreateGC (ev.Window);
+//
+//				var collapsedText = SyntaxHighlightingService.GetColor (editor.EditorTheme, EditorThemeColors.CollapsedText);
+//				foldGC = collapsedText.CreateGC (ev.Window);
+//
+//				collapsedText = SyntaxHighlightingService.GetColor (editor.EditorTheme, EditorThemeColors.Background);
+//				foldBgGC = collapsedText.CreateGC (ev.Window);
+//			}
+//
+//			ev.Window.DrawRectangle (textBgGC, true, ev.Area);
+//			ev.Window.DrawLayout (textGC, 5, 4, layout);
+//			ev.Window.DrawRectangle (textBgGC, false, 1, 1, this.Allocation.Width - 3, this.Allocation.Height - 3);
+//			ev.Window.DrawRectangle (foldGC, false, 0, 0, this.Allocation.Width - 1, this.Allocation.Height - 1);
+//			
+//			if (!HideCodeSegmentPreviewInformString) {
+//				informLayout.SetText (CodeSegmentPreviewInformString);
+//				int w, h;
+//				informLayout.GetPixelSize (out w, out h); 
+//				PreviewInformStringHeight = h;
+//				ev.Window.DrawRectangle (foldBgGC, true, Allocation.Width - w - 3, Allocation.Height - h, w + 2, h - 1);
+//				ev.Window.DrawLayout (foldGC, Allocation.Width - w - 4, Allocation.Height - h - 3, informLayout);
+//			}
+//			return true;
+//		}
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 	}
 }

@@ -166,8 +166,13 @@ namespace MonoDevelop.Ide.Projects {
 				}
 			} while (store.IterNext (ref looping_iter));
 		}
+<<<<<<< HEAD
 
 		int CompareNodes (TreeModel model, Gtk.TreeIter a, Gtk.TreeIter b)
+=======
+		
+		int CompareNodes (Gtk.ITreeModel model, Gtk.TreeIter a, Gtk.TreeIter b)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			string s1 = (string) store.GetValue (a, 0);
 			string s2 = (string) store.GetValue (b, 0);

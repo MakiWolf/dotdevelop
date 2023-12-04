@@ -384,7 +384,7 @@ namespace MonoDevelop.Ide.Tasks
 		TaskListEntry SelectedTask
 		{
 			get {
-				TreeModel model;
+				ITreeModel model;
 				TreeIter iter;
 				if (view.Selection.GetSelected (out model, out iter))
 				{

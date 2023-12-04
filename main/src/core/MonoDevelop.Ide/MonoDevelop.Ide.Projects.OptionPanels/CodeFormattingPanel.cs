@@ -331,8 +331,13 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 		static readonly string parentPolicyText = GettextCatalog.GetString ("(Inherited Policy)");
 
 		static readonly string customPolicyText = GettextCatalog.GetString ("(Custom)");
+<<<<<<< HEAD
 
 		void OnSetPolicyData (Gtk.TreeViewColumn treeColumn, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		void OnSetPolicyData (Gtk.TreeViewColumn treeColumn, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			MimeTypePanelData mt = (MimeTypePanelData) store.GetValue (iter, 0);
 
@@ -462,7 +467,11 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 		{
 			store.Clear();
 			comboCell.Changed -= OnPolicySelectionChanged;
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			base.OnDestroyed();
 		}
 	}

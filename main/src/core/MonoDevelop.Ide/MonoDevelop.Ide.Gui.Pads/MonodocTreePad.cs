@@ -60,9 +60,15 @@ namespace MonoDevelop.Ide.Gui.Pads
 
 			tree_view.AppendColumn ("name_col", tree_view.TextRenderer, "text", 0);
 			tree_view.RowExpanded += new Gtk.RowExpandedHandler (RowExpanded);
+<<<<<<< HEAD
 			tree_view.RowActivated += RowActivated;
 
 			store = new TreeStore (typeof (string), typeof (Node));
+=======
+			tree_view.Selection.Changed += new EventHandler (RowActivated);
+			
+			store = new TreeStore (typeof (string), typeof (Monodoc.Node));
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			tree_view.Model = store;
 			tree_view.HeadersVisible = false;
 
@@ -92,7 +98,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 		Hashtable populated = new Hashtable ();
 		void RowExpanded (object o, Gtk.RowExpandedArgs args)
 		{
-			Node node = (Node)store.GetValue (args.Iter, 1);
+			Monodoc.Node node = (Monodoc.Node)store.GetValue (args.Iter, 1);
 			if (node == null)
 				return;
 			if (populated.ContainsKey (node))
@@ -112,7 +118,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 		void RowActivated (object o, EventArgs e)
 		{
 			Gtk.TreeIter iter;
-			Gtk.TreeModel model;
+			Gtk.ITreeModel model;
 
 			if (tree_view.Selection.GetSelected (out model, out iter)) {
 				var path = store.GetPath (iter);
@@ -124,20 +130,26 @@ namespace MonoDevelop.Ide.Gui.Pads
 					return;
 				}
 
+<<<<<<< HEAD
 				Node n = (Node)store.GetValue (iter, 1);
 
 				IdeServices.HelpOperations.ShowHelp (n.PublicUrl);
+=======
+				Monodoc.Node n = (Monodoc.Node)store.GetValue (iter, 1);
+				
+				IdeApp.HelpOperations.ShowHelp (n.PublicUrl);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			}
 		}
 
 #pragma warning disable 618
 		void PopulateNode (TreeIter parent)
 		{
-			Node node = (Node)store.GetValue (parent, 1);
+			Monodoc.Node node = (Monodoc.Node)store.GetValue (parent, 1);
 			if (node.Nodes == null)
 				return;
 
-			foreach (Node n in node.Nodes) {
+			foreach (Monodoc.Node n in node.Nodes) {
 				store.AppendValues (parent, n.Caption, n);
 			}
 		}

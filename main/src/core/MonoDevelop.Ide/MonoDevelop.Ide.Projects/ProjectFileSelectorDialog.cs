@@ -187,8 +187,13 @@ namespace MonoDevelop.Ide.Projects
 
 			return value;
 		}
+<<<<<<< HEAD
 
 		void PixDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+=======
+		
+		void PixDataFunc (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var pixRenderer = (CellRendererImage) cell;
 			string dirname = (string) tree_model.GetValue (iter, 0);
@@ -203,8 +208,13 @@ namespace MonoDevelop.Ide.Projects
 			pixRenderer.ImageExpanderClosed = dirClosedBuf;
 			pixRenderer.Image = dirClosedBuf;
 		}
+<<<<<<< HEAD
 
 		void TxtDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+=======
+		
+		void TxtDataFunc (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			CellRendererText txtRenderer = (CellRendererText) cell;
 			string dirname = (string) tree_model.GetValue (iter, 0);
@@ -216,8 +226,13 @@ namespace MonoDevelop.Ide.Projects
 			int lastSlash = dirname.LastIndexOf (System.IO.Path.DirectorySeparatorChar);
 			txtRenderer.Text = lastSlash < 0? dirname : dirname.Substring (lastSlash + 1);
 		}
+<<<<<<< HEAD
 
 		void TxtFileDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+=======
+		
+		void TxtFileDataFunc (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			CellRendererText txtRenderer = (CellRendererText) cell;
 			ProjectFile pf = (ProjectFile)tree_model.GetValue (iter, 0);

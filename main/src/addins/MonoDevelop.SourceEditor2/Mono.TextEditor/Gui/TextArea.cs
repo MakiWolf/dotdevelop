@@ -50,6 +50,7 @@ using MonoDevelop.Core;
 using MonoDevelop.Core.Text;
 using MonoDevelop.Ide.Editor;
 using MonoDevelop.Ide.Editor.Highlighting;
+using Cairo;
 
 namespace Mono.TextEditor
 {
@@ -221,7 +222,7 @@ namespace Mono.TextEditor
 			textViewMargin.HideCodeSegmentPreviewWindow ();
 			QueueDrawArea ((int)this.textViewMargin.XOffset, 0, this.Allocation.Width - (int)this.textViewMargin.XOffset, this.Allocation.Height);
 			OnHScroll (EventArgs.Empty);
-			SetChildrenPositions (Allocation);
+//			SetChildrenPositions (Allocation);
 		}
 		
 		void VAdjustmentValueChanged (object sender, EventArgs args)
@@ -229,7 +230,7 @@ namespace Mono.TextEditor
 			var alloc = this.Allocation;
 			alloc.X = alloc.Y = 0;
 			VAdjustmentValueChanged ();
-			SetChildrenPositions (alloc);
+//			SetChildrenPositions (alloc);
 		}
 		
 		protected virtual void VAdjustmentValueChanged ()
@@ -329,7 +330,7 @@ namespace Mono.TextEditor
 					nextTipX = tipX;
 					nextTipY = tipY;
 					nextTipOffset = tipOffset;
-					nextTipScheduledTime = DateTime.FromBinary (0);
+					nextTipScheduledTime = System.DateTime.FromBinary (0);
 					tipItem = null;
 					TooltipTimer ();
 				}
@@ -451,9 +452,9 @@ namespace Mono.TextEditor
 				args.RetVal = true;
 			};
 			
-			using (Pixmap inv = new Pixmap (null, 1, 1, 1)) {
-				invisibleCursor = new Cursor (inv, inv, Gdk.Color.Zero, Gdk.Color.Zero, 0, 0);
-			}
+//			using (Pixmap inv = new Pixmap (null, 1, 1, 1)) {
+//				invisibleCursor = new Cursor (inv, inv, Gdk.Color.Zero, Gdk.Color.Zero, 0, 0);
+//			}
 			
 			InitAnimations ();
 			this.Document.HeightChanged += HandleDocumentHeightChanged;
@@ -908,27 +909,27 @@ namespace Mono.TextEditor
 
 		protected override void OnRealized ()
 		{
-			WidgetFlags |= WidgetFlags.Realized;
+			this.IsRealized = true;
 			WindowAttr attributes = new WindowAttr () {
 				WindowType = Gdk.WindowType.Child,
 				X = Allocation.X,
 				Y = Allocation.Y,
 				Width = Allocation.Width,
 				Height = Allocation.Height,
-				Wclass = WindowClass.InputOutput,
+//				Wclass = WindowClass.InputOutput,
 				Visual = this.Visual,
-				Colormap = this.Colormap,
+//				Colormap = this.Colormap,
 				EventMask = (int)(this.Events | Gdk.EventMask.ExposureMask),
 				Mask = this.Events | Gdk.EventMask.ExposureMask,
 			};
 			
-			WindowAttributesType mask = WindowAttributesType.X | WindowAttributesType.Y | WindowAttributesType.Colormap | WindowAttributesType.Visual;
-			GdkWindow = new Gdk.Window (ParentWindow, attributes, mask);
-			GdkWindow.UserData = Raw;
-			GdkWindow.Background = Style.Background (StateType.Normal);
-			Style = Style.Attach (GdkWindow);
+//			WindowAttributesType mask = WindowAttributesType.X | WindowAttributesType.Y | WindowAttributesType.Colormap | WindowAttributesType.Visual;
+//			GdkWindow = new Gdk.Window (ParentWindow, attributes, mask);
+//			GdkWindow.UserData = Raw;
+//			GdkWindow.Background = Style.Background (StateType.Normal);
+//			Style = Style.Attach (GdkWindow);
 
-			imContext.ClientWindow = this.GdkWindow;
+//			imContext.ClientWindow = this.GdkWindow;
 			Caret.PositionChanged += CaretPositionChanged;
 
 			SetWidgetBgFromStyle ();
@@ -1141,12 +1142,12 @@ namespace Mono.TextEditor
 		
 		public new void QueueDrawArea (int x, int y, int w, int h)
 		{
-			if (GdkWindow != null) {
-				GdkWindow.InvalidateRect (new Rectangle (x, y, w, h), false);
+//			if (GdkWindow != null) {
+//				GdkWindow.InvalidateRect (new Rectangle (x, y, w, h), false);
 #if DEBUG_EXPOSE
 				Console.WriteLine ("invalidated {0},{1} {2}x{3}", x, y, w, h);
 #endif
-			}
+//			}
 		}
 		
 		public new void QueueDraw ()
@@ -1360,19 +1361,19 @@ namespace Mono.TextEditor
 
 			GtkWorkarounds.MapKeys (evnt, out key, out mod, out accels);
 
-			if (key == Gdk.Key.space) {
-				cm.HandleItemCommand (Margin.ItemCommand.ActivateCurrentItem);
-			} else if (key == Gdk.Key.Up) {
-				cm.HandleItemCommand (Margin.ItemCommand.FocusPreviousItem);
-			} else if (key == Gdk.Key.Down) {
-				cm.HandleItemCommand (Margin.ItemCommand.FocusNextItem);
-			} else if (key == Gdk.Key.Tab || key == Gdk.Key.Right) {
-				return FocusNextMargin (Gtk.DirectionType.TabForward);
-			} else if (key == Gdk.Key.ISO_Left_Tab || key == Gdk.Key.Left) {
-				return FocusNextMargin (DirectionType.TabBackward);
-			} else {
+//			if (key == Gdk.Key.space) {
+//				cm.HandleItemCommand (Margin.ItemCommand.ActivateCurrentItem);
+//			} else if (key == Gdk.Key.Up) {
+//				cm.HandleItemCommand (Margin.ItemCommand.FocusPreviousItem);
+//			} else if (key == Gdk.Key.Down) {
+//				cm.HandleItemCommand (Margin.ItemCommand.FocusNextItem);
+//			} else if (key == Gdk.Key.Tab || key == Gdk.Key.Right) {
+//				return FocusNextMargin (Gtk.DirectionType.TabForward);
+//			} else if (key == Gdk.Key.ISO_Left_Tab || key == Gdk.Key.Left) {
+//				return FocusNextMargin (DirectionType.TabBackward);
+//			} else {
 				return false;
-			}
+//			}
 
 			return true;
 		}
@@ -1559,18 +1560,18 @@ namespace Mono.TextEditor
 		{
 			var undo = OpenUndoGroup ();
 			int dragOffset = Document.LocationToOffset (dragCaretPos);
-			if (context.Action == DragAction.Move) {
-				if (CanEdit (Caret.Line) && !selection.IsEmpty) {
-					var selectionRange = selection.GetSelectionRange (textEditorData);
-					if (selectionRange.Offset < dragOffset)
-						dragOffset -= selectionRange.Length;
-					Caret.PreserveSelection = true;
-					textEditorData.DeleteSelection (selection);
-					Caret.PreserveSelection = false;
-
-					selection = MonoDevelop.Ide.Editor.Selection.Empty;
-				}
-			}
+//			if (context.Action == DragAction.Move) {
+//				if (CanEdit (Caret.Line) && !selection.IsEmpty) {
+//					var selectionRange = selection.GetSelectionRange (textEditorData);
+//					if (selectionRange.Offset < dragOffset)
+//						dragOffset -= selectionRange.Length;
+//					Caret.PreserveSelection = true;
+//					textEditorData.DeleteSelection (selection);
+//					Caret.PreserveSelection = false;
+//
+//					selection = MonoDevelop.Ide.Editor.Selection.Empty;
+//				}
+//			}
 			if (selection_data.Length > 0 && selection_data.Format == 8) {
 				Caret.Offset = dragOffset;
 				if (CanEdit (dragCaretPos.Line)) {
@@ -2089,7 +2090,7 @@ namespace Mono.TextEditor
 			sizeHasBeenAllocated = true;
 			if (Options.WrapLines)
 				textViewMargin.PurgeLayoutCache ();
-			SetChildrenPositions (allocation);
+//			SetChildrenPositions (allocation);
 
 			UpdateMarginRects (allocation);
 		}
@@ -2327,28 +2328,32 @@ namespace Mono.TextEditor
 #if DEBUG_EXPOSE
 		DateTime started = DateTime.Now;
 #endif
+<<<<<<< HEAD
 		Stopwatch timingsWatch = new Stopwatch ();
 		protected override bool OnExposeEvent (Gdk.EventExpose e)
+=======
+		protected override bool OnDrawn (Context cr)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (this.isDisposed)
 				return false;
 
-			try {
-				ExposeEventInternal (e);
-			} catch (Exception ex) {
-				GLib.ExceptionManager.RaiseUnhandledException (ex, false);
-			}
+//			try {
+//				ExposeEventInternal (e);
+//			} catch (Exception ex) {
+//				GLib.ExceptionManager.RaiseUnhandledException (ex, false);
+//			}
 
 			keyPressTimings.EndTimer (true);
-			return base.OnExposeEvent (e);
+			return base.OnDrawn (cr);
 		}
 
 		void ExposeEventInternal (Gdk.EventExpose e)
 		{
 			UpdateAdjustments ();
 
-			var area = e.Region.Clipbox;
-			var cairoArea = new Cairo.Rectangle (area.X, area.Y, area.Width, area.Height);
+//			var area = e.Region.Clipbox;
+//			var cairoArea = new Cairo.Rectangle (area.X, area.Y, area.Width, area.Height);
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window))
 			using (Cairo.Context textViewCr = Gdk.CairoHelper.Create (e.Window)) {
 				UpdateMarginXOffsets ();
@@ -2356,10 +2361,15 @@ namespace Mono.TextEditor
 				cr.LineWidth = Options.Zoom;
 				textViewCr.LineWidth = Options.Zoom;
 
+<<<<<<< HEAD
 				timingsWatch.Restart ();
 				RenderMargins (cr, textViewCr, cairoArea);
 				keyPressTimings.AddMarginDrawingTime (timingsWatch.Elapsed);
 							
+=======
+//				RenderMargins (cr, textViewCr, cairoArea);
+			
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 #if DEBUG_EXPOSE
 				Console.WriteLine ("{0} expose {1},{2} {3}x{4}", (long)(DateTime.Now - started).TotalMilliseconds,
 					e.Area.X, e.Area.Y, e.Area.Width, e.Area.Height);
@@ -2373,6 +2383,7 @@ namespace Mono.TextEditor
 				foreach (Animation animation in actors) {
 					animation.Drawer.Draw (cr);
 				}
+<<<<<<< HEAD
 				keyPressTimings.AddAnimationDrawingTime (timingsWatch.Elapsed);
 
 
@@ -2384,6 +2395,14 @@ namespace Mono.TextEditor
 				textViewMargin.DrawCaret (e.Window, Allocation);
 				keyPressTimings.AddCaretDrawingTime (timingsWatch.Elapsed);
 			}
+=======
+				
+//				OnPainted (new PaintEventArgs (cr, cairoArea));
+			}
+
+//			if (Caret.IsVisible)
+//				textViewMargin.DrawCaret (e.Window, Allocation);
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		protected virtual void OnPainted (PaintEventArgs e)
@@ -3186,7 +3205,7 @@ namespace Mono.TextEditor
 		int nextTipOffset = 0;
 		int nextTipX=0; int nextTipY=0;
 		Gdk.ModifierType nextTipModifierState = ModifierType.None;
-		DateTime nextTipScheduledTime; // Time at which we want the tooltip to show
+		System.DateTime nextTipScheduledTime; // Time at which we want the tooltip to show
 		
 		void ShowTooltip (Gdk.ModifierType modifierState, DocumentLocation location)
 		{
@@ -3247,7 +3266,7 @@ namespace Mono.TextEditor
 			nextTipY = yloc;
 			nextTipOffset = offset;
 			nextTipModifierState = modifierState;
-			nextTipScheduledTime = DateTime.Now + TimeSpan.FromMilliseconds (TooltipTimeout);
+			nextTipScheduledTime = System.DateTime.Now + TimeSpan.FromMilliseconds (TooltipTimeout);
 			// If a tooltip is already scheduled, there is no need to create a new timer.
 			if (tipShowTimeoutId == 0)
 				tipShowTimeoutId = GLib.Timeout.Add (timeOut, () => { TooltipTimer (); return false; });
@@ -3261,7 +3280,7 @@ namespace Mono.TextEditor
 			if (nextTipOffset == -1)
 				return;
 			
-			int remainingMs = (int) (nextTipScheduledTime - DateTime.Now).TotalMilliseconds;
+			int remainingMs = (int) (nextTipScheduledTime - System.DateTime.Now).TotalMilliseconds;
 			if (remainingMs > 50) {
 				// Still some significant time left. Re-schedule the timer
 				tipShowTimeoutId = GLib.Timeout.Add ((uint) remainingMs, () => { TooltipTimer (); return false; });
@@ -3537,18 +3556,18 @@ namespace Mono.TextEditor
 		{
 			if (animation == null)
 				return;
-			Rectangle bounds = animation.Drawer.AnimationBounds;
+//			Rectangle bounds = animation.Drawer.AnimationBounds;
 			actors.Remove (animation);
 			if (animation is IDisposable)
 				((IDisposable)animation).Dispose ();
-			QueueDrawArea (bounds.X, bounds.Y, bounds.Width, bounds.Height);
+//			QueueDrawArea (bounds.X, bounds.Y, bounds.Width, bounds.Height);
 		}
 		
 		void OnAnimationIteration (object sender, EventArgs args)
 		{
 			foreach (Animation actor in actors) {
-				Rectangle bounds = actor.Drawer.AnimationBounds;
-				QueueDrawArea (bounds.X, bounds.Y, bounds.Width, bounds.Height);
+//				Rectangle bounds = actor.Drawer.AnimationBounds;
+//				QueueDrawArea (bounds.X, bounds.Y, bounds.Width, bounds.Height);
 			}
 		}
 		#endregion
@@ -3686,7 +3705,7 @@ namespace Mono.TextEditor
 			var newContainerChildren = new List<MonoTextEditor.EditorContainerChild> (containerChildren);
 			newContainerChildren.Add (info);
 			containerChildren = newContainerChildren;
-			ResizeChild (Allocation, info);
+//			ResizeChild (Allocation, info);
 			SetAdjustments ();
 		}
 		
@@ -3698,8 +3717,8 @@ namespace Mono.TextEditor
 						break;
 					info.X = x;
 					info.Y = y;
-					if (widget.Visible)
-						ResizeChild (Allocation, info);
+//					if (widget.Visible)
+//						ResizeChild (Allocation, info);
 					break;
 				}
 			}
@@ -3758,7 +3777,7 @@ namespace Mono.TextEditor
 		
 		protected override void OnMapped ()
 		{
-			WidgetFlags |= WidgetFlags.Mapped;
+			this.IsMapped = true;
 			// Note: SourceEditorWidget.ShowAutoSaveWarning() might have set TextEditor.Visible to false,
 			// in which case we want to not map it (would cause a gtk+ critical error).
 			containerChildren.ForEach (child => { if (child.Child.Visible) child.Child.Map (); });
@@ -3767,7 +3786,7 @@ namespace Mono.TextEditor
 		
 		protected override void OnUnmapped ()
 		{
-			WidgetFlags &= ~WidgetFlags.Mapped;
+			this.IsMapped = false;
 			
 			// We hide the window first so that the user doesn't see widgets disappearing one by one.
 			GdkWindow.Hide ();
@@ -3775,26 +3794,26 @@ namespace Mono.TextEditor
 			containerChildren.ForEach (child => child.Child.Unmap ());
 		}
 
-		void ResizeChild (Rectangle allocation, MonoTextEditor.EditorContainerChild child)
-		{
-			Requisition req = child.Child.SizeRequest ();
-			var childRectangle = new Gdk.Rectangle (child.X, child.Y, req.Width, req.Height);
-			if (!child.FixedPosition) {
+//		void ResizeChild (Rectangle allocation, MonoTextEditor.EditorContainerChild child)
+//		{
+//			Requisition req = child.Child.SizeRequest ();
+//			var childRectangle = new Gdk.Rectangle (child.X, child.Y, req.Width, req.Height);
+//			if (!child.FixedPosition) {
 //				double zoom = Options.Zoom;
-				childRectangle.X = (int)(child.X /* * zoom */- HAdjustment.Value);
-				childRectangle.Y = (int)(child.Y /* * zoom */- VAdjustment.Value);
-			}
-			//			childRectangle.X += allocation.X;
-			//			childRectangle.Y += allocation.Y;
-			child.Child.SizeAllocate (childRectangle);
-		}
+//				childRectangle.X = (int)(child.X /* * zoom */- HAdjustment.Value);
+//				childRectangle.Y = (int)(child.Y /* * zoom */- VAdjustment.Value);
+//			}
+//			//			childRectangle.X += allocation.X;
+//			//			childRectangle.Y += allocation.Y;
+//			child.Child.SizeAllocate (childRectangle);
+//		}
 		
-		void SetChildrenPositions (Rectangle allocation)
-		{
-			foreach (var child in containerChildren.ToArray ()) {
-				ResizeChild (allocation, child);
-			}
-		}
+//		void SetChildrenPositions (Rectangle allocation)
+//		{
+//			foreach (var child in containerChildren.ToArray ()) {
+//				ResizeChild (allocation, child);
+//			}
+//		}
 		#endregion
 
 	}

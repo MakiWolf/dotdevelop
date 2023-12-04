@@ -148,7 +148,16 @@ namespace MonoDevelop.Ide
 			get { return PlatformService.DefaultMonospaceFont; }
 		}
 
+<<<<<<< HEAD
 		public string PlatformName {
+=======
+		[Obsolete ("Use FontService")]
+		public static string DefaultSansFont {
+			get { return PlatformService.DefaultSansFont; }
+		}
+
+		public static string PlatformName {
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			get { return PlatformService.Name; }
 		}
 

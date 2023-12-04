@@ -26,6 +26,7 @@
 // THE SOFTWARE.
 
 using System;
+using Cairo;
 using Gdk;
 using MonoDevelop.Core;
 
@@ -52,7 +53,7 @@ namespace Mono.TextEditor.Theatrics
 			DoubleBuffered = true;
 			Decorated = false;
 			BorderWidth = 0;
-			HasFrame = true;
+//			HasFrame = true;
 			this.editor = editor;
 			Events = Gdk.EventMask.ExposureMask;
 			Duration = 500;
@@ -60,10 +61,10 @@ namespace Mono.TextEditor.Theatrics
 			ExpandHeight = 2;
 			BounceEasing = Easing.Sine;
 			
-			var rgbaColormap = Screen.RgbaColormap;
-			if (rgbaColormap == null)
+//			var rgbaColormap = Screen.RgbaColormap;
+//			if (rgbaColormap == null)
 				return;
-			Colormap = rgbaColormap;
+//			Colormap = rgbaColormap;
 
 			stage.ActorStep += OnAnimationActorStep;
 			stage.Iteration += OnAnimationIteration;
@@ -87,7 +88,7 @@ namespace Mono.TextEditor.Theatrics
 		int x, y;
 		protected int width, height;
 		double vValue, hValue;
-		protected Rectangle bounds;
+//		protected Rectangle bounds;
 
 		public virtual void Popup ()
 		{
@@ -96,13 +97,13 @@ namespace Mono.TextEditor.Theatrics
 				return;
 			}
 			editor.GdkWindow.GetOrigin (out x, out y);
-			bounds = CalculateInitialBounds ();
-			x = x + bounds.X - (int)(ExpandWidth / 2);
-			y = y + bounds.Y - (int)(ExpandHeight / 2);
+//			bounds = CalculateInitialBounds ();
+//			x = x + bounds.X - (int)(ExpandWidth / 2);
+//			y = y + bounds.Y - (int)(ExpandHeight / 2);
 			Move (x, y);
 			
-			width = System.Math.Max (1, bounds.Width + (int)ExpandWidth);
-			height = System.Math.Max (1, bounds.Height + (int)ExpandHeight);
+//			width = System.Math.Max (1, bounds.Width + (int)ExpandWidth);
+//			height = System.Math.Max (1, bounds.Height + (int)ExpandHeight);
 			Resize (width, height);
 			
 			
@@ -215,7 +216,7 @@ namespace Mono.TextEditor.Theatrics
 			}
 		}
 
-		protected abstract Rectangle CalculateInitialBounds ();
+//		protected abstract Rectangle CalculateInitialBounds ();
 		
 		
 		
@@ -238,8 +239,13 @@ namespace Mono.TextEditor.Theatrics
 			if (!IsComposited)
 				throw new InvalidOperationException ("Only works with composited screen. Check Widget.IsComposited.");
 			if (editor == null)
+<<<<<<< HEAD
 				throw new ArgumentNullException (nameof(Editor));
 			WidgetFlags |= Gtk.WidgetFlags.NoWindow;
+=======
+				throw new ArgumentNullException ("Editor");
+			this.HasWindow = false;
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			this.editor = editor;
 			Events = EventMask.ExposureMask;
 			Duration = 500;
@@ -247,10 +253,10 @@ namespace Mono.TextEditor.Theatrics
 			ExpandHeight = 2;
 			BounceEasing = Easing.Sine;
 			
-			var rgbaColormap = Screen.RgbaColormap;
-			if (rgbaColormap == null)
+//			var rgbaColormap = Screen.RgbaColormap;
+//			if (rgbaColormap == null)
 				return;
-			Colormap = rgbaColormap;
+//			Colormap = rgbaColormap;
 
 			stage.ActorStep += OnAnimationActorStep;
 			stage.Iteration += OnAnimationIteration;
@@ -337,18 +343,16 @@ namespace Mono.TextEditor.Theatrics
 			return true;
 		}
 
-		protected override bool OnExposeEvent (EventExpose evnt)
+		protected override bool OnDrawn (Context cr)
 		{
 			try {
 				var alloc = Allocation;
-				using (var cr = CairoHelper.Create (evnt.Window)) {
-					cr.Translate (alloc.X, alloc.Y);
-					cr.Translate (xExpandedOffset * (1 - scale), yExpandedOffset * (1 - scale));
-					var scaleX = (alloc.Width / userspaceArea.Width - 1) * scale + 1;
-					var scaleY = (alloc.Height / userspaceArea.Height - 1) * scale + 1;
-					cr.Scale (scaleX, scaleY);
-					Draw (cr, userspaceArea);
-				}
+				cr.Translate (alloc.X, alloc.Y);
+				cr.Translate (xExpandedOffset * (1 - scale), yExpandedOffset * (1 - scale));
+				var scaleX = (alloc.Width / userspaceArea.Width - 1) * scale + 1;
+				var scaleY = (alloc.Height / userspaceArea.Height - 1) * scale + 1;
+				cr.Scale (scaleX, scaleY);
+				Draw (cr, userspaceArea);
 			} catch (Exception e) {
 				LoggingService.LogError ("Exception in animation:", e);
 			}

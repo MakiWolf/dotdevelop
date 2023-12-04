@@ -113,8 +113,13 @@ namespace MonoDevelop.Ide.Projects.OptionPanels
 				store.AppendValues (it.Name, ce != null && ce.Build, it);
 			}
 		}
+<<<<<<< HEAD
 
 		void OnSetConfigurationsData (Gtk.TreeViewColumn treeColumn, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		void OnSetConfigurationsData (Gtk.TreeViewColumn treeColumn, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var item = (SolutionItem) store.GetValue (iter, ProjectCol);
 			ConfigurationData data = parentDialog.ConfigurationData.FindConfigurationData (item);

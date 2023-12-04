@@ -46,8 +46,13 @@ namespace MonoDevelop.Ide.Gui.Components
 		public ExecutionModeComboBox ()
 		{
 			this.Build ();
+<<<<<<< HEAD
 
 			comboMode.RowSeparatorFunc = delegate (TreeModel model, TreeIter iter) {
+=======
+			
+			comboMode.RowSeparatorFunc = delegate (ITreeModel model, TreeIter iter) {
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 				string item = (string) comboMode.Model.GetValue (iter, 0);
 				return item == "--";
 			};

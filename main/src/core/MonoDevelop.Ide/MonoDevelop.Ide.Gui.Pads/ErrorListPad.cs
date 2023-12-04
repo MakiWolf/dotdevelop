@@ -163,11 +163,11 @@ namespace MonoDevelop.Ide.Gui.Pads
 			btnBox.Accessible.SetShouldIgnore (true);
 			var imageView = new ImageView (image, Gtk.IconSize.Menu);
 			imageView.Accessible.SetShouldIgnore (true);
-			btnBox.PackStart (imageView);
+			btnBox.PackStart (imageView, false, true, 0);
 
 			label = new Label ();
 			label.Accessible.SetShouldIgnore (true);
-			btnBox.PackStart (label);
+			btnBox.PackStart (label, false, true, 0);
 
 			return btnBox;
 		}
@@ -693,7 +693,11 @@ namespace MonoDevelop.Ide.Gui.Pads
 			col.Resizable = true;
 		}
 
+<<<<<<< HEAD
 		static void ToggleDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		static void ToggleDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererToggle toggleRenderer = (Gtk.CellRendererToggle)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -703,8 +707,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 			}
 			toggleRenderer.Active = task.Completed;
 		}
+<<<<<<< HEAD
 
 		static void LineDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		static void LineDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererText textRenderer = (Gtk.CellRendererText)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -715,7 +724,11 @@ namespace MonoDevelop.Ide.Gui.Pads
 			SetText (textRenderer, model, iter, task, task.Line != 0 ? task.Line.ToString () : "");
 		}
 
+<<<<<<< HEAD
 		static void DescriptionDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		static void DescriptionDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var textRenderer = (CellRendererText)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -735,7 +748,11 @@ namespace MonoDevelop.Ide.Gui.Pads
 			SetText (textRenderer, model, iter, task, text);
 		}
 
+<<<<<<< HEAD
 		static void FileDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		static void FileDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererText textRenderer = (Gtk.CellRendererText)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -746,8 +763,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 
 			SetText (textRenderer, model, iter, task, task.GetFile ());
 		}
+<<<<<<< HEAD
 
 		static void ProjectDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		static void ProjectDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererText textRenderer = (Gtk.CellRendererText)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -757,8 +779,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 			}
 			SetText (textRenderer, model, iter, task, task.GetProject ());
 		}
+<<<<<<< HEAD
 
 		static void PathDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		
+		static void PathDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererText textRenderer = (Gtk.CellRendererText)cell;
 			TaskListEntry task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -769,7 +796,11 @@ namespace MonoDevelop.Ide.Gui.Pads
 			SetText (textRenderer, model, iter, task, task.GetPath ());
 		}
 
+<<<<<<< HEAD
 		static void CategoryDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, TreeModel model, Gtk.TreeIter iter)
+=======
+		static void CategoryDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Gtk.CellRendererText textRenderer = (Gtk.CellRendererText)cell;
 			var task = model.GetValue (iter, DataColumns.Task) as TaskListEntry;
@@ -779,8 +810,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 			}
 			SetText (textRenderer, model, iter, task, task.Category ?? "");
 		}
+<<<<<<< HEAD
 
 		static void SetText (CellRendererText textRenderer, TreeModel model, TreeIter iter, TaskListEntry task, string text)
+=======
+		
+		static void SetText (CellRendererText textRenderer, ITreeModel model, TreeIter iter, TaskListEntry task, string text)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			textRenderer.Text = text;
 			textRenderer.Weight = (int)((bool)model.GetValue (iter, DataColumns.Read) ? Pango.Weight.Normal : Pango.Weight.Bold);
@@ -837,7 +873,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 		}
 
 
-		bool FilterTasks (TreeModel model, TreeIter iter)
+		bool FilterTasks (ITreeModel model, TreeIter iter)
 		{
 			bool canShow = false;
 
@@ -990,7 +1026,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 			}
 		}
 
-		static int SeverityIterSort(TreeModel model, TreeIter a, TreeIter z)
+		static int SeverityIterSort(ITreeModel model, TreeIter a, TreeIter z)
 		{
 			TaskListEntry aTask = model.GetValue(a, DataColumns.Task) as TaskListEntry,
 			     zTask = model.GetValue(z, DataColumns.Task) as TaskListEntry;
@@ -999,8 +1035,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 			       aTask.Severity.CompareTo(zTask.Severity) :
 			       0;
 		}
+<<<<<<< HEAD
 
 		static int ProjectIterSort (TreeModel model, TreeIter a, TreeIter z)
+=======
+		
+		static int ProjectIterSort (ITreeModel model, TreeIter a, TreeIter z)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			TaskListEntry aTask = model.GetValue (a, DataColumns.Task) as TaskListEntry,
 			     zTask = model.GetValue (z, DataColumns.Task) as TaskListEntry;
@@ -1009,8 +1050,13 @@ namespace MonoDevelop.Ide.Gui.Pads
 			       string.Compare (aTask.GetProject (), zTask.GetProject (), StringComparison.Ordinal) :
 			       0;
 		}
+<<<<<<< HEAD
 
 		static int FileIterSort (TreeModel model, TreeIter a, TreeIter z)
+=======
+		
+		static int FileIterSort (ITreeModel model, TreeIter a, TreeIter z)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			TaskListEntry aTask = model.GetValue (a, DataColumns.Task) as TaskListEntry,
 			     zTask = model.GetValue (z, DataColumns.Task) as TaskListEntry;
@@ -1020,7 +1066,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 			       0;
 		}
 
-		static int CategoryIterSort (TreeModel model, TreeIter a, TreeIter z)
+		static int CategoryIterSort (ITreeModel model, TreeIter a, TreeIter z)
 		{
 			TaskListEntry aTask = model.GetValue (a, DataColumns.Task) as TaskListEntry,
 				 zTask = model.GetValue (z, DataColumns.Task) as TaskListEntry;
@@ -1087,23 +1133,23 @@ namespace MonoDevelop.Ide.Gui.Pads
 		{
 			public int PreferedMaxWidth { get; set; }
 
-			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-			{
-				int originalWrapWidth = WrapWidth;
-				WrapWidth = -1;
-				// First calculate Width with WrapWidth=-1 which will give us
-				// Width of text in one line(without wrapping)
-				base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-				int oneLineWidth = width;
-				WrapWidth = originalWrapWidth;
-				// originalWrapWidth(aka WrapWidth) equals to actual width of Column if oneLineWidth is bigger
-				// then column width/height we must recalculate, because Height is atm for one line
-				// and not multipline that WrapWidth creates...
-				if (oneLineWidth > originalWrapWidth) {
-					base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-				}
-				width = Math.Min (oneLineWidth, PreferedMaxWidth);
-			}
+//			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+//			{
+//				int originalWrapWidth = WrapWidth;
+//				WrapWidth = -1;
+//				// First calculate Width with WrapWidth=-1 which will give us
+//				// Width of text in one line(without wrapping)
+//				base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+//				int oneLineWidth = width;
+//				WrapWidth = originalWrapWidth;
+//				// originalWrapWidth(aka WrapWidth) equals to actual width of Column if oneLineWidth is bigger
+//				// then column width/height we must recalculate, because Height is atm for one line
+//				// and not multipline that WrapWidth creates...
+//				if (oneLineWidth > originalWrapWidth) {
+//					base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+//				}
+//				width = Math.Min (oneLineWidth, PreferedMaxWidth);
+//			}
 		}
 	}
 

@@ -44,7 +44,7 @@ vbox1
 
 		private global::Gtk.Label label1;
 
-		private global::Gtk.ComboBox comboboxLineEndings;
+		private global::Gtk.ComboBoxText comboboxLineEndings;
 
 		private global::Gtk.Label GtkLabel14;
 
@@ -128,7 +128,7 @@ vbox1
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hbox1.Gtk.Box+BoxChild
-			this.comboboxLineEndings = global::Gtk.ComboBox.NewText();
+			this.comboboxLineEndings = new global::Gtk.ComboBoxText();
 			this.comboboxLineEndings.Name = "comboboxLineEndings";
 			this.hbox1.Add(this.comboboxLineEndings);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.comboboxLineEndings]));

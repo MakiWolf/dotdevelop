@@ -65,6 +65,53 @@ namespace MonoDevelop.Ide
 			hb.ShowAll ();
 			PackStart (hb, true, true, 0);
 			
+<<<<<<< HEAD
+=======
+			// Feedback button
+			
+			if (FeedbackService.Enabled) {
+				CustomFrame fr = new CustomFrame (0, 0, 1, 0);
+				fr.Accessible.Role = Atk.Role.Filler;
+				var px = Xwt.Drawing.Image.FromResource ("feedback-16.png");
+				HBox b = new HBox (false, 3);
+				b.Accessible.Role = Atk.Role.Filler;
+
+				var im = new Xwt.ImageView (px).ToGtkWidget ();
+				im.Accessible.Role = Atk.Role.Filler;
+				b.PackStart (im, false, true, 0);
+				var label = new Gtk.Label (GettextCatalog.GetString ("Feedback"));
+				label.Accessible.Role = Atk.Role.Filler;
+				b.PackStart (label, false, true, 0);
+				Gtk.Alignment al = new Gtk.Alignment (0f, 0f, 1f, 1f);
+				al.Accessible.Role = Atk.Role.Filler;
+				al.RightPadding = 5;
+				al.LeftPadding = 3;
+				al.Add (b);
+				feedbackButton = new MiniButton (al);
+				feedbackButton.Accessible.SetLabel (GettextCatalog.GetString ("Feedback"));
+				feedbackButton.Accessible.Description = GettextCatalog.GetString ("Click to send feedback to the development team");
+
+				//feedbackButton.BackroundColor = new Gdk.Color (200, 200, 255);
+				fr.Add (feedbackButton);
+				mainBox.PackStart (fr, false, false, 0);
+				feedbackButton.Clicked += HandleFeedbackButtonClicked;
+				feedbackButton.ButtonPressEvent += HandleFeedbackButtonButtonPressEvent;
+				;
+				feedbackButton.ClickOnRelease = true;
+				FeedbackService.FeedbackPositionGetter = delegate {
+					int x, y;
+					if (feedbackButton.GdkWindow != null) {
+						feedbackButton.GdkWindow.GetOrigin (out x, out y);
+						x += feedbackButton.Allocation.Width;
+						y -= 6;
+					} else {
+						x = y = -1;
+					}
+					return new Gdk.Point (x, y);
+				};
+			}
+			
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			// Dock area
 			
 			CustomFrame dfr = new CustomFrame (0, 0, 1, 0);
@@ -138,18 +185,18 @@ namespace MonoDevelop.Ide
 			return rect;
 		}
 		
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			bool ret = base.OnExposeEvent (evnt);
-			if (HasResizeGrip) {
-				Gdk.Rectangle rect = GetGripRect ();
-				int w = rect.Width - Style.Xthickness;
-				int h = Allocation.Height - Style.YThickness;
-				if (h < 18 - Style.YThickness) h = 18 - Style.YThickness;
-				Gdk.WindowEdge edge = Direction == TextDirection.Ltr ? Gdk.WindowEdge.SouthEast : Gdk.WindowEdge.SouthWest;
-				Gtk.Style.PaintResizeGrip (Style, GdkWindow, State, evnt.Area, this, "statusbar", edge, rect.X, rect.Y, w, h);
-			}
- 			return ret;
-		}
+//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+//		{
+//			bool ret = base.OnExposeEvent (evnt);
+//			if (HasResizeGrip) {
+//				Gdk.Rectangle rect = GetGripRect ();
+//				int w = rect.Width - Style.Xthickness;
+//				int h = Allocation.Height - Style.YThickness;
+//				if (h < 18 - Style.YThickness) h = 18 - Style.YThickness;
+//				Gdk.WindowEdge edge = Direction == TextDirection.Ltr ? Gdk.WindowEdge.SouthEast : Gdk.WindowEdge.SouthWest;
+//				Gtk.Style.PaintResizeGrip (Style, GdkWindow, State, evnt.Area, this, "statusbar", edge, rect.X, rect.Y, w, h);
+//			}
+// 			return ret;
+//		}
 	}
 }

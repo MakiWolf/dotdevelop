@@ -89,6 +89,19 @@ namespace MonoDevelop.Platform
 			}
 		}
 
+<<<<<<< HEAD
+=======
+		public override string DefaultSansFont {
+			get {
+				try {
+					return (string)(Gio.GetGSettingsString ("org.gnome.desktop.interface", "document-font-name"));
+				} catch (Exception) {
+					return "Sans 11";
+				}
+			}
+		}
+		
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		public override string Name {
 			get { return "Gnome"; }
 		}

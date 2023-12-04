@@ -526,7 +526,7 @@ namespace MonoDevelop.Ide.Projects
 				ShowAll ();
 			}
 
-			bool FilterFuncWrapper (TreeModel model, TreeIter iter)
+			bool FilterFuncWrapper (ITreeModel model, TreeIter iter)
 			{
 				if (filterFunc == null)
 					return true;
@@ -539,7 +539,7 @@ namespace MonoDevelop.Ide.Projects
 				return filterFunc (item);
 			}
 
-			static void CellDataFuncText (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
+			static void CellDataFuncText (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
 			{
 				var item = (TemplateItem) model.GetValue (iter, 0);
 				string name = GLib.Markup.EscapeText (item.Name);
@@ -548,8 +548,13 @@ namespace MonoDevelop.Ide.Projects
 
 				((CellRendererText)cell).Markup = name;
 			}
+<<<<<<< HEAD
 
 			static void CellDataFuncIcon (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
+=======
+			
+			static void CellDataFuncIcon (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
+>>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			{
 				var item = (TemplateItem) model.GetValue (iter, 0);
 				var id = item.Template.Icon.IsNull ? "md-project" : item.Template.Icon.ToString ();
