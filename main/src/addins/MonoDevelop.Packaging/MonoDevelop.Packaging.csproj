@@ -14,40 +14,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-<<<<<<< HEAD
-=======
-    <Reference Include="gtk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="NuGet.Protocol">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.Protocol.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NuGet.Packaging">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.Packaging.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NuGet.Packaging.Core">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.Packaging.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NuGet.Frameworks">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.Frameworks.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NuGet.Versioning">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.Versioning.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="pango-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Mono.Cairo" />
-    <Reference Include="NuGet.PackageManagement">
-      <HintPath>..\..\..\external\nuget-binary\NuGet.PackageManagement.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
