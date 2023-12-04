@@ -39,14 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-<<<<<<< HEAD
-=======
-    <Reference Include="pango-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gtk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
