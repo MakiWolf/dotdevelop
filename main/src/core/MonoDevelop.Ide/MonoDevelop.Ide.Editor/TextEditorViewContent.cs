@@ -236,10 +236,10 @@ namespace MonoDevelop.Ide.Editor
 			policyContainer.PolicyChanged += HandlePolicyChanged;
 			((DefaultSourceEditorOptions)textEditor.Options).UpdateStylePolicy (currentPolicy);
 
-			var context = await EditorConfigService.GetEditorConfigContext (textEditor.FileName, token);
-			if (context == null)
-				return;
-			((DefaultSourceEditorOptions)textEditor.Options).SetContext (context);
+			//var context = await EditorConfigService.GetEditorConfigContext (textEditor.FileName, token);
+			//if (context == null)
+			// 	return;
+			// ((DefaultSourceEditorOptions)textEditor.Options).SetContext (context);
 		}
 
 		void HandlePolicyChanged (object sender, MonoDevelop.Projects.Policies.PolicyChangedEventArgs args)
@@ -379,7 +379,7 @@ namespace MonoDevelop.Ide.Editor
 				if (!string.IsNullOrEmpty (textEditorImpl.ContentName))
 					AutoSave.RemoveAutoSaveFile (textEditorImpl.ContentName);
 
-				EditorConfigService.RemoveEditConfigContext (textEditor.FileName).Ignore ();
+				//EditorConfigService.RemoveEditConfigContext (textEditor.FileName).Ignore ();
 				textEditorImpl.DirtyChanged -= HandleDirtyChanged;
 				textEditor.MimeTypeChanged -= UpdateTextEditorOptions;
 				textEditor.TextChanged -= HandleTextChanged;

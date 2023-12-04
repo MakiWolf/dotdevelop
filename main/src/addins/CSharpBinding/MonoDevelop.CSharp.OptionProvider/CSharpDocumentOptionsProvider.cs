@@ -23,7 +23,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
+/* using System;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,12 +54,12 @@ namespace MonoDevelop.CSharp.OptionProvider
 
 			var path = GetPath (document);
 			ICodingConventionContext conventions = null;
-			try {
-				if (path != null)
-					conventions = await EditorConfigService.GetEditorConfigContext (path, cancellationToken);
-			} catch (Exception e) {
-				LoggingService.LogError("Error while loading coding conventions.", e);
-			}
+			 try {
+			 	if (path != null)
+			 		//conventions = await EditorConfigService.GetEditorConfigContext (path, cancellationToken);
+			 } catch (Exception e) {
+			 	LoggingService.LogError("Error while loading coding conventions.", e);
+			 }
 			return new DocumentOptions (project?.Policies, conventions?.CurrentConventions);
 		}
 
@@ -155,3 +155,4 @@ namespace MonoDevelop.CSharp.OptionProvider
 		}
 	}
 }
+ */

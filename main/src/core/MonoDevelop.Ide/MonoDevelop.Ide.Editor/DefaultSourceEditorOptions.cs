@@ -28,7 +28,7 @@ using MonoDevelop.Core;
 using MonoDevelop.Ide.Gui.Content;
 using MonoDevelop.Ide.Fonts;
 using MonoDevelop.Ide.Editor.Extension;
-using Microsoft.VisualStudio.CodingConventions;
+//using Microsoft.VisualStudio.CodingConventions;
 using System.Threading.Tasks;
 using MonoDevelop.Ide.TypeSystem;
 
@@ -58,7 +58,7 @@ namespace MonoDevelop.Ide.Editor
 		static DefaultSourceEditorOptions instance;
 		static ITextEditorOptions plainEditor;
 		static bool inited;
-		ICodingConventionContext context;
+		//ICodingConventionContext context;
 
 		public static DefaultSourceEditorOptions Instance {
 			get {
@@ -277,13 +277,13 @@ namespace MonoDevelop.Ide.Editor
 			});
 
 			IdeApp.Preferences.ColorScheme.Changed += OnColorSchemeChanged;
-			IdeApp.Preferences.Editor.FollowCodingConventions.Changed += OnFollowCodingConventionsChanged;
+			//IdeApp.Preferences.Editor.FollowCodingConventions.Changed += OnFollowCodingConventionsChanged;
 		}
 
-		void OnFollowCodingConventionsChanged (object sender, EventArgs e)
+		/* void OnFollowCodingConventionsChanged (object sender, EventArgs e)
 		{
 			UpdateContextOptions (null, null).Ignore ();
-		}
+		} */
 
 
 		void UpdateFont ()
@@ -319,7 +319,7 @@ namespace MonoDevelop.Ide.Editor
 			return result;
 		}
 
-		internal void SetContext (ICodingConventionContext context)
+		/* internal void SetContext (ICodingConventionContext context)
 		{
 			if (this.context == context)
 				return;
@@ -342,8 +342,8 @@ namespace MonoDevelop.Ide.Editor
 				defaultEolMarkerFromContext = eolMarker;
 
 			tabsToSpacesFromContext = null;
-			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentStyle (out Microsoft.VisualStudio.CodingConventions.IndentStyle result))
-				tabsToSpacesFromContext = result == Microsoft.VisualStudio.CodingConventions.IndentStyle.Spaces;
+			//if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentStyle (out Microsoft.VisualStudio.CodingConventions.IndentStyle result))
+			//	tabsToSpacesFromContext = result == Microsoft.VisualStudio.CodingConventions.IndentStyle.Spaces;
 
 			indentationSizeFromContext = null;
 			if (followCodingConventions && context.CurrentConventions.UniversalConventions.TryGetIndentSize (out int indentSize)) 
@@ -369,7 +369,7 @@ namespace MonoDevelop.Ide.Editor
 			}
 			this.FireChange ();
 			return Task.CompletedTask;
-		}
+		} */
 
 		#region new options
 
@@ -931,12 +931,13 @@ namespace MonoDevelop.Ide.Editor
 		
 		public void Dispose ()
 		{
-			IdeServices.FontService.RemoveCallback (UpdateFont);
+			/* IdeServices.FontService.RemoveCallback (UpdateFont);
 			IdeApp.Preferences.ColorScheme.Changed -= OnColorSchemeChanged;
 			IdeApp.Preferences.Editor.FollowCodingConventions.Changed -= OnFollowCodingConventionsChanged;
 			if (context != null)
-				context.CodingConventionsChangedAsync -= UpdateContextOptions;
-		}
+				context.CodingConventionsChangedAsync -= UpdateContextOptions; */
+		
+		} 
 
 		void OnChanged (EventArgs args)
 		{

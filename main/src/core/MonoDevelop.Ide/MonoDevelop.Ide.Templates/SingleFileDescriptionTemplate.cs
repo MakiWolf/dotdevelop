@@ -482,12 +482,12 @@ namespace MonoDevelop.Ide.Templates
 				: MonoDevelop.Projects.Policies.PolicyService.GetDefaultPolicy<TextStylePolicy> (mime ?? "text/plain");
 			string eolMarker = TextStylePolicy.GetEolMarker (textPolicy.EolMarker);
 
-			var ctx = await EditorConfigService.GetEditorConfigContext (fileName);
+			/* var ctx = await EditorConfigService.GetEditorConfigContext (fileName);
 			if (ctx != null) {
 				ctx.CurrentConventions.UniversalConventions.TryGetEncoding (out encoding);
 				if (ctx.CurrentConventions.UniversalConventions.TryGetLineEnding (out string lineEnding))
 					eolMarker = lineEnding;
-			}
+			} */
 			if (encoding == null)
 				encoding = System.Text.Encoding.UTF8;
 			var bom = encoding.GetPreamble ();
@@ -509,12 +509,12 @@ namespace MonoDevelop.Ide.Templates
 			bool convertTabsToSpaces = textPolicy.TabsToSpaces;
 			int tabWidth = textPolicy.TabWidth;
 
-			if (ctx != null) {
+			/* if (ctx != null) {
 				if (ctx.CurrentConventions.UniversalConventions.TryGetIndentStyle (out Microsoft.VisualStudio.CodingConventions.IndentStyle result))
 					convertTabsToSpaces = result == Microsoft.VisualStudio.CodingConventions.IndentStyle.Spaces;
 				if (ctx.CurrentConventions.UniversalConventions.TryGetTabWidth (out int editorConfigTabWidth))
 					tabWidth = editorConfigTabWidth;
-			}
+			} */
 			var tabToSpaces = convertTabsToSpaces ? new string (' ', tabWidth) : null;
 
 			IDocumentLine lastLine = null;
@@ -529,13 +529,13 @@ namespace MonoDevelop.Ide.Templates
 				}
 				lastLine = line;
 			}
-			if (ctx != null && lastLine != null && lastLine.Length > 0) {
+			/* if (ctx != null && lastLine != null && lastLine.Length > 0) {
 				if (ctx.CurrentConventions.UniversalConventions.TryGetRequireFinalNewline (out bool requireNewLine)) {
 					if (requireNewLine)
 						ms.Write (eolMarkerBytes, 0, eolMarkerBytes.Length);
 				}
 			}
-			ctx.Dispose ();
+			ctx.Dispose (); */
 			ms.Position = 0;
 			return ms;
 		}

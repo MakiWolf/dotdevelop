@@ -42,5 +42,5 @@
 	branch = dotdevelop
 [submodule "main/external/Samsung.Netcoredbg"]
 	path = main/external/Samsung.Netcoredbg
-	url = https://github.com/dotdevelop/netcoredbg.git
-	branch = dotdevelop
+	url = https://github.com/MakiWolf/netcoredbg
+	branch = master

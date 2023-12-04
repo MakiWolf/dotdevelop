@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.IO;
+/* using System.IO;
 using NUnit.Framework;
 using UnitTests;
 using System.Threading;
@@ -186,3 +186,4 @@ max_line_length = 42
 
 	}
 }
+ */
