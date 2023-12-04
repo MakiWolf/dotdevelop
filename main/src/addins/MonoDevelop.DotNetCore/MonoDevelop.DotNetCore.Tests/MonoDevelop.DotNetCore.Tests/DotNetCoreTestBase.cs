@@ -38,14 +38,9 @@ namespace MonoDevelop.DotNetCore.Tests
 	{
 		protected override Task InternalSetup (string rootDir)
 		{
-<<<<<<< HEAD
-			Xwt.Application.Initialize (Xwt.ToolkitType.Gtk);
-			return base.InternalSetup (rootDir);
-=======
 			base.InternalSetup (rootDir);
 			Xwt.Application.Initialize (Xwt.ToolkitType.Gtk3);
 			DesktopService.Initialize ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		/// <summary>
