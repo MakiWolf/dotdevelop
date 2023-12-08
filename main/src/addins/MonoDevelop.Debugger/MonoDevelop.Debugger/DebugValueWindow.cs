@@ -83,16 +83,9 @@ namespace MonoDevelop.Debugger
 
 		public DebugValueWindow (Gtk.Window transientFor, PinnedWatchLocation location, StackFrame frame, ObjectValue value, PinnedWatch watch) : base (Gtk.WindowType.Toplevel)
 		{
-<<<<<<< HEAD:main/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger/DebugValueWindow.cs
-			TypeHint = WindowTypeHint.PopupMenu;
-			AllowShrink = false;
-			AllowGrow = false;
-			Decorated = false;
-=======
 			this.TypeHint = WindowTypeHint.PopupMenu;
 			this.Resizable = false;
 			this.Decorated = false;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69:main/src/addins/MonoDevelop.SourceEditor2/MonoDevelop.SourceEditor/DebugValueWindow.cs
 
 			TransientFor = transientFor;
 			// Avoid getting the focus when the window is shown. We'll get it when the mouse enters the window
