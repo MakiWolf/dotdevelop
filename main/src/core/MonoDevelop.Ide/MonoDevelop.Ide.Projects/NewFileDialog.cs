@@ -78,13 +78,8 @@ namespace MonoDevelop.Ide.Projects
 			this.basePath = basePath;
 
 			BorderWidth = 6;
-<<<<<<< HEAD
-			HasSeparator = false;
-=======
 			TransientFor = IdeApp.Workbench.RootWindow;
 //			HasSeparator = false;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
-
 			InitializeComponents ();
 
 			nameEntry.GrabFocus ();
