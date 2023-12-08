@@ -88,17 +88,8 @@
     <Reference Include="Xamarin.Mac">
       <HintPath>..\..\..\external\Xamarin.Mac.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <IncludeCopyLocal Include="Xamarin.Mac.dll" />
     <IncludeCopyLocal Include="Xwt.XamMac.dll" />
-=======
-    <Reference Include="gio-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gio-sharp-3.0</Package>
-    </Reference>
-    <Reference Include="cairo-sharp, Version=1.10.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Package>gtk-sharp-3.0</Package>
-    </Reference>
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoDevelop.Core\MonoDevelop.Core.csproj">
@@ -118,8 +109,6 @@
       <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
       <Name>Xwt</Name>
     </ProjectReference>
-<<<<<<< HEAD
-=======
 <!--
     <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk.csproj">
       <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
@@ -129,7 +118,6 @@
       <Project>{3B25FD1F-CEBA-4450-8893-DC330FDB56A7}</Project>
       <Name>Xwt.Gtk3</Name>
     </ProjectReference>
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
     <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins\Mono.Addins.csproj">
       <Project>{91DD5A2D-9FE3-4C3C-9253-876141874DAD}</Project>
       <Name>Mono.Addins</Name>
@@ -140,8 +128,6 @@
       <Name>Mono.Addins.Setup</Name>
       <Private>False</Private>
     </ProjectReference>
-<<<<<<< HEAD
-=======
 <!--    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.Gui\Mono.Addins.Gui.csproj">
       <Project>{FEC19BDA-4904-4005-8C09-68E82E8BEF6A}</Project>
       <Name>Mono.Addins.Gui</Name>
@@ -150,7 +136,6 @@
       <Project>{410A7DC9-E7DA-43E6-B592-93E2A344B660}</Project>
       <Name>Mono.Addins.GuiGtk3</Name>
     </ProjectReference>
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
     <ProjectReference Include="..\..\..\external\debugger-libs\Mono.Debugging\Mono.Debugging.csproj">
       <Project>{90C99ADB-7D4B-4EB4-98C2-40BD1B14C7D2}</Project>
       <Name>Mono.Debugging</Name>
