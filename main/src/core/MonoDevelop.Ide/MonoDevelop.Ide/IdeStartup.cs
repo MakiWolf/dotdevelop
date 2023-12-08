@@ -158,19 +158,11 @@ namespace MonoDevelop.Ide
 			LoggingService.LogInfo ("Using GTK+ {0}", IdeVersionInfo.GetGtkVersion ());
 
 			// XWT initialization
-<<<<<<< HEAD
-			FilePath p = typeof (IdeStartup).Assembly.Location;
-			Runtime.LoadAssemblyFrom (p.ParentDirectory.Combine ("Xwt.Gtk.dll"));
-			Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk);
-			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarWindowBackend, GtkExtendedTitleBarWindowBackend> ();
-			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarDialogBackend, GtkExtendedTitleBarDialogBackend> ();
-=======
 			FilePath p = typeof(IdeStartup).Assembly.Location;
 			Runtime.LoadAssemblyFrom (p.ParentDirectory.Combine("Xwt.Gtk3.dll"));
 			Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk3);
 			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarWindowBackend,GtkExtendedTitleBarWindowBackend> ();
 			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarDialogBackend,GtkExtendedTitleBarDialogBackend> ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			IdeTheme.SetupXwtTheme ();
 
 			IdeStartupTracker.StartupTracker.MarkSection ("XwtInitialization");
