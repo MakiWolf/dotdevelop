@@ -74,12 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-<<<<<<< HEAD
   <Target Name="AfterBuild">
      <Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="..\..\build\bin\testing" SkipUnchangedFiles="true" />
      <Copy SourceFiles="$(OutputPath)\GuiUnit.exe" DestinationFolder="..\..\build\bin\testing" SkipUnchangedFiles="true" />
    </Target>
 </Project>
-=======
-</Project>
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
