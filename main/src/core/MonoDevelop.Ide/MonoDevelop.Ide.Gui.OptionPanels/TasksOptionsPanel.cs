@@ -50,14 +50,8 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
 
 		public TasksPanelWidget ()
 		{
-			Build ();
-<<<<<<< HEAD
-
-			comboPriority = ComboBox.NewText ();
-=======
-			
+			Build ();	
 			comboPriority = new ComboBoxText ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			foreach (TaskPriority priority in Enum.GetValues (typeof (TaskPriority)))
 				comboPriority.AppendText (Enum.GetName (typeof (TaskPriority), priority));
 			comboPriority.Changed += new EventHandler (Validate);
