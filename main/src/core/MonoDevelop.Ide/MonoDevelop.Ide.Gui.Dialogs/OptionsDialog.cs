@@ -254,13 +254,8 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				crp.Image = ImageService.GetIcon (icon, treeIconSize);
 			}
 		}
-<<<<<<< HEAD
-
-		static void TextCellDataFunc (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
-=======
 		
 		static void TextCellDataFunc (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			TreeIter parent;
 			bool toplevel = !model.IterParent (out parent, iter);
