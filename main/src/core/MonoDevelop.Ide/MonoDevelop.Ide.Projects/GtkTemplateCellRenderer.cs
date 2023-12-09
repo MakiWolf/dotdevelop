@@ -123,7 +123,6 @@ namespace MonoDevelop.Ide.Projects
 //			}
 //		}
 
-<<<<<<< HEAD
 			using (var ctx = CairoHelper.Create (window)) {
 				using (var layout = new Pango.Layout (widget.PangoContext)) {
 
@@ -136,27 +135,7 @@ namespace MonoDevelop.Ide.Projects
 			}
 		}
 
-		void DrawTemplateCategoryText (Drawable window, Widget widget, Rectangle cell_area, CellRendererState flags)
-		{
-			StateType state = GetState (widget, flags);
-
-			using (var layout = new Pango.Layout (widget.PangoContext)) {
-
-				layout.Ellipsize = Pango.EllipsizeMode.End;
-				int textPixelWidth = widget.Allocation.Width - ((int)Xpad * 2);
-				layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
-
-				layout.SetMarkup (MarkupTopLevelCategoryName (TemplateCategory));
-
-				int w, h;
-				layout.GetPixelSize (out w, out h);
-
-				int textX = cell_area.X + (int)Xpad + categoryTextPaddingX;
-				int textY = cell_area.Y + (cell_area.Height - h) / 2 + groupTemplateHeadingYOffset;
-				window.DrawLayout (widget.Style.TextGC (state), textX, textY, layout);
-			}
-		}
-=======
+		
 //		void DrawTemplateCategoryText (Drawable window, Widget widget, Rectangle cell_area, CellRendererState flags)
 //		{
 //			StateType state = GetState (widget, flags);
@@ -177,8 +156,6 @@ namespace MonoDevelop.Ide.Projects
 //				window.DrawLayout (widget.Style.TextGC (state), textX, textY, layout);
 //			}
 //		}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
-
 		Rectangle DrawIcon (Cairo.Context ctx, Widget widget, Rectangle cell_area, CellRendererState flags)
 		{
 			var iconRect = new Rectangle (cell_area.X + (int)Xpad, cell_area.Y + (int)Ypad, (int)TemplateIcon.Width, (int)TemplateIcon.Height);
