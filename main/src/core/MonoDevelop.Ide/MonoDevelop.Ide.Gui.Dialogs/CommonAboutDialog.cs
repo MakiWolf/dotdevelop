@@ -79,13 +79,7 @@ Console.WriteLine( "oeDEBUG :: CommonAboutDialog ctor" );
 			notebook.BorderWidth = 0;
 			notebook.AppendPage (new AboutMonoDevelopTabPage (), new Label (Title));
 			notebook.AppendPage (new VersionInformationTabPage (), new Label (GettextCatalog.GetString ("Version Information")));
-<<<<<<< HEAD
-			VBox.PackStart (notebook, true, true, 0);
-
-=======
 			ContentArea.PackStart (notebook, true, true, 0);
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			var copyButton = new Button () { Label = GettextCatalog.GetString ("Copy Information") };
 			copyButton.Clicked += (sender, e) => CopyBufferToClipboard ();
 			ActionArea.PackEnd (copyButton, false, false, 0);
