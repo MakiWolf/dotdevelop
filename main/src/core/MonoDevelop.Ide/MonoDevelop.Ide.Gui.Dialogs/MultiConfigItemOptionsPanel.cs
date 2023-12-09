@@ -115,14 +115,8 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			configCombo.PackStart (cell, true);
 			configCombo.AddAttribute (cell, "text", 0);
 			combosBox.PackStart (configCombo, false, false, 0);
-<<<<<<< HEAD
-			var platformLabel = new Gtk.Label (GettextCatalog.GetString ("Platform:"));
-			combosBox.PackStart (platformLabel, false, false, 0);
-			platformCombo = Gtk.ComboBox.NewText ();
-=======
 			combosBox.PackStart (new Gtk.Label (GettextCatalog.GetString ("Platform:")), false, false, 0);
 			platformCombo = new Gtk.ComboBoxText ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			platformCombo.Name = "panelWidgetPlatformCombo";
 			combosBox.PackStart (platformCombo, false, false, 0);
 			cbox.PackStart (new Gtk.HSeparator (), false, false, 0);
