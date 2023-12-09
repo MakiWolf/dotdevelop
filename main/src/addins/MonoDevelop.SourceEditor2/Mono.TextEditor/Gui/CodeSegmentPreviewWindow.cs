@@ -72,11 +72,6 @@ namespace Mono.TextEditor
 		
 		protected override void OnDestroyed ()
 		{
-<<<<<<< HEAD
-			editor = null;
-			base.OnDestroyed ();
-		}
-=======
 			layout = layout.Kill ();
 			informLayout = informLayout.Kill ();
 			fontDescription = fontDescription.Kill ();
@@ -131,6 +126,5 @@ namespace Mono.TextEditor
 //			}
 //			return true;
 //		}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 	}
 }
