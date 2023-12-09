@@ -158,26 +158,6 @@ namespace MonoDevelop.Debugger
 //					width += (int)(Xpad * 2 + img.Width);
 //			}
 
-<<<<<<< HEAD:main/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger/ObjectValue/ObjectValueTreeView.cs
-			protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-			{
-				base.Render (window, widget, background_area, cell_area, expose_area, flags);
-				if (!icon.IsNull) {
-					using (var ctx = Gdk.CairoHelper.Create (window)) {
-						using (var layout = new Pango.Layout (widget.PangoContext)) {
-							layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
-							layout.FontDescription.Family = Family;
-							layout.SetText (Text);
-							int w, h;
-							layout.GetPixelSize (out w, out h);
-							var x = cell_area.X + w + 3 * Xpad;
-							var y = cell_area.Y + cell_area.Height / 2 - (int)(img.Height / 2);
-							ctx.DrawImage (widget, img, x, y);
-						}
-					}
-				}
-			}
-=======
 //			protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
 //			{
 //				base.Render (window, widget, background_area, cell_area, expose_area, flags);
@@ -196,7 +176,6 @@ namespace MonoDevelop.Debugger
 //					}
 //				}
 //			}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69:main/src/addins/MonoDevelop.Debugger/MonoDevelop.Debugger/ObjectValueTreeView.cs
 		}
 
 		class ValueCellRenderer : CellRendererText
