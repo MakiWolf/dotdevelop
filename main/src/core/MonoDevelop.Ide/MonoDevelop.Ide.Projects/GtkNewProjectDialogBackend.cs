@@ -37,13 +37,7 @@ using MonoDevelop.Ide.Gui;
 using MonoDevelop.Core;
 using System.Threading.Tasks;
 using MonoDevelop.Ide.Projects;
-<<<<<<< HEAD
 using System.Collections.Generic;
-#if GTK3
- using TreeModel = Gtk.ITreeModel;
-#endif
-=======
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 namespace MonoDevelop.Ide.Projects
 {
@@ -84,10 +78,6 @@ namespace MonoDevelop.Ide.Projects
 			actionHandler.PerformShowMenu += PerformShowMenu;
 		}
 
-<<<<<<< HEAD
-		async void NextButtonClicked (object sender, EventArgs e) => await MoveToNextPage ();
-
-=======
 		void ProjectCreationFailed (object obj, EventArgs args) => ShowProjectCreationAccessibityNotification (true);
 		void ProjectCreated(object obj, EventArgs args) => ShowProjectCreationAccessibityNotification (false);
 		async void NextButtonClicked (object sender, EventArgs e) => await MoveToNextPage ();
@@ -106,7 +96,6 @@ namespace MonoDevelop.Ide.Projects
 			this.Accessible.MakeAccessibilityAnnouncement (messageText);
 		}
 
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		public void ShowDialog ()
 		{
 			MessageService.ShowCustomDialog (this, IdeServices.DesktopService.GetFocusedTopLevelWindow ());
@@ -419,36 +408,17 @@ namespace MonoDevelop.Ide.Projects
 			templateTextRenderer.RenderRecentTemplate = false;
 			languageCellRenderer.RenderRecentTemplate = false;
 			foreach (TemplateCategory subCategory in category.Categories) {
-<<<<<<< HEAD
-				var iter = templatesTreeStore.AppendValues (
-					subCategory.Name,
-					null,
-					null,
-					subCategory.Name,
-=======
 				templatesListStore.AppendValues (
 					MarkupTopLevelCategoryName (subCategory.Name),
 					null,
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					null);
 
 				foreach (SolutionTemplate template in subCategory.Templates) {
 					if (template.HasProjects || controller.IsNewSolution) {
-<<<<<<< HEAD
-						string language = GetLanguageForTemplate (template);
-						templatesTreeStore.AppendValues (
-							iter,
-							template.Name,
-							GetIcon (template.IconId, IconSize.Dnd),
-							template,
-							subCategory.Name,
-							language);
-=======
 						templatesListStore.AppendValues (
 							template.Name,
 							GetIcon (template.IconId, IconSize.Dnd),
 							template);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					}
 				}
 			}
@@ -565,15 +535,9 @@ namespace MonoDevelop.Ide.Projects
 		{
 			TreeIter iter = TreeIter.Zero;
 			// recent templates entry is always the first one and has no category assigned to it
-<<<<<<< HEAD
-			if (templateCategoriesTreeStore.GetIterFirst (out iter) && templateCategoriesTreeStore.GetValue (iter, TemplateCategoryColumn) == null) {
-				templateCategoriesTreeView.Selection.SelectIter (iter);
-				TreePath path = templateCategoriesTreeStore.GetPath (iter);
-=======
 			if (templateCategoriesListStore.GetIterFirst (out iter) && templateCategoriesListStore.GetValue (iter, TemplateCategoryColumn) == null) {
 				templateCategoriesTreeView.Selection.SelectIter (iter);
 				TreePath path = templateCategoriesListStore.GetPath (iter);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 				templateCategoriesTreeView.ScrollToCell (path, null, true, 1, 0);
 			}
 		}
@@ -733,11 +697,7 @@ namespace MonoDevelop.Ide.Projects
 
 		void TreeViewRowActivated (object o, RowActivatedArgs args)
 		{
-<<<<<<< HEAD
-			if (CanMoveToNextPage && !isLastPressedKeySpace &&
-=======
 			if (CanMoveToNextPage && !isLastPressedKeySpace && 
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			    IsSolutionTemplateOnActivatedRow ((Gtk.TreeView)o, args))
 				MoveToNextPage ().Ignore();
 			isLastPressedKeySpace = false;
