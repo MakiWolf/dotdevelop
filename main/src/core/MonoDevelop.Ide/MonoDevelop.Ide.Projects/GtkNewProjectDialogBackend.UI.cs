@@ -146,16 +146,9 @@ namespace MonoDevelop.Ide.Projects
 			topLabelHBox.Name = "topLabelHBox";
 			topLabelHBox.PackStart (topBannerLabel, false, false, 20);
 			topLabelEventBox.Add (topLabelHBox);
-
-<<<<<<< HEAD
-			VBox.PackStart (topLabelEventBox, false, false, 0);
-			VBox.PackStart (topBannerBottomEdgeLineEventBox, false, false, 0);
-=======
 			ContentArea.PackStart (topBannerTopEdgeLineEventBox, false, false, 0);
 			ContentArea.PackStart (topLabelEventBox, false, false, 0);
 			ContentArea.PackStart (topBannerBottomEdgeLineEventBox, false, false, 0);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
-
 			// Main templates section.
 			centreVBox = new VBox ();
 			centreVBox.Accessible.SetShouldIgnore (true);
@@ -185,15 +178,8 @@ namespace MonoDevelop.Ide.Projects
 			templateCategoriesTreeView.Accessible.Description = GettextCatalog.GetString ("Select the project category to see all possible project templates");
 			templateCategoriesTreeView.BorderWidth = 0;
 			templateCategoriesTreeView.HeadersVisible = false;
-<<<<<<< HEAD
-			templateCategoriesTreeView.Model = templateCategoriesTreeStore;
-			templateCategoriesTreeView.SearchColumn = -1; // disable the interactive search
-			templateCategoriesTreeView.ShowExpanders = false;
-
-=======
 			templateCategoriesTreeView.Model = templateCategoriesListStore;
 			templateCategoriesTreeView.SearchColumn = -1; // disable the interactive search
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
 			templateCategoriesScrolledWindow.Add (templateCategoriesTreeView);
 			templateCategoriesBgBox.Add (templateCategoriesScrolledWindow);
@@ -217,14 +203,8 @@ namespace MonoDevelop.Ide.Projects
 			templatesTreeView.Accessible.SetTitle (GettextCatalog.GetString ("Project Templates"));
 			templatesTreeView.Accessible.Description = GettextCatalog.GetString ("Select the project template");
 			templatesTreeView.HeadersVisible = false;
-<<<<<<< HEAD
-			templatesTreeView.Model = templatesTreeStore;
-			templatesTreeView.SearchColumn = -1; // disable the interactive search
-			templatesTreeView.ShowExpanders = false;
-=======
 			templatesTreeView.Model = templatesListStore;
 			templatesTreeView.SearchColumn = -1; // disable the interactive search
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
 			templatesScrolledWindow.Add (templatesTreeView);
 			templatesBgBox.Add (templatesScrolledWindow);
@@ -397,11 +377,6 @@ namespace MonoDevelop.Ide.Projects
 				min_height = DefaultHeight;
 		}
 
-<<<<<<< HEAD
-			if (requisition.Width < DefaultWidth)
-				requisition.Width = DefaultWidth;
-		}
-=======
 		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
 		{
 			base.OnGetPreferredWidth (out min_width, out natural_width);
@@ -409,7 +384,6 @@ namespace MonoDevelop.Ide.Projects
 			if (min_width < DefaultWidth)
 				min_width = DefaultWidth;
 		}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 	}
 }
 
