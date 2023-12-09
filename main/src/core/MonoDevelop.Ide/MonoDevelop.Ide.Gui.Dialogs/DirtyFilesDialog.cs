@@ -162,15 +162,9 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			Sensitive = false;
 
 			List<Task> saveTasks = new List<Task> ();
-<<<<<<< HEAD
-			tsFiles.Foreach (delegate (TreeModel model, TreePath path, TreeIter iter) {
-				var doc = tsFiles.GetValue (iter, 2) as Document;
-				if (doc == null)
-=======
 			tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
 				var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
 				if (window == null)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					return false;
 				if ((bool)tsFiles.GetValue (iter, 1))
 					saveTasks.Add (doc.Save ());
