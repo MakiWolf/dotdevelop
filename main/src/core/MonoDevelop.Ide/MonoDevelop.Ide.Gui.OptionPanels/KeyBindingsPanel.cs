@@ -1031,7 +1031,6 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
 //				}
 //			}
 
-<<<<<<< HEAD
 							HashSet<Command> bindingConflicts;
 							if (keyBindingsPanel.conflicts.TryGetValue (key, out bindingConflicts) && bindingConflicts.Contains (Command)) {
 								bgColor = Styles.KeyBindingsPanel.KeyConflictBackgroundColor.ToCairoColor ();
@@ -1095,21 +1094,12 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
 					}
 				}
 			}
-
-			protected override void OnDestroyed()
-			{
-				keyBindingsPanel = null;
-				HideConflictTooltip ();
-				base.OnDestroyed();
-			}
-=======
 //			protected override void OnDestroyed()
 //			{
 //				keyBindingsPanel = null;
 //				HideConflictTooltip ();
 //				base.OnDestroyed();
 //			}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 	}
 }
