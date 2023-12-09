@@ -64,9 +64,7 @@ namespace MonoDevelop.Ide
 			hb.Add (mainBox);
 			hb.ShowAll ();
 			PackStart (hb, true, true, 0);
-			
-<<<<<<< HEAD
-=======
+	
 			// Feedback button
 			
 			if (FeedbackService.Enabled) {
@@ -110,8 +108,6 @@ namespace MonoDevelop.Ide
 					return new Gdk.Point (x, y);
 				};
 			}
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			// Dock area
 			
 			CustomFrame dfr = new CustomFrame (0, 0, 1, 0);
