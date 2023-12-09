@@ -40,3 +40,6 @@
 	path = main/external/Samsung.Netcoredbg
 	url = https://github.com/dotdevelop/netcoredbg.git
 	branch = dotdevelop
+[submodule "xwt"]
+	path = xwt
+	url = https://github.com/dotdevelop/xwt.git
