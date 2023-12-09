@@ -42,13 +42,8 @@ namespace MonoDevelop.Ide.Projects
 {
 	public class DefaultPolicyOptionsDialog : OptionsDialog
 	{
-<<<<<<< HEAD
-		ComboBox policiesCombo;
-		MonoDevelop.Components.MenuButton newButton;
-=======
 		ComboBoxText policiesCombo;
 		MenuButton newButton;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		Button deleteButton;
 		MonoDevelop.Components.MenuButton exportButton;
 		List<PolicySet> sets = new List<PolicySet> ();
@@ -68,13 +63,7 @@ namespace MonoDevelop.Ide.Projects
 			HBox topBar = new HBox ();
 			topBar.Spacing = 3;
 			topBar.PackStart (new Label (GettextCatalog.GetString ("Editing Policy:")), false, false, 0);
-<<<<<<< HEAD
-
-			policiesCombo = ComboBox.NewText ();
-=======
-			
 			policiesCombo = new ComboBoxText ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			topBar.PackStart (policiesCombo, false, false, 0);
 
 			deleteButton = new Button (GettextCatalog.GetString ("Delete Policy"));
@@ -137,17 +126,9 @@ namespace MonoDevelop.Ide.Projects
 			ebox.Add (align);
 
 			ebox.ShowAll ();
-<<<<<<< HEAD
-
-			VBox.PackStart (ebox, false, false, 0);
-			VBox.BorderWidth = 0;
-			Box.BoxChild c = (Box.BoxChild) VBox [ebox];
-=======
-			
 			ContentArea.PackStart (ebox, false, false, 0);
 			ContentArea.BorderWidth = 0;
 			Box.BoxChild c = (Box.BoxChild) ContentArea [ebox];
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			c.Position = 0;
 
 			foreach (PolicySet ps in PolicyService.GetUserPolicySets ()) {
