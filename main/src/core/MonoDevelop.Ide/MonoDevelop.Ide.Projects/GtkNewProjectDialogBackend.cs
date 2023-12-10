@@ -150,26 +150,6 @@ namespace MonoDevelop.Ide.Projects
 
 		void HandlePopup (SolutionTemplate template, uint eventTime)
 		{
-<<<<<<< HEAD
-			var engine = Platform.IsMac ? Xwt.Toolkit.NativeEngine : Xwt.Toolkit.CurrentEngine;
-			var xwtParent = Xwt.Toolkit.CurrentEngine.WrapWidget (templatesTreeView);
-			engine.Invoke (() => {
-				if (popupMenu == null) {
-					popupMenu = new Xwt.Menu ();
-				}
-				ClearPopupMenuItems ();
-				AddLanguageMenuItems (popupMenu, template);
-				Gdk.Rectangle rect = languageCellRenderer.GetLanguageRect ();
-
-				try {
-					popupMenu.Popup (xwtParent, rect.X, rect.Bottom);
-				} catch {
-					// popup at mouse position if the toolkit is not supported
-					popupMenu.Popup ();
-				}
-
-			});
-=======
 			if (popupMenu == null) {
 				popupMenu = new Menu ();
 				popupMenu.AttachToWidget (this, null);
@@ -187,7 +167,6 @@ namespace MonoDevelop.Ide.Projects
 				pushIn = false;
 			};
 			popupMenu.Popup (null, null, posFunc, 0, eventTime);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		[GLib.ConnectBefore]
