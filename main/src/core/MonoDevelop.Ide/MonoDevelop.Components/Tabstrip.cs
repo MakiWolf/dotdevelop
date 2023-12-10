@@ -309,40 +309,7 @@ namespace MonoDevelop.Components
 		
 		protected override void OnGetPreferredHeight (out int min_height, out int natural_height)
 		{
-<<<<<<< HEAD
-			requisition.Height = (int)Math.Ceiling (tabSizes.Max (p => p.Y));
-			requisition.Width = tabs.Count == 0 ? 10 : tabs.Where (t => t.Visible).Sum (t => (int)Math.Ceiling (t.Size.X));
-		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-		{
-			using (var cr = Gdk.CairoHelper.Create (evnt.Window)) {
-				cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-				cr.SetSourceColor (Styles.SubTabBarBackgroundColor.ToCairoColor ());
-				cr.Fill ();
-
-				Tab active = null;
-				for (int i = tabs.Count; i --> 0;) {
-					if (i == ActiveTab) {
-						active = tabs [i];
-						continue;
-					}
-					var tab = tabs[i];
-					if (!tab.Visible)
-						continue;
-					var bounds = GetBounds (tab);
-					tab.HoverPosition = tab == hoverTab ? new Cairo.PointD (mx - bounds.X, my) : new Cairo.PointD (-1, -1);
-					tab.Draw (cr, bounds);
-				}
-
-				if (active != null && active.Visible) {
-					active.Draw (cr, GetBounds (active));
-				}
-			}
-
-			return base.OnExposeEvent (evnt);
-		}
-=======
 			min_height = natural_height = (int)Math.Ceiling (tabSizes.Max (p => p.Y));
 		}
 
@@ -372,7 +339,6 @@ namespace MonoDevelop.Components
 //
 //			return base.OnExposeEvent (evnt);
 //		}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 		int focusedTab = -1;
 
