@@ -74,10 +74,6 @@ namespace MonoDevelop.Components
 
 		internal static void InitializeGtk (string progname, ref string[] args)
 		{
-<<<<<<< HEAD
-			if (Gtk.Settings.Default != null)
-				throw new InvalidOperationException ("Gtk already initialized!");
-=======
 		//	if (Gtk.Settings.Default != null)
 		//		throw new InvalidOperationException ("Gtk already initialized!");
 			
@@ -85,7 +81,6 @@ namespace MonoDevelop.Components
 			//      otherwise it will not be loaded correctly and theme switching won't work.
 			if (!Platform.IsLinux)
 				UpdateGtkTheme ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 
 			IdeStartupTracker.StartupTracker.MarkSection ("PreGtkInitialization");
 #if MAC
