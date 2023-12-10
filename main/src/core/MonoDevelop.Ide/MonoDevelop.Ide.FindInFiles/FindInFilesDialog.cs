@@ -61,15 +61,9 @@ namespace MonoDevelop.Ide.FindInFiles
 		}
 
 		CheckButton checkbuttonRecursively;
-<<<<<<< HEAD
-		ComboBoxEntry comboboxentryReplace;
-		ComboBoxEntry comboboxentryPath;
-		MonoDevelop.Components.SearchEntry searchentryFileMask;
-=======
 		ComboBoxText comboboxentryReplace;
 		ComboBoxText comboboxentryPath;
 		SearchEntry searchentryFileMask;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		Button buttonBrowsePaths;
 		Button buttonReplace;
 		Label labelFileMask;
@@ -440,13 +434,8 @@ namespace MonoDevelop.Ide.FindInFiles
 			comboboxentryPath.Destroyed += ComboboxentryPathDestroyed;
 			LoadHistory ("MonoDevelop.FindReplaceDialogs.PathHistory", comboboxentryPath);
 			comboboxentryPath.Show ();
-<<<<<<< HEAD
-			hboxPath.PackStart (comboboxentryPath);
-
-=======
 			hboxPath.PackStart (comboboxentryPath, false, true, 0);
 			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			labelPath.MnemonicWidget = comboboxentryPath;
 
 			buttonBrowsePaths = new Button { Label = "…" };
