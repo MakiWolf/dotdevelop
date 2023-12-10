@@ -762,46 +762,6 @@ namespace MonoDevelop.Components
 //				Gdk.Colormap.System.AllocColor (ref color, true, true);
 				return color;
 			}
-
-<<<<<<< HEAD
-			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-			{
-				// The Entry's GdkWindow is the top level window onto which
-				// the frame is drawn; the actual text entry is drawn into a
-				// separate window, so we can ensure that for themes that don't
-				// respect HasFrame, we never ever allow the base frame drawing
-				// to happen
-				if (evnt.Window == GdkWindow) {
-					return true;
-				}
-
-				bool ret = base.OnExposeEvent (evnt);
-
-				if (text_gc == null) {
-					text_gc = new Gdk.GC (evnt.Window);
-					text_gc.Copy (Style.TextGC (StateType.Normal));
-					Gdk.Color color_a = parent.Style.Base (StateType.Normal);
-					Gdk.Color color_b = parent.Style.Text (StateType.Normal);
-					text_gc.RgbFgColor = ColorBlend (color_a, color_b);
-				}
-
-				if (Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
-					return ret;
-				}
-
-				if (layout == null) {
-					layout = new Pango.Layout (PangoContext);
-					layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
-				}
-
-				int width, height;
-				layout.SetMarkup (parent.EmptyMessage);
-				layout.GetPixelSize (out width, out height);
-				evnt.Window.DrawLayout (text_gc, 2, (SizeRequest ().Height - height) / 2, layout);
-
-				return ret;
-			}
-=======
 //			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
 //			{
 //				// The Entry's GdkWindow is the top level window onto which
@@ -839,7 +799,6 @@ namespace MonoDevelop.Components
 //
 //				return ret;
 //			}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 	}
 }
