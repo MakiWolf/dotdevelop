@@ -2328,12 +2328,8 @@ namespace Mono.TextEditor
 #if DEBUG_EXPOSE
 		DateTime started = DateTime.Now;
 #endif
-<<<<<<< HEAD
 		Stopwatch timingsWatch = new Stopwatch ();
-		protected override bool OnExposeEvent (Gdk.EventExpose e)
-=======
 		protected override bool OnDrawn (Context cr)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (this.isDisposed)
 				return false;
@@ -2360,16 +2356,10 @@ namespace Mono.TextEditor
 				
 				cr.LineWidth = Options.Zoom;
 				textViewCr.LineWidth = Options.Zoom;
-
-<<<<<<< HEAD
 				timingsWatch.Restart ();
-				RenderMargins (cr, textViewCr, cairoArea);
+				//RenderMargins (cr, textViewCr, cairoArea);
 				keyPressTimings.AddMarginDrawingTime (timingsWatch.Elapsed);
 							
-=======
-//				RenderMargins (cr, textViewCr, cairoArea);
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 #if DEBUG_EXPOSE
 				Console.WriteLine ("{0} expose {1},{2} {3}x{4}", (long)(DateTime.Now - started).TotalMilliseconds,
 					e.Area.X, e.Area.Y, e.Area.Width, e.Area.Height);
@@ -2383,26 +2373,13 @@ namespace Mono.TextEditor
 				foreach (Animation animation in actors) {
 					animation.Drawer.Draw (cr);
 				}
-<<<<<<< HEAD
 				keyPressTimings.AddAnimationDrawingTime (timingsWatch.Elapsed);
-
-
-				OnPainted (new PaintEventArgs (cr, cairoArea));
-			}
-
-			if (Caret.IsVisible) {
-				timingsWatch.Restart ();
-				textViewMargin.DrawCaret (e.Window, Allocation);
-				keyPressTimings.AddCaretDrawingTime (timingsWatch.Elapsed);
-			}
-=======
 				
 //				OnPainted (new PaintEventArgs (cr, cairoArea));
 			}
 
 //			if (Caret.IsVisible)
 //				textViewMargin.DrawCaret (e.Window, Allocation);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		protected virtual void OnPainted (PaintEventArgs e)
