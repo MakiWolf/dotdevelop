@@ -111,20 +111,6 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 		public TextEncoding SelectedEncoding {
 			get {
 				if (!ShowEncodingSelector)
-<<<<<<< HEAD
-					return null;
-				else if (encodingMenu.History < firstEncIndex || encodingMenu.History == selectOption)
-					return null;
-				return TextEncoding.ConversionEncodings [encodingMenu.History - firstEncIndex];
-			}
-			set {
-				for (uint n=0; n < TextEncoding.ConversionEncodings.Length; n++) {
-					if (TextEncoding.ConversionEncodings [n] == value) {
-						encodingMenu.SetHistory (n + (uint)firstEncIndex);
-						Menu menu = (Menu)encodingMenu.Menu;
-						RadioMenuItem rm = (RadioMenuItem) menu.Children [n + firstEncIndex];
-						rm.Active = true;
-=======
 					return -1;
 				else if (encodingMenu.Active < firstEncIndex || encodingMenu.Active == selectOption)
 					return -1;
@@ -134,7 +120,6 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				for (uint n=0; n < TextEncoding.ConversionEncodings.Length; n++) {
 					if (TextEncoding.ConversionEncodings [n].CodePage == value) {
 						encodingMenu.Active = (int)(n + firstEncIndex);
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 						return;
 					}
 				}
