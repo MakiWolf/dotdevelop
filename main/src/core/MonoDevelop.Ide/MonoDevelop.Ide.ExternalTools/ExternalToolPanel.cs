@@ -180,11 +180,7 @@ namespace MonoDevelop.Ide.ExternalTools
 		{
 			if (toolListBox.Selection.CountSelectedRows () == 1) {
 				TreeIter selectedItem;
-<<<<<<< HEAD
-				TreeModel ls;
-=======
 				ITreeModel ls;				
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 				((ListStore)toolListBox.Model).GetIter (out selectedItem, (TreePath)toolListBox.Selection.GetSelectedRows (out ls)[0]);
 				// we know we have a selected item so get it's index
 				// use that to get the path of the item before it, and swap the two
@@ -202,11 +198,7 @@ namespace MonoDevelop.Ide.ExternalTools
 		{
 			if (toolListBox.Selection.CountSelectedRows () == 1) {
 				TreeIter selectedItem;
-<<<<<<< HEAD
-				TreeModel ls;
-=======
 				ITreeModel ls;				
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 				((ListStore)toolListBox.Model).GetIter (out selectedItem, (TreePath) toolListBox.Selection.GetSelectedRows(out ls)[0]);
 				// swap it with the next one
 				TreeIter toSwap = selectedItem;
