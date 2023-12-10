@@ -115,7 +115,6 @@ namespace MonoDevelop.Components
 			Parent = parent;
 		}
 
-<<<<<<< HEAD
 		protected virtual void OnParentSizeRequested (Gtk.SizeRequestedArgs args)
 		{
 			SizeRequest ();
@@ -128,13 +127,11 @@ namespace MonoDevelop.Components
 		void HandleSizeRequested (object o, Gtk.SizeRequestedArgs args)
 		{
 			OnParentSizeRequested (args);
-=======
 //			parent.SizeRequested += delegate {
 //				SizeRequest ();
 //			};
 			parent.SizeAllocated += HandleSizeAllocated;
 			HandleWidget = null;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		void HandleSizeAllocated (object o, Gtk.SizeAllocatedArgs args)
