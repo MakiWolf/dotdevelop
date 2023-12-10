@@ -66,11 +66,7 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 		public override bool EditsReadOnlyObject {
 			get { return true; }
 		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
+  
 		protected override string GetValueText ()
 		{
 			return MonoDevelop.Core.GettextCatalog.GetString ("(Collection)");
@@ -280,11 +276,7 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 				if (MonoDevelop.Ide.MessageService.ShowCustomDialog (dialog, toplevel) == (int)ResponseType.Ok) {
 					DesignerTransaction tran = CreateTransaction (Instance);
 					object old = collection;
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 					try {
 						collection.Clear ();
 						foreach (object[] o in itemStore)
@@ -296,8 +288,6 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 					}
 				}
 			}
-<<<<<<< HEAD
-=======
 		}
 		
 		//This and EndTransaction are from Mono internal class System.ComponentModel.ReflectionPropertyDescriptor
@@ -330,7 +320,6 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 			}
 			else
 				tran.Cancel ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		//This and EndTransaction are from Mono internal class System.ComponentModel.ReflectionPropertyDescriptor
