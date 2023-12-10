@@ -543,18 +543,11 @@ namespace MonoDevelop.Ide.Projects
 
 		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
 		{
-<<<<<<< HEAD
-			requisition = Child?.SizeRequest () ?? Requisition.Zero;
-			var entryRequest = filterEntry.SizeRequest ();
-			requisition.Width += entryRequest.Width;
-			requisition.Height = Math.Max (requisition.Height, entryRequest.Height);
-=======
 			min_width = 0;
 			if (Child != null)
 				min_width = Child.SizeRequest ().Width;
 			min_width += filterEntry.SizeRequest ().Width;
 			natural_width = min_width;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		void RepositionFilter ()
