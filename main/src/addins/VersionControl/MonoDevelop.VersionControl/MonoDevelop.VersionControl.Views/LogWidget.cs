@@ -610,30 +610,13 @@ namespace MonoDevelop.VersionControl.Views
 
 			base.OnDestroyed ();
 		}
-<<<<<<< HEAD
-
-		bool IsDestroyed { get; set; }
-
-		static void DateFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void DateFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var renderer = (CellRendererText)cell;
 			var revision = (Revision)model.GetValue (iter, 0);
 			// Grab today's day and the start of tomorrow's day to make Today/Yesterday calculations.
 			var now = DateTime.Now;
-<<<<<<< HEAD
-			var age = new DateTime (now.Year, now.Month, now.Day).AddDays (1) - revision.Time;
-
-			renderer.Text = age.Days >= 2 ?
-				revision.Time.ToShortDateString () :
-				revision.Time.Humanize (utcDate: false, dateToCompareAgainst: now);
-		}
-
-		static void GraphFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 			var age = new DateTime (now.Year, now.Month, now.Day).AddDays(1) - rev.Time;
 			if (age.Days >= 0 && age.Days < 1) { // Check whether it's a commit that's less than a day away. Also discard future commits.
 				day = GettextCatalog.GetString ("Today");
@@ -646,7 +629,6 @@ namespace MonoDevelop.VersionControl.Views
 		}	
 		
 		static void GraphFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var renderer = (RevisionGraphCellRenderer)cell;
 			Gtk.TreeIter node;
@@ -666,13 +648,8 @@ namespace MonoDevelop.VersionControl.Views
 
 			return filter;
 		}
-<<<<<<< HEAD
-
-		static void MessageFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void MessageFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			string filter = GetCurrentFilter (model);
 
@@ -691,13 +668,8 @@ namespace MonoDevelop.VersionControl.Views
 					renderer.Markup = EscapeWithFilterMarker (message, filter);
 			}
 		}
-<<<<<<< HEAD
-
-		static void AuthorFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void AuthorFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			string filter = GetCurrentFilter (model);
 
@@ -714,13 +686,8 @@ namespace MonoDevelop.VersionControl.Views
 			else
 				renderer.Markup = EscapeWithFilterMarker (author, filter);
 		}
-<<<<<<< HEAD
-
-		static void AuthorIconFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void AuthorIconFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			CellRendererImage renderer = (CellRendererImage)cell;
 			var rev = (Revision)model.GetValue (iter, 0);
@@ -737,13 +704,8 @@ namespace MonoDevelop.VersionControl.Views
 				};
 			}
 		}
-<<<<<<< HEAD
-
-		static void RevisionFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void RevisionFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			string filter = GetCurrentFilter (model);
 
@@ -754,13 +716,8 @@ namespace MonoDevelop.VersionControl.Views
 			else
 				renderer.Markup = EscapeWithFilterMarker (rev, filter);
 		}
-<<<<<<< HEAD
-
-		static void SetDiffCellData (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-=======
 		
 		static void SetDiffCellData (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var rc = (CellRendererDiff)cell;
 			var diffMode = (bool)model.GetValue (iter, 0);
