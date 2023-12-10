@@ -623,122 +623,6 @@ namespace MonoDevelop.Components.Chart
 //			}
 //		}
 		
-<<<<<<< HEAD
-		void DrawTicks (Gdk.Window win, Gdk.GC gc, TickEnumerator e, AxisPosition pos, AxisDimension ad, int tickSize, bool showLabels)
-		{
-			int rwidth, rheight;
-			win.GetSize (out rwidth, out rheight);
-			
-			Pango.Layout layout = null;
-			
-			if (showLabels) {
-				layout = new Pango.Layout (this.PangoContext);
-				layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
-			}
-			
-			bool isX = pos == AxisPosition.Top || pos == AxisPosition.Bottom;
-			bool isTop = pos == AxisPosition.Top || pos == AxisPosition.Right;
-			
-			double start = GetStart (ad);
-			double end = GetEnd (ad);
-			
-			e.Init (GetOrigin (ad));
-			
-			while (e.CurrentValue > start)
-				e.MovePrevious ();
-			
-			int lastPosLabel;
-			int lastPos;
-			int lastTw = 0;
-			
-			if (isX) {
-				lastPosLabel = reverseXAxis ? left + width + MinLabelGapX : left - MinLabelGapX;
-				lastPos = left - minTickStep*2;
-			}
-			else {
-				lastPosLabel = reverseYAxis ? top - MinLabelGapY : rheight + MinLabelGapY;
-				lastPos = top + height + minTickStep*2;
-			}
-			
-			for ( ; e.CurrentValue <= end; e.MoveNext ())
-			{
-				int px, py;
-				int tw = 0, th = 0;
-				int tick = tickSize;
-				
-				GetPoint (e.CurrentValue, e.CurrentValue, out px, out py);
-				
-				if (showLabels) {
-					layout.SetMarkup (e.CurrentLabel);
-					layout.GetPixelSize (out tw, out th);
-				}
-
-				if (isX) {
-					if (Math.Abs ((long)px - (long)lastPos) < minTickStep || px < left || px > left + width)
-						continue;
-					lastPos = px;
-					
-					bool labelFits = false;
-					if ((Math.Abs (px - lastPosLabel) - (tw/2) - (lastTw/2)) >= MinLabelGapX) {
-						lastPosLabel = px;
-						lastTw = tw;
-						labelFits = true;
-					}
-					
-					if (isTop) {
-						if (showLabels) {
-							if (labelFits)
-								win.DrawLayout (gc, px - (tw/2), top - AreaBorderWidth - th, layout);
-							else
-								tick = tick / 2;
-						}
-						win.DrawLine (gc, px, top, px, top + tick);
-					}
-					else {
-						if (showLabels) {
-							if (labelFits)
-								win.DrawLayout (gc, px - (tw/2), top + height + AreaBorderWidth, layout);
-							else
-								tick = tick / 2;
-						}
-						win.DrawLine (gc, px, top + height, px, top + height - tick);
-					}
-				}
-				else {
-					if (Math.Abs ((long)lastPos - (long)py) < minTickStep || py < top || py > top + height)
-						continue;
-					lastPos = py;
-					
-					bool labelFits = false;
-					if ((Math.Abs (py - lastPosLabel) - (th/2) - (lastTw/2)) >= MinLabelGapY) {
-						lastPosLabel = py;
-						lastTw = th;
-						labelFits = true;
-					}
-					
-					if (isTop) {
-						if (showLabels) {
-							if (labelFits)
-								win.DrawLayout (gc, left + width + AreaBorderWidth + 1, py - (th/2), layout);
-							else
-								tick = tick / 2;
-						}
-						win.DrawLine (gc, left + width, py, left + width - tick, py);
-					}
-					else {
-						if (showLabels) {
-							if (labelFits)
-								win.DrawLayout (gc, left - AreaBorderWidth - tw - 1, py - (th/2), layout);
-							else
-								tick = tick / 2;
-						}
-						win.DrawLine (gc, left, py, left + tick, py);
-					}
-				}
-			}
-			layout?.Dispose ();
-		}
-=======
 //		void DrawTicks (Gdk.Window win, Gdk.GC gc, TickEnumerator e, AxisPosition pos, AxisDimension ad, int tickSize, bool showLabels)
 //		{
 //			int rwidth, rheight;
@@ -853,7 +737,6 @@ namespace MonoDevelop.Components.Chart
 //			}
 //			layout?.Dispose ();
 //		}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		
 		int MeasureAxisSize (AxisPosition pos)
 		{
@@ -978,47 +861,6 @@ namespace MonoDevelop.Components.Chart
 		
 		void DrawCursorLabel (ChartCursor cursor)
 		{
-<<<<<<< HEAD
-			using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
-				gc.RgbFgColor = cursor.Color;
-
-				int x, y;
-				GetPoint (cursor.Value, cursor.Value, out x, out y);
-
-				if (cursor.Dimension == AxisDimension.X) {
-
-					string text;
-
-					if (cursor.LabelAxis != null) {
-						double minStep = GetMinTickStep (cursor.Dimension);
-						TickEnumerator tenum = cursor.LabelAxis.GetTickEnumerator (minStep);
-						tenum.Init (cursor.Value);
-						text = tenum.CurrentLabel;
-					} else {
-						text = GetValueLabel (cursor.Dimension, cursor.Value);
-					}
-
-					if (text != null && text.Length > 0) {
-						Pango.Layout layout = new Pango.Layout (this.PangoContext);
-						layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
-						layout.SetMarkup (text);
-
-						int tw, th;
-						layout.GetPixelSize (out tw, out th);
-						int tl = x - tw / 2;
-						int tt = top + 4;
-						if (tl + tw + 2 >= left + width) tl = left + width - tw - 1;
-						if (tl < left + 1) tl = left + 1;
-						GdkWindow.DrawRectangle (Style.WhiteGC, true, tl - 1, tt - 1, tw + 2, th + 2);
-						GdkWindow.DrawRectangle (Style.BlackGC, false, tl - 2, tt - 2, tw + 3, th + 3);
-						GdkWindow.DrawLayout (gc, tl, tt, layout);
-						layout.Dispose ();
-					}
-				} else {
-					throw new NotSupportedException ();
-				}
-			}
-=======
 //			using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
 //				gc.RgbFgColor = cursor.Color;
 //
@@ -1058,7 +900,6 @@ namespace MonoDevelop.Components.Chart
 //					throw new NotSupportedException ();
 //				}
 //			}
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 		
 		void GetPoint (double wx, double wy, out int x, out int y)
