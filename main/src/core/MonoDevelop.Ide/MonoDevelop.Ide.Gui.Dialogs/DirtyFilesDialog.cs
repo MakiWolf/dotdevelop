@@ -183,8 +183,6 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 
 		void Quit (object o, EventArgs e)
 		{
-<<<<<<< HEAD
-=======
 			tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
 				var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
 				if (window == null)
@@ -192,8 +190,6 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				window.ViewContent.DiscardChanges ();
 				return false;
 			});
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			Respond (Gtk.ResponseType.Ok);
 			Hide ();
 		}
