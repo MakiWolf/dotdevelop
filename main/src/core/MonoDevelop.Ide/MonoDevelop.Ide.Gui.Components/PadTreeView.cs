@@ -58,13 +58,8 @@ namespace MonoDevelop.Ide.Gui.Components
 		{
 			Init ();
 		}
-<<<<<<< HEAD
-
-		public PadTreeView (TreeModel model) : base (model)
-=======
 		
 		public PadTreeView (ITreeModel model) : base (model)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			Init ();
 		}
