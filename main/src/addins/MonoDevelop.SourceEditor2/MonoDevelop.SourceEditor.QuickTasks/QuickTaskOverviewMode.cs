@@ -958,7 +958,6 @@ namespace MonoDevelop.SourceEditor.QuickTasks
 			if (TextEditor == null)
 				return true;
 
-<<<<<<< HEAD
 				cr.Save ();
 				var allocation = Allocation;
 				var displayScale = Core.Platform.IsMac ? GtkWorkarounds.GetScaleFactor (this) : 1.0;
@@ -975,18 +974,12 @@ namespace MonoDevelop.SourceEditor.QuickTasks
 				if (TextEditor == null)
 					return true;
 
-				DrawCaret (cr, displayScale);
-				if (QuickTaskStrip.MergeScrollBarAndQuickTasks)
-					DrawBar (cr);
-=======
 			DrawCaret (cr);
 
 			if (QuickTaskStrip.MergeScrollBarAndQuickTasks)
 				DrawBar (cr);
 
 			cr.Restore ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
-
 			if (HasFocus) {
 				switch (currentFocus) {
 				case FocusWidget.Indicator:
