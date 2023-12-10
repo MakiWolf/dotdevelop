@@ -203,21 +203,6 @@ namespace MonoDevelop.Ide.Editor
 				y = geometry.Y + geometry.Height - h;
 			if (y < geometry.Top)
 				y = geometry.Top;
-<<<<<<< HEAD
-
-			return new Xwt.Point (x, y);
-		}
-
-		public virtual bool TryCloseTooltipWindow (Window tipWindow, TooltipCloseReason reason)
-		{
-			if (tipWindow.nativeWidget is Gtk.Widget gtkWidget) {
-				gtkWidget.Destroy ();
-			} else if (tipWindow.nativeWidget is IDisposable disposable) {
-				disposable.Dispose ();
-			} 
-			tipWindow.Dispose ();
-			return true;
-=======
 			
 			xwtWindow.Location = new Xwt.Point(x, y);
 			var gtkWindow = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk3).GetNativeWindow (xwtWindow) as Gtk.Window;
@@ -225,7 +210,6 @@ namespace MonoDevelop.Ide.Editor
 				gtkWindow.ShowAll ();
 			else
 				xwtWindow.Show ();
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		}
 
 		protected bool IsDisposed {
