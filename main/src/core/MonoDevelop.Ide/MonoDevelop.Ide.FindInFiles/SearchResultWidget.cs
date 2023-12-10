@@ -384,13 +384,7 @@ namespace MonoDevelop.Ide.FindInFiles
 		{
 			labelStatus.Text = text;
 		}
-<<<<<<< HEAD
-
-		static void FileIconDataFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
-=======
-		
 		static void FileIconDataFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (TreeIter.Zero.Equals (iter))
 				return;
@@ -405,13 +399,8 @@ namespace MonoDevelop.Ide.FindInFiles
 		{
 			return string.Format ("<span weight=\"{1}\">{0}</span>", GLib.Markup.EscapeText (text), didRead ? "normal" : "bold");
 		}
-<<<<<<< HEAD
-
-		void FileNameDataFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
-=======
 		
 		void FileNameDataFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (TreeIter.Zero.Equals (iter))
 				return;
@@ -422,25 +411,15 @@ namespace MonoDevelop.Ide.FindInFiles
 				return;
 			fileNameRenderer.Markup = MarkupText (System.IO.Path.GetFileName (searchResult.FileName) + ":" + searchResult.GetLineNumber (this), didRead);
 		}
-<<<<<<< HEAD
-
-		int CompareLineNumbers (TreeModel model, TreeIter first, TreeIter second)
-=======
 		
 		int CompareLineNumbers (ITreeModel model, TreeIter first, TreeIter second)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			var loc1 = ((SearchResult)model.GetValue (first, SearchResultColumn)).GetLocation (this);
 			var loc2 = ((SearchResult)model.GetValue (second, SearchResultColumn)).GetLocation (this);
 			return loc1.Line.CompareTo (loc2.Line);
 		}
-<<<<<<< HEAD
-
-		static int DefaultSortFunc (TreeModel model, TreeIter first, TreeIter second)
-=======
 		
 		static int DefaultSortFunc (ITreeModel model, TreeIter first, TreeIter second)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			return 0;
 		}
@@ -479,13 +458,8 @@ namespace MonoDevelop.Ide.FindInFiles
 
 			return System.IO.Path.GetDirectoryName (searchResult1.FileName).CompareTo (System.IO.Path.GetDirectoryName (searchResult2.FileName));
 		}
-<<<<<<< HEAD
-
-		void ResultPathDataFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
-=======
 		
 		void ResultPathDataFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (TreeIter.Zero.Equals (iter))
 				return;
@@ -541,10 +515,6 @@ namespace MonoDevelop.Ide.FindInFiles
 			pathRenderer.Markup = projectNameMarkup;
 		}
 
-<<<<<<< HEAD
-
-		void ResultTextDataFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
-=======
 		static int TranslateIndexToUTF8 (string text, int index)
 		{
 			byte[] bytes = Encoding.UTF8.GetBytes (text);
@@ -552,7 +522,6 @@ namespace MonoDevelop.Ide.FindInFiles
 		}
 		List<Tuple<SearchResult, string>> markupCache = new List<Tuple<SearchResult, string>> ();
 		void ResultTextDataFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 		{
 			if (TreeIter.Zero.Equals (iter))
 				return;
