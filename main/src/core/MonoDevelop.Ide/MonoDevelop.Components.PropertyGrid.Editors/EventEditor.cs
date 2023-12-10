@@ -44,31 +44,6 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 	{
 		IEventBindingService evtBind;
 
-<<<<<<< HEAD
-		protected override void Initialize ()
-		{
-			IComponent comp = Instance as IComponent;
-			if (comp != null) {
-				evtBind = (IEventBindingService)comp.Site.GetService (typeof (IEventBindingService));
-				base.Initialize ();
-			}
-		}
-		
-		protected override IPropertyEditor CreateEditor (Gdk.Rectangle cell_area, Gtk.StateType state)
-		{
-			if (evtBind == null) {
-				return null;
-			}
-
-			//get existing method names
-			ICollection IColl = evtBind.GetCompatibleMethods (evtBind.GetEvent (Property)) ;
-			string[] methods = new string [IColl.Count + 1];
-			IColl.CopyTo (methods, 1);
-			
-			//add a suggestion
-			methods [0] = evtBind.CreateUniqueMethodName ((IComponent) Instance, evtBind.GetEvent (Property));
-			
-=======
 		protected override void Initialize ()
 		{
 			IComponent comp = Instance as IComponent;
@@ -85,8 +60,6 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 			
 			//add a suggestion
 			methods [0] = evtBind.CreateUniqueMethodName ((IComponent) Instance, evtBind.GetEvent (Property));
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			EventEditor combo = new EventEditor (evtBind, methods);
 
 			if (Value != null)
