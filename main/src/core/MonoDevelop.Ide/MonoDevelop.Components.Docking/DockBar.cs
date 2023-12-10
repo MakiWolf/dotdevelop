@@ -124,13 +124,8 @@ namespace MonoDevelop.Components.Docking
 			box.PackStart (it, false, false, 0);
 			it.ShowAll ();
 			UpdateVisibility ();
-<<<<<<< HEAD
-			it.Shown += OnItemVisibilityShown;
-			it.Hidden += OnItemVisibilityHidden;
-=======
 			it.Shown += OnItemVisibilityChanged;
 			it.Hidden += OnItemVisibilityChanged;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			return it;
 		}
 		
@@ -170,15 +165,9 @@ namespace MonoDevelop.Components.Docking
 		internal void RemoveItem (DockBarItem it)
 		{
 			DisableHoverActivation ();
-<<<<<<< HEAD
-			box.Remove (it);
-			it.Shown -= OnItemVisibilityShown;
-			it.Hidden -= OnItemVisibilityHidden;
-=======
 			box.Remove (it);
 			it.Shown -= OnItemVisibilityChanged;
 			it.Hidden -= OnItemVisibilityChanged;
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			UpdateVisibility ();
 		}
 
