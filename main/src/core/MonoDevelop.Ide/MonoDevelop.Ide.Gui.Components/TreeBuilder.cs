@@ -155,14 +155,10 @@ namespace MonoDevelop.Ide.Gui.Components
 				return ats;
 			}
 			
-<<<<<<< HEAD
-=======
 			static int NullSortFunc (Gtk.ITreeModel model, Gtk.TreeIter a, Gtk.TreeIter b)
 			{
 				return 0;
 			}
-			
->>>>>>> b08b7c532f3372052fd8f3a8bc386ae5d531cc69
 			public void AddChildren (IEnumerable dataObjects)
 			{
 				NodeBuilder[] chain = null;
