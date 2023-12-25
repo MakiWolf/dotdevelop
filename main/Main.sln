@@ -474,7 +474,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextUIGtkUtil", "external\v
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.Debugger.DotNetCore", "external\Monodevelop.Netcoredbg\MonoDevelop.Debugger.DotNetCore\MonoDevelop.Debugger.DotNetCore.csproj", "{F71A259D-C08F-48D9-93B7-EE51497EB390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xwt.Gtk2", "external\xwt\Xwt.Gtk2\Xwt.Gtk2.csproj", "{FED3E127-B64A-4E57-8D2A-C8817C5D593A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xwt.Gtk3", "external\xwt\Xwt.Gtk\Xwt.Gtk3.csproj", "{FED3E127-B64A-4E57-8D2A-C8817C5D593A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xwt.GtkSharp", "external\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj", "{8F0B736F-8353-4A6C-B471-192D826BDD81}"
 EndProject
