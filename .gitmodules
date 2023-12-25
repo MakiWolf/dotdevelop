@@ -42,4 +42,4 @@
 	branch = dotdevelop
 [submodule "main/external/xwt"]
 	path = main/external/xwt
-	url = https://github.com/dotdevelop/xwt.git
+	url = https://github.com/MakiWolf/xwt.git
