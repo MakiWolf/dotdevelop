@@ -261,7 +261,7 @@ namespace MonoDevelop.Components.Docking
 				label = new Label (it.Label);
 				label.Accessible.SetShouldIgnore (true);
 				label.UseMarkup = true;
-				label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11));
+				//label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11));
 
 				if (bar.Orientation == Orientation.Vertical)
 					label.Angle = 270;

@@ -130,9 +130,9 @@ namespace MonoDevelop.Ide.CodeCompletion
 			}
 
 			if (documentation.Count > 0) {
-				markup.Append ("<span font='");
-				markup.Append (IdeServices.FontService.SansFontName);
-				markup.Append ("' size='small'>");
+				//markup.Append ("<span font='");
+				//markup.Append (IdeServices.FontService.SansFontName);
+				//markup.Append ("' size='small'>");
 				markup.AppendLine ();
 				markup.AppendLine ();
 				markup.AppendTaggedText (theme, documentation, 0, MaxParamColumnCount);
@@ -150,7 +150,7 @@ namespace MonoDevelop.Ide.CodeCompletion
 					}
 					if (documentation.Count > 0) {
 						markup.Append ("<span font='");
-						markup.Append (IdeServices.FontService.SansFontName);
+						//markup.Append (IdeServices.FontService.SansFontName);
 						markup.Append ("' size='small'>");
 						markup.AppendLine ();
 						markup.AppendLine ();

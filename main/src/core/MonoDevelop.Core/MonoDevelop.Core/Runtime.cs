@@ -131,7 +131,7 @@ namespace MonoDevelop.Core
 
 				WebRequestHelper.Initialize ();
 				Web.HttpClientProvider.Initialize ();
-				Mono.Addins.Setup.HttpClientProvider.SetHttpClientFactory (Web.HttpClientProvider.CreateHttpClient);
+				//Mono.Addins.Setup.HttpClientProvider.SetHttpClientFactory (Web.HttpClientProvider.CreateHttpClient);
 
 				//have to do this after the addin service and property service have initialized
 				if (UserDataMigrationService.HasSource) {

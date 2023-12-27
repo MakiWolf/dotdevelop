@@ -151,13 +151,13 @@ namespace MonoDevelop.Ide.Projects
 		void HandlePopup (SolutionTemplate template, uint eventTime)
 		{
 			if (popupMenu == null) {
-				popupMenu = new Menu ();
-				popupMenu.AttachToWidget (this, null);
+				popupMenu = new Xwt.Menu ();
+				//popupMenu.AttachToWidget (this, null);
 			}
 			ClearPopupMenuItems ();
 			AddLanguageMenuItems (popupMenu, template);
-			popupMenu.ModifyBg (StateType.Normal, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToGdkColor ());
-			popupMenu.ShowAll ();
+			//popupMenu.ModifyBg (StateType.Normal, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToGdkColor ());
+			//popupMenu.ShowAll ();
 
 			MenuPositionFunc posFunc = (Menu m, out int x, out int y, out bool pushIn) => {
 				Gdk.Rectangle rect = languageCellRenderer.GetLanguageRect ();
@@ -166,7 +166,7 @@ namespace MonoDevelop.Ide.Projects
 				y = screenRect.Bottom;
 				pushIn = false;
 			};
-			popupMenu.Popup (null, null, posFunc, 0, eventTime);
+			//popupMenu.Popup (null, null, posFunc, 0, eventTime);
 		}
 
 		[GLib.ConnectBefore]
@@ -386,21 +386,21 @@ namespace MonoDevelop.Ide.Projects
 		{
 			templateTextRenderer.RenderRecentTemplate = false;
 			languageCellRenderer.RenderRecentTemplate = false;
-			foreach (TemplateCategory subCategory in category.Categories) {
-				templatesListStore.AppendValues (
-					MarkupTopLevelCategoryName (subCategory.Name),
-					null,
-					null);
+			// foreach (TemplateCategory subCategory in category.Categories) {
+			// 	templatesListStore.AppendValues (
+			// 		MarkupTopLevelCategoryName (subCategory.Name),
+			// 		null,
+			// 		null);
 
-				foreach (SolutionTemplate template in subCategory.Templates) {
-					if (template.HasProjects || controller.IsNewSolution) {
-						templatesListStore.AppendValues (
-							template.Name,
-							GetIcon (template.IconId, IconSize.Dnd),
-							template);
-					}
-				}
-			}
+			// 	foreach (SolutionTemplate template in subCategory.Templates) {
+			// 		if (template.HasProjects || controller.IsNewSolution) {
+			// 			templatesListStore.AppendValues (
+			// 				template.Name,
+			// 				GetIcon (template.IconId, IconSize.Dnd),
+			// 				template);
+			// 		}
+			// 	}
+			// }
 			templatesTreeView.ExpandAll ();
 		}
 
@@ -514,11 +514,11 @@ namespace MonoDevelop.Ide.Projects
 		{
 			TreeIter iter = TreeIter.Zero;
 			// recent templates entry is always the first one and has no category assigned to it
-			if (templateCategoriesListStore.GetIterFirst (out iter) && templateCategoriesListStore.GetValue (iter, TemplateCategoryColumn) == null) {
-				templateCategoriesTreeView.Selection.SelectIter (iter);
-				TreePath path = templateCategoriesListStore.GetPath (iter);
-				templateCategoriesTreeView.ScrollToCell (path, null, true, 1, 0);
-			}
+			//if (templateCategoriesListStore.GetIterFirst (out iter) && templateCategoriesListStore.GetValue (iter, TemplateCategoryColumn) == null) {
+			//	templateCategoriesTreeView.Selection.SelectIter (iter);
+				//TreePath path = templateCategoriesListStore.GetPath (iter);
+				//templateCategoriesTreeView.ScrollToCell (path, null, true, 1, 0);
+			//}
 		}
 
 		void SelectFirstSubTemplateCategory ()
@@ -600,11 +600,11 @@ namespace MonoDevelop.Ide.Projects
 				try {
 					CanMoveToNextPage = false;
 					// disable all controls on this dialog to prevent users actions
-					VBox.Sensitive = false;
+					//VBox.Sensitive = false;
 					await controller.Create ();
 				} catch {
 					// if something goes wrong, we need to enable dialog contols
-					VBox.Sensitive = true;
+					//VBox.Sensitive = true;
 					throw;
 				} finally {
 					CanMoveToNextPage = true;

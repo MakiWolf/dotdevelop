@@ -59,7 +59,7 @@ namespace MonoDevelop.Components
 		public TooltipPopoverWindow () : base (PopupType.Tooltip)
 		{
 			Theme.SetBackgroundColor (Styles.PopoverWindow.DefaultBackgroundColor);
-			Theme.Font = Xwt.Drawing.Font.FromName (IdeServices.FontService.SansFontName).WithScaledSize (Styles.FontScale11);
+			//Theme.Font = Xwt.Drawing.Font.FromName (IdeServices.FontService.SansFontName).WithScaledSize (Styles.FontScale11);
 			ShowArrow = true;
 		}
 

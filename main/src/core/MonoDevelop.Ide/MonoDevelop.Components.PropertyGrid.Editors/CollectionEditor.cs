@@ -324,35 +324,35 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 
 		//This and EndTransaction are from Mono internal class System.ComponentModel.ReflectionPropertyDescriptor
 		// Lluis Sanchez Gual (lluis@ximian.com), (C) Novell, Inc, MIT X11 license
-		DesignerTransaction CreateTransaction (object obj)
-		{
-			IComponent com = obj as IComponent;
-			if (com == null || com.Site == null) return null;
+		// DesignerTransaction CreateTransaction (object obj)
+		// {
+		// 	IComponent com = obj as IComponent;
+		// 	if (com == null || com.Site == null) return null;
 
-			IDesignerHost dh = (IDesignerHost) com.Site.GetService (typeof(IDesignerHost));
-			if (dh == null) return null;
+		// 	IDesignerHost dh = (IDesignerHost) com.Site.GetService (typeof(IDesignerHost));
+		// 	if (dh == null) return null;
 
-			DesignerTransaction tran = dh.CreateTransaction ();
-			IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
-			if (ccs != null)
-				ccs.OnComponentChanging (com, Property);
-			return tran;
-		}
+		// 	DesignerTransaction tran = dh.CreateTransaction ();
+		// 	IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
+		// 	if (ccs != null)
+		// 		ccs.OnComponentChanging (com, Property);
+		// 	return tran;
+		// }
 
-		void EndTransaction (object obj, DesignerTransaction tran, object oldValue, object newValue, bool commit)
-		{
-			if (tran == null) return;
+		// void EndTransaction (object obj, DesignerTransaction tran, object oldValue, object newValue, bool commit)
+		// {
+		// 	if (tran == null) return;
 
-			if (commit) {
-				IComponent com = obj as IComponent;
-				IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
-				if (ccs != null)
-					ccs.OnComponentChanged (com, Property, oldValue, newValue);
-				tran.Commit ();
-			}
-			else
-				tran.Cancel ();
-		}
+		// 	if (commit) {
+		// 		IComponent com = obj as IComponent;
+		// 		IComponentChangeService ccs = (IComponentChangeService) com.Site.GetService (typeof(IComponentChangeService));
+		// 		if (ccs != null)
+		// 			ccs.OnComponentChanged (com, Property, oldValue, newValue);
+		// 		tran.Commit ();
+		// 	}
+		// 	else
+		// 		tran.Cancel ();
+		// }
 
 		static void UpdateIndices (ListStore itemStore)
 		{

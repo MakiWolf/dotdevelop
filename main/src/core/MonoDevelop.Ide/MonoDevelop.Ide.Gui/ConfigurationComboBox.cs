@@ -84,7 +84,7 @@ namespace MonoDevelop.Ide.Gui
 					fd = null;
 				}
 				if (toolbar.IconSize == Gtk.IconSize.Menu || toolbar.IconSize == Gtk.IconSize.SmallToolbar) {
-					fd = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
+					//fd = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
 				}
 				combo.ModifyLabelFont (fd);
 			}

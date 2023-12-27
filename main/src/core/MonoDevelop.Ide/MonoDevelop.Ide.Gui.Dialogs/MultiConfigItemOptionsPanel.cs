@@ -127,10 +127,10 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				configurationLabel,
 				GettextCatalog.GetString ("Select a configuration"));
 
-			platformCombo.SetCommonAccessibilityAttributes (
-				platformCombo.Name,
-				platformLabel,
-				GettextCatalog.GetString ("Select a platform"));
+			//platformCombo.SetCommonAccessibilityAttributes (
+				//platformCombo.Name,
+				//platformLabel,
+				//GettextCatalog.GetString ("Select a platform"));
 
 			cbox.Hidden += OnPageHidden;
 			cbox.Shown += OnPageShown;

@@ -325,24 +325,24 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 
 		void ProcessExpandAnimation (Cairo.Context cr, ToolboxWidgetCategory lastCategory, int lastCategoryYpos, Cairo.Color backColor, Gdk.Rectangle area, ref int ypos)
 		{
-			if (lastCategory != null && lastCategory.AnimatingExpand) {
-				int newypos = lastCategory.IsExpanded ? lastCategoryYpos + lastCategory.AnimationHeight : ypos + lastCategory.AnimationHeight;
-				if (newypos < lastCategoryYpos) {
-					newypos = lastCategoryYpos;
+			//if (lastCategory != null && lastCategory.AnimatingExpand) {
+				//int newypos = lastCategory.IsExpanded ? lastCategoryYpos + lastCategory.AnimationHeight : ypos + lastCategory.AnimationHeight;
+				//if (newypos < lastCategoryYpos) {
+				//	newypos = lastCategoryYpos;
 //					StopExpandAnimation (lastCategory);
-				}
-				if (newypos > ypos) {
-					newypos = ypos;
+				//}
+				//if (newypos > ypos) {
+				//	newypos = ypos;
 //					StopExpandAnimation (lastCategory);
-				}
+				//}
 
 				// Clear the area where the category will be drawn since it will be
 				// drawn over the items being hidden/shown
-				cr.SetSourceColor (backColor);
-				cr.Rectangle (area.X, newypos, area.Width, ypos - lastCategoryYpos);
-				cr.Fill ();
-				ypos = newypos;
-			}
+				//cr.SetSourceColor (backColor);
+				//cr.Rectangle (area.X, newypos, area.Width, ypos - lastCategoryYpos);
+				//cr.Fill ();
+				//ypos = newypos;
+			//}
 		}		
 		
 //		protected override bool OnKeyPressEvent (Gdk.EventKey evnt)
@@ -453,7 +453,7 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 //			return base.OnScrollEvent (evnt);
 //		}
 		
-		public Action<Gdk.EventButton> DoPopupMenu { get; set; }
+//		public Action<Gdk.EventButton> DoPopupMenu { get; set; }
 		
 //		protected override bool OnButtonPressEvent (Gdk.EventButton e)
 //		{
@@ -501,69 +501,69 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 
 		Xwt.Motion.Tweener tweener;
 
-		void StartExpandAnimation (ToolboxWidgetCategory cat)
-		{
-			if (tweener != null) {
-				tweener.Stop ();
+		// void StartExpandAnimation (ToolboxWidgetCategory cat)
+		// {
+		// 	if (tweener != null) {
+		// 		tweener.Stop ();
 
-                        if (cat.AnimatingExpand)
-				GLib.Source.Remove (cat.AnimationHandle);
+        //                 if (cat.AnimatingExpand)
+		// 		GLib.Source.Remove (cat.AnimationHandle);
 
-			cat.AnimationHeight = 0;
-			cat.AnimatingExpand = true;
+		// 	cat.AnimationHeight = 0;
+			//cat.AnimatingExpand = true;
 //			cat.AnimationHandle = GLib.Timeout.Add (animationTimeSpan, delegate {
 //				cat.AnimationHeight += animationStepSize;
 //				QueueResize ();
 //				return true;
 //			});
-		}
+	//	}
 
-		void StartCollapseAnimation (Category cat)
-		{
-			if (cat.AnimatingExpand)
-				GLib.Source.Remove (cat.AnimationHandle);
+		// void StartCollapseAnimation (Category cat)
+		// {
+		// 	if (cat.AnimatingExpand)
+		// 		GLib.Source.Remove (cat.AnimationHandle);
 
-			cat.AnimationHeight = 0;
-			cat.AnimatingExpand = true;
+		// 	cat.AnimationHeight = 0;
+		// 	cat.AnimatingExpand = true;
 //			cat.AnimationHandle = GLib.Timeout.Add (animationTimeSpan, delegate {
 //				cat.AnimationHeight -= animationStepSize;
 //				QueueResize ();
 //				return true;
 //			});
-		}
+	//	}
 
-		void StopExpandAnimation (Category cat)
-		{
-			if (cat.AnimatingExpand) {
-				cat.AnimatingExpand = false;
-				GLib.Source.Remove (cat.AnimationHandle);
-			}
+		// void StopExpandAnimation (Category cat)
+		// {
+		// 	if (cat.AnimatingExpand) {
+		// 		cat.AnimatingExpand = false;
+		// 		GLib.Source.Remove (cat.AnimationHandle);
+		// 	}
 
-			cat.AnimatingExpand = true;
-			cat.AnimationPosition = 0.0f;
+		// 	cat.AnimatingExpand = true;
+		// 	cat.AnimationPosition = 0.0f;
 
-			tweener = new Xwt.Motion.Tweener (animationDurationMs, 10) { Easing = Xwt.Motion.Easing.SinOut };
-			tweener.ValueUpdated += (sender, e) => {
-				cat.AnimationPosition = tweener.Value;
-				QueueDraw ();
-			};
-			tweener.Finished += (sender, e) => {
-				cat.AnimatingExpand = false;
-				QueueDraw ();
-			};
-			tweener.Start ();
-			QueueDraw ();
-		}
+		// 	tweener = new Xwt.Motion.Tweener (animationDurationMs, 10) { Easing = Xwt.Motion.Easing.SinOut };
+		// 	tweener.ValueUpdated += (sender, e) => {
+		// 		cat.AnimationPosition = tweener.Value;
+		// 		QueueDraw ();
+		// 	};
+		// 	tweener.Finished += (sender, e) => {
+		// 		cat.AnimatingExpand = false;
+		// 		QueueDraw ();
+		// 	};
+		// 	tweener.Start ();
+		// 	QueueDraw ();
+		// }
 
-		protected override bool OnPopupMenu ()
-		{
+	//	protected override bool OnPopupMenu ()
+		//{
 			//			if (DoPopupMenu != null) {
 			//				DoPopupMenu (null);
 			//				return true;
 			//			}
 			//			return base.OnPopupMenu ();
-			return false;
-		}
+		//	return false;
+		//}
 		
 //		protected override bool OnMotionNotifyEvent (Gdk.EventMotion e)
 //		{

@@ -168,7 +168,7 @@ namespace MonoDevelop.Ide.Editor
 
 
 			var xwtWindow = (Xwt.WindowFrame)tipWindow;
-			xwtWindow.Location = CalculateWindowLocation (editor, item, xwtWindow, mouseX, mouseY, origin);
+			//xwtWindow.Location = CalculateWindowLocation (editor, item, xwtWindow, mouseX, mouseY, origin);
 
 			var gtkWindow = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk).GetNativeWindow (xwtWindow) as Gtk.Window;
 			if (gtkWindow != null)
@@ -177,40 +177,40 @@ namespace MonoDevelop.Ide.Editor
 				xwtWindow.Show ();
 		}
 
-		protected virtual Xwt.Point CalculateWindowLocation (TextEditor editor, TooltipItem item, Xwt.WindowFrame xwtWindow, int mouseX, int mouseY, Xwt.Point origin)
-		{
-			int w;
-			double xalign;
-			GetRequiredPosition (editor, xwtWindow, out w, out xalign);
-			w += 10;
+		// protected virtual Xwt.Point CalculateWindowLocation (TextEditor editor, TooltipItem item, Xwt.WindowFrame xwtWindow, int mouseX, int mouseY, Xwt.Point origin)
+		// {
+		// 	int w;
+		// 	double xalign;
+		// 	GetRequiredPosition (editor, xwtWindow, out w, out xalign);
+		// 	w += 10;
 
-			var allocation = GetAllocation (editor);
-			int x = (int)(mouseX + origin.X + allocation.X);
-			int y = (int)(mouseY + origin.Y + allocation.Y);
-			Gtk.Widget widget = editor;
-			var geometry = widget.Screen.GetUsableMonitorGeometry (widget.Screen.GetMonitorAtPoint (x, y));
+		// 	var allocation = GetAllocation (editor);
+		// 	int x = (int)(mouseX + origin.X + allocation.X);
+		// 	int y = (int)(mouseY + origin.Y + allocation.Y);
+		// 	Gtk.Widget widget = editor;
+		// 	var geometry = widget.Screen.GetUsableMonitorGeometry (widget.Screen.GetMonitorAtPoint (x, y));
 
-			x -= (int)((double)w * xalign);
-			y += 10;
+		// 	x -= (int)((double)w * xalign);
+		// 	y += 10;
 
-			if (x + w >= geometry.X + geometry.Width)
-				x = geometry.X + geometry.Width - w;
-			if (x < geometry.Left)
-				x = geometry.Left;
+		// 	if (x + w >= geometry.X + geometry.Width)
+		// 		x = geometry.X + geometry.Width - w;
+		// 	if (x < geometry.Left)
+		// 		x = geometry.Left;
 
-			int h = (int)xwtWindow.Size.Height;
-			if (y + h >= geometry.Y + geometry.Height)
-				y = geometry.Y + geometry.Height - h;
-			if (y < geometry.Top)
-				y = geometry.Top;
+		// 	int h = (int)xwtWindow.Size.Height;
+		// 	if (y + h >= geometry.Y + geometry.Height)
+		// 		y = geometry.Y + geometry.Height - h;
+		// 	if (y < geometry.Top)
+		// 		y = geometry.Top;
 			
-			xwtWindow.Location = new Xwt.Point(x, y);
-			var gtkWindow = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk3).GetNativeWindow (xwtWindow) as Gtk.Window;
-			if (gtkWindow != null)
-				gtkWindow.ShowAll ();
-			else
-				xwtWindow.Show ();
-		}
+		// 	xwtWindow.Location = new Xwt.Point(x, y);
+		// 	var gtkWindow = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk3).GetNativeWindow (xwtWindow) as Gtk.Window;
+		// 	if (gtkWindow != null)
+		// 		gtkWindow.ShowAll ();
+		// 	else
+		// 		xwtWindow.Show ();
+		// }
 
 		protected bool IsDisposed {
 			get;

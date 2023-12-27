@@ -104,7 +104,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 		protected override bool RunDefault ()
 		{
 			var win = new FileSelectorDialog (Title, Action.ToGtkAction ());
-			win.SelectedEncoding = TextEncoding.GetEncoding (Encoding);
+			//win.SelectedEncoding = TextEncoding.GetEncoding (Encoding);
 			win.ShowEncodingSelector = ShowEncodingSelector;
 			win.ShowViewerSelector = ShowViewerSelector;
 			bool pathAlreadySet = false;
@@ -123,7 +123,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				var result = MessageService.RunCustomDialog (win, TransientFor ?? MessageService.RootWindow);
 				if (result == (int)Gtk.ResponseType.Ok) {
 					GetDefaultProperties (win);
-					data.Encoding = win.SelectedEncoding?.Encoding;
+					//data.Encoding = win.SelectedEncoding?.Encoding;
 					data.CloseCurrentWorkspace = win.CloseCurrentWorkspace;
 					data.SelectedViewer = win.SelectedViewer;
 					return true;

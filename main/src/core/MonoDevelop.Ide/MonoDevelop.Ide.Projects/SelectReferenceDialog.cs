@@ -588,41 +588,41 @@ namespace MonoDevelop.Ide.Projects
 			}
 		}
 
-		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-		{
-			StateType st = StateType.Normal;
-			if ((flags & CellRendererState.Prelit) != 0)
-				st = StateType.Prelight;
-			if ((flags & CellRendererState.Focused) != 0)
-				st = StateType.Normal;
-			if ((flags & CellRendererState.Insensitive) != 0)
-				st = StateType.Insensitive;
-			if ((flags & CellRendererState.Selected) != 0)
-				st = widget.HasFocus ? StateType.Selected : Gtk.StateType.Active;
+		// protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+		// {
+		// 	StateType st = StateType.Normal;
+		// 	if ((flags & CellRendererState.Prelit) != 0)
+		// 		st = StateType.Prelight;
+		// 	if ((flags & CellRendererState.Focused) != 0)
+		// 		st = StateType.Normal;
+		// 	if ((flags & CellRendererState.Insensitive) != 0)
+		// 		st = StateType.Insensitive;
+		// 	if ((flags & CellRendererState.Selected) != 0)
+		// 		st = widget.HasFocus ? StateType.Selected : Gtk.StateType.Active;
 
-			SetupLayout (widget, flags);
+		// 	SetupLayout (widget, flags);
 
-			int w, h;
-			layout.GetPixelSize (out w, out h);
+		// 	int w, h;
+		// 	layout.GetPixelSize (out w, out h);
 
-			const int textXOffset = 2; // Shift text up slightly in the row.
-			int tx = cell_area.X + (int)Xpad;
-			int ty = cell_area.Y + (cell_area.Height - h) / 2 - textXOffset;
+		// 	const int textXOffset = 2; // Shift text up slightly in the row.
+		// 	int tx = cell_area.X + (int)Xpad;
+		// 	int ty = cell_area.Y + (cell_area.Height - h) / 2 - textXOffset;
 
-			int textPixelWidth = cell_area.Width - ((int)Xpad * 2) ;
-			layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
+		// 	int textPixelWidth = cell_area.Width - ((int)Xpad * 2) ;
+		// 	layout.Width = (int)(textPixelWidth * Pango.Scale.PangoScale);
 
-			window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
-		}
+		// 	window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
+		// }
 
-		public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-		{
-			base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-			SetupLayout (widget);
+		// public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+		// {
+		// 	base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+		// 	SetupLayout (widget);
 
-			int layoutWidth = 0;
-			layout.GetPixelSize (out layoutWidth, out height);
-		}
+		// 	int layoutWidth = 0;
+		// 	layout.GetPixelSize (out layoutWidth, out height);
+		// }
 
 		void SetupLayout (Widget widget, CellRendererState flags = 0)
 		{
@@ -644,12 +644,12 @@ namespace MonoDevelop.Ide.Projects
 			layout.SetMarkup (newmarkup);
 		}
 
-		protected override void OnDestroyed ()
-		{
-			base.OnDestroyed ();
-			if (layout != null)
-				layout.Dispose ();
-		}
+		// protected override void OnDestroyed ()
+		// {
+		// 	base.OnDestroyed ();
+		// 	if (layout != null)
+		// 		layout.Dispose ();
+		// }
 	}
 }
 

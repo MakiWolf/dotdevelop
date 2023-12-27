@@ -146,7 +146,7 @@ namespace MonoDevelop.Ide.Projects
 			topLabelHBox.Name = "topLabelHBox";
 			topLabelHBox.PackStart (topBannerLabel, false, false, 20);
 			topLabelEventBox.Add (topLabelHBox);
-			ContentArea.PackStart (topBannerTopEdgeLineEventBox, false, false, 0);
+			//ContentArea.PackStart (topBannerTopEdgeLineEventBox, false, false, 0);
 			ContentArea.PackStart (topLabelEventBox, false, false, 0);
 			ContentArea.PackStart (topBannerBottomEdgeLineEventBox, false, false, 0);
 			// Main templates section.
@@ -178,7 +178,7 @@ namespace MonoDevelop.Ide.Projects
 			templateCategoriesTreeView.Accessible.Description = GettextCatalog.GetString ("Select the project category to see all possible project templates");
 			templateCategoriesTreeView.BorderWidth = 0;
 			templateCategoriesTreeView.HeadersVisible = false;
-			templateCategoriesTreeView.Model = templateCategoriesListStore;
+			//templateCategoriesTreeView.Model = templateCategoriesListStore;
 			templateCategoriesTreeView.SearchColumn = -1; // disable the interactive search
 			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
 			templateCategoriesScrolledWindow.Add (templateCategoriesTreeView);
@@ -203,7 +203,7 @@ namespace MonoDevelop.Ide.Projects
 			templatesTreeView.Accessible.SetTitle (GettextCatalog.GetString ("Project Templates"));
 			templatesTreeView.Accessible.Description = GettextCatalog.GetString ("Select the project template");
 			templatesTreeView.HeadersVisible = false;
-			templatesTreeView.Model = templatesListStore;
+			//templatesTreeView.Model = templatesListStore;
 			templatesTreeView.SearchColumn = -1; // disable the interactive search
 			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
 			templatesScrolledWindow.Add (templatesTreeView);

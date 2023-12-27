@@ -86,7 +86,7 @@ namespace MonoDevelop.Debugger
 
 			var label = new Label {
 				Text = GettextCatalog.GetString ("The debugger will step into code and hit exceptions in dependencies that aren’t considered part of your project, like packages and references."),
-				Font = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11).ToXwtFont (),
+				//Font = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11).ToXwtFont (),
 				TextColor = Ide.Gui.Styles.SecondaryTextColor,
 				MarginLeft = 30,
 				Wrap = WrapMode.Word,

@@ -72,10 +72,10 @@ namespace Mono.TextEditor
 		
 		protected override void OnDestroyed ()
 		{
-			layout = layout.Kill ();
-			informLayout = informLayout.Kill ();
-			fontDescription = fontDescription.Kill ();
-			fontInform = fontInform.Kill ();
+			//layout = layout.Kill ();
+			//informLayout = informLayout.Kill ();
+			//fontDescription = fontDescription.Kill ();
+			//fontInform = fontInform.Kill ();
 //			if (textGC != null) {
 //				textGC.Dispose ();
 //				textBgGC.Dispose ();

@@ -320,7 +320,7 @@ namespace MonoDevelop.Debugger
 			Selection.Changed += HandleSelectionChanged;
 			ResetColumnSizes ();
 
-			Pango.FontDescription newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+			//Pango.FontDescription newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 
 			liveIcon = ImageService.GetIcon ("md-live", IconSize.Menu);
 			noLiveIcon = liveIcon.WithAlpha (0.5);
@@ -768,19 +768,19 @@ namespace MonoDevelop.Debugger
 				compact = value;
 				Pango.FontDescription newFont;
 				if (compact) {
-					newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+					//newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 					valueCol.MaxWidth = 800;
 					crpViewer.Image = ImageService.GetIcon (Stock.Edit).WithSize (12,12);
 				} else {
-					newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale12);
+					//newFont = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale12);
 					valueCol.MaxWidth = int.MaxValue;
 				}
 				crtValue.Compact = compact;
 				typeCol.Visible = !compact;
-				crtExp.FontDesc = newFont;
-				crtValue.FontDesc = newFont;
-				crtType.FontDesc = newFont;
-				crpButton.FontDesc = newFont;
+				//crtExp.FontDesc = newFont;
+				//crtValue.FontDesc = newFont;
+				//crtType.FontDesc = newFont;
+				//crpButton.FontDesc = newFont;
 				ResetColumnSizes ();
 				AdjustColumnSizes ();
 			}

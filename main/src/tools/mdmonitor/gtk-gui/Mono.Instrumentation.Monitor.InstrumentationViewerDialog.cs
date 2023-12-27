@@ -122,9 +122,9 @@ namespace Mono.Instrumentation.Monitor
 			this.buttonSave.Relief = ((global::Gtk.ReliefStyle)(2));
 			this.buttonSave.Label = global::Mono.Unix.Catalog.GetString ("Save");
 			global::Gtk.Image w6 = new global::Gtk.Image ();
-			w6.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-save", global::Gtk.IconSize.Button);
-			this.buttonSave.Image = w6;
-			this.buttonsBox.Add (this.buttonSave);
+			// w6.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-save", global::Gtk.IconSize.Button);
+			// this.buttonSave.Image = w6;
+			// this.buttonsBox.Add (this.buttonSave);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.buttonsBox [this.buttonSave]));
 			w7.Position = 0;
 			w7.Expand = false;
@@ -137,9 +137,9 @@ namespace Mono.Instrumentation.Monitor
 			this.buttonSaveAs.Relief = ((global::Gtk.ReliefStyle)(2));
 			this.buttonSaveAs.Label = global::Mono.Unix.Catalog.GetString ("Copy");
 			global::Gtk.Image w8 = new global::Gtk.Image ();
-			w8.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-copy", global::Gtk.IconSize.Button);
-			this.buttonSaveAs.Image = w8;
-			this.buttonsBox.Add (this.buttonSaveAs);
+			// w8.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-copy", global::Gtk.IconSize.Button);
+			// this.buttonSaveAs.Image = w8;
+			// this.buttonsBox.Add (this.buttonSaveAs);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.buttonsBox [this.buttonSaveAs]));
 			w9.Position = 1;
 			w9.Expand = false;
@@ -152,9 +152,9 @@ namespace Mono.Instrumentation.Monitor
 			this.buttonDelete.Relief = ((global::Gtk.ReliefStyle)(2));
 			this.buttonDelete.Label = global::Mono.Unix.Catalog.GetString ("Delete");
 			global::Gtk.Image w10 = new global::Gtk.Image ();
-			w10.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Button);
-			this.buttonDelete.Image = w10;
-			this.buttonsBox.Add (this.buttonDelete);
+			//w10.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Button);
+			//this.buttonDelete.Image = w10;
+			//this.buttonsBox.Add (this.buttonDelete);
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.buttonsBox [this.buttonDelete]));
 			w11.Position = 2;
 			w11.Expand = false;

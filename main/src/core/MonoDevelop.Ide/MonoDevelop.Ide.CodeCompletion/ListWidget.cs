@@ -159,9 +159,9 @@ namespace MonoDevelop.Ide.CodeCompletion
 			if (noMatchFont != null)
 				noMatchFont.Dispose ();
 
-			itemFont = IdeServices.FontService.MonospaceFont.Copy ();
-			categoryFont = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
-			noMatchFont = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
+			//itemFont = IdeServices.FontService.MonospaceFont.Copy ();
+			//categoryFont = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
+			//noMatchFont = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
 
 			var newItemFontSize = itemFont.Size;
 			var newCategoryFontSize = categoryFont.Size;

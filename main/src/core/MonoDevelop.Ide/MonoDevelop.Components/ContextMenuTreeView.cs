@@ -25,11 +25,6 @@
 // THE SOFTWARE.
 using System;
 using MonoDevelop.Components.AtkCocoaHelper;
-#if GTK3
-using TreeModel = Gtk.ITreeModel;
-#else
-using TreeModel = Gtk.TreeModel;
-#endif
 
 namespace MonoDevelop.Components
 {
@@ -189,7 +184,7 @@ namespace MonoDevelop.Components
 			Selection.SelectFunction = DefaultTreeSelectFunction;
 		}
 
-		static bool DefaultTreeSelectFunction (Gtk.TreeSelection selection, TreeModel model, Gtk.TreePath path, bool selected)
+		static bool DefaultTreeSelectFunction (Gtk.TreeSelection selection, Gtk.ITreeModel model, Gtk.TreePath path, bool selected)
 		{
 			return true;
 		}

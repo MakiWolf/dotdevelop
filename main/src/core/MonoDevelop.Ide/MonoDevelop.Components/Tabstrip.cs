@@ -575,7 +575,7 @@ namespace MonoDevelop.Components
 				layout.Dispose ();
 
 			layout = PangoUtil.CreateLayout (parent);
-			layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
+			//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
 			layout.SetText (label ?? "");
 			layout.Alignment = Pango.Alignment.Center;
 			layout.GetPixelSize (out w, out h);
@@ -621,10 +621,10 @@ namespace MonoDevelop.Components
 
 			if (Active) {
 				cr.SetSourceColor (Styles.SubTabBarActiveTextColor.ToCairoColor ());
-				layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11, Pango.Weight.Bold);
+				//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11, Pango.Weight.Bold);
 			} else {
 				cr.SetSourceColor (Styles.SubTabBarTextColor.ToCairoColor ());
-				layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
+				//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11);
 			}
 
 			// Pango.Layout.Width is in pango units

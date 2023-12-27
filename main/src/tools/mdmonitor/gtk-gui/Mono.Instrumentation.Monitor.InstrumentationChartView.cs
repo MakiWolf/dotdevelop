@@ -81,9 +81,9 @@ namespace Mono.Instrumentation.Monitor
 			this.buttonZoomOut.Relief = ((global::Gtk.ReliefStyle)(2));
 			this.buttonZoomOut.Label = "";
 			global::Gtk.Image w3 = new global::Gtk.Image ();
-			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-zoom-out", global::Gtk.IconSize.Menu);
-			this.buttonZoomOut.Image = w3;
-			this.hboxChartBar.Add (this.buttonZoomOut);
+			// w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-zoom-out", global::Gtk.IconSize.Menu);
+			// this.buttonZoomOut.Image = w3;
+			// this.hboxChartBar.Add (this.buttonZoomOut);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxChartBar [this.buttonZoomOut]));
 			w4.PackType = ((global::Gtk.PackType)(1));
 			w4.Position = 2;
@@ -97,9 +97,9 @@ namespace Mono.Instrumentation.Monitor
 			this.buttonZoomIn.Relief = ((global::Gtk.ReliefStyle)(2));
 			this.buttonZoomIn.Label = "";
 			global::Gtk.Image w5 = new global::Gtk.Image ();
-			w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-zoom-in", global::Gtk.IconSize.Menu);
-			this.buttonZoomIn.Image = w5;
-			this.hboxChartBar.Add (this.buttonZoomIn);
+			// w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-zoom-in", global::Gtk.IconSize.Menu);
+			// this.buttonZoomIn.Image = w5;
+			// this.hboxChartBar.Add (this.buttonZoomIn);
 			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxChartBar [this.buttonZoomIn]));
 			w6.PackType = ((global::Gtk.PackType)(1));
 			w6.Position = 3;

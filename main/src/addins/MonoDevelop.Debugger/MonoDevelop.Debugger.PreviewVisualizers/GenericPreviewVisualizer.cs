@@ -69,7 +69,7 @@ namespace MonoDevelop.Debugger.PreviewVisualizers
 			
 			label = new Label ();
 			label.Text = value;
-			label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11));
+			//label.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11));
 			label.ModifyFg (StateType.Normal, col);
 			label.SetPadding (4, 4);
 

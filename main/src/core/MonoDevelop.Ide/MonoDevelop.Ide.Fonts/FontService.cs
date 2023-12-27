@@ -61,7 +61,7 @@ namespace MonoDevelop.Ide.Fonts
 			#pragma warning disable 618
 			defaultMonospaceFontName = desktopService.DefaultMonospaceFont;
 			defaultMonospaceFont = FontDescription.FromString (defaultMonospaceFontName);
-			defaultSansFontName = DesktopService.DefaultSansFont;
+			//defaultSansFontName = DesktopService.DefaultSansFont;
 			defaultSansFont = FontDescription.FromString (defaultSansFontName);
 			#pragma warning restore 618
 		}

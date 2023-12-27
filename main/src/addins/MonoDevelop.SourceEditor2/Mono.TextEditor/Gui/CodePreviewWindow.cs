@@ -73,9 +73,9 @@ namespace Mono.TextEditor
 			}
 			layout.Ellipsize = Pango.EllipsizeMode.End;
 
-			var geometry = Screen.GetUsableMonitorGeometry (Screen.GetMonitorAtWindow (ParentWindow));
-			maxWidth = geometry.Width * 2 / 5;
-			maxHeight = geometry.Height * 2 / 5;
+			// var geometry = Screen.GetUsableMonitorGeometry (Screen.GetMonitorAtWindow (ParentWindow));
+			// maxWidth = geometry.Width * 2 / 5;
+			// maxHeight = geometry.Height * 2 / 5;
 
 			layout.SetText ("n");
 			layout.GetPixelSize (out int _, out int lineHeight);
@@ -167,16 +167,16 @@ namespace Mono.TextEditor
 			base.OnDestroyed ();
 		}
 
-		protected override bool OnExposeEvent (EventExpose evnt)
-		{
-			using (var cr = CairoHelper.Create (GdkWindow)) {
-				CairoHelper.Region (cr, evnt.Region);
-				cr.Clip ();
-				cr.Translate (Allocation.X, Allocation.Y);
-				Draw (cr);
-			}
-			return true;
-		}
+		// protected override bool OnExposeEvent (EventExpose evnt)
+		// {
+		// 	using (var cr = CairoHelper.Create (GdkWindow)) {
+		// 		CairoHelper.Region (cr, evnt.Region);
+		// 		cr.Clip ();
+		// 		cr.Translate (Allocation.X, Allocation.Y);
+		// 		Draw (cr);
+		// 	}
+		// 	return true;
+		// }
 
 		void Draw (Cairo.Context cr)
 		{

@@ -162,14 +162,14 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			Sensitive = false;
 
 			List<Task> saveTasks = new List<Task> ();
-			tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
-				var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
-				if (window == null)
-					return false;
-				if ((bool)tsFiles.GetValue (iter, 1))
-					saveTasks.Add (doc.Save ());
-				return false;
-			});
+			// tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
+			// 	var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
+			// 	if (window == null)
+			// 		return false;
+			// 	if ((bool)tsFiles.GetValue (iter, 1))
+			// 		saveTasks.Add (doc.Save ());
+			// 	return false;
+			// });
 
 			try {
 				await Task.WhenAll (saveTasks);
@@ -183,13 +183,13 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 
 		void Quit (object o, EventArgs e)
 		{
-			tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
-				var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
-				if (window == null)
-					return false;
-				window.ViewContent.DiscardChanges ();
-				return false;
-			});
+			//tsFiles.Foreach (delegate (ITreeModel model, TreePath path, TreeIter iter) {
+				//var window = tsFiles.GetValue (iter, 2) as SdiWorkspaceWindow;
+				//if (window == null)
+				//	return false;
+				//window.ViewContent.DiscardChanges ();
+				//return false;
+			//});
 			Respond (Gtk.ResponseType.Ok);
 			Hide ();
 		}

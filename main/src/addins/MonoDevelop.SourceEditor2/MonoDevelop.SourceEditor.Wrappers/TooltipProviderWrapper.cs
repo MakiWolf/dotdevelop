@@ -157,10 +157,10 @@ namespace MonoDevelop.SourceEditor.Wrappers
 			lastItem = null;
 		}
 
-		public override bool TryCloseTooltipWindow (Xwt.WindowFrame tipWindow, Ide.Editor.TooltipCloseReason reason)
-		{
-			return provider.TryCloseTooltipWindow (tipWindow, reason);
-		}
+		// public override bool TryCloseTooltipWindow (Xwt.WindowFrame tipWindow, Ide.Editor.TooltipCloseReason reason)
+		// {
+		// 	return provider.TryCloseTooltipWindow (tipWindow, reason);
+		// }
 		#endregion
 	}
 }

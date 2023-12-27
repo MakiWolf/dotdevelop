@@ -124,7 +124,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 				}
 				Monodoc.Node n = (Monodoc.Node)store.GetValue (iter, 1);
 				
-				IdeApp.HelpOperations.ShowHelp (n.PublicUrl);
+				//IdeApp.HelpOperations.ShowHelp (n.PublicUrl);
 			}
 		}
 

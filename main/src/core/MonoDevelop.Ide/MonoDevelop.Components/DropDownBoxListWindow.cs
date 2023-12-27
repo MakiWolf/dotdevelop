@@ -613,7 +613,7 @@ namespace MonoDevelop.Components
 					layout.Dispose ();
 				layout = new Pango.Layout (PangoContext);
 				layout.Wrap = Pango.WrapMode.Char;
-				layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+				//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 				CalcRowHeight ();
 				CalcVisibleRows ();
 			}

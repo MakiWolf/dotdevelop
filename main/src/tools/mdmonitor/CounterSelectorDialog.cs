@@ -41,7 +41,7 @@ namespace Mono.Instrumentation.Monitor
 		{
 			this.Build ();
 			
-			HasSeparator = false;
+			//HasSeparator = false;
 			store = new TreeStore (typeof(bool), typeof(string), typeof(CounterCategory), typeof(Counter), typeof(bool));
 			treeCounters.Model = store;
 			

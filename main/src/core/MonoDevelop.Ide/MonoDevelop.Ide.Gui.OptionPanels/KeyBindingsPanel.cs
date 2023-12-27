@@ -1031,69 +1031,69 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
 //				}
 //			}
 
-							HashSet<Command> bindingConflicts;
-							if (keyBindingsPanel.conflicts.TryGetValue (key, out bindingConflicts) && bindingConflicts.Contains (Command)) {
-								bgColor = Styles.KeyBindingsPanel.KeyConflictBackgroundColor.ToCairoColor ();
-								fgColor = Styles.KeyBindingsPanel.KeyConflictForegroundColor.ToCairoColor ();
-							} else if (keyBindingsPanel.duplicates.ContainsKey (key)) {
-								bgColor = Styles.KeyBindingsPanel.KeyDuplicateBackgroundColor.ToCairoColor ();
-								fgColor = Styles.KeyBindingsPanel.KeyDuplicateForegroundColor.ToCairoColor ();
-							} else {
-								bgColor = Styles.KeyBindingsPanel.KeyBackgroundColor.ToCairoColor ();
-								fgColor = Styles.KeyBindingsPanel.KeyForegroundColor.ToCairoColor ();
-							}
+			// 				HashSet<Command> bindingConflicts;
+			// 				if (keyBindingsPanel.conflicts.TryGetValue (key, out bindingConflicts) && bindingConflicts.Contains (Command)) {
+			// 					bgColor = Styles.KeyBindingsPanel.KeyConflictBackgroundColor.ToCairoColor ();
+			// 					fgColor = Styles.KeyBindingsPanel.KeyConflictForegroundColor.ToCairoColor ();
+			// 				} else if (keyBindingsPanel.duplicates.ContainsKey (key)) {
+			// 					bgColor = Styles.KeyBindingsPanel.KeyDuplicateBackgroundColor.ToCairoColor ();
+			// 					fgColor = Styles.KeyBindingsPanel.KeyDuplicateForegroundColor.ToCairoColor ();
+			// 				} else {
+			// 					bgColor = Styles.KeyBindingsPanel.KeyBackgroundColor.ToCairoColor ();
+			// 					fgColor = Styles.KeyBindingsPanel.KeyForegroundColor.ToCairoColor ();
+			// 				}
 
-							layout.SetText (KeyBindingManager.BindingToDisplayLabel (key, false));
-							layout.FontDescription = KeySymbolFont;
-							layout.GetPixelSize (out w, out h);
+			// 				layout.SetText (KeyBindingManager.BindingToDisplayLabel (key, false));
+			// 				layout.FontDescription = KeySymbolFont;
+			// 				layout.GetPixelSize (out w, out h);
 
-							int buttonWidth = w + (2 * KeyHPadding);
-							int buttonHeight = h + (2 * KeyVPadding);
-							int x = cell_area.X + xpad;
-							double y = cell_area.Y + ((cell_area.Height / 2) - (buttonHeight / 2));
+			// 				int buttonWidth = w + (2 * KeyHPadding);
+			// 				int buttonHeight = h + (2 * KeyVPadding);
+			// 				int x = cell_area.X + xpad;
+			// 				double y = cell_area.Y + ((cell_area.Height / 2) - (buttonHeight / 2));
 
-							cr.RoundedRectangle (x, y, buttonWidth, buttonHeight, KeyBgRadius);
-							cr.LineWidth = 1;
-							cr.SetSourceColor (bgColor);
-							cr.FillPreserve ();
-							cr.SetSourceColor (bgColor);
-							cr.Stroke ();
+			// 				cr.RoundedRectangle (x, y, buttonWidth, buttonHeight, KeyBgRadius);
+			// 				cr.LineWidth = 1;
+			// 				cr.SetSourceColor (bgColor);
+			// 				cr.FillPreserve ();
+			// 				cr.SetSourceColor (bgColor);
+			// 				cr.Stroke ();
 
-							cr.SetSourceColor (fgColor);
-							cr.MoveTo (x + KeyHPadding, y + KeyVPadding);
-							cr.ShowLayout (layout);
-							xpad += buttonWidth + Spacing;
-						}
-					}
-				}
-			}
+			// 				cr.SetSourceColor (fgColor);
+			// 				cr.MoveTo (x + KeyHPadding, y + KeyVPadding);
+			// 				cr.ShowLayout (layout);
+			// 				xpad += buttonWidth + Spacing;
+			// 			}
+			// 		}
+			// 	}
+			// }
 
-			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-			{
-				base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-				x_offset = y_offset = 0;
-				if (string.IsNullOrEmpty (Text)) {
-					width = 0;
-					height = 0;
-					return;
-				}
+			// public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+			// {
+			// 	base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+			// 	x_offset = y_offset = 0;
+			// 	if (string.IsNullOrEmpty (Text)) {
+			// 		width = 0;
+			// 		height = 0;
+			// 		return;
+			// 	}
 
-				using (var layout = new Pango.Layout (widget.PangoContext)) {
-					height = 0;
-					width = (int)Xpad;
-					int w, h, buttonWidth;
-					foreach (var key in Text.Split (new char [] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {
-						layout.SetText (KeyBindingManager.BindingToDisplayLabel (key, false));
-						layout.FontDescription = KeySymbolFont;
-						layout.GetPixelSize (out w, out h);
-						if (height == 0)
-							height = h + (KeyVPadding * 2) + 1;
+			// 	using (var layout = new Pango.Layout (widget.PangoContext)) {
+			// 		height = 0;
+			// 		width = (int)Xpad;
+			// 		int w, h, buttonWidth;
+			// 		foreach (var key in Text.Split (new char [] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {
+			// 			layout.SetText (KeyBindingManager.BindingToDisplayLabel (key, false));
+			// 			layout.FontDescription = KeySymbolFont;
+			// 			layout.GetPixelSize (out w, out h);
+			// 			if (height == 0)
+			// 				height = h + (KeyVPadding * 2) + 1;
 
-						buttonWidth = w + (2 * KeyHPadding);
-						width += buttonWidth + Spacing;
-					}
-				}
-			}
+			// 			buttonWidth = w + (2 * KeyHPadding);
+			// 			width += buttonWidth + Spacing;
+			// 		}
+			// 	}
+			// }
 //			protected override void OnDestroyed()
 //			{
 //				keyBindingsPanel = null;

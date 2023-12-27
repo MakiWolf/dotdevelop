@@ -40,6 +40,7 @@
     <Compile Include="MockShellDocumentView.cs" />
     <Compile Include="MockShellDocumentToolbar.cs" />
     <Compile Include="MockViewBuilder.cs" />
+  <Reference Include="gio-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\core\MonoDevelop.Core\MonoDevelop.Core.csproj">

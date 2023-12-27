@@ -275,7 +275,7 @@ namespace MonoDevelop.Ide.CodeCompletion
 			foreColor = Styles.PopoverWindow.DefaultTextColor.ToCairoColor ();
 			headLabel.ModifyFg (StateType.Normal, foreColor.ToGdkColor ());
 			headLabel.FontDescription = IdeServices.FontService.GetFontDescription ("Editor").CopyModified (Styles.FontScale11);
-			Theme.Font = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11).ToXwtFont ();
+			//Theme.Font = IdeServices.FontService.SansFont.CopyModified (Styles.FontScale11).ToXwtFont ();
 			Theme.ShadowColor = Styles.PopoverWindow.ShadowColor;
 			#pragma warning disable CS0612 // Type or member is obsolete
 			if (this.Visible)

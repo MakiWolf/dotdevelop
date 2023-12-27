@@ -123,17 +123,17 @@ namespace MonoDevelop.Ide.Projects
 //			}
 //		}
 
-			using (var ctx = CairoHelper.Create (window)) {
-				using (var layout = new Pango.Layout (widget.PangoContext)) {
+		// 	using (var ctx = CairoHelper.Create (window)) {
+		// 		using (var layout = new Pango.Layout (widget.PangoContext)) {
 
-					Rectangle iconRect = DrawIcon (ctx, widget, cell_area, flags);
+		// 			Rectangle iconRect = DrawIcon (ctx, widget, cell_area, flags);
 
-					DrawTemplateNameText (window, widget, cell_area, iconRect, flags);
-					if (RenderRecentTemplate)
-						DrawCategoryText (ctx, widget, cell_area, iconRect, flags);
-				}
-			}
-		}
+		// 			DrawTemplateNameText (window, widget, cell_area, iconRect, flags);
+		// 			if (RenderRecentTemplate)
+		// 				DrawCategoryText (ctx, widget, cell_area, iconRect, flags);
+		// 		}
+		// 	}
+		// }
 
 		
 //		void DrawTemplateCategoryText (Drawable window, Widget widget, Rectangle cell_area, CellRendererState flags)

@@ -327,17 +327,17 @@ namespace MonoDevelop.Components.MainToolbar
 				}
 
 
-				using (var font = IdeServices.FontService.SansFont.CopyModified (MonoDevelop.Ide.Gui.Styles.FontScale11)) {
-					errors.Visible = ec > 0;
-					errors.ModifyFont (font);
-					errors.Text = ec.ToString ();
-					errorImage.Visible = ec > 0;
+				// using (var font = IdeServices.FontService.SansFont.CopyModified (MonoDevelop.Ide.Gui.Styles.FontScale11)) {
+				// 	errors.Visible = ec > 0;
+				// 	errors.ModifyFont (font);
+				// 	errors.Text = ec.ToString ();
+				// 	errorImage.Visible = ec > 0;
 
-					warnings.Visible = wc > 0;
-					warnings.ModifyFont (font);
-					warnings.Text = wc.ToString ();
-					warningImage.Visible = wc > 0;
-				}
+				// 	warnings.Visible = wc > 0;
+				// 	warnings.ModifyFont (font);
+				// 	warnings.Text = wc.ToString ();
+				// 	warningImage.Visible = wc > 0;
+				// }
 
 				ebox.Visible = ec > 0 || wc > 0;
 

@@ -391,7 +391,7 @@ namespace MonoDevelop.Components.PropertyGrid
 			descTextView.Editable = false;
 			descTextView.LeftMargin = 5;
 			descTextView.RightMargin = 5;
-			descTextView.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11));
+			//descTextView.ModifyFont (IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11));
 			
 			textScroll.Add (descTextView);
 			

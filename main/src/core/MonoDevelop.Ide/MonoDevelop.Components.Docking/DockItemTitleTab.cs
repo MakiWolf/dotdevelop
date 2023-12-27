@@ -195,10 +195,10 @@ namespace MonoDevelop.Components.Docking
 			}
 
 			if (IsRealized && labelWidget?.Visible == true) {
-				var font = IdeServices.FontService.SansFont.CopyModified (null, Pango.Weight.Bold);
-				font.AbsoluteSize = Pango.Units.FromPixels (11);
-				labelWidget.ModifyFont (font);
-				labelWidget.ModifyText (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
+				//var font = IdeServices.FontService.SansFont.CopyModified (null, Pango.Weight.Bold);
+				//font.AbsoluteSize = Pango.Units.FromPixels (11);
+				//labelWidget.ModifyFont (font);
+				//labelWidget.ModifyText (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
 			}
 
 			var r = WidthRequest;

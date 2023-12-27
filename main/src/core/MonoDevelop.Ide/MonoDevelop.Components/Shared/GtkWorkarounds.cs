@@ -32,17 +32,17 @@ using MonoDevelop.Core;
 // Anything that only needs to be in MonoDevelop.Ide should go into the other part.
 namespace MonoDevelop.Components
 {
-	public static partial class GtkWorkarounds
-	{
-		public static void Terminate ()
-		{
-#if MAC
-			var app = Mac.Messaging.IntPtr_objc_msgSend (
-				ObjCRuntime.Class.GetHandle ("NSApplication"),
-				ObjCRuntime.Selector.GetHandle ("sharedApplication"));
+// 	public static partial class GtkWorkarounds
+// 	{
+// 		public static void Terminate ()
+// 		{
+// #if MAC
+// 			var app = Mac.Messaging.IntPtr_objc_msgSend (
+// 				ObjCRuntime.Class.GetHandle ("NSApplication"),
+// 				ObjCRuntime.Selector.GetHandle ("sharedApplication"));
 
-			Mac.Messaging.void_objc_msgSend_IntPtr (app, ObjCRuntime.Selector.GetHandle ("terminate:"), IntPtr.Zero);
-#endif
-		}
-	}
+// 			Mac.Messaging.void_objc_msgSend_IntPtr (app, ObjCRuntime.Selector.GetHandle ("terminate:"), IntPtr.Zero);
+// #endif
+// 		}
+// 	}
 }

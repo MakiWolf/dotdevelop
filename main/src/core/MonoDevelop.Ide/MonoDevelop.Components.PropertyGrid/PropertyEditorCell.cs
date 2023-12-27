@@ -73,7 +73,7 @@ namespace MonoDevelop.Components.PropertyGrid
 			}
 			layout = new Pango.Layout (container.PangoContext);
 			layout.Width = -1;
-			layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+			//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 			
 			this.context = context;
 			Initialize ();

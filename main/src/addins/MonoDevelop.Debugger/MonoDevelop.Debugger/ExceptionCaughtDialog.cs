@@ -320,12 +320,12 @@ widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
 
 		void Expander_Activated (object sender, EventArgs e)
 		{
-			if (expanderProperties.Expanded && expanderStacktrace.Expanded)
-				paned.PositionSet = false;
-			else if (expanderStacktrace.Expanded)
-				paned.Position = paned.MaxPosition;
-			else
-				paned.Position = paned.MinPosition;
+			// if (expanderProperties.Expanded && expanderStacktrace.Expanded)
+			// 	paned.PositionSet = false;
+			// else if (expanderStacktrace.Expanded)
+			// 	paned.Position = paned.MaxPosition;
+			// else
+			// 	paned.Position = paned.MinPosition;
 		}
 
 //		static void StackFrameLayout (CellLayout layout, CellRenderer cr, ITreeModel model, TreeIter iter)
@@ -624,11 +624,11 @@ widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
 				}
 			});
 			exception.Changed += delegate {
-				Application.Invoke ((o, args) => {
-					innerExceptionsStore.EmitRowChanged (innerExceptionsStore.GetPath (iter), iter);
-					updateInnerExceptions ();
-					innerExceptionsTreeView.ExpandRow (innerExceptionsStore.GetPath (iter), true);
-				});
+				// Application.Invoke ((o, args) => {
+				// 	innerExceptionsStore.EmitRowChanged (innerExceptionsStore.GetPath (iter), iter);
+				// 	updateInnerExceptions ();
+				// 	innerExceptionsTreeView.ExpandRow (innerExceptionsStore.GetPath (iter), true);
+				// });
 			};
 			updateInnerExceptions ();
 		}
@@ -746,11 +746,11 @@ widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
 
 		void ExceptionChanged (object sender, EventArgs e)
 		{
-			Application.Invoke ((o, args) => {
-				if (hadInnerException != HasInnerException ())
-					Build ();
-				UpdateDisplay ();
-			});
+			// Application.Invoke ((o, args) => {
+			// 	if (hadInnerException != HasInnerException ())
+			// 		Build ();
+			// 	UpdateDisplay ();
+			// });
 		}
 
 		void OnlyShowMyCodeToggled (object sender, EventArgs e)
@@ -1139,11 +1139,11 @@ widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
 			vb.PackStart (closeButton, false, false, 0);
 			box.PackStart (vb, false, false, 0);
 
-			exception.Changed += delegate {
-				Application.Invoke ((o, args) => {
-					LoadData ();
-				});
-			};
+			// exception.Changed += delegate {
+			// 	Application.Invoke ((o, args) => {
+			// 		LoadData ();
+			// 	});
+			// };
 			LoadData ();
 
 			var eb = new PopoverWidget ();

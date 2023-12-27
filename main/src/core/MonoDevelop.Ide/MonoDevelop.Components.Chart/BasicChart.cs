@@ -769,7 +769,7 @@ namespace MonoDevelop.Components.Chart
 		{
 			int max = 0;
 			Pango.Layout layout = new Pango.Layout (this.PangoContext);
-			layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+			//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 			
 			double start = GetStart (ad);
 			double end = GetEnd (ad);
