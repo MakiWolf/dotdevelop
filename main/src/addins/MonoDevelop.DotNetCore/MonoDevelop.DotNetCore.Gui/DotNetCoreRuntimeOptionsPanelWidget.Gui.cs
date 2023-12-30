@@ -57,7 +57,7 @@ namespace MonoDevelop.DotNetCore.Gui
 			targetFrameworkLabel.UseUnderline = true;
 			mainHBox.PackStart (targetFrameworkLabel, false, true, 0);
 
-			runtimeVersionCombo = ComboBox.NewText ();
+			//runtimeVersionCombo = ComboBox.NewText ();
 			runtimeVersionCombo.Name = "runtimeVersionCombo";
 			mainHBox.PackStart (runtimeVersionCombo, false, false, 0);
 			mainVBox.PackStart (mainHBox, false, false, 0);

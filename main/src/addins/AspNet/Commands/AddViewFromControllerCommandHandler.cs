@@ -74,8 +74,8 @@ namespace MonoDevelop.AspNet.Commands
 						return;
 
 					string ext = ".cshtml";
-					if (dialog.ActiveViewEngine == "Aspx")
-						ext = dialog.IsPartialView ? ".ascx" : ".aspx";
+					//if (dialog.ActiveViewEngine == "Aspx")
+						//ext = dialog.IsPartialView ? ".ascx" : ".aspx";
 
 					if (!System.IO.Directory.Exists (path))
 						System.IO.Directory.CreateDirectory (path);
@@ -99,7 +99,7 @@ namespace MonoDevelop.AspNet.Commands
 
 				if (dialog.HasMaster) {
 					host.IsViewContentPage = true;
-					host.ContentPlaceholder = dialog.PrimaryPlaceHolder;
+					//host.ContentPlaceholder = dialog.PrimaryPlaceHolder;
 					host.MasterPage = dialog.MasterFile;
 					host.ContentPlaceHolders = dialog.ContentPlaceHolders;
 				}
@@ -108,10 +108,10 @@ namespace MonoDevelop.AspNet.Commands
 				else
 					host.IsViewPage = true;
 
-				if (dialog.IsStronglyTyped)
-					host.ViewDataTypeString = dialog.ViewDataTypeString;
+				//if (dialog.IsStronglyTyped)
+				//	host.ViewDataTypeString = dialog.ViewDataTypeString;
 
-				host.ProcessTemplate (dialog.TemplateFile, outputFile);
+				//host.ProcessTemplate (dialog.TemplateFile, outputFile);
 				MonoDevelop.TextTemplating.TextTemplatingService.ShowTemplateHostErrors (host.Errors);
 
 			} finally {

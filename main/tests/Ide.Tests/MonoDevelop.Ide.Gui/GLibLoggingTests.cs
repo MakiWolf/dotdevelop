@@ -48,10 +48,10 @@ namespace MonoDevelop.Ide.Gui
 
 				LoggingService.RegisterCrashReporter (crashReporter);
 
-				GLib.Log.Write ("Gtk", GLib.LogLevelFlags.Warning, "{0}", "should not be captured");
+				//GLib.Log.Write ("Gtk", GLib.LogLevelFlags.Warning, "{0}", "should not be captured");
 				Assert.IsNull (crashReporter.LastException);
 
-				GLib.Log.Write ("Gtk", GLib.LogLevelFlags.Critical, "{0}", "critical should be captured");
+				//GLib.Log.Write ("Gtk", GLib.LogLevelFlags.Critical, "{0}", "critical should be captured");
 				Assert.That (crashReporter.LastException.Message, Contains.Substring ("critical should be captured"));
 				Assert.That (crashReporter.LastException.Source, Is.Not.Null);
 
@@ -85,7 +85,7 @@ namespace MonoDevelop.Ide.Gui
 
 					LoggingService.AddLogger (logger);
 					try {
-						GLib.Log.Write ("Gtk", glibLevel, "{0}: should be captured", glibLevel);
+						//GLib.Log.Write ("Gtk", glibLevel, "{0}: should be captured", glibLevel);
 						var (_, message) = logger.LogMessages.Single (x => x.Level == coreLevel);
 						AssertGLibStackTrace (message);
 					} finally {

@@ -119,12 +119,12 @@ namespace MonoDevelop.VersionControl.Views
 			QueueResize ();
 		}
 
-		protected override void OnSizeRequested (ref Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
-			requisition.Width = width;
-			requisition.Height = height;
-		}
+		// protected override void OnSizeRequested (ref Requisition requisition)
+		// {
+		// 	base.OnSizeRequested (ref requisition);
+		// 	requisition.Width = width;
+		// 	requisition.Height = height;
+		// }
 
 		int px, py;
 		protected override bool OnMotionNotifyEvent (EventMotion evnt)
@@ -155,162 +155,162 @@ namespace MonoDevelop.VersionControl.Views
 		{
 			var layout = new Pango.Layout (PangoContext);
 			layout.SingleParagraphMode = false;
-			layout.FontDescription = IdeServices.FontService.MonospaceFont;
+			//layout.FontDescription = IdeServices.FontService.MonospaceFont;
 			layout.SetText (text);
 			return layout;
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose e)
-		{
-			var window = e.Window;
-			var widget = this;
-			ClearAccessibleLines ();
-			using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
-				int w, maxy;
-				window.GetSize (out w, out maxy);
-				var cell_area = Allocation;
-//				if (DrawLeft) {
-//					cell_area.Width += cell_area.X - leftSpace;
-//					cell_area.X = leftSpace;
-//				}
+// 		protected override bool OnExposeEvent (Gdk.EventExpose e)
+// 		{
+// 			var window = e.Window;
+// 			var widget = this;
+// 			ClearAccessibleLines ();
+// 			using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
+// 				int w, maxy;
+// 				window.GetSize (out w, out maxy);
+// 				var cell_area = Allocation;
+// //				if (DrawLeft) {
+// //					cell_area.Width += cell_area.X - leftSpace;
+// //					cell_area.X = leftSpace;
+// //				}
 
-				cell_area.Width -= RightPadding;
+// 				cell_area.Width -= RightPadding;
 
-				window.DrawRectangle (widget.Style.BaseGC (Gtk.StateType.Normal), true, cell_area.X, cell_area.Y, cell_area.Width - 1, cell_area.Height);
-				if (lines == null)
-					return true;
-				Gdk.GC normalGC = widget.Style.TextGC (StateType.Normal);
-				Gdk.GC removedGC = new Gdk.GC (window);
-				removedGC.Copy (normalGC);
-				removedGC.RgbFgColor = Styles.LogView.DiffRemoveBackgroundColor.AddLight (-0.3).ToGdkColor ();
-				Gdk.GC addedGC = new Gdk.GC (window);
-				addedGC.Copy (normalGC);
-				addedGC.RgbFgColor = Styles.LogView.DiffAddBackgroundColor.AddLight (-0.3).ToGdkColor ();
-				Gdk.GC infoGC = new Gdk.GC (window);
-				infoGC.Copy (normalGC);
-				infoGC.RgbFgColor = widget.Style.Text (StateType.Normal).AddLight (0.2);
+// 				window.DrawRectangle (widget.Style.BaseGC (Gtk.StateType.Normal), true, cell_area.X, cell_area.Y, cell_area.Width - 1, cell_area.Height);
+// 				if (lines == null)
+// 					return true;
+// 				Gdk.GC normalGC = widget.Style.TextGC (StateType.Normal);
+// 				Gdk.GC removedGC = new Gdk.GC (window);
+// 				removedGC.Copy (normalGC);
+// 				removedGC.RgbFgColor = Styles.LogView.DiffRemoveBackgroundColor.AddLight (-0.3).ToGdkColor ();
+// 				Gdk.GC addedGC = new Gdk.GC (window);
+// 				addedGC.Copy (normalGC);
+// 				addedGC.RgbFgColor = Styles.LogView.DiffAddBackgroundColor.AddLight (-0.3).ToGdkColor ();
+// 				Gdk.GC infoGC = new Gdk.GC (window);
+// 				infoGC.Copy (normalGC);
+// 				infoGC.RgbFgColor = widget.Style.Text (StateType.Normal).AddLight (0.2);
 
-				Cairo.Context ctx = CairoHelper.Create (window);
+// 				Cairo.Context ctx = CairoHelper.Create (window);
 
-				// Rendering is done in two steps:
-				// 1) Get a list of blocks to render
-				// 2) render the blocks
+// 				// Rendering is done in two steps:
+// 				// 1) Get a list of blocks to render
+// 				// 2) render the blocks
 
-				var blocks = CalculateBlocks (maxy, cell_area.Y + 2);
+// 				var blocks = CalculateBlocks (maxy, cell_area.Y + 2);
 
-				// Now render the blocks
+// 				// Now render the blocks
 
-				// The y position of the highlighted line
-				int selectedLineRowTop = -1;
+// 				// The y position of the highlighted line
+// 				int selectedLineRowTop = -1;
 
-				BlockInfo lastCodeSegmentStart = null;
-				BlockInfo lastCodeSegmentEnd = null;
+// 				BlockInfo lastCodeSegmentStart = null;
+// 				BlockInfo lastCodeSegmentEnd = null;
 
-				foreach (BlockInfo block in blocks) {
-					if (block.Type == BlockType.Info) {
-						// Finished drawing the content of a code segment. Now draw the segment border and label.
-						if (lastCodeSegmentStart != null)
-							DrawCodeSegmentBorder (infoGC, ctx, cell_area.X, cell_area.Width, lastCodeSegmentStart, lastCodeSegmentEnd, lines, widget, window);
-						lastCodeSegmentStart = block;
-					}
+// 				foreach (BlockInfo block in blocks) {
+// 					if (block.Type == BlockType.Info) {
+// 						// Finished drawing the content of a code segment. Now draw the segment border and label.
+// 						if (lastCodeSegmentStart != null)
+// 							DrawCodeSegmentBorder (infoGC, ctx, cell_area.X, cell_area.Width, lastCodeSegmentStart, lastCodeSegmentEnd, lines, widget, window);
+// 						lastCodeSegmentStart = block;
+// 					}
 
-					lastCodeSegmentEnd = block;
+// 					lastCodeSegmentEnd = block;
 
-					if (block.YEnd < 0)
-						continue;
+// 					if (block.YEnd < 0)
+// 						continue;
 
-					// Draw the block background
-					DrawBlockBg (ctx, cell_area.X + 1, cell_area.Width - 2, block);
+// 					// Draw the block background
+// 					DrawBlockBg (ctx, cell_area.X + 1, cell_area.Width - 2, block);
 
-					// Get all text for the current block
-					var sb = new StringBuilder ();
-					bool replaceFirst = false;
-					int subLine = 0;
-					for (int n = block.FirstLine; n <= block.LastLine; n++) {
-						string s = ProcessLine (lines [n]);
-						if (n > block.FirstLine)
-							sb.Append ('\n');
-						if ((block.Type == BlockType.Added || block.Type == BlockType.Removed) && s.Length > 0) {
-							sb.Append (' ');
-							sb.Append (s, 1, s.Length - 1);
-							replaceFirst = true;
-						} else
-							sb.Append (s);
-						int idx = 0, curIdx = 0;
-						while ((idx = s.IndexOf ('\n')) >= 0) {
-							var y1 = block.YStart + subLine * lineHeight;
-							if (y1 < cell_area.Bottom && y1 + lineHeight >= e.Area.Y && y1 < e.Area.Bottom)
-								AddAccessibleLine (cell_area.X + 2 + LeftPaddingBlock, y1, block.Type, block.FirstLine + n + subLine, ref replaceFirst, s.Substring (curIdx, idx));
-							subLine++;
-							curIdx = idx;
-						}
-						var y2 = block.YStart + subLine * lineHeight;
-						if (y2 < cell_area.Bottom && y2 + lineHeight >= e.Area.Y && y2 < e.Area.Bottom)
-							AddAccessibleLine (cell_area.X + 2 + LeftPaddingBlock, y2, block.Type, block.FirstLine + n + subLine, ref replaceFirst, curIdx > 0 ? s.Substring (curIdx) : s);
-						subLine++;
-					}
+// 					// Get all text for the current block
+// 					var sb = new StringBuilder ();
+// 					bool replaceFirst = false;
+// 					int subLine = 0;
+// 					for (int n = block.FirstLine; n <= block.LastLine; n++) {
+// 						string s = ProcessLine (lines [n]);
+// 						if (n > block.FirstLine)
+// 							sb.Append ('\n');
+// 						if ((block.Type == BlockType.Added || block.Type == BlockType.Removed) && s.Length > 0) {
+// 							sb.Append (' ');
+// 							sb.Append (s, 1, s.Length - 1);
+// 							replaceFirst = true;
+// 						} else
+// 							sb.Append (s);
+// 						int idx = 0, curIdx = 0;
+// 						while ((idx = s.IndexOf ('\n')) >= 0) {
+// 							var y1 = block.YStart + subLine * lineHeight;
+// 							if (y1 < cell_area.Bottom && y1 + lineHeight >= e.Area.Y && y1 < e.Area.Bottom)
+// 								AddAccessibleLine (cell_area.X + 2 + LeftPaddingBlock, y1, block.Type, block.FirstLine + n + subLine, ref replaceFirst, s.Substring (curIdx, idx));
+// 							subLine++;
+// 							curIdx = idx;
+// 						}
+// 						var y2 = block.YStart + subLine * lineHeight;
+// 						if (y2 < cell_area.Bottom && y2 + lineHeight >= e.Area.Y && y2 < e.Area.Bottom)
+// 							AddAccessibleLine (cell_area.X + 2 + LeftPaddingBlock, y2, block.Type, block.FirstLine + n + subLine, ref replaceFirst, curIdx > 0 ? s.Substring (curIdx) : s);
+// 						subLine++;
+// 					}
 
-					// Draw a special background for the selected line
-					if (px < 0) {
-						selectedLine = selectedLineRowTop = -1;
-					} else if (block.Type != BlockType.Info && px >= cell_area.X && py <= cell_area.Right && py >= block.YStart && py <= block.YEnd) {
-						int row = (py - block.YStart) / lineHeight;
-						double yrow = block.YStart + lineHeight * row;
-						double xrow = cell_area.X + LeftPaddingBlock;
-						int wrow = cell_area.Width - 1 - LeftPaddingBlock;
-						if (block.Type == BlockType.Added)
-							ctx.SetSourceColor (Styles.LogView.DiffAddBackgroundColor.AddLight (0.1).ToCairoColor ());
-						else if (block.Type == BlockType.Removed)
-							ctx.SetSourceColor (Styles.LogView.DiffRemoveBackgroundColor.AddLight (0.1).ToCairoColor ());
-						else {
-							ctx.SetSourceColor (Styles.LogView.DiffHighlightColor.ToCairoColor ());
-							xrow -= LeftPaddingBlock;
-							wrow += LeftPaddingBlock;
-						}
-						ctx.Rectangle (xrow, yrow, wrow, lineHeight);
-						ctx.Fill ();
-						selectedLine = block.SourceLineStart + row;
-						//						selctedPath = path;
-						selectedLineRowTop = (int)yrow;
-					}
+// 					// Draw a special background for the selected line
+// 					if (px < 0) {
+// 						selectedLine = selectedLineRowTop = -1;
+// 					} else if (block.Type != BlockType.Info && px >= cell_area.X && py <= cell_area.Right && py >= block.YStart && py <= block.YEnd) {
+// 						int row = (py - block.YStart) / lineHeight;
+// 						double yrow = block.YStart + lineHeight * row;
+// 						double xrow = cell_area.X + LeftPaddingBlock;
+// 						int wrow = cell_area.Width - 1 - LeftPaddingBlock;
+// 						if (block.Type == BlockType.Added)
+// 							ctx.SetSourceColor (Styles.LogView.DiffAddBackgroundColor.AddLight (0.1).ToCairoColor ());
+// 						else if (block.Type == BlockType.Removed)
+// 							ctx.SetSourceColor (Styles.LogView.DiffRemoveBackgroundColor.AddLight (0.1).ToCairoColor ());
+// 						else {
+// 							ctx.SetSourceColor (Styles.LogView.DiffHighlightColor.ToCairoColor ());
+// 							xrow -= LeftPaddingBlock;
+// 							wrow += LeftPaddingBlock;
+// 						}
+// 						ctx.Rectangle (xrow, yrow, wrow, lineHeight);
+// 						ctx.Fill ();
+// 						selectedLine = block.SourceLineStart + row;
+// 						//						selctedPath = path;
+// 						selectedLineRowTop = (int)yrow;
+// 					}
 
-					// Draw the line text. Ignore header blocks, since they are drawn as labels in DrawCodeSegmentBorder
+// 					// Draw the line text. Ignore header blocks, since they are drawn as labels in DrawCodeSegmentBorder
 
-					if (block.Type != BlockType.Info) {
-						layout.SetMarkup ("");
-						layout.SetText (sb.ToString ());
-						Gdk.GC gc;
-						switch (block.Type) {
-						case BlockType.Removed: gc = removedGC; break;
-						case BlockType.Added: gc = addedGC; break;
-						case BlockType.Info: gc = infoGC; break;
-						default: gc = normalGC; break;
-						}
-						window.DrawLayout (gc, cell_area.X + 2 + LeftPaddingBlock, block.YStart, layout);
-					}
+// 					if (block.Type != BlockType.Info) {
+// 						layout.SetMarkup ("");
+// 						layout.SetText (sb.ToString ());
+// 						Gdk.GC gc;
+// 						switch (block.Type) {
+// 						case BlockType.Removed: gc = removedGC; break;
+// 						case BlockType.Added: gc = addedGC; break;
+// 						case BlockType.Info: gc = infoGC; break;
+// 						default: gc = normalGC; break;
+// 						}
+// 						window.DrawLayout (gc, cell_area.X + 2 + LeftPaddingBlock, block.YStart, layout);
+// 					}
 
-					// Finally draw the change symbol at the left margin
+// 					// Finally draw the change symbol at the left margin
 
-					DrawChangeSymbol (ctx, widget, cell_area.X + 1, cell_area.Width - 2, block);
-				}
+// 					DrawChangeSymbol (ctx, widget, cell_area.X + 1, cell_area.Width - 2, block);
+// 				}
 
-				// Finish the drawing of the code segment
-				if (lastCodeSegmentStart != null)
-					DrawCodeSegmentBorder (infoGC, ctx, cell_area.X, cell_area.Width, lastCodeSegmentStart, lastCodeSegmentEnd, lines, widget, window);
+// 				// Finish the drawing of the code segment
+// 				if (lastCodeSegmentStart != null)
+// 					DrawCodeSegmentBorder (infoGC, ctx, cell_area.X, cell_area.Width, lastCodeSegmentStart, lastCodeSegmentEnd, lines, widget, window);
 
-				// Draw the source line number at the current selected line. It must be done at the end because it must
-				// be drawn over the source code text and segment borders.
-				if (selectedLineRowTop != -1)
-					DrawLineBox (normalGC, ctx, Allocation.Right - 4, selectedLineRowTop, selectedLine, widget, window);
+// 				// Draw the source line number at the current selected line. It must be done at the end because it must
+// 				// be drawn over the source code text and segment borders.
+// 				if (selectedLineRowTop != -1)
+// 					DrawLineBox (normalGC, ctx, Allocation.Right - 4, selectedLineRowTop, selectedLine, widget, window);
 
-				((IDisposable)ctx).Dispose ();
-				removedGC.Dispose ();
-				addedGC.Dispose ();
-				infoGC.Dispose ();
-			}
-			Accessible?.SetAccessibleChildren (accessibleLines.Select (l => l.Accessible).ToArray ());
-			return true;
-		}
+// 				((IDisposable)ctx).Dispose ();
+// 				removedGC.Dispose ();
+// 				addedGC.Dispose ();
+// 				infoGC.Dispose ();
+// 			}
+// 			Accessible?.SetAccessibleChildren (accessibleLines.Select (l => l.Accessible).ToArray ());
+// 			return true;
+// 		}
 
 		void AddAccessibleLine (int x, int y, BlockType blockType, int lineNumber, ref bool replaceFirst, string text)
 		{
@@ -431,65 +431,65 @@ namespace MonoDevelop.VersionControl.Views
 			Unchanged
 		}
 
-		void DrawCodeSegmentBorder (Gdk.GC gc, Cairo.Context ctx, double x, int width, BlockInfo firstBlock, BlockInfo lastBlock, string [] lines, Gtk.Widget widget, Gdk.Drawable window)
-		{
-			int shadowSize = 2;
-			int spacing = 4;
-			int bottomSpacing = (lineHeight - spacing) / 2;
+		// void DrawCodeSegmentBorder (Gdk.GC gc, Cairo.Context ctx, double x, int width, BlockInfo firstBlock, BlockInfo lastBlock, string [] lines, Gtk.Widget widget, Gdk.Drawable window)
+		// {
+		// 	int shadowSize = 2;
+		// 	int spacing = 4;
+		// 	int bottomSpacing = (lineHeight - spacing) / 2;
 
-			ctx.Rectangle (x + shadowSize + 0.5, firstBlock.YStart + bottomSpacing + spacing - shadowSize + 0.5, width - shadowSize * 2, shadowSize);
-			ctx.SetSourceColor (Styles.LogView.DiffBoxSplitterColor.ToCairoColor ());
-			ctx.LineWidth = 1;
-			ctx.Fill ();
+		// 	ctx.Rectangle (x + shadowSize + 0.5, firstBlock.YStart + bottomSpacing + spacing - shadowSize + 0.5, width - shadowSize * 2, shadowSize);
+		// 	ctx.SetSourceColor (Styles.LogView.DiffBoxSplitterColor.ToCairoColor ());
+		// 	ctx.LineWidth = 1;
+		// 	ctx.Fill ();
 
-			ctx.Rectangle (x + shadowSize + 0.5, lastBlock.YEnd + bottomSpacing + 0.5, width - shadowSize * 2, shadowSize);
-			ctx.SetSourceColor (Styles.LogView.DiffBoxSplitterColor.ToCairoColor ());
-			ctx.Fill ();
+		// 	ctx.Rectangle (x + shadowSize + 0.5, lastBlock.YEnd + bottomSpacing + 0.5, width - shadowSize * 2, shadowSize);
+		// 	ctx.SetSourceColor (Styles.LogView.DiffBoxSplitterColor.ToCairoColor ());
+		// 	ctx.Fill ();
 
-			ctx.Rectangle (x + 0.5, firstBlock.YStart + bottomSpacing + spacing + 0.5, width, lastBlock.YEnd - firstBlock.YStart - spacing);
-			ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
-			ctx.Stroke ();
+		// 	ctx.Rectangle (x + 0.5, firstBlock.YStart + bottomSpacing + spacing + 0.5, width, lastBlock.YEnd - firstBlock.YStart - spacing);
+		// 	ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
+		// 	ctx.Stroke ();
 
-			string text = lines [firstBlock.FirstLine].Replace ("@", "").Replace ("-", "");
-			text = "<span size='x-small'>" + text.Replace ("+", "</span><span size='small'>→</span><span size='x-small'> ") + "</span>";
+		// 	string text = lines [firstBlock.FirstLine].Replace ("@", "").Replace ("-", "");
+		// 	text = "<span size='x-small'>" + text.Replace ("+", "</span><span size='small'>→</span><span size='x-small'> ") + "</span>";
 
-			layout.SetText ("");
-			layout.SetMarkup (text);
-			int tw, th;
-			layout.GetPixelSize (out tw, out th);
-			th--;
+		// 	layout.SetText ("");
+		// 	layout.SetMarkup (text);
+		// 	int tw, th;
+		// 	layout.GetPixelSize (out tw, out th);
+		// 	th--;
 
-			int dy = (lineHeight - th) / 2;
+		// 	int dy = (lineHeight - th) / 2;
 
-			ctx.Rectangle (x + 2 + LeftPaddingBlock - 1 + 0.5, firstBlock.YStart + dy - 1 + 0.5, tw + 2, th + 2);
-			ctx.LineWidth = 1;
-			ctx.SetSourceColor (widget.Style.Base (StateType.Normal).ToCairoColor ());
-			ctx.FillPreserve ();
-			ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
-			ctx.Stroke ();
+		// 	ctx.Rectangle (x + 2 + LeftPaddingBlock - 1 + 0.5, firstBlock.YStart + dy - 1 + 0.5, tw + 2, th + 2);
+		// 	ctx.LineWidth = 1;
+		// 	ctx.SetSourceColor (widget.Style.Base (StateType.Normal).ToCairoColor ());
+		// 	ctx.FillPreserve ();
+		// 	ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
+		// 	ctx.Stroke ();
 
-			window.DrawLayout (gc, (int)(x + 2 + LeftPaddingBlock), firstBlock.YStart + dy, layout);
-		}
+		// 	window.DrawLayout (gc, (int)(x + 2 + LeftPaddingBlock), firstBlock.YStart + dy, layout);
+		// }
 
-		void DrawLineBox (Gdk.GC gc, Cairo.Context ctx, int right, int top, int line, Gtk.Widget widget, Gdk.Drawable window)
-		{
-			layout.SetText ("");
-			layout.SetMarkup ("<small>" + line.ToString () + "</small>");
-			int tw, th;
-			layout.GetPixelSize (out tw, out th);
-			th--;
+		// void DrawLineBox (Gdk.GC gc, Cairo.Context ctx, int right, int top, int line, Gtk.Widget widget, Gdk.Drawable window)
+		// {
+		// 	layout.SetText ("");
+		// 	layout.SetMarkup ("<small>" + line.ToString () + "</small>");
+		// 	int tw, th;
+		// 	layout.GetPixelSize (out tw, out th);
+		// 	th--;
 
-			int dy = (lineHeight - th) / 2;
+		// 	int dy = (lineHeight - th) / 2;
 
-			ctx.Rectangle (right - tw - 2 + 0.5, top + dy - 1 + 0.5, tw + 2, th + 2);
-			ctx.LineWidth = 1;
-			ctx.SetSourceColor (widget.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
-			ctx.FillPreserve ();
-			ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
-			ctx.Stroke ();
+		// 	ctx.Rectangle (right - tw - 2 + 0.5, top + dy - 1 + 0.5, tw + 2, th + 2);
+		// 	ctx.LineWidth = 1;
+		// 	ctx.SetSourceColor (widget.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
+		// 	ctx.FillPreserve ();
+		// 	ctx.SetSourceColor (Styles.LogView.DiffBoxBorderColor.ToCairoColor ());
+		// 	ctx.Stroke ();
 
-			window.DrawLayout (gc, right - tw - 1, top + dy, layout);
-		}
+		// 	window.DrawLayout (gc, right - tw - 1, top + dy, layout);
+		// }
 
 		void DrawBlockBg (Cairo.Context ctx, double x, int width, BlockInfo block)
 		{

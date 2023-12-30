@@ -42,7 +42,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			Modal = true;
 			foreach (VersionControlSystem vcs in VersionControlService.GetVersionControlSystems ()) {
 				if (vcs.IsInstalled) {
-					repCombo.AppendText (vcs.Name);
+					//repCombo.AppendText (vcs.Name);
 					systems.Add (vcs);
 				}
 			}
@@ -78,7 +78,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 				boxFolder.Visible = false;
 			}
 
-			repoContainer.SetFlag (WidgetFlags.NoWindow);
+			//repoContainer.SetFlag (WidgetFlags.NoWindow);
 			SetupAccessibility ();
 		}
 
@@ -210,7 +210,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 		protected virtual void OnButtonRemoveClicked(object sender, System.EventArgs e)
 		{
 			TreeIter iter;
-			TreeModel model;
+			ITreeModel model;
 			if (repoTree.Selection.GetSelected (out model, out iter)) {
 				VersionControlService.RemoveRepository (
 					(Repository) store.GetValue (iter, RepositoryCol));
@@ -236,7 +236,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 					VersionControlService.SaveConfiguration ();
 
 					TreeIter iter;
-					TreeModel model;
+					ITreeModel model;
 					if (repoTree.Selection.GetSelected (out model, out iter)) {
 						// Update values
 						store.SetValue (iter, RepoNameCol, rep.Name);
@@ -261,7 +261,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 		Repository GetSelectedRepository ()
 		{
 			TreeIter iter;
-			TreeModel model;
+			ITreeModel model;
 			if (repoTree.Selection.GetSelected (out model, out iter))
 				return (Repository) store.GetValue (iter, RepositoryCol);
 			return null;
@@ -336,7 +336,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 		void UpdateControls ()
 		{
 			TreeIter iter;
-			TreeModel model;
+			ITreeModel model;
 			if (repoTree.Selection.GetSelected (out model, out iter)) {
 				TreeIter piter;
 				if (!store.IterParent (out piter, iter)) {

@@ -37,9 +37,9 @@ namespace MonoDevelop.Refactoring.Rename
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.Refactoring.Rename.RenameItemDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
-			w1.Name = "dialog1_VBox";
-			w1.BorderWidth = ((uint)(2));
+			// global::Gtk.VBox w1 = this.VBox;
+			// w1.Name = "dialog1_VBox";
+			// w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
 			this.vbox = new global::Gtk.VBox ();
 			this.vbox.Name = "vbox";
@@ -126,17 +126,17 @@ namespace MonoDevelop.Refactoring.Rename
 			w9.Position = 3;
 			w9.Expand = false;
 			w9.Fill = false;
-			w1.Add (this.vbox);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox]));
-			w10.Position = 0;
-			w10.Expand = false;
-			w10.Fill = false;
+			//w1.Add (this.vbox);
+			// global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox]));
+			// w10.Position = 0;
+			// w10.Expand = false;
+			// w10.Fill = false;
 			// Internal child MonoDevelop.Refactoring.Rename.RenameItemDialog.ActionArea
-			global::Gtk.HButtonBox w11 = this.ActionArea;
-			w11.Name = "dialog1_ActionArea";
-			w11.Spacing = 10;
-			w11.BorderWidth = ((uint)(5));
-			w11.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			// global::Gtk.HButtonBox w11 = this.ActionArea;
+			// w11.Name = "dialog1_ActionArea";
+			// w11.Spacing = 10;
+			// w11.BorderWidth = ((uint)(5));
+			// w11.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -146,9 +146,9 @@ namespace MonoDevelop.Refactoring.Rename
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonCancel]));
-			w12.Expand = false;
-			w12.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonCancel]));
+			// w12.Expand = false;
+			// w12.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonPreview = new global::Gtk.Button ();
 			this.buttonPreview.CanFocus = true;
@@ -156,10 +156,10 @@ namespace MonoDevelop.Refactoring.Rename
 			this.buttonPreview.UseUnderline = true;
 			this.buttonPreview.Label = global::Mono.Unix.Catalog.GetString ("_Preview");
 			this.AddActionWidget (this.buttonPreview, 0);
-			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonPreview]));
-			w13.Position = 1;
-			w13.Expand = false;
-			w13.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonPreview]));
+			// w13.Position = 1;
+			// w13.Expand = false;
+			// w13.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -169,10 +169,10 @@ namespace MonoDevelop.Refactoring.Rename
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonOk]));
-			w14.Position = 2;
-			w14.Expand = false;
-			w14.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonOk]));
+			// w14.Position = 2;
+			// w14.Expand = false;
+			// w14.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

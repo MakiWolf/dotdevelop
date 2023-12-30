@@ -50,7 +50,7 @@ namespace MonoDevelop.DotNetCore.Gui
 			}
 
 			if (project.HasMultipleTargetFrameworks) {
-				runtimeVersionCombo.AppendText (GettextCatalog.GetString ("(Multiple Frameworks)"));
+				//runtimeVersionCombo.AppendText (GettextCatalog.GetString ("(Multiple Frameworks)"));
 				runtimeVersionCombo.Active = 0;
 				Sensitive = false;
 			} else {
@@ -76,11 +76,11 @@ namespace MonoDevelop.DotNetCore.Gui
 
 				for (int i = 0; i < knownFrameworks.Count; i++) {
 					var fx = knownFrameworks[i];
-					if (installedFrameworks.Any (f => f.Id == fx.Id)) {
-						runtimeVersionCombo.AppendText (fx.GetDisplayName ());
-					} else {
-						runtimeVersionCombo.AppendText (GettextCatalog.GetString ("{0} (Not installed)", fx.GetDisplayName ()));
-					}
+					//if (installedFrameworks.Any (f => f.Id == fx.Id)) {
+						//runtimeVersionCombo.AppendText (fx.GetDisplayName ());
+					//} else {
+						//runtimeVersionCombo.AppendText (GettextCatalog.GetString ("{0} (Not installed)", fx.GetDisplayName ()));
+					//}
 
 					if (project.TargetFramework.Id == fx.Id) {
 						runtimeVersionCombo.Active = i;

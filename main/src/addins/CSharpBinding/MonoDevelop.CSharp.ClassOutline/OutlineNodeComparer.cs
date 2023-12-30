@@ -48,7 +48,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 		const string DEFAULT_REGION_NAME = "region";
 		
 		AstAmbience ambience;
-		TreeModel model;
+		ITreeModel model;
 		OutlineSettings settings;
 		int[] groupTable;
 
@@ -61,7 +61,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 		/// <param name="model">
 		/// The model containing the nodes to compare.
 		/// </param>
-		public OutlineNodeComparer (AstAmbience ambience, OutlineSettings settings, TreeModel model)
+		public OutlineNodeComparer (AstAmbience ambience, OutlineSettings settings, ITreeModel model)
 		{
 			this.ambience = ambience;
 			this.settings = settings;
@@ -95,7 +95,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 		/// Zero if nodeA == nodeB.
 		/// Greater than zero if nodeA &gt; nodeB.
 		/// </returns>
-		public int CompareNodes (TreeModel model, TreeIter node1, TreeIter node2)
+		public int CompareNodes (ITreeModel model, TreeIter node1, TreeIter node2)
 		{
 			object o1 = model.GetValue (node1, 0);
 			object o2 = model.GetValue (node2, 0);

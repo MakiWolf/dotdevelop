@@ -76,14 +76,14 @@ type FSharpOutlineTextEditorExtension() as x =
                 let treeStore = new TreeStore(typedefof<obj>)
                 let padTreeView = new PadTreeView(treeStore, HeadersVisible = true)
 
-                let setCellIcon _column (cellRenderer : CellRenderer) (treeModel : TreeModel) (iter : TreeIter) =
+                let setCellIcon _column (cellRenderer : CellRenderer) (treeModel : ITreeModel) (iter : TreeIter) =
                     let pixRenderer = cellRenderer :?> CellRendererImage
                     treeModel.GetValue(iter, 0)
                     |> Option.tryCast<FSharpNavigationDeclarationItem[]>
                     |> Option.iter(fun item ->
                         pixRenderer.Image <- ImageService.GetIcon(ServiceUtils.getIcon item.[0], Gtk.IconSize.Menu))
 
-                let setCellText _column (cellRenderer : CellRenderer) (treeModel : TreeModel) (iter : TreeIter) =
+                let setCellText _column (cellRenderer : CellRenderer) (treeModel : ITreeModel) (iter : TreeIter) =
                     let renderer = cellRenderer :?> CellRendererText
                     treeModel.GetValue(iter, 0)
                     |> Option.tryCast<FSharpNavigationDeclarationItem[]>

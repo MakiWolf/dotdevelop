@@ -70,7 +70,7 @@ namespace MonoDevelop.AspNet.Commands
 			int templateIndex = 0;
 			foreach (string file in loadedTemplateList) {
 				string name = System.IO.Path.GetFileNameWithoutExtension (file);
-				templateCombo.AppendText (name);
+				//templateCombo.AppendText (name);
 				if (!foundEmptyTemplate) {
 					if (name == "Empty") {
 						templateCombo.Active = templateIndex;
@@ -101,7 +101,7 @@ namespace MonoDevelop.AspNet.Commands
 			AddActionWidget (buttonOk, ResponseType.Ok);
 
 			nameEntry = new Entry ();
-			templateCombo = ComboBox.NewText ();
+			//templateCombo = ComboBox.NewText ();
 
 			var nameLabel = new Label {
 				TextWithMnemonic = GettextCatalog.GetString ("_Name:"),
@@ -123,7 +123,7 @@ namespace MonoDevelop.AspNet.Commands
 			table.Attach (nameEntry, 1, 2, 0, 1, AttachOptions.Fill | AttachOptions.Expand, 0, 0, 0);
 			table.Attach (templateLabel, 0, 1, 1, 2, AttachOptions.Fill, 0, 0, 0);
 			table.Attach (templateCombo, 1, 2, 1, 2, AttachOptions.Fill | AttachOptions.Expand, 0, 0, 0);
-			VBox.PackStart (table);
+			//VBox.PackStart (table);
 
 			Child.ShowAll ();
 		}

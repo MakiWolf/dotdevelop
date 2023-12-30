@@ -168,7 +168,7 @@ namespace MonoDevelop.VersionControl.Views
 				editor.DoPopupMenu += (e) => ShowPopup (editor, e);
 				editor.Caret.PositionChanged += CaretPositionChanged;
 				editor.FocusInEvent += EditorFocusIn;
-				editor.SetScrollAdjustments (attachedHAdjustments[i], attachedVAdjustments[i]);
+				//editor.SetScrollAdjustments (attachedHAdjustments[i], attachedVAdjustments[i]);
 			}
 
 			if (editors.Length == 2) {
@@ -486,12 +486,12 @@ namespace MonoDevelop.VersionControl.Views
 		protected override void OnDestroyed ()
 		{
 			if (vAdjustment != null) {
-				vAdjustment.Destroy ();
-				hAdjustment.Destroy ();
-				foreach (var adj in attachedVAdjustments)
-					adj.Destroy ();
-				foreach (var adj in attachedHAdjustments)
-					adj.Destroy ();
+				//vAdjustment.Destroy ();
+				//hAdjustment.Destroy ();
+				//foreach (var adj in attachedVAdjustments)
+					//adj.Destroy ();
+				//foreach (var adj in attachedHAdjustments)
+					//adj.Destroy ();
 				vAdjustment = null;
 			}
 
@@ -569,11 +569,11 @@ namespace MonoDevelop.VersionControl.Views
 			return (dx != 0.0 || dy != 0.0) || base.OnScrollEvent (evnt);
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
-			children.ForEach (child => child.Child.SizeRequest ());
-		}
+		// protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		// {
+		// 	base.OnSizeRequested (ref requisition);
+		// 	children.ForEach (child => child.Child.SizeRequest ());
+		// }
 
 		internal static Cairo.Color GetColor (Hunk hunk, bool removeSide, bool border, double alpha)
 		{

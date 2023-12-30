@@ -1810,10 +1810,10 @@ namespace MonoDevelop.CSharp
 			);
 		}
 
-		Gdk.Color AlphaBlend (Cairo.Color color, Cairo.Color color2, double alpha)
-		{
-			return AlphaBlend ((Gdk.Color)((HslColor)color), (Gdk.Color)((HslColor)color2), alpha);
-		}
+		// Gdk.Color AlphaBlend (Cairo.Color color, Cairo.Color color2, double alpha)
+		// {
+		// 	return AlphaBlend ((Gdk.Color)((HslColor)color), (Gdk.Color)((HslColor)color2), alpha);
+		// }
 
 		HslColor AlphaBlend (HslColor color, HslColor color2, double alpha)
 		{

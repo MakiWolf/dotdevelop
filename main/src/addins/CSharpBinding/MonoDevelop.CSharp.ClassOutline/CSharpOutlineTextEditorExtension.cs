@@ -288,7 +288,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 			}
 		}
 
-		static void OutlineTreeIconFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		static void OutlineTreeIconFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var pixRenderer = (CellRendererImage)cell;
 			object o = model.GetValue (iter, 0);
@@ -299,7 +299,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 			}
 		}
 
-		static void OutlineTreeTextFunc (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		static void OutlineTreeTextFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var astAmbience = new AstAmbience (IdeApp.TypeSystemService.Workspace.Options);
 			var txtRenderer = (CellRendererText)cell;

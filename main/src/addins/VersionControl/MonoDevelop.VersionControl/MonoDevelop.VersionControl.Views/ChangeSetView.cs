@@ -175,12 +175,12 @@ namespace MonoDevelop.VersionControl.Views
 			
 			disposed = true;
 			if (colCommit != null) {
-				colCommit.Destroy ();
+				//colCommit.Destroy ();
 				colCommit = null;
 			}
 
 			if (this.diffRenderer != null) {
-				this.diffRenderer.Destroy ();
+				//this.diffRenderer.Destroy ();
 				this.diffRenderer = null;
 			}
 		}

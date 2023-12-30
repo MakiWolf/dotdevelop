@@ -433,7 +433,7 @@ namespace MonoDevelop.AnalysisCore.Gui
 							marker.IsVisible = currentResult.Underline;
 
 							if (currentResult.InspectionMark != IssueMarker.GrayOut) {
-								marker.Color = GetColor (editor, currentResult);
+								//marker.Color = GetColor (editor, currentResult);
 								marker.IsVisible &= currentResult.Level != DiagnosticSeverity.Hidden;
 							}
 							editor.AddMarker (marker);

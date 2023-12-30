@@ -36,12 +36,12 @@ namespace MonoDevelop.DotNetCore.Tests
 	[RequireService (typeof (TypeSystemService))]
 	class DotNetCoreTestBase : TestBase
 	{
-		protected override Task InternalSetup (string rootDir)
-		{
-			base.InternalSetup (rootDir);
-			Xwt.Application.Initialize (Xwt.ToolkitType.Gtk3);
-			DesktopService.Initialize ();
-		}
+		//protected override Task InternalSetup (string rootDir)
+		//{
+			//base.InternalSetup (rootDir);
+			//Xwt.Application.Initialize (Xwt.ToolkitType.Gtk3);
+			//DesktopService.Initialize ();
+		//}
 
 		/// <summary>
 		/// Clear all other package sources and just use the main NuGet package source when

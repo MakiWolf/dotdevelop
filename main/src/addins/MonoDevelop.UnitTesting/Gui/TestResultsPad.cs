@@ -141,7 +141,7 @@ namespace MonoDevelop.UnitTesting
 			book.Pack1 (sw, true, true);
 
 			outputView = new MonoDevelop.Ide.Gui.Components.LogView.LogTextView { Name = "testResultOutput" };
-			outputView.ModifyFont (IdeServices.FontService.MonospaceFont);
+			//outputView.ModifyFont (IdeServices.FontService.MonospaceFont);
 			outputView.Editable = false;
 			bold = new TextTag ("bold");
 			bold.Weight = Pango.Weight.Bold;
@@ -536,7 +536,7 @@ namespace MonoDevelop.UnitTesting
 				if (last == null)
 					return;
 
-				Gtk.TreeModel foo;
+				Gtk.ITreeModel foo;
 				Gtk.TreeIter iter;
 				if (!failuresTreeView.Selection.GetSelected (out foo, out iter))
 					return;
@@ -560,7 +560,7 @@ namespace MonoDevelop.UnitTesting
 					return;
 				var clipboard = Clipboard.Get (Gdk.Atom.Intern ("CLIPBOARD", false));
 
-				Gtk.TreeModel foo;
+				Gtk.ITreeModel foo;
 				Gtk.TreeIter iter;
 				if (!failuresTreeView.Selection.GetSelected (out foo, out iter))
 					return;
@@ -588,7 +588,7 @@ namespace MonoDevelop.UnitTesting
 			if (test != null) {
 				var last = test.GetLastResult ();
 
-				Gtk.TreeModel foo;
+				Gtk.ITreeModel foo;
 				Gtk.TreeIter iter;
 				if (!failuresTreeView.Selection.GetSelected (out foo, out iter)) {
 					info.Enabled = false;
@@ -671,7 +671,7 @@ namespace MonoDevelop.UnitTesting
 		
 		UnitTest GetSelectedTest ()
 		{
-			Gtk.TreeModel foo;
+			Gtk.ITreeModel foo;
 			Gtk.TreeIter iter;
 			if (!failuresTreeView.Selection.GetSelected (out foo, out iter))
 				return null;
@@ -744,9 +744,9 @@ namespace MonoDevelop.UnitTesting
 					int curLine = 1;
 					const int maxLineLength = 255;
 					const int maxLineNumber = 255;
-					sb.Append ("<span font='");
-					sb.Append (IdeServices.FontService.MonospaceFontName);
-					sb.Append ("'>");
+					//sb.Append ("<span font='");
+					//sb.Append (IdeServices.FontService.MonospaceFontName);
+					//sb.Append ("'>");
 					using (var sr = new StringReader (Escape(result.Message))) {
 						while (null != (curLineText = sr.ReadLine ())) {
 							if (curLineText == null) continue;

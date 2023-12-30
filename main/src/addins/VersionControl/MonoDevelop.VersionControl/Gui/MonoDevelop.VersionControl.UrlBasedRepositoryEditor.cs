@@ -39,9 +39,9 @@ namespace MonoDevelop.VersionControl
 			this.hbox1 = new global::Gtk.HBox ();
 			this.hbox1.Name = "hbox1";
 			// Container child hbox1.Gtk.Box+BoxChild
-			this.comboProtocol = global::Gtk.ComboBox.NewText ();
-			this.comboProtocol.Name = "comboProtocol";
-			this.hbox1.Add (this.comboProtocol);
+			// this.comboProtocol = global::Gtk.ComboBox.NewText ();
+			// this.comboProtocol.Name = "comboProtocol";
+			// this.hbox1.Add (this.comboProtocol);
 			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.comboProtocol]));
 			w1.Position = 0;
 			w1.Expand = false;

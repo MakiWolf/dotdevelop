@@ -60,19 +60,19 @@ namespace MonoDevelop.VersionControl.Git
 				if (MessageService.RunCustomDialog (dlg) != (int) Gtk.ResponseType.Ok)
 					return;
 
-				string remote = dlg.SelectedRemote;
-				string branch = dlg.SelectedRemoteBranch ?? repo.GetCurrentBranch ();
+				//string remote = dlg.SelectedRemote;
+				//string branch = dlg.SelectedRemoteBranch ?? repo.GetCurrentBranch ();
 
 				ProgressMonitor monitor = VersionControlService.GetProgressMonitor (GettextCatalog.GetString ("Pushing changes..."), VersionControlOperationType.Push);
-				Task.Run (async () => {
-					try {
-						await repo.PushAsync (monitor, remote, branch);
-					} catch (Exception ex) {
-						monitor.ReportError (ex.Message, ex);
-					} finally {
-						monitor.Dispose ();
-					}
-				});
+				// Task.Run (async () => {
+				// 	try {
+				// 		await repo.PushAsync (monitor, remote, branch);
+				// 	} catch (Exception ex) {
+				// 		monitor.ReportError (ex.Message, ex);
+				// 	} finally {
+				// 		monitor.Dispose ();
+				// 	}
+				// });
 			} finally {
 				dlg.Destroy ();
 				dlg.Dispose ();

@@ -958,12 +958,12 @@ namespace MonoDevelop.UnitTesting
 			GetNthPage (n).Hide ();
 		}
 		
-		protected override void OnSwitchPage (NotebookPage page, uint n)
-		{
-			base.OnSwitchPage (page, n);
-			if (!loadedPages.Contains (Page))
-				OnPageLoadRequired ();
-		}
+		// protected override void OnSwitchPage (NotebookPage page, uint n)
+		// {
+		// 	base.OnSwitchPage (page, n);
+		// 	if (!loadedPages.Contains (Page))
+		// 		OnPageLoadRequired ();
+		// }
 		
 		void OnPageLoadRequired ()
 		{
@@ -983,7 +983,7 @@ namespace MonoDevelop.UnitTesting
 		
 		public HeaderLabel ()
 		{
-			WidgetFlags |= WidgetFlags.NoWindow;
+			//WidgetFlags |= WidgetFlags.NoWindow;
 			layout = new Pango.Layout (this.PangoContext);
 		}
 		
@@ -1001,14 +1001,14 @@ namespace MonoDevelop.UnitTesting
 			set { padding = value; }
 		}
 		
-		protected override bool OnExposeEvent (Gdk.EventExpose args)
-		{
-			using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
-				gc.ClipRectangle = Allocation;
-				GdkWindow.DrawLayout (gc, padding, padding, layout);
-			}
-			return true;
-		}
+		// protected override bool OnExposeEvent (Gdk.EventExpose args)
+		// {
+		// 	using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
+		// 		gc.ClipRectangle = Allocation;
+		// 		GdkWindow.DrawLayout (gc, padding, padding, layout);
+		// 	}
+		// 	return true;
+		// }
 		protected override void OnDestroyed ()
 		{
 			if (layout != null) {

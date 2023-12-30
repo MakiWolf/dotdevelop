@@ -58,7 +58,7 @@ namespace MonoDevelop.AspNet.Commands
 		Button buttonCancel, buttonOk, masterButton;
 		Label placeholderLabel;
 		ComboBox viewEngineCombo, templateCombo;
-		ComboBoxEntry placeholderCombo, dataClassCombo;
+		//ComboBoxEntry placeholderCombo, dataClassCombo;
 		Entry nameEntry;
 		Entry masterEntry;
 		CheckButton partialCheck, stronglyTypedCheck, masterCheck;
@@ -76,7 +76,7 @@ namespace MonoDevelop.AspNet.Commands
 			var viewEngines = GetProperViewEngines ();
 			loadedTemplateList = new Dictionary<string, IList<string>> ();
 			foreach (var engine in viewEngines) {
-				viewEngineCombo.AppendText (engine);
+				//viewEngineCombo.AppendText (engine);
 				loadedTemplateList[engine] = aspFlavor.GetCodeTemplates ("AddView", engine);
 			}
 
@@ -88,7 +88,7 @@ namespace MonoDevelop.AspNet.Commands
 			if (project.Files.GetFile (siteMaster) != null)
 				masterEntry.Text = "~/Views/Shared/Site.master";
 			
-			placeholderCombo.Model = primaryPlaceholderStore;
+			//placeholderCombo.Model = primaryPlaceholderStore;
 			
 			UpdateTypePanelSensitivity (null, null);
 			UpdateMasterPanelSensitivity (null, null);
@@ -102,18 +102,18 @@ namespace MonoDevelop.AspNet.Commands
 			BorderWidth = 6;
 			Resizable = false;
 
-			VBox.Spacing = 6;
+			//VBox.Spacing = 6;
 
 			buttonCancel = new Button (Gtk.Stock.Cancel);
 			AddActionWidget (buttonCancel, ResponseType.Cancel);
 			buttonOk = new Button (Gtk.Stock.Ok);
 			AddActionWidget (buttonOk, ResponseType.Ok);
 
-			var table = new Table (3, 2, false) { ColumnSpacing = 6, RowSpacing = 6 };
+			//var table = new Table (3, 2, false) { ColumnSpacing = 6, RowSpacing = 6 };
 
 			nameEntry = new Entry { WidthRequest = 350 };
-			viewEngineCombo = ComboBox.NewText ();
-			templateCombo = ComboBox.NewText ();
+			//viewEngineCombo = ComboBox.NewText ();
+			//templateCombo = ComboBox.NewText ();
 
 			var nameLabel = new Label (GettextCatalog.GetString ("_Name")) {
 				MnemonicWidget = nameEntry,
@@ -131,14 +131,14 @@ namespace MonoDevelop.AspNet.Commands
 			const AttachOptions expandFill = AttachOptions.Expand | AttachOptions.Fill;
 			const AttachOptions fill = AttachOptions.Fill;
 
-			table.Attach (nameLabel,       0, 1, 0, 1, fill,       0, 0, 0);
-			table.Attach (nameEntry,       1, 2, 0, 1, expandFill, 0, 0, 0);
-			table.Attach (templateLabel,   0, 1, 1, 2, fill,       0, 0, 0);
-			table.Attach (templateCombo,   1, 2, 1, 2, expandFill, 0, 0, 0);
-			table.Attach (engineLabel,     0, 1, 2, 3, fill,       0, 0, 0);
-			table.Attach (viewEngineCombo, 1, 2, 2, 3, expandFill, 0, 0, 0);
+			//table.Attach (nameLabel,       0, 1, 0, 1, fill,       0, 0, 0);
+			//table.Attach (nameEntry,       1, 2, 0, 1, expandFill, 0, 0, 0);
+			//table.Attach (templateLabel,   0, 1, 1, 2, fill,       0, 0, 0);
+			//table.Attach (templateCombo,   1, 2, 1, 2, expandFill, 0, 0, 0);
+			//table.Attach (engineLabel,     0, 1, 2, 3, fill,       0, 0, 0);
+			//table.Attach (viewEngineCombo, 1, 2, 2, 3, expandFill, 0, 0, 0);
 
-			VBox.PackStart (table, false, false, 0);
+			//VBox.PackStart (table, false, false, 0);
 
 			var frame = new Frame (GettextCatalog.GetString ("Options")) { BorderWidth = 2 };
 			var optionsVBox = new VBox { Spacing = 6 };
@@ -155,16 +155,16 @@ namespace MonoDevelop.AspNet.Commands
 			stronglyTypedCheck = new CheckButton (GettextCatalog.GetString ("_Strongly typed")) { UseUnderline = true };
 			masterCheck = new CheckButton (GettextCatalog.GetString ("Has _master page or layout")) { UseUnderline = true };
 
-			dataClassCombo = ComboBoxEntry.NewText ();
+			//dataClassCombo = ComboBoxEntry.NewText ();
 			masterEntry = new Entry { WidthRequest = 250 };
-			placeholderCombo = ComboBoxEntry.NewText ();
+			//placeholderCombo = ComboBoxEntry.NewText ();
 			masterButton = new Button ("...");
 
-			optionsVBox.PackStart (partialCheck);
-			optionsVBox.PackStart (stronglyTypedCheck);
-			typePanel = WithLabelAndLeftPadding (dataClassCombo, GettextCatalog.GetString ("_Data class:"), true, 24);
-			optionsVBox.PackStart (typePanel);
-			optionsVBox.PackStart (masterCheck);
+			//optionsVBox.PackStart (partialCheck);
+			//optionsVBox.PackStart (stronglyTypedCheck);
+			//typePanel = WithLabelAndLeftPadding (dataClassCombo, GettextCatalog.GetString ("_Data class:"), true, 24);
+			//optionsVBox.PackStart (typePanel);
+			//optionsVBox.PackStart (masterCheck);
 
 
 			var masterLabel = new Label (GettextCatalog.GetString ("_File:")) {
@@ -173,24 +173,24 @@ namespace MonoDevelop.AspNet.Commands
 				UseUnderline = true
 			};
 
-			placeholderLabel = new Label (GettextCatalog.GetString ("P_rimary placeholder:")) {
-				MnemonicWidget = placeholderCombo,
-				Xalign = 0,
-				UseUnderline = true
-			};
+			// placeholderLabel = new Label (GettextCatalog.GetString ("P_rimary placeholder:")) {
+			// 	MnemonicWidget = placeholderCombo,
+			// 	Xalign = 0,
+			// 	UseUnderline = true
+			// };
 
 			var masterTable = new Table (2, 3, false) { RowSpacing = 6, ColumnSpacing = 6 };
 
 			masterTable.Attach (masterLabel,      0, 1, 0, 1, fill,       0, 0, 0);
 			masterTable.Attach (masterEntry,      1, 3, 0, 1, expandFill, 0, 0, 0);
 			masterTable.Attach (placeholderLabel, 0, 1, 1, 2, expandFill, 0, 0, 0);
-			masterTable.Attach (placeholderCombo, 1, 2, 1, 2, fill,       0, 0, 0);
+			//masterTable.Attach (placeholderCombo, 1, 2, 1, 2, fill,       0, 0, 0);
 			masterTable.Attach (masterButton,     2, 3, 1, 2, fill,       0, 0, 0);
 
 			masterPanel = new Alignment (0.5f, 0.5f, 1f, 1f) { LeftPadding = 24, Child = masterTable };
-			optionsVBox.PackStart (masterPanel);
+			//optionsVBox.PackStart (masterPanel);
 
-			VBox.PackStart (frame, false, false, 0);
+			//VBox.PackStart (frame, false, false, 0);
 
 			Child.ShowAll ();
 
@@ -199,11 +199,11 @@ namespace MonoDevelop.AspNet.Commands
 			nameEntry.Changed += Validate;
 			partialCheck.Toggled += UpdateMasterPanelSensitivity;
 			stronglyTypedCheck.Toggled += UpdateTypePanelSensitivity;
-			dataClassCombo.Changed += DataClassChanged;
+			//dataClassCombo.Changed += DataClassChanged;
 			masterCheck.Toggled += UpdateMasterPanelSensitivity;
 			masterEntry.Changed += MasterChanged;
 			masterButton.Clicked += ShowMasterSelectionDialog;
-			placeholderCombo.Changed += Validate;
+			//placeholderCombo.Changed += Validate;
 
 		}
 
@@ -216,7 +216,7 @@ namespace MonoDevelop.AspNet.Commands
 			};
 
 			var box = new HBox (false, 6);
-			box.PackStart (label);
+			//box.PackStart (label);
 			box.PackStart (w, true, true, 0);
 
 			return new Alignment (0.5f, 0.5f, 1f, 1f) { LeftPadding = leftPadding, Child = box };
@@ -257,9 +257,9 @@ namespace MonoDevelop.AspNet.Commands
 
 		void UpdateTemplateList ()
 		{
-			templateCombo.Model = templateStore[ActiveViewEngine];
-			oldEngine = ActiveViewEngine;
-			templateCombo.Active = 0;
+			// templateCombo.Model = templateStore[ActiveViewEngine];
+			// oldEngine = ActiveViewEngine;
+			// templateCombo.Active = 0;
 		}
 		
 		protected virtual void Validate (object sender, EventArgs e)
@@ -277,7 +277,7 @@ namespace MonoDevelop.AspNet.Commands
 			bool canHaveMaster = !IsPartialView;
 			masterCheck.Sensitive = canHaveMaster;
 			masterPanel.Sensitive = canHaveMaster && HasMaster;
-			placeholderLabel.Sensitive = placeholderCombo.Sensitive = masterPanel.Sensitive && ActiveViewEngine != "Razor";
+			//placeholderLabel.Sensitive = placeholderCombo.Sensitive = masterPanel.Sensitive && ActiveViewEngine != "Razor";
 			MasterChanged (null, null);
 			Validate ();
 		}
@@ -286,40 +286,40 @@ namespace MonoDevelop.AspNet.Commands
 		{
 			bool enabled = typePanel.Sensitive = stronglyTypedCheck.Active;
 
-			if (enabled && classDataProvider == null) {
-				classDataProvider = new TypeDataProvider ();
-				await classDataProvider.GetTypes (project);
-				dataClassStore = new ListStore (typeof (string));
-				foreach (var item in classDataProvider.TypeNamesList)
-					dataClassStore.AppendValues (item);
-				dataClassCombo.Model = dataClassStore;
-				if (classDataProvider.TypeNamesList.Count > 0)
-					dataClassCombo.Active = 0;
-			}
+			// if (enabled && classDataProvider == null) {
+			// 	classDataProvider = new TypeDataProvider ();
+			// 	await classDataProvider.GetTypes (project);
+			// 	dataClassStore = new ListStore (typeof (string));
+			// 	foreach (var item in classDataProvider.TypeNamesList)
+			// 		dataClassStore.AppendValues (item);
+			// 	dataClassCombo.Model = dataClassStore;
+			// 	if (classDataProvider.TypeNamesList.Count > 0)
+			// 		dataClassCombo.Active = 0;
+			// }
 
 			Validate ();
 		}
 		
-		public override void Dispose ()
-		{
-			Destroy ();
-			base.Dispose ();
-		}
+		// public override void Dispose ()
+		// {
+		// 	Destroy ();
+		// 	base.Dispose ();
+		// }
 		
 		public bool IsValid ()
 		{
 			if (!IsValidIdentifier (ViewName))
 				return false;
 
-			if (!IsPartialView && HasMaster && ActiveViewEngine != "Razor") {
-				if (String.IsNullOrEmpty (MasterFile) || !File.Exists (aspFlavor.VirtualToLocalPath (oldMaster, null)))
-					return false;
-				//PrimaryPlaceHolder can be empty
-				//Layout Page can be empty in Razor Views - it's usually set in _ViewStart.cshtml file
-			}
+			// if (!IsPartialView && HasMaster && ActiveViewEngine != "Razor") {
+			// 	if (String.IsNullOrEmpty (MasterFile) || !File.Exists (aspFlavor.VirtualToLocalPath (oldMaster, null)))
+			// 		return false;
+			// 	//PrimaryPlaceHolder can be empty
+			// 	//Layout Page can be empty in Razor Views - it's usually set in _ViewStart.cshtml file
+			// }
 			
-			if (IsStronglyTyped && String.IsNullOrEmpty(ViewDataTypeString))
-			    return false;
+			// if (IsStronglyTyped && String.IsNullOrEmpty(ViewDataTypeString))
+			//     return false;
 			
 			return true;
 		}
@@ -332,25 +332,25 @@ namespace MonoDevelop.AspNet.Commands
 		protected virtual void ShowMasterSelectionDialog (object sender, EventArgs e)
 		{
 			string pattern, title;
-			if (ActiveViewEngine == "Razor") {
-				pattern = "*.cshtml";
-				title = GettextCatalog.GetString ("Select a Layout file...");
-			} else {
-				pattern = "*.master";
-				title = GettextCatalog.GetString ("Select a Master Page...");
-			}
-			var dialog = new MonoDevelop.Ide.Projects.ProjectFileSelectorDialog (project, null, pattern)
-			{
-				Title = title,
-				TransientFor = this,
-			};
-			try {
-				if (MessageService.RunCustomDialog (dialog) == (int) ResponseType.Ok)
-					masterEntry.Text = aspFlavor.LocalToVirtualPath (dialog.SelectedFile.FilePath);
-			} finally {
-				dialog.Destroy ();
-				dialog.Dispose ();
-			}
+			// if (ActiveViewEngine == "Razor") {
+			// 	pattern = "*.cshtml";
+			// 	title = GettextCatalog.GetString ("Select a Layout file...");
+			// } else {
+			// 	pattern = "*.master";
+			// 	title = GettextCatalog.GetString ("Select a Master Page...");
+			// }
+			// var dialog = new MonoDevelop.Ide.Projects.ProjectFileSelectorDialog (project, null, pattern)
+			// {
+			// 	Title = title,
+			// 	TransientFor = this,
+			// };
+			// try {
+			// 	if (MessageService.RunCustomDialog (dialog) == (int) ResponseType.Ok)
+			// 		masterEntry.Text = aspFlavor.LocalToVirtualPath (dialog.SelectedFile.FilePath);
+			// } finally {
+			// 	dialog.Destroy ();
+			// 	dialog.Dispose ();
+			// }
 		}
 		
 		protected virtual async void MasterChanged (object sender, EventArgs e)
@@ -371,22 +371,22 @@ namespace MonoDevelop.AspNet.Commands
 			
 			var pd = await IdeApp.TypeSystemService.ParseFile (project, realPath) as WebFormsParsedDocument;
 			
-			if (pd != null) {
-				try {
-					ContentPlaceHolders.AddRange (pd.XDocument.GetAllPlaceholderIds ());
+			// if (pd != null) {
+			// 	try {
+			// 		ContentPlaceHolders.AddRange (pd.XDocument.GetAllPlaceholderIds ());
 					
-					for (int i = 0; i < ContentPlaceHolders.Count; i++) {
-						string placeholder = ContentPlaceHolders[i];
-						primaryPlaceholderStore.AppendValues (placeholder);
+			// 		for (int i = 0; i < ContentPlaceHolders.Count; i++) {
+			// 			string placeholder = ContentPlaceHolders[i];
+			// 			primaryPlaceholderStore.AppendValues (placeholder);
 						
-						if (placeholder.Contains ("main") || placeholder.Contains ("Main") 
-							|| placeholder.Contains ("content") || placeholder.Contains ("Content"))
-							placeholderCombo.Active = i;
-					}
-				} catch (Exception ex) {
-					LoggingService.LogError ("Unhandled exception getting master regions for '" + realPath + "'", ex);
-				}
-			}
+			// 			if (placeholder.Contains ("main") || placeholder.Contains ("Main") 
+			// 				|| placeholder.Contains ("content") || placeholder.Contains ("Content"))
+			// 				placeholderCombo.Active = i;
+			// 		}
+			// 	} catch (Exception ex) {
+			// 		LoggingService.LogError ("Unhandled exception getting master regions for '" + realPath + "'", ex);
+			// 	}
+			// }
 			
 			Validate ();
 		}
@@ -395,10 +395,10 @@ namespace MonoDevelop.AspNet.Commands
 		{
 			if (String.IsNullOrEmpty (oldEngine))
 				return;
-			if (oldEngine != ActiveViewEngine) {
-				UpdateTemplateList ();
-				UpdateMasterPanelSensitivity (null, null);
-			}
+			// if (oldEngine != ActiveViewEngine) {
+			// 	UpdateTemplateList ();
+			// 	UpdateMasterPanelSensitivity (null, null);
+			// }
 		}
 
 		protected virtual void DataClassChanged (object sender, EventArgs e)
@@ -408,17 +408,17 @@ namespace MonoDevelop.AspNet.Commands
 		
 		#region Public properties
 		
-		public Type ViewDataType {
-			get {
-				return dataClassCombo.Active >= 0 ? (Type)classDataProvider.TypesList[dataClassCombo.Active] : System.Type.GetType(dataClassCombo.ActiveText, false);
-			}
-		}
+		// public Type ViewDataType {
+		// 	get {
+		// 		return dataClassCombo.Active >= 0 ? (Type)classDataProvider.TypesList[dataClassCombo.Active] : System.Type.GetType(dataClassCombo.ActiveText, false);
+		// 	}
+		// }
 
-		public string ViewDataTypeString {
-			get {
-				return dataClassCombo.ActiveText;
-			}
-		}
+		// public string ViewDataTypeString {
+		// 	get {
+		// 		return dataClassCombo.ActiveText;
+		// 	}
+		// }
 		
 		public string MasterFile {
 			get {
@@ -432,21 +432,21 @@ namespace MonoDevelop.AspNet.Commands
 			}
 		}
 		
-		public string PrimaryPlaceHolder {
-			get {
-				return placeholderCombo.ActiveText;
-			}
-		}
+		// public string PrimaryPlaceHolder {
+		// 	get {
+		// 		return placeholderCombo.ActiveText;
+		// 	}
+		// }
 		
 		public List<string> ContentPlaceHolders {
 			get; private set;
 		}
 		
-		public string TemplateFile {
-			get {
-				return loadedTemplateList[ActiveViewEngine][templateCombo.Active];
-			}
-		}
+		// public string TemplateFile {
+		// 	get {
+		// 		return loadedTemplateList[ActiveViewEngine][templateCombo.Active];
+		// 	}
+		// }
 		
 		public string ViewName {
 			get {
@@ -465,9 +465,9 @@ namespace MonoDevelop.AspNet.Commands
 			get { return stronglyTypedCheck.Active; }
 		}
 
-		public string ActiveViewEngine {
-			get { return viewEngineCombo.ActiveText; }
-		}
+		// public string ActiveViewEngine {
+		// 	get { return viewEngineCombo.ActiveText; }
+		// }
 		
 		#endregion
 

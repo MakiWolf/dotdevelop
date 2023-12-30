@@ -95,10 +95,10 @@ namespace MonoDevelop.Packaging.Gui
 
 		void PackageIdTextInserted (object o, TextInsertedArgs args)
 		{
-			if (args.Text.IndexOf ('\r') >= 0) {
-				var textBox = (Entry)o;
-				textBox.Text = textBox.Text.Replace ("\r", string.Empty);
-			}
+			// if (args.Text.IndexOf ('\r') >= 0) {
+			// 	var textBox = (Entry)o;
+			// 	textBox.Text = textBox.Text.Replace ("\r", string.Empty);
+			// }
 		}
 
 		void PackageIdTextBoxChanged (object sender, EventArgs e)
@@ -131,13 +131,13 @@ namespace MonoDevelop.Packaging.Gui
 			wizardPage.Description = packageDescriptionTextBox.Text;
 		}
 
-		public override void Dispose ()
-		{
-			Dispose (idTooltip);
-			Dispose (backgroundImage);
+		// public override void Dispose ()
+		// {
+		// 	Dispose (idTooltip);
+		// 	Dispose (backgroundImage);
 
-			base.Dispose ();
-		}
+		// 	base.Dispose ();
+		// }
 
 		void Dispose (IDisposable disposable)
 		{

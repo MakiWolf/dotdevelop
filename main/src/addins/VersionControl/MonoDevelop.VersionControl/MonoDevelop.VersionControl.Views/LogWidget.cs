@@ -87,49 +87,49 @@ namespace MonoDevelop.VersionControl.Views
 				set;
 			}
 
-			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-			{
-				x_offset = y_offset = 0;
-				width = 16;
-				height = cell_area.Height;
-			}
+			// public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+			// {
+			// 	x_offset = y_offset = 0;
+			// 	width = 16;
+			// 	height = cell_area.Height;
+			// }
 
-			protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-			{
-				using (Cairo.Context cr = Gdk.CairoHelper.Create (window)) {
-					cr.LineWidth = 2.0;
-					double center_x = cell_area.X + Math.Round ((double) (cell_area.Width / 2d));
-					double center_y = cell_area.Y + Math.Round ((double) (cell_area.Height / 2d));
-					cr.Arc (center_x, center_y, 5, 0, 2 * Math.PI);
-					var state = StateType.Normal;
-					if (!base.Sensitive)
-						state = StateType.Insensitive;
-					else if (flags.HasFlag (CellRendererState.Selected)) {
-						if (widget.HasFocus)
-							state = StateType.Selected;
-						else
-							state = StateType.Active;
-					}
-					else if (flags.HasFlag (CellRendererState.Prelit))
-						state = StateType.Prelight;
-					else if (widget.State == StateType.Insensitive)
-						state = StateType.Insensitive;
+			// protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+			// {
+			// 	using (Cairo.Context cr = Gdk.CairoHelper.Create (window)) {
+			// 		cr.LineWidth = 2.0;
+			// 		double center_x = cell_area.X + Math.Round ((double) (cell_area.Width / 2d));
+			// 		double center_y = cell_area.Y + Math.Round ((double) (cell_area.Height / 2d));
+			// 		cr.Arc (center_x, center_y, 5, 0, 2 * Math.PI);
+			// 		var state = StateType.Normal;
+			// 		if (!base.Sensitive)
+			// 			state = StateType.Insensitive;
+			// 		else if (flags.HasFlag (CellRendererState.Selected)) {
+			// 			if (widget.HasFocus)
+			// 				state = StateType.Selected;
+			// 			else
+			// 				state = StateType.Active;
+			// 		}
+			// 		else if (flags.HasFlag (CellRendererState.Prelit))
+			// 			state = StateType.Prelight;
+			// 		else if (widget.State == StateType.Insensitive)
+			// 			state = StateType.Insensitive;
 
-					cr.SetSourceColor (widget.Style.Text (state).ToCairoColor ());
-					cr.Stroke ();
-					if (!FirstNode) {
-						cr.MoveTo (center_x, cell_area.Y - 2);
-						cr.LineTo (center_x, center_y - 5);
-						cr.Stroke ();
-					}
+			// 		cr.SetSourceColor (widget.Style.Text (state).ToCairoColor ());
+			// 		cr.Stroke ();
+			// 		if (!FirstNode) {
+			// 			cr.MoveTo (center_x, cell_area.Y - 2);
+			// 			cr.LineTo (center_x, center_y - 5);
+			// 			cr.Stroke ();
+			// 		}
 
-					if (!LastNode) {
-						cr.MoveTo (center_x, cell_area.Y + cell_area.Height + 2);
-						cr.LineTo (center_x, center_y + 5);
-						cr.Stroke ();
-					}
-				}
-			}
+			// 		if (!LastNode) {
+			// 			cr.MoveTo (center_x, cell_area.Y + cell_area.Height + 2);
+			// 			cr.LineTo (center_x, center_y + 5);
+			// 			cr.Stroke ();
+			// 		}
+			// 	}
+			// }
 		}
 
 		public LogWidget (VersionControlDocumentInfo info)
@@ -226,7 +226,7 @@ namespace MonoDevelop.VersionControl.Views
 			colChangedFile.Title = GettextCatalog.GetString ("File");
 			colChangedFile.PackStart (crp, false);
 			colChangedFile.PackStart (crt, true);
-			colChangedFile.SetCellDataFunc (crp, HandleNodeCellDataFunc);
+			//colChangedFile.SetCellDataFunc (crp, HandleNodeCellDataFunc);
 			colChangedFile.AddAttribute (crt, "text", 3);
 			treeviewFiles.AppendColumn (colChangedFile);
 
@@ -289,14 +289,14 @@ namespace MonoDevelop.VersionControl.Views
 			Ide.Gui.Styles.Changed += HandleStylesChanged;
 		}
 
-		static void HandleNodeCellDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		{
-			var cri = (CellRendererImage)cell;
-			var image = tree_model.GetValue (iter, 2) as Xwt.Drawing.Image;
-			cri.Visible = image != null;
-			if (image != null)
-				cri.Image = image;
-		}
+		// static void HandleNodeCellDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+		// {
+		// 	var cri = (CellRendererImage)cell;
+		// 	var image = tree_model.GetValue (iter, 2) as Xwt.Drawing.Image;
+		// 	cri.Visible = image != null;
+		// 	if (image != null)
+		// 		cri.Image = image;
+		// }
 
 		[GLib.ConnectBeforeAttribute]
 		void LabelRevision_ButtonPressEvent (object o, ButtonPressEventArgs args)
@@ -583,7 +583,7 @@ namespace MonoDevelop.VersionControl.Views
 
 		protected override void OnDestroyed ()
 		{
-			IsDestroyed = true;
+			//IsDestroyed = true;
 			selectionCancellationTokenSource.Cancel ();
 
 			treeviewFiles.Selection.Changed -= SetDiff;
@@ -617,15 +617,15 @@ namespace MonoDevelop.VersionControl.Views
 			var revision = (Revision)model.GetValue (iter, 0);
 			// Grab today's day and the start of tomorrow's day to make Today/Yesterday calculations.
 			var now = DateTime.Now;
-			var age = new DateTime (now.Year, now.Month, now.Day).AddDays(1) - rev.Time;
-			if (age.Days >= 0 && age.Days < 1) { // Check whether it's a commit that's less than a day away. Also discard future commits.
-				day = GettextCatalog.GetString ("Today");
-			} else if (age.Days < 2) { // Check whether it's a commit from yesterday.
-				day = GettextCatalog.GetString ("Yesterday");
-			} else {
-				day = rev.Time.ToShortDateString ();
-			}
-			renderer.Text = string.Format ("{0} {1:HH:mm}", day, rev.Time);
+			// var age = new DateTime (now.Year, now.Month, now.Day).AddDays(1) - rev.Time;
+			// if (age.Days >= 0 && age.Days < 1) { // Check whether it's a commit that's less than a day away. Also discard future commits.
+			// 	day = GettextCatalog.GetString ("Today");
+			// } else if (age.Days < 2) { // Check whether it's a commit from yesterday.
+			// 	day = GettextCatalog.GetString ("Yesterday");
+			// } else {
+			// 	day = rev.Time.ToShortDateString ();
+			// }
+			//renderer.Text = string.Format ("{0} {1:HH:mm}", day, rev.Time);
 		}	
 		
 		static void GraphFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
@@ -777,8 +777,8 @@ namespace MonoDevelop.VersionControl.Views
 			selectionCancellationTokenSource = new CancellationTokenSource ();
 			var token = selectionCancellationTokenSource.Token;
 			Task.Run (async () => await info.Repository.GetRevisionChangesAsync (d, token)).ContinueWith (result => {
-				if (IsDestroyed)
-					return;
+				//if (IsDestroyed)
+				//	return;
 				changedpathstore.Clear ();
 				revertButton.GetNativeWidget<Gtk.Widget> ().Sensitive = revertToButton.GetNativeWidget<Gtk.Widget> ().Sensitive = true;
 				Gtk.TreeIter selectIter = Gtk.TreeIter.Zero;

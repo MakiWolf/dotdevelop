@@ -98,60 +98,60 @@ namespace MonoDevelop.VersionControl.Views
 				return base.OnButtonPressEvent (evnt);
 			}
 
-			protected override bool OnButtonReleaseEvent (EventButton evnt)
-			{
-				button &= ~evnt.Button;
-				return base.OnButtonReleaseEvent (evnt);
-			}
+			// protected override bool OnButtonReleaseEvent (EventButton evnt)
+			// {
+			// 	button &= ~evnt.Button;
+			// 	return base.OnButtonReleaseEvent (evnt);
+			// }
 
-			protected override bool OnExposeEvent (Gdk.EventExpose e)
-			{
-				if (widget.LeftDiff == null)
-					return true;
-				var adj = widget.vAdjustment;
+			// protected override bool OnExposeEvent (Gdk.EventExpose e)
+			// {
+			// 	if (widget.LeftDiff == null)
+			// 		return true;
+			// 	var adj = widget.vAdjustment;
 
-				var diff = useLeftDiff ? widget.LeftDiff : widget.RightDiff;
+			// 	var diff = useLeftDiff ? widget.LeftDiff : widget.RightDiff;
 
-				using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
-					cr.LineWidth = 1;
-					double curY = 0;
+			// 	using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
+			// 		cr.LineWidth = 1;
+			// 		double curY = 0;
 
-					foreach (var hunk in diff) {
-						double y, count;
-						if (paintInsert) {
-							y = hunk.InsertStart / (double)editor.LineCount;
-							count = hunk.Inserted / (double)editor.LineCount;
-						} else {
-							y = hunk.RemoveStart / (double)editor.LineCount;
-							count = hunk.Removed / (double)editor.LineCount;
-						}
+			// 		foreach (var hunk in diff) {
+			// 			double y, count;
+			// 			if (paintInsert) {
+			// 				y = hunk.InsertStart / (double)editor.LineCount;
+			// 				count = hunk.Inserted / (double)editor.LineCount;
+			// 			} else {
+			// 				y = hunk.RemoveStart / (double)editor.LineCount;
+			// 				count = hunk.Removed / (double)editor.LineCount;
+			// 			}
 
-						double start = y * Allocation.Height;
-						FillGradient (cr, 0.5 + curY, start - curY);
+			// 			double start = y * Allocation.Height;
+			// 			FillGradient (cr, 0.5 + curY, start - curY);
 
-						curY = start;
-						double height = Math.Max (cr.LineWidth, count * Allocation.Height);
-						cr.Rectangle (0.5, 0.5 + curY, Allocation.Width, height);
-						cr.SetSourceColor (GetColor (hunk, !paintInsert, false, 1.0));
-						cr.Fill ();
-						curY += height;
-					}
+			// 			curY = start;
+			// 			double height = Math.Max (cr.LineWidth, count * Allocation.Height);
+			// 			cr.Rectangle (0.5, 0.5 + curY, Allocation.Width, height);
+			// 			cr.SetSourceColor (GetColor (hunk, !paintInsert, false, 1.0));
+			// 			cr.Fill ();
+			// 			curY += height;
+			// 		}
 
-					FillGradient (cr, 0.5 + curY, Allocation.Height - curY);
+			// 		FillGradient (cr, 0.5 + curY, Allocation.Height - curY);
 
-					int barPadding = 3;
-					var allocH = Allocation.Height;
-					var adjUpper = adj.Upper;
-					var barY = allocH * adj.Value / adjUpper + barPadding;
-					var barH = allocH * (adj.PageSize / adjUpper) - barPadding - barPadding;
-					DrawBar (cr, barY, barH);
+			// 		int barPadding = 3;
+			// 		var allocH = Allocation.Height;
+			// 		var adjUpper = adj.Upper;
+			// 		var barY = allocH * adj.Value / adjUpper + barPadding;
+			// 		var barH = allocH * (adj.PageSize / adjUpper) - barPadding - barPadding;
+			// 		DrawBar (cr, barY, barH);
 
-					cr.Rectangle (0.5, 0.5, Allocation.Width - 1, Allocation.Height - 1);
-					cr.SetSourceColor ((HslColor)Style.Dark (StateType.Normal));
-					cr.Stroke ();
-				}
-				return true;
-			}
+			// 		cr.Rectangle (0.5, 0.5, Allocation.Width - 1, Allocation.Height - 1);
+			// 		cr.SetSourceColor ((HslColor)Style.Dark (StateType.Normal));
+			// 		cr.Stroke ();
+			// 	}
+			// 	return true;
+			// }
 
 			void FillGradient (Cairo.Context cr, double y, double h)
 			{

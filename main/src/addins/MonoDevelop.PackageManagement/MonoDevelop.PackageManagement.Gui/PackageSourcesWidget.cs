@@ -41,13 +41,13 @@ namespace MonoDevelop.PackageManagement
 			this.viewModel.PackageSourceChanged += PackageSourceChanged;
 		}
 
-		public override void Dispose ()
-		{
-			this.viewModel.PackageSourceViewModels.CollectionChanged -= PackageSourceViewModelsCollectionChanged;
-			this.viewModel.PackageSourceChanged -= PackageSourceChanged;
-			this.viewModel.Dispose ();
-			base.Dispose ();
-		}
+		// public override void Dispose ()
+		// {
+		// 	this.viewModel.PackageSourceViewModels.CollectionChanged -= PackageSourceViewModelsCollectionChanged;
+		// 	this.viewModel.PackageSourceChanged -= PackageSourceChanged;
+		// 	this.viewModel.Dispose ();
+		// 	base.Dispose ();
+		// }
 		
 		void InitializeTreeView ()
 		{

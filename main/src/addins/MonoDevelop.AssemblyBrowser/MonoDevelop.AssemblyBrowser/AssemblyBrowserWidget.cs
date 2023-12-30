@@ -112,16 +112,16 @@ namespace MonoDevelop.AssemblyBrowser
 		{
 			this.Build ();
 
-			comboboxVisibilty = ComboBox.NewText ();
-			comboboxVisibilty.InsertText (0, GettextCatalog.GetString ("Only public members"));
-			comboboxVisibilty.InsertText (1, GettextCatalog.GetString ("All members"));
-			comboboxVisibilty.Active = Math.Min (1, Math.Max (0, PropertyService.Get ("AssemblyBrowser.MemberSelection", 0)));
-			comboboxVisibilty.Changed += delegate {
-				if (TreeView != null)
-					TreeView.PublicApiOnly = comboboxVisibilty.Active == 0;
-				PropertyService.Set ("AssemblyBrowser.MemberSelection", comboboxVisibilty.Active);
-				GenerateOutput (); 
-			};
+			//comboboxVisibilty = ComboBox.NewText ();
+			//comboboxVisibilty.InsertText (0, GettextCatalog.GetString ("Only public members"));
+			//comboboxVisibilty.InsertText (1, GettextCatalog.GetString ("All members"));
+			//comboboxVisibilty.Active = Math.Min (1, Math.Max (0, PropertyService.Get ("AssemblyBrowser.MemberSelection", 0)));
+			//comboboxVisibilty.Changed += delegate {
+			//	if (TreeView != null)
+			//		TreeView.PublicApiOnly = comboboxVisibilty.Active == 0;
+			//	PropertyService.Set ("AssemblyBrowser.MemberSelection", comboboxVisibilty.Active);
+			//	GenerateOutput (); 
+			//};
 
 			searchentry1 = new MonoDevelop.Components.SearchEntry ();
 			searchentry1.Ready = true;
@@ -171,12 +171,12 @@ namespace MonoDevelop.AssemblyBrowser
 
 			};
 
-			languageCombobox = Gtk.ComboBox.NewText ();
-			languageCombobox.AppendText (GettextCatalog.GetString ("Summary"));
-			languageCombobox.AppendText (GettextCatalog.GetString ("IL"));
-			languageCombobox.AppendText (GettextCatalog.GetString ("C#"));
-			languageCombobox.Active = Math.Min (2, Math.Max (0, PropertyService.Get ("AssemblyBrowser.Language", 0)));
-			languageCombobox.Changed += LanguageComboboxhandleChanged;
+			//languageCombobox = Gtk.ComboBox.NewText ();
+			//languageCombobox.AppendText (GettextCatalog.GetString ("Summary"));
+			//languageCombobox.AppendText (GettextCatalog.GetString ("IL"));
+			//languageCombobox.AppendText (GettextCatalog.GetString ("C#"));
+			//languageCombobox.Active = Math.Min (2, Math.Max (0, PropertyService.Get ("AssemblyBrowser.Language", 0)));
+			//languageCombobox.Changed += LanguageComboboxhandleChanged;
 #pragma warning disable 618
 			TreeView = new AssemblyBrowserTreeView (new NodeBuilder[] { 
 				new ErrorNodeBuilder (),
@@ -224,7 +224,7 @@ namespace MonoDevelop.AssemblyBrowser
 
 			documentationScrolledWindow.PackStart (inspectEditor, true, true, 0);
 
-			this.ExposeEvent += HPaneExpose;
+			//this.ExposeEvent += HPaneExpose;
 			hpaned1 = hpaned1.ReplaceWithWidget (new HPanedThin (), true);
 			hpaned1.Position = 271;
 
@@ -455,15 +455,15 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				col.SetCellDataFunc (crp, RenderImage);
-				col.SetCellDataFunc (crt, RenderText);
+				//col.SetCellDataFunc (crp, RenderImage);
+				//col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 				searchTreeview.AppendColumn (col);
 				col.Resizable = true;
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Declaring Type"), crt = new Gtk.CellRendererText ());
 				col.FixedWidth = 300;
 				col.Sizing = TreeViewColumnSizing.Fixed;
-				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 				col.Resizable = true;
 				searchTreeview.Model = resultListStore;
@@ -475,8 +475,8 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				col.SetCellDataFunc (crp, RenderImage);
-				col.SetCellDataFunc (crt, RenderText);
+				//col.SetCellDataFunc (crp, RenderImage);
+				//col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 
 				searchTreeview.AppendColumn (col);
@@ -484,7 +484,7 @@ namespace MonoDevelop.AssemblyBrowser
 				col.Sizing = TreeViewColumnSizing.Fixed;
 				col.Resizable = true;
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Parent"), crt = new Gtk.CellRendererText ());
-				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 
 				col.FixedWidth = 300;
@@ -499,8 +499,8 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				col.SetCellDataFunc (crp, RenderImage);
-				col.SetCellDataFunc (crt, RenderText);
+				//col.SetCellDataFunc (crp, RenderImage);
+				//col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 				searchTreeview.AppendColumn (col);
 				col.FixedWidth = 400;
@@ -508,7 +508,7 @@ namespace MonoDevelop.AssemblyBrowser
 				col.Resizable = true;
 
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Namespace"), crt = new Gtk.CellRendererText ());
-				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 				col.FixedWidth = 300;
 				col.Sizing = TreeViewColumnSizing.Fixed;
@@ -518,60 +518,60 @@ namespace MonoDevelop.AssemblyBrowser
 			}
 		}
 
-		void RenderDeclaringTypeOrNamespace (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		{
-			var ct = (Gtk.CellRendererText)cell;
-			var entity = tree_model.GetValue (iter, 0) as IEntity;
-			if (entity != null) {
-				if (entity.DeclaringType != null) {
-					ct.Text = entity.DeclaringType.FullName;
-					return;
-				}
-				if (entity is ITypeDefinition type) {
-					ct.Text = type.Namespace;
-				} else {
-					ct.Text = entity.DeclaringType?.Namespace ?? "";
-				}
-			}
-		}
+		// void RenderDeclaringTypeOrNamespace (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+		// {
+		// 	var ct = (Gtk.CellRendererText)cell;
+		// 	var entity = tree_model.GetValue (iter, 0) as IEntity;
+		// 	if (entity != null) {
+		// 		if (entity.DeclaringType != null) {
+		// 			ct.Text = entity.DeclaringType.FullName;
+		// 			return;
+		// 		}
+		// 		if (entity is ITypeDefinition type) {
+		// 			ct.Text = type.Namespace;
+		// 		} else {
+		// 			ct.Text = entity.DeclaringType?.Namespace ?? "";
+		// 		}
+		// 	}
+		// }
 
-		void RenderText (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		{
-			var ct = (Gtk.CellRendererText)cell;
-			var entity = tree_model.GetValue (iter, 0) as INamedElement;
-			if (entity != null)
-				ct.Text = entity.Name;
-		}
+		// void RenderText (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+		// {
+		// 	var ct = (Gtk.CellRendererText)cell;
+		// 	var entity = tree_model.GetValue (iter, 0) as INamedElement;
+		// 	if (entity != null)
+		// 		ct.Text = entity.Name;
+		// }
 
-		void RenderImage (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		{
-			var ct = (CellRendererImage)cell;
-			var entity = tree_model.GetValue (iter, 0) as IEntity;
-			if (entity is IEvent evt) {
-				ct.Image = ImageService.GetIcon (EventDefinitionNodeBuilder.GetStockIcon (evt), Gtk.IconSize.Menu);
-				return;
-			}
+		// void RenderImage (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
+		// {
+		// 	var ct = (CellRendererImage)cell;
+		// 	var entity = tree_model.GetValue (iter, 0) as IEntity;
+		// 	if (entity is IEvent evt) {
+		// 		ct.Image = ImageService.GetIcon (EventDefinitionNodeBuilder.GetStockIcon (evt), Gtk.IconSize.Menu);
+		// 		return;
+		// 	}
 
-			if (entity is IField field) {
-				ct.Image = ImageService.GetIcon (FieldDefinitionNodeBuilder.GetStockIcon (field), Gtk.IconSize.Menu);
-				return;
-			}
+		// 	if (entity is IField field) {
+		// 		ct.Image = ImageService.GetIcon (FieldDefinitionNodeBuilder.GetStockIcon (field), Gtk.IconSize.Menu);
+		// 		return;
+		// 	}
 
-			if (entity is IMethod method) {
-				ct.Image = ImageService.GetIcon (MethodDefinitionNodeBuilder.GetStockIcon (method), Gtk.IconSize.Menu);
-				return;
-			}
+		// 	if (entity is IMethod method) {
+		// 		ct.Image = ImageService.GetIcon (MethodDefinitionNodeBuilder.GetStockIcon (method), Gtk.IconSize.Menu);
+		// 		return;
+		// 	}
 
-			if (entity is IProperty property) {
-				ct.Image = ImageService.GetIcon (PropertyDefinitionNodeBuilder.GetStockIcon (property), Gtk.IconSize.Menu);
-				return;
-			}
+		// 	if (entity is IProperty property) {
+		// 		ct.Image = ImageService.GetIcon (PropertyDefinitionNodeBuilder.GetStockIcon (property), Gtk.IconSize.Menu);
+		// 		return;
+		// 	}
 				
-			if (entity is ITypeDefinition type) {
-				ct.Image = ImageService.GetIcon (TypeDefinitionNodeBuilder.GetStockIcon (type), Gtk.IconSize.Menu);
-				return;
-			}
-		}
+		// 	if (entity is ITypeDefinition type) {
+		// 		ct.Image = ImageService.GetIcon (TypeDefinitionNodeBuilder.GetStockIcon (type), Gtk.IconSize.Menu);
+		// 		return;
+		// 	}
+		// }
 
 		CancellationTokenSource searchTokenSource = new CancellationTokenSource ();
 
@@ -912,14 +912,14 @@ namespace MonoDevelop.AssemblyBrowser
 		}
 
 		int oldSize2 = -1;
-		void HPaneExpose (object sender, Gtk.ExposeEventArgs args)
-		{
-			int size = this.Allocation.Width;
-			if (size == oldSize2)
-				return;
-			oldSize2 = size;
-			this.hpaned1.Position = Math.Min (350, this.Allocation.Width * 2 / 3);
-		}
+		// void HPaneExpose (object sender, Gtk.ExposeEventArgs args)
+		// {
+		// 	int size = this.Allocation.Width;
+		// 	if (size == oldSize2)
+		// 		return;
+		// 	oldSize2 = size;
+		// 	this.hpaned1.Position = Math.Min (350, this.Allocation.Width * 2 / 3);
+		// }
 		
 		internal void Open (string url, AssemblyLoader? currentAssembly = null, bool expandNode = true)
 		{
@@ -1132,7 +1132,7 @@ namespace MonoDevelop.AssemblyBrowser
 //			this.searchInCombobox.Changed -= SearchInComboboxhandleChanged;
 //			this.searchEntry.Changed -= SearchEntryhandleChanged;
 			this.searchTreeview.RowActivated -= SearchTreeviewhandleRowActivated;
-			hpaned1.ExposeEvent -= HPaneExpose;
+			//hpaned1.ExposeEvent -= HPaneExpose;
 			base.OnDestroyed ();
 		}
 

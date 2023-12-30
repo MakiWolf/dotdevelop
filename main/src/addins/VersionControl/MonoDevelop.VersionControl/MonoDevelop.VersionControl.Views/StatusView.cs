@@ -388,15 +388,15 @@ namespace MonoDevelop.VersionControl.Views
 		{
 			disposed = true;
 			if (colCommit != null) {
-				colCommit.Destroy ();
+				//colCommit.Destroy ();
 				colCommit = null;
 			}
 			if (colRemote != null) {
-				colRemote.Destroy ();
+				//colRemote.Destroy ();
 				colRemote = null;
 			}
 			if (colFile != null) {
-				colFile.Destroy ();
+				//colFile.Destroy ();
 				colFile = null;
 			}
 			if (filelist != null) {
@@ -411,11 +411,11 @@ namespace MonoDevelop.VersionControl.Views
 			}
 			if (cellToggle != null) {
 				cellToggle.Toggled -= OnCommitCellToggled;
-				cellToggle.Destroy ();
+				//cellToggle.Destroy ();
 				cellToggle = null;
 			}
 			if (this.diffRenderer != null) {
-				this.diffRenderer.Destroy ();
+				//this.diffRenderer.Destroy ();
 				this.diffRenderer = null;
 			}
 			VersionControlService.FileStatusChanged -= OnFileStatusChanged;
@@ -632,7 +632,8 @@ namespace MonoDevelop.VersionControl.Views
 			TreeIter it = filestore.AppendValues (statusicon, lstatus, GLib.Markup.EscapeText (localpath).Split ('\n'), rstatus, commit, false, n.LocalPath.ToString (), true, hasComment, fileIcon, n.HasLocalChanges, rstatusicon, scolor, n.HasRemoteChange (VersionStatus.Modified));
 			if (!n.IsDirectory)
 				filestore.AppendValues (it, statusicon, "", new string[0], "", false, true, n.LocalPath.ToString (), false, false, fileIcon, false, null, null, false);
-			if (expanded)
+
+			if (expanded)
 				filelist.ExpandRow (filestore.GetPath (it), open_all: false);
 
 			return it;

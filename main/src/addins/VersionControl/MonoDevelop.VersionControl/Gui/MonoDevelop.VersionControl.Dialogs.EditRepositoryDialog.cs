@@ -25,10 +25,10 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.BorderWidth = ((uint)(6));
 			this.DefaultWidth = 500;
 			// Internal child MonoDevelop.VersionControl.Dialogs.EditRepositoryDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
-			w1.Events = ((global::Gdk.EventMask)(256));
-			w1.Name = "dialog-vbox3";
-			w1.Spacing = 6;
+			// global::Gtk.VBox w1 = this.VBox;
+			// w1.Events = ((global::Gdk.EventMask)(256));
+			// w1.Name = "dialog-vbox3";
+			// w1.Spacing = 6;
 			// Container child dialog-vbox3.Gtk.Box+BoxChild
 			this.vbox1 = new global::Gtk.VBox ();
 			this.vbox1.Name = "vbox1";
@@ -73,9 +73,9 @@ namespace MonoDevelop.VersionControl.Dialogs
 			w4.XOptions = ((global::Gtk.AttachOptions)(4));
 			w4.YOptions = ((global::Gtk.AttachOptions)(0));
 			// Container child table1.Gtk.Table+TableChild
-			this.versionControlType = global::Gtk.ComboBox.NewText ();
-			this.versionControlType.Name = "versionControlType";
-			this.table1.Add (this.versionControlType);
+			// this.versionControlType = global::Gtk.ComboBox.NewText ();
+			// this.versionControlType.Name = "versionControlType";
+			// this.table1.Add (this.versionControlType);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.versionControlType]));
 			w5.LeftAttach = ((uint)(1));
 			w5.RightAttach = ((uint)(2));
@@ -100,16 +100,16 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.vbox1.Add (this.repoEditorContainer);
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.repoEditorContainer]));
 			w8.Position = 2;
-			w1.Add (this.vbox1);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
-			w9.Position = 0;
+			//w1.Add (this.vbox1);
+			// global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
+			// w9.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Dialogs.EditRepositoryDialog.ActionArea
-			global::Gtk.HButtonBox w10 = this.ActionArea;
-			w10.Events = ((global::Gdk.EventMask)(256));
-			w10.Name = "GtkDialog_ActionArea";
-			w10.Spacing = 10;
-			w10.BorderWidth = ((uint)(5));
-			w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			// global::Gtk.HButtonBox w10 = this.ActionArea;
+			// w10.Events = ((global::Gdk.EventMask)(256));
+			// w10.Name = "GtkDialog_ActionArea";
+			// w10.Spacing = 10;
+			// w10.BorderWidth = ((uint)(5));
+			// w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child GtkDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button10 = new global::Gtk.Button ();
 			this.button10.CanDefault = true;
@@ -119,9 +119,9 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.button10.UseUnderline = true;
 			this.button10.Label = "gtk-cancel";
 			this.AddActionWidget (this.button10, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button10]));
-			w11.Expand = false;
-			w11.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button10]));
+			// w11.Expand = false;
+			// w11.Fill = false;
 			// Container child GtkDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -130,11 +130,11 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			w10.Add (this.buttonOk);
-			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.buttonOk]));
-			w12.Position = 1;
-			w12.Expand = false;
-			w12.Fill = false;
+			//w10.Add (this.buttonOk);
+			// global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.buttonOk]));
+			// w12.Position = 1;
+			// w12.Expand = false;
+			// w12.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

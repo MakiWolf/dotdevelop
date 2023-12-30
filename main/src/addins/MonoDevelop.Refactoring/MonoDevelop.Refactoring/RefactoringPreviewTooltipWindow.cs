@@ -335,20 +335,20 @@ namespace MonoDevelop.Refactoring
 		const int verticalTextSpace = 7;
 		const int textBorder = 12;
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
+		// protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		// {
+		// 	base.OnSizeRequested (ref requisition);
 
-			int y = verticalTextBorder * 2 - verticalTextSpace + (Platform.IsWindows ? 10 : 2);
-			int x = 0;
+		// 	int y = verticalTextBorder * 2 - verticalTextSpace + (Platform.IsWindows ? 10 : 2);
+		// 	int x = 0;
 
-			foreach (var line in diff.LineResults) {
-				MeasureLine (line, ref x, ref y);
-			}
+		// 	foreach (var line in diff.LineResults) {
+		// 		MeasureLine (line, ref x, ref y);
+		// 	}
 
-			requisition.Height = y;
-			requisition.Width = x + textBorder * 2;
-		}
+		// 	requisition.Height = y;
+		// 	requisition.Width = x + textBorder * 2;
+		// }
 
 		void MeasureLine (LineResult lineResult, ref int x, ref int y)
 		{
@@ -366,39 +366,39 @@ namespace MonoDevelop.Refactoring
 			}
 		}
 
-		protected override void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context g)
-		{
-			var style = editor.Options.GetEditorTheme ();
-			g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+		// protected override void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context g)
+		// {
+		// 	var style = editor.Options.GetEditorTheme ();
+		// 	g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 
-			g.SetSourceColor (SyntaxHighlightingService.GetColor (style, EditorThemeColors.Background));
-			g.Fill ();
+		// 	g.SetSourceColor (SyntaxHighlightingService.GetColor (style, EditorThemeColors.Background));
+		// 	g.Fill ();
 
-			int y = verticalTextSpace / 2;
+		// 	int y = verticalTextSpace / 2;
 
-			foreach (var lineResult in diff.LineResults) {
-				switch (lineResult.LineKind) {
-				case LineKind.Normal:
-					DrawLine (g, lineResult, ref y);
-					break;
-				case LineKind.Removed:
-					g.Rectangle (0, y, Allocation.Width, lineHeight);
+		// 	foreach (var lineResult in diff.LineResults) {
+		// 		switch (lineResult.LineKind) {
+		// 		case LineKind.Normal:
+		// 			DrawLine (g, lineResult, ref y);
+		// 			break;
+		// 		case LineKind.Removed:
+		// 			g.Rectangle (0, y, Allocation.Width, lineHeight);
 
-					g.SetSourceColor (diff.RemovedBackground);
-					g.Fill ();
-					g.SetSourceColor (diff.RemovedForeground);
-					DrawLine (g, lineResult, ref y);
-					break;
-				case LineKind.Added:
-					g.Rectangle (0, y, Allocation.Width, lineHeight);
-					g.SetSourceColor (diff.AddedBackground);
-					g.Fill ();
-					g.SetSourceColor (diff.AddedForeground);
-					DrawLine (g, lineResult, ref y);
-					break;
-				}
-			}
-		}
+		// 			g.SetSourceColor (diff.RemovedBackground);
+		// 			g.Fill ();
+		// 			g.SetSourceColor (diff.RemovedForeground);
+		// 			DrawLine (g, lineResult, ref y);
+		// 			break;
+		// 		case LineKind.Added:
+		// 			g.Rectangle (0, y, Allocation.Width, lineHeight);
+		// 			g.SetSourceColor (diff.AddedBackground);
+		// 			g.Fill ();
+		// 			g.SetSourceColor (diff.AddedForeground);
+		// 			DrawLine (g, lineResult, ref y);
+		// 			break;
+		// 		}
+		// 	}
+		// }
 
 		void DrawLine (Cairo.Context g, LineResult lineResult, ref int y)
 		{

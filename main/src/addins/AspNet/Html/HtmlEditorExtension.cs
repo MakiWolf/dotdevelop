@@ -73,7 +73,7 @@ namespace MonoDevelop.AspNet.Html
 			}
 		}
 		
-		void OutlineTreeDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		void OutlineTreeDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			Gtk.CellRendererText txtRenderer = (Gtk.CellRendererText) cell;
 			XNode n = (XNode) model.GetValue (iter, 0);

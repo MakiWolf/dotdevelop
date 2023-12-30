@@ -217,9 +217,9 @@ namespace MonoDevelop.CSharp.Completion
 				markup.AppendTaggedText (theme, taggedParts);
 			} else {
 				markup.AppendTaggedText (theme, taggedParts.Take (i));
-				markup.Append ("<span font='");
-				markup.Append (IdeServices.FontService.SansFontName);
-				markup.Append ("' size='small'>");
+				//markup.Append ("<span font='");
+				//markup.Append (IdeServices.FontService.SansFontName);
+				//markup.Append ("' size='small'>");
 				markup.AppendLine ();
 				markup.AppendLine ();
 				markup.AppendTaggedText (theme, taggedParts.Skip (i + 1));
@@ -227,9 +227,9 @@ namespace MonoDevelop.CSharp.Completion
 			}
 			markup.AppendLine ();
 			markup.AppendLine ();
-			markup.Append ("<span font='");
-			markup.Append (IdeServices.FontService.SansFontName);
-			markup.Append ("' size='small'>");
+			//markup.Append ("<span font='");
+			//markup.Append (IdeServices.FontService.SansFontName);
+			//markup.Append ("' size='small'>");
 			markup.AppendLine (GettextCatalog.GetString ("Note: creates an using for namespace:"));
 			markup.Append ("<b>");
 			markup.Append (Ambience.EscapeText (type.ContainingNamespace.ToDisplayString ()));

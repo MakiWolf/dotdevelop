@@ -234,7 +234,7 @@ namespace MonoDevelop.Packaging.Gui
 			metadata.Copyright = packageCopyrightTextBox.Text;
 			metadata.DevelopmentDependency = packageDevelopmentDependencyCheckBox.Active;
 			metadata.IconUrl = packageIconUrlTextBox.Text;
-			metadata.Language = GetSelectedLanguage ();
+			//metadata.Language = GetSelectedLanguage ();
 			metadata.LicenseUrl = packageLicenseUrlTextBox.Text;
 			metadata.Owners = packageOwnersTextBox.Text;
 			metadata.ProjectUrl = packageProjectUrlTextBox.Text;
@@ -245,21 +245,21 @@ namespace MonoDevelop.Packaging.Gui
 			metadata.Title = packageTitleTextBox.Text;
 		}
 
-		string GetSelectedLanguage ()
-		{
-			if (packageLanguageComboBox.Active == 0) {
-				// 'None' selected.
-				return string.Empty;
-			}
+		// string GetSelectedLanguage ()
+		// {
+		// 	if (packageLanguageComboBox.Active == 0) {
+		// 		// 'None' selected.
+		// 		return string.Empty;
+		// 	}
 
-			int languageIndex = packageLanguageComboBox.Active - 1;
-			if (languageIndex < languages.Count) {
-				return languages [languageIndex].Name;
-			}
+		// 	int languageIndex = packageLanguageComboBox.Active - 1;
+		// 	if (languageIndex < languages.Count) {
+		// 		return languages [languageIndex].Name;
+		// 	}
 
 			// No match for language so just return the combo box text.
-			return packageLanguageComboBox.ActiveText;
-		}
+			//return packageLanguageComboBox.ActiveText;
+		//}
 
 		void PopulateLanguages ()
 		{

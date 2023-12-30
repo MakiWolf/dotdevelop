@@ -117,16 +117,16 @@ namespace MonoDevelop.CSharp.Formatting
 					return;
 				}
 				
-				TreeModel model;
+				ITreeModel model;
 				TreeIter iter;
 				if (treeView.Selection.GetSelected (out model, out iter))
 					UpdateExample (model, iter);
 			};
 			notebookCategories.ShowTabs = false;
-			comboboxCategories.AppendText (GettextCatalog.GetString ("Indentation"));
-			comboboxCategories.AppendText (GettextCatalog.GetString ("New Lines"));
-			comboboxCategories.AppendText (GettextCatalog.GetString ("Spacing"));
-			comboboxCategories.AppendText (GettextCatalog.GetString ("Wrapping"));
+			//comboboxCategories.AppendText (GettextCatalog.GetString ("Indentation"));
+			//comboboxCategories.AppendText (GettextCatalog.GetString ("New Lines"));
+			//comboboxCategories.AppendText (GettextCatalog.GetString ("Spacing"));
+			//comboboxCategories.AppendText (GettextCatalog.GetString ("Wrapping"));
 			comboboxCategories.Changed += delegate {
 				texteditor.Text = "";
 				notebookCategories.Page = comboboxCategories.Active;
@@ -634,7 +634,7 @@ namespace MonoDevelop.CSharp.Formatting
 		void TreeSelectionChanged (object sender, EventArgs e)
 		{
 			var treeSelection = (TreeSelection)sender;
-			TreeModel model;
+			ITreeModel model;
 			TreeIter iter;
 			if (treeSelection.GetSelected (out model, out iter)) {
 				var info = GetProperty (model, iter);
@@ -650,7 +650,7 @@ namespace MonoDevelop.CSharp.Formatting
 		}
 		
 			
-		void UpdateExample (TreeModel model, TreeIter iter)
+		void UpdateExample (ITreeModel model, TreeIter iter)
 		{
 			string example = (string)model.GetValue (iter, exampleTextColumn);
 			UpdateExample (example);
@@ -671,7 +671,7 @@ namespace MonoDevelop.CSharp.Formatting
 			texteditor.Text = CSharpFormatter.FormatText (profile.CreateOptions (textPolicy), text, 0, text.Length);
 		}
 		
-		static PropertyInfo GetProperty (TreeModel model, TreeIter iter)
+		static PropertyInfo GetProperty (ITreeModel model, TreeIter iter)
 		{
 			string propertyName = (string)model.GetValue (iter, propertyColumn);
 			if (string.IsNullOrEmpty (propertyName))
@@ -685,7 +685,7 @@ namespace MonoDevelop.CSharp.Formatting
 			return info.GetValue (profile, null);
 		}
 		
-		static void RenderIcon (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
+		static void RenderIcon (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var pixbufCellRenderer = (CellRendererImage)cell;
 			if (model.IterHasChild (iter)) {
@@ -695,7 +695,7 @@ namespace MonoDevelop.CSharp.Formatting
 			}
 		}
 		
-		static void ComboboxDataFunc (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
+		static void ComboboxDataFunc (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var cellRenderer = (CellRendererCombo)cell;
 			var info = GetProperty (model, iter);
@@ -710,7 +710,7 @@ namespace MonoDevelop.CSharp.Formatting
 			cellRenderer.Text = value is Enum ? TranslateValue (value) : value.ToString ();
 		}
 		
-		static void ToggleDataFunc (TreeViewColumn col, CellRenderer cell, TreeModel model, TreeIter iter)
+		static void ToggleDataFunc (TreeViewColumn col, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var cellRenderer = (CellRendererToggle)cell;
 			var info = GetProperty (model, iter);

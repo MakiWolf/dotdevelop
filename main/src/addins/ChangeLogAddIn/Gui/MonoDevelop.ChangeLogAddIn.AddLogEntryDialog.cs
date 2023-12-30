@@ -58,11 +58,11 @@ namespace MonoDevelop.ChangeLogAddIn
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.ChangeLogAddIn.AddLogEntryDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
-			w1.Events = ((global::Gdk.EventMask)(256));
-			w1.Name = "dialog_VBox";
-			w1.Spacing = 6;
-			w1.BorderWidth = ((uint)(2));
+			// global::Gtk.VBox w1 = this.VBox;
+			// w1.Events = ((global::Gdk.EventMask)(256));
+			// w1.Name = "dialog_VBox";
+			// w1.Spacing = 6;
+			// w1.BorderWidth = ((uint)(2));
 			// Container child dialog_VBox.Gtk.Box+BoxChild
 			this.vbox1 = new global::Gtk.VBox ();
 			this.vbox1.Name = "vbox1";
@@ -239,16 +239,16 @@ namespace MonoDevelop.ChangeLogAddIn
 			w20.Position = 3;
 			w20.Expand = false;
 			w20.Fill = false;
-			w1.Add (this.vbox1);
-			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
-			w21.Position = 0;
+			// w1.Add (this.vbox1);
+			// global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
+			// w21.Position = 0;
 			// Internal child MonoDevelop.ChangeLogAddIn.AddLogEntryDialog.ActionArea
-			global::Gtk.HButtonBox w22 = this.ActionArea;
-			w22.Events = ((global::Gdk.EventMask)(256));
-			w22.Name = "ChangeLogAddIn.AddLogEntryDialog_ActionArea";
-			w22.Spacing = 6;
-			w22.BorderWidth = ((uint)(5));
-			w22.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			// global::Gtk.HButtonBox w22 = this.ActionArea;
+			// w22.Events = ((global::Gdk.EventMask)(256));
+			// w22.Name = "ChangeLogAddIn.AddLogEntryDialog_ActionArea";
+			// w22.Spacing = 6;
+			// w22.BorderWidth = ((uint)(5));
+			// w22.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child ChangeLogAddIn.AddLogEntryDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button7 = new global::Gtk.Button ();
 			this.button7.CanDefault = true;
@@ -258,9 +258,9 @@ namespace MonoDevelop.ChangeLogAddIn
 			this.button7.UseUnderline = true;
 			this.button7.Label = "gtk-cancel";
 			this.AddActionWidget (this.button7, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w23 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.button7]));
-			w23.Expand = false;
-			w23.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w23 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.button7]));
+			// w23.Expand = false;
+			// w23.Fill = false;
 			// Container child ChangeLogAddIn.AddLogEntryDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button119 = new global::Gtk.Button ();
 			this.button119.CanDefault = true;
@@ -270,10 +270,10 @@ namespace MonoDevelop.ChangeLogAddIn
 			this.button119.UseUnderline = true;
 			this.button119.Label = "gtk-ok";
 			this.AddActionWidget (this.button119, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w24 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.button119]));
-			w24.Position = 1;
-			w24.Expand = false;
-			w24.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w24 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w22 [this.button119]));
+			// w24.Position = 1;
+			// w24.Expand = false;
+			// w24.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

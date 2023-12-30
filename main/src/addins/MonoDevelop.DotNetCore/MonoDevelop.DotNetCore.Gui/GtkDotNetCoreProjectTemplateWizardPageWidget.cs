@@ -99,9 +99,9 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void PopulateTargetFrameworks ()
 		{
-			foreach (TargetFramework framework in wizardPage.TargetFrameworks) {
-				targetFrameworkComboBox.AppendText (framework.GetDisplayName ());
-			}
+			// foreach (TargetFramework framework in wizardPage.TargetFrameworks) {
+			// 	targetFrameworkComboBox.AppendText (framework.GetDisplayName ());
+			// }
 
 			targetFrameworkComboBox.Active = wizardPage.SelectedTargetFrameworkIndex;
 		}
@@ -113,9 +113,9 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void PopulateAuthentications ()
 		{
-			foreach (var authentication in wizardPage.SupportedAuthentications) {
-				authenticationComboBox.AppendText (authentication.Description);
-			}
+			// foreach (var authentication in wizardPage.SupportedAuthentications) {
+			// 	authenticationComboBox.AppendText (authentication.Description);
+			// }
 
 			authenticationComboBox.Active = wizardPage.SelectedAuthenticationIndex;
 			authenticationInformationLabel.LabelProp = wizardPage.SupportedAuthentications [wizardPage.SelectedAuthenticationIndex].Information;
@@ -180,8 +180,8 @@ namespace MonoDevelop.DotNetCore.Gui
 			configurationBottomEventBox = new EventBox {
 				Name = "configurationBottomEventBox"
 			};
-			configurationVBox.PackStart (configurationBottomEventBox);
-			mainHBox.PackStart (configurationVBox);
+			//configurationVBox.PackStart (configurationBottomEventBox);
+			//mainHBox.PackStart (configurationVBox);
 
 			// Add the image
 			backgroundLargeImageEventBox = new EventBox {
@@ -191,7 +191,7 @@ namespace MonoDevelop.DotNetCore.Gui
 				Name = "backgroundLargeImageVBox"
 			};
 			backgroundLargeImageEventBox.Add (backgroundLargeImageVBox);
-			mainHBox.PackStart (backgroundLargeImageEventBox);
+			//mainHBox.PackStart (backgroundLargeImageEventBox);
 
 			Add (mainHBox);
 
@@ -204,7 +204,7 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void AddFrameworkSelection()
 		{
-			targetFrameworkComboBox = ComboBox.NewText ();
+			//targetFrameworkComboBox = ComboBox.NewText ();
 			targetFrameworkComboBox.WidthRequest = 350;
 			targetFrameworkComboBox.Name = "targetFrameworkComboBox";
 			configurationTable.Attach (targetFrameworkComboBox, 1, 2, 1, 2, AttachOptions.Fill, AttachOptions.Fill, 0, 0);
@@ -232,7 +232,7 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void AddAuthenticationSelection(uint primaryRow)
 		{
-			authenticationComboBox = ComboBox.NewText ();
+			//authenticationComboBox = ComboBox.NewText ();
 			authenticationComboBox.WidthRequest = 350;
 			authenticationComboBox.Name = "authenticationComboBox";
 			configurationTable.Attach (authenticationComboBox, 1, 2, primaryRow, primaryRow + 1, AttachOptions.Fill, AttachOptions.Fill, 0, 0);

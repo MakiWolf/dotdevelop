@@ -69,29 +69,29 @@ namespace MonoDevelop.CSharp.Project
 			if (project.IsLibraryBasedProjectType) {
 				//fixme: should we totally hide these?
 				compileTargetCombo.Sensitive = false;
-				mainClassEntry.Sensitive = false;
+				//mainClassEntry.Sensitive = false;
 			} else {
 				classListStore = new ListStore (typeof(string));
-				mainClassEntry.Model = classListStore;
-				mainClassEntry.TextColumn = 0;
-				((Entry)mainClassEntry.Child).Text = csproject.MainClass ?? string.Empty;
+				//mainClassEntry.Model = classListStore;
+				//mainClassEntry.TextColumn = 0;
+				//((Entry)mainClassEntry.Child).Text = csproject.MainClass ?? string.Empty;
 			
 				UpdateTarget ();
 			}
 			
 			// Load the codepage. If it matches any of the supported encodigs, use the encoding name 			
 			string foundEncoding = null;
-			foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
-				if (e.CodePage == -1)
-					continue;
-				if (e.CodePage == csproject.CodePage)
-					foundEncoding = e.Id;
-				codepageEntry.AppendText (e.Id);
-			}
-			if (foundEncoding != null)
-				codepageEntry.Entry.Text = foundEncoding;
-			else if (csproject.CodePage != 0)
-				codepageEntry.Entry.Text = csproject.CodePage.ToString ();
+			//foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
+			//	if (e.CodePage == -1)
+			//		continue;
+			//	if (e.CodePage == csproject.CodePage)
+			//		foundEncoding = e.Id;
+				//codepageEntry.AppendText (e.Id);
+			//}
+			//if (foundEncoding != null)
+			//	codepageEntry.Entry.Text = foundEncoding;
+			//else if (csproject.CodePage != 0)
+			//	codepageEntry.Entry.Text = csproject.CodePage.ToString ();
 			
 			iconEntry.Path = csproject.Win32Icon;
 			iconEntry.DefaultPath = project.BaseDirectory;
@@ -155,17 +155,17 @@ namespace MonoDevelop.CSharp.Project
 			compileTargetCombo.SetCommonAccessibilityAttributes ("CodeGeneration.CompileTarget", label86,
 			                                                     GettextCatalog.GetString ("Select the compile target for the code generation"));
 
-			mainClassEntry.SetCommonAccessibilityAttributes ("CodeGeneration.MainClass", label88,
-			                                                 GettextCatalog.GetString ("Enter the main class for the code generation"));
+			//mainClassEntry.SetCommonAccessibilityAttributes ("CodeGeneration.MainClass", label88,
+			//                                                 GettextCatalog.GetString ("Enter the main class for the code generation"));
 
 			iconEntry.SetEntryAccessibilityAttributes ("CodeGeneration.WinIcon", "",
 			                                           GettextCatalog.GetString ("Enter the file to use as the icon on Windows"));
 			iconEntry.SetAccessibilityLabelRelationship (label3);
 
-			codepageEntry.SetCommonAccessibilityAttributes ("CodeGeneration.CodePage", label1,
-			                                                GettextCatalog.GetString ("Select the compiler code page"));
+			//codepageEntry.SetCommonAccessibilityAttributes ("CodeGeneration.CodePage", label1,
+			  //                                              GettextCatalog.GetString ("Select the compiler code page"));
 
-			noStdLibCheckButton.SetCommonAccessibilityAttributes ("CodeGeneration.NoStdLib", "", GettextCatalog.GetString ("Whether or not to include a reference to mscorlib.dll"));
+			//noStdLibCheckButton.SetCommonAccessibilityAttributes ("CodeGeneration.NoStdLib", "", GettextCatalog.GetString ("Whether or not to include a reference to mscorlib.dll"));
 
 			langVerCombo.SetCommonAccessibilityAttributes ("CodeGeneration.LanguageVersion", label2,
 			                                               GettextCatalog.GetString ("Select the version of C# to use"));
@@ -176,23 +176,23 @@ namespace MonoDevelop.CSharp.Project
 
 		public bool ValidateChanges ()
 		{
-			if (codepageEntry.Entry.Text.Length > 0) {
+			//if (codepageEntry.Entry.Text.Length > 0) {
 				// Get the codepage. If the user specified an encoding name, find it.
 				int trialCodePage = -1;
-				foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
-					if (e.Id == codepageEntry.Entry.Text) {
-						trialCodePage = e.CodePage;
-						break;
-					}
-				}
+				// foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
+				// 	if (e.Id == codepageEntry.Entry.Text) {
+				// 		trialCodePage = e.CodePage;
+				// 		break;
+				// 	}
+				// }
 			
-				if (trialCodePage == -1) {
-					if (!int.TryParse (codepageEntry.Entry.Text, out trialCodePage)) {
-						MessageService.ShowError (GettextCatalog.GetString ("Invalid code page number."));
-						return false;
-					}
-				}
-			}
+				// if (trialCodePage == -1) {
+				// 	if (!int.TryParse (codepageEntry.Entry.Text, out trialCodePage)) {
+				// 		MessageService.ShowError (GettextCatalog.GetString ("Invalid code page number."));
+				// 		return false;
+				// 	}
+				// }
+			//}
 			return true;
 		}
 		
@@ -208,25 +208,25 @@ namespace MonoDevelop.CSharp.Project
 				isBadVersion = (bool)langVerCombo.Model.GetValue (iter, 2);
 			}
 
-			if (codepageEntry.Entry.Text.Length > 0) {
+			//if (codepageEntry.Entry.Text.Length > 0) {
 				// Get the codepage. If the user specified an encoding name, find it.
-				int trialCodePage = -1;
-				foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
-					if (e.Id == codepageEntry.Entry.Text) {
-						trialCodePage = e.CodePage;
-						break;
-					}
-				}
+				//int trialCodePage = -1;
+				// foreach (TextEncoding e in TextEncoding.SupportedEncodings) {
+				// 	if (e.Id == codepageEntry.Entry.Text) {
+				// 		trialCodePage = e.CodePage;
+				// 		break;
+				// 	}
+				// }
 			
-				if (trialCodePage != -1)
-					codePage = trialCodePage;
-				else {
-					if (!int.TryParse (codepageEntry.Entry.Text, out trialCodePage)) {
-						return;
-					}
-					codePage = trialCodePage;
-				}
-			} else
+				//if (trialCodePage != -1)
+				//	codePage = trialCodePage;
+				// else {
+				// 	if (!int.TryParse (codepageEntry.Entry.Text, out trialCodePage)) {
+				// 		return;
+				// 	}
+				// 	codePage = trialCodePage;
+				// }
+			//} else
 				codePage = 0;
 			
 			project.CompileTarget = compileTargetCombo.CompileTarget;
@@ -238,8 +238,8 @@ namespace MonoDevelop.CSharp.Project
 			if (iconEntry.Sensitive)
 				csproject.Win32Icon = iconEntry.Path;
 			
-			if (mainClassEntry.Sensitive)
-				csproject.MainClass = mainClassEntry.Entry.Text;
+			// if (mainClassEntry.Sensitive)
+			// 	csproject.MainClass = mainClassEntry.Entry.Text;
 			foreach (DotNetProjectConfiguration configuration in configs) {
 				CSharpCompilerParameters compilerParameters = (CSharpCompilerParameters) configuration.CompilationParameters;
 				compilerParameters.UnsafeCode = allowUnsafeCodeCheckButton.Active;

@@ -35,7 +35,7 @@ namespace MonoDevelop.VersionControl.Git
 		public ConflictResolutionDialog ()
 		{
 			this.Build ();
-			HasSeparator = false;
+			//HasSeparator = false;
 
 			this.UseNativeContextMenus ();
 		}

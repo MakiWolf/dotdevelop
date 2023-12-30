@@ -207,22 +207,22 @@ namespace MonoDevelop.CodeGeneration
 				BorderWidth = 3;
 			}
 			
-			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-			{
-				Style.PaintFlatBox (Style,
-				                    evnt.Window,
-				                    StateType.Normal,
-				                    ShadowType.Out,
-				                    evnt.Area,
-				                    this,
-				                    "tooltip",
-				                    Allocation.X + 1,
-				                    Allocation.Y + 1,
-				                    Allocation.Width - 2,
-				                    Allocation.Height - 2);
+			// protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+			// {
+			// 	Style.PaintFlatBox (Style,
+			// 	                    evnt.Window,
+			// 	                    StateType.Normal,
+			// 	                    ShadowType.Out,
+			// 	                    evnt.Area,
+			// 	                    this,
+			// 	                    "tooltip",
+			// 	                    Allocation.X + 1,
+			// 	                    Allocation.Y + 1,
+			// 	                    Allocation.Width - 2,
+			// 	                    Allocation.Height - 2);
 				
-				return base.OnExposeEvent (evnt);
-			}
+			// 	return base.OnExposeEvent (evnt);
+			// }
 		}
 		
 /*		protected override bool OnExposeEvent (Gdk.EventExpose evnt)

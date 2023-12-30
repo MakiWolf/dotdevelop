@@ -25,12 +25,12 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.Title = global::Mono.Unix.Catalog.GetString ("Subversion");
 			this.Modal = true;
 			this.Resizable = false;
-			this.AllowGrow = false;
+			//this.AllowGrow = false;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.UserPasswordDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
-			w1.Events = ((global::Gdk.EventMask)(256));
-			w1.Name = "dialog_VBox";
-			w1.BorderWidth = ((uint)(2));
+			// global::Gtk.VBox w1 = this.VBox;
+			// w1.Events = ((global::Gdk.EventMask)(256));
+			// w1.Name = "dialog_VBox";
+			// w1.BorderWidth = ((uint)(2));
 			// Container child dialog_VBox.Gtk.Box+BoxChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
@@ -123,16 +123,16 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			w9.Position = 3;
 			w9.Expand = false;
 			w9.Fill = false;
-			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			w10.Position = 0;
+			// w1.Add (this.vbox2);
+			// global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			// w10.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.UserPasswordDialog.ActionArea
-			global::Gtk.HButtonBox w11 = this.ActionArea;
-			w11.Events = ((global::Gdk.EventMask)(256));
-			w11.Name = "MonoDevelop.VersionControl.Subversion.UserPasswordDialog_ActionArea";
-			w11.Spacing = 10;
-			w11.BorderWidth = ((uint)(5));
-			w11.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			// global::Gtk.HButtonBox w11 = this.ActionArea;
+			// w11.Events = ((global::Gdk.EventMask)(256));
+			// w11.Name = "MonoDevelop.VersionControl.Subversion.UserPasswordDialog_ActionArea";
+			// w11.Spacing = 10;
+			// w11.BorderWidth = ((uint)(5));
+			// w11.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child MonoDevelop.VersionControl.Subversion.UserPasswordDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button1 = new global::Gtk.Button ();
 			this.button1.CanDefault = true;
@@ -142,9 +142,9 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.button1.UseUnderline = true;
 			this.button1.Label = "gtk-cancel";
 			this.AddActionWidget (this.button1, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.button1]));
-			w12.Expand = false;
-			w12.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.button1]));
+			// w12.Expand = false;
+			// w12.Fill = false;
 			// Container child MonoDevelop.VersionControl.Subversion.UserPasswordDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button7 = new global::Gtk.Button ();
 			this.button7.CanDefault = true;
@@ -154,10 +154,10 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.button7.UseUnderline = true;
 			this.button7.Label = "gtk-ok";
 			this.AddActionWidget (this.button7, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.button7]));
-			w13.Position = 1;
-			w13.Expand = false;
-			w13.Fill = false;
+			// global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.button7]));
+			// w13.Position = 1;
+			// w13.Expand = false;
+			// w13.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

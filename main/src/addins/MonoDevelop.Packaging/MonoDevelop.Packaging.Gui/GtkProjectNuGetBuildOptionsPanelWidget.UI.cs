@@ -56,7 +56,7 @@ namespace MonoDevelop.Packaging.Gui
 			missingMetadataLabel.WidthRequest = 600;
 			missingMetadataLabel.Text = GettextCatalog.GetString ("The project does not have NuGet package metadata so a NuGet package will not be created. NuGet package metadata can be specified in the Metadata section in Project Options");
 
-			vbox.PackStart (missingMetadataLabel);
+			//vbox.PackStart (missingMetadataLabel);
 
 			Add (vbox);
 

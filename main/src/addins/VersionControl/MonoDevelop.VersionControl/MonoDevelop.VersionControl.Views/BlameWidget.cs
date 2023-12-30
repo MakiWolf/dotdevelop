@@ -150,7 +150,7 @@ namespace MonoDevelop.VersionControl.Views
 			editor = new MonoTextEditor (doc, new SourceEditor.StyledSourceEditorOptions (options));
 
 			AddChild (editor);
-			editor.SetScrollAdjustments (hAdjustment, vAdjustment);
+			//editor.SetScrollAdjustments (hAdjustment, vAdjustment);
 
 			overview = new BlameRenderer (this);
 			AddChild (overview);
@@ -228,8 +228,8 @@ namespace MonoDevelop.VersionControl.Views
 		protected override void OnAdded (Widget widget)
 		{
 			base.OnAdded (widget);
-			if (widget == Child)
-				widget.SetScrollAdjustments (hAdjustment, vAdjustment);
+			//if (widget == Child)
+				//widget.SetScrollAdjustments (hAdjustment, vAdjustment);
 		}
 
 		protected override void OnRemoved (Widget widget)
@@ -248,10 +248,10 @@ namespace MonoDevelop.VersionControl.Views
 			base.OnDestroyed ();
 
 			hScrollBar.Destroy ();
-			hAdjustment.Destroy ();
+			//hAdjustment.Destroy ();
 
 			vScrollBar.Destroy ();
-			vAdjustment.Destroy ();
+			//vAdjustment.Destroy ();
 
 			editor.Destroy ();
 			overview.Destroy ();
@@ -296,11 +296,11 @@ namespace MonoDevelop.VersionControl.Views
 			return (dx != 0.0 || dy != 0.0) || base.OnScrollEvent (evnt);
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		{
-			base.OnSizeRequested (ref requisition);
-			children.ForEach (child => child.Child.SizeRequest ());
-		}
+		// protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		// {
+		// 	base.OnSizeRequested (ref requisition);
+		// 	children.ForEach (child => child.Child.SizeRequest ());
+		// }
 
 		void HandleEditorExposeEvent (object o, PaintEventArgs args)
 		{
@@ -338,18 +338,18 @@ namespace MonoDevelop.VersionControl.Views
 			}
 		}
 
-		protected override bool OnExposeEvent (EventExpose evnt)
-		{
-			Gdk.GC gc = Style.DarkGC (State);
-			evnt.Window.DrawLine (gc, Allocation.X, Allocation.Top, Allocation.X, Allocation.Bottom);
-			evnt.Window.DrawLine (gc, Allocation.Right, Allocation.Top, Allocation.Right, Allocation.Bottom);
+		// protected override bool OnExposeEvent (EventExpose evnt)
+		// {
+		// 	Gdk.GC gc = Style.DarkGC (State);
+		// 	evnt.Window.DrawLine (gc, Allocation.X, Allocation.Top, Allocation.X, Allocation.Bottom);
+		// 	evnt.Window.DrawLine (gc, Allocation.Right, Allocation.Top, Allocation.Right, Allocation.Bottom);
 
-			evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Y, Allocation.Right, Allocation.Y);
-			evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Bottom, Allocation.Right, Allocation.Bottom);
+		// 	evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Y, Allocation.Right, Allocation.Y);
+		// 	evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Bottom, Allocation.Right, Allocation.Bottom);
 
 
-			return base.OnExposeEvent (evnt);
-		}
+		// 	return base.OnExposeEvent (evnt);
+		// }
 
 		void JumpOverFoldings (ref int line)
 		{
@@ -400,7 +400,7 @@ namespace MonoDevelop.VersionControl.Views
 
 			public void OptionsChanged ()
 			{
-				layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+				//layout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 				UpdateWidth ();
 			}
 
@@ -700,138 +700,138 @@ namespace MonoDevelop.VersionControl.Views
 			const int margin = 4;
 
 
-			protected override bool OnExposeEvent (Gdk.EventExpose e)
-			{
-				using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
-					cr.LineWidth = Math.Max (1.0, widget.Editor.Options.Zoom);
+// 			protected override bool OnExposeEvent (Gdk.EventExpose e)
+// 			{
+// 				using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
+// 					cr.LineWidth = Math.Max (1.0, widget.Editor.Options.Zoom);
 
-					cr.Rectangle (leftSpacer, 0, Allocation.Width, Allocation.Height);
-					cr.SetSourceColor (Styles.BlameView.AnnotationBackgroundColor.ToCairoColor ());
-					cr.Fill ();
+// 					cr.Rectangle (leftSpacer, 0, Allocation.Width, Allocation.Height);
+// 					cr.SetSourceColor (Styles.BlameView.AnnotationBackgroundColor.ToCairoColor ());
+// 					cr.Fill ();
 
-					int startLine = widget.Editor.YToLine ((int)widget.Editor.VAdjustment.Value);
-					double startY = widget.Editor.LineToY (startLine);
-					while (startLine > 1 && startLine < annotations.Count && annotations[startLine - 1] != null && annotations[startLine] != null && annotations[startLine - 1].Revision == annotations[startLine].Revision) {
-						startLine--;
-						startY -= widget.Editor.GetLineHeight (widget.Editor.Document.GetLine (startLine));
-					}
-					double curY = startY - widget.Editor.VAdjustment.Value;
-					int line = startLine;
-					while (curY < Allocation.Bottom && line <= widget.Editor.LineCount) {
-						double curStart = curY;
-//						widget.JumpOverFoldings (ref line);
-						int lineStart = line;
-						int authorWidth = 0, revisionWidth = 0, dateWidth = 0, h = 16;
-						Annotation ann = line <= annotations.Count ? annotations[line - 1] : null;
-						if (ann != null) {
-							do {
-								widget.JumpOverFoldings (ref line);
-								line++;
-							} while (line <= annotations.Count && annotations[line - 1] != null && annotations[line - 1].Revision == ann.Revision);
+// 					int startLine = widget.Editor.YToLine ((int)widget.Editor.VAdjustment.Value);
+// 					double startY = widget.Editor.LineToY (startLine);
+// 					while (startLine > 1 && startLine < annotations.Count && annotations[startLine - 1] != null && annotations[startLine] != null && annotations[startLine - 1].Revision == annotations[startLine].Revision) {
+// 						startLine--;
+// 						startY -= widget.Editor.GetLineHeight (widget.Editor.Document.GetLine (startLine));
+// 					}
+// 					double curY = startY - widget.Editor.VAdjustment.Value;
+// 					int line = startLine;
+// 					while (curY < Allocation.Bottom && line <= widget.Editor.LineCount) {
+// 						double curStart = curY;
+// //						widget.JumpOverFoldings (ref line);
+// 						int lineStart = line;
+// 						int authorWidth = 0, revisionWidth = 0, dateWidth = 0, h = 16;
+// 						Annotation ann = line <= annotations.Count ? annotations[line - 1] : null;
+// 						if (ann != null) {
+// 							do {
+// 								widget.JumpOverFoldings (ref line);
+// 								line++;
+// 							} while (line <= annotations.Count && annotations[line - 1] != null && annotations[line - 1].Revision == ann.Revision);
 
-							double nextY = widget.editor.LineToY (line) - widget.editor.VAdjustment.Value;
-							if (highlightAnnotation != null && highlightAnnotation.Revision == ann.Revision && curStart <= highlightPositon && highlightPositon < nextY) {
-								cr.Rectangle (leftSpacer, curStart + cr.LineWidth, Allocation.Width - leftSpacer, nextY - curStart - cr.LineWidth);
-								cr.SetSourceColor (Styles.BlameView.AnnotationHighlightColor.ToCairoColor ());
-								cr.Fill ();
-							}
+// 							double nextY = widget.editor.LineToY (line) - widget.editor.VAdjustment.Value;
+// 							if (highlightAnnotation != null && highlightAnnotation.Revision == ann.Revision && curStart <= highlightPositon && highlightPositon < nextY) {
+// 								cr.Rectangle (leftSpacer, curStart + cr.LineWidth, Allocation.Width - leftSpacer, nextY - curStart - cr.LineWidth);
+// 								cr.SetSourceColor (Styles.BlameView.AnnotationHighlightColor.ToCairoColor ());
+// 								cr.Fill ();
+// 							}
 
-							// use a fixed size revision to get a approx. revision width
-							layout.SetText ("88888888");
-							layout.GetPixelSize (out revisionWidth, out h);
-							layout.SetText (TruncRevision (ann.Text));
+// 							// use a fixed size revision to get a approx. revision width
+// 							layout.SetText ("88888888");
+// 							layout.GetPixelSize (out revisionWidth, out h);
+// 							layout.SetText (TruncRevision (ann.Text));
 
-							const int dateRevisionSpacing = 16;
+// 							const int dateRevisionSpacing = 16;
 
-							using (var gc = new Gdk.GC (e.Window)) {
-								gc.RgbFgColor = Styles.BlameView.AnnotationTextColor.ToGdkColor ();
-								e.Window.DrawLayout (gc, Allocation.Width - revisionWidth - margin, (int)(curY + (widget.Editor.LineHeight - h) / 2), layout);
+// 							using (var gc = new Gdk.GC (e.Window)) {
+// 								gc.RgbFgColor = Styles.BlameView.AnnotationTextColor.ToGdkColor ();
+// 								e.Window.DrawLayout (gc, Allocation.Width - revisionWidth - margin, (int)(curY + (widget.Editor.LineHeight - h) / 2), layout);
 
-								if (ann.HasDate) {
-									string dateTime = ann.Date.ToShortDateString ();
-									// use a fixed size date to get a approx. date width
-									layout.SetText (new DateTime (1999, 10, 10).ToShortDateString ());
-									layout.GetPixelSize (out dateWidth, out h);
-									layout.SetText (dateTime);
+// 								if (ann.HasDate) {
+// 									string dateTime = ann.Date.ToShortDateString ();
+// 									// use a fixed size date to get a approx. date width
+// 									layout.SetText (new DateTime (1999, 10, 10).ToShortDateString ());
+// 									layout.GetPixelSize (out dateWidth, out h);
+// 									layout.SetText (dateTime);
 
-									e.Window.DrawLayout (gc, Allocation.Width - revisionWidth - margin - revisionWidth - dateRevisionSpacing, (int)(curY + (widget.Editor.LineHeight - h) / 2), layout);
-								}
-							}
+// 									e.Window.DrawLayout (gc, Allocation.Width - revisionWidth - margin - revisionWidth - dateRevisionSpacing, (int)(curY + (widget.Editor.LineHeight - h) / 2), layout);
+// 								}
+// 							}
 
-							using (var authorLayout = MonoDevelop.Components.PangoUtil.CreateLayout (this)) {
-								authorLayout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
-								authorLayout.SetText (ann.Author);
-								authorLayout.GetPixelSize (out authorWidth, out h);
+// 							using (var authorLayout = MonoDevelop.Components.PangoUtil.CreateLayout (this)) {
+// 								authorLayout.FontDescription = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
+// 								authorLayout.SetText (ann.Author);
+// 								authorLayout.GetPixelSize (out authorWidth, out h);
 
-								var maxWidth = Allocation.Width - revisionWidth - margin - revisionWidth - dateRevisionSpacing;
-				/*				if (authorWidth > maxWidth) {
-									int idx = ann.Author.IndexOf ('<');
-									if (idx > 0)
-										authorLayout.SetText (ann.Author.Substring (0, idx) + Environment.NewLine + ann.Author.Substring (idx));
-									authorLayout.GetPixelSize (out authorWidth, out h);
-								}*/
+// 								var maxWidth = Allocation.Width - revisionWidth - margin - revisionWidth - dateRevisionSpacing;
+// 				/*				if (authorWidth > maxWidth) {
+// 									int idx = ann.Author.IndexOf ('<');
+// 									if (idx > 0)
+// 										authorLayout.SetText (ann.Author.Substring (0, idx) + Environment.NewLine + ann.Author.Substring (idx));
+// 									authorLayout.GetPixelSize (out authorWidth, out h);
+// 								}*/
 
-								cr.Save ();
-								cr.Rectangle (0, 0, maxWidth, Allocation.Height);
-								cr.Clip ();
-								cr.Translate (leftSpacer + margin, (int)(curY + (widget.Editor.LineHeight - h) / 2));
-								cr.SetSourceColor (Styles.BlameView.AnnotationTextColor.ToCairoColor ());
-								cr.ShowLayout (authorLayout);
-								cr.ResetClip ();
-								cr.Restore ();
-							}
+// 								cr.Save ();
+// 								cr.Rectangle (0, 0, maxWidth, Allocation.Height);
+// 								cr.Clip ();
+// 								cr.Translate (leftSpacer + margin, (int)(curY + (widget.Editor.LineHeight - h) / 2));
+// 								cr.SetSourceColor (Styles.BlameView.AnnotationTextColor.ToCairoColor ());
+// 								cr.ShowLayout (authorLayout);
+// 								cr.ResetClip ();
+// 								cr.Restore ();
+// 							}
 
-							curY = nextY;
-						} else {
-							curY += widget.Editor.GetLineHeight (line);
-							line++;
-							widget.JumpOverFoldings (ref line);
-						}
+// 							curY = nextY;
+// 						} else {
+// 							curY += widget.Editor.GetLineHeight (line);
+// 							line++;
+// 							widget.JumpOverFoldings (ref line);
+// 						}
 
-						if (ann != null && line - lineStart > 1) {
-							string msg = GetCommitMessage (lineStart, false);
-							if (!string.IsNullOrEmpty (msg)) {
-								msg = RevisionHelpers.FormatMessage (msg);
+// 						if (ann != null && line - lineStart > 1) {
+// 							string msg = GetCommitMessage (lineStart, false);
+// 							if (!string.IsNullOrEmpty (msg)) {
+// 								msg = RevisionHelpers.FormatMessage (msg);
 
-								layout.SetText (msg);
-								layout.Width = (int)(Allocation.Width * Pango.Scale.PangoScale);
-								using (var gc = new Gdk.GC (e.Window)) {
-									gc.RgbFgColor = Styles.BlameView.AnnotationSummaryTextColor.ToGdkColor ();
-									gc.ClipRectangle = new Rectangle (0, (int)curStart, Allocation.Width, (int)(curY - curStart));
-									e.Window.DrawLayout (gc, (int)(leftSpacer + margin), (int)(curStart + h), layout);
-								}
-							}
-						}
+// 								layout.SetText (msg);
+// 								layout.Width = (int)(Allocation.Width * Pango.Scale.PangoScale);
+// 								using (var gc = new Gdk.GC (e.Window)) {
+// 									gc.RgbFgColor = Styles.BlameView.AnnotationSummaryTextColor.ToGdkColor ();
+// 									gc.ClipRectangle = new Rectangle (0, (int)curStart, Allocation.Width, (int)(curY - curStart));
+// 									e.Window.DrawLayout (gc, (int)(leftSpacer + margin), (int)(curStart + h), layout);
+// 								}
+// 							}
+// 						}
 
-						cr.Rectangle (0, curStart, leftSpacer, curY - curStart);
+// 						cr.Rectangle (0, curStart, leftSpacer, curY - curStart);
 
-						if (ann != null && !string.IsNullOrEmpty (ann.Author)) {
-							double a;
+// 						if (ann != null && !string.IsNullOrEmpty (ann.Author)) {
+// 							double a;
 
-							if (ann != null && (maxDate - minDate).TotalHours > 0) {
-								a = 1 - (ann.Date  - minDate).TotalHours / (maxDate - minDate).TotalHours;
-							} else {
-								a = 1;
-							}
-							var color = Styles.BlameView.AnnotationMarkColor;
-							color.Light = 0.4 + a / 2;
-							color.Saturation = 1 - a / 2;
-							cr.SetSourceColor (color.ToCairoColor ());
-						} else {
-							cr.SetSourceColor ((ann != null ? Styles.BlameView.AnnotationMarkModifiedColor : Styles.BlameView.AnnotationBackgroundColor).ToCairoColor ());
-						}
-						cr.Fill ();
+// 							if (ann != null && (maxDate - minDate).TotalHours > 0) {
+// 								a = 1 - (ann.Date  - minDate).TotalHours / (maxDate - minDate).TotalHours;
+// 							} else {
+// 								a = 1;
+// 							}
+// 							var color = Styles.BlameView.AnnotationMarkColor;
+// 							color.Light = 0.4 + a / 2;
+// 							color.Saturation = 1 - a / 2;
+// 							cr.SetSourceColor (color.ToCairoColor ());
+// 						} else {
+// 							cr.SetSourceColor ((ann != null ? Styles.BlameView.AnnotationMarkModifiedColor : Styles.BlameView.AnnotationBackgroundColor).ToCairoColor ());
+// 						}
+// 						cr.Fill ();
 
-						if (ann != null) {
-							cr.MoveTo (0, curY + 0.5);
-							cr.LineTo (Allocation.Width, curY + 0.5);
-							cr.SetSourceColor (Styles.BlameView.AnnotationSplitterColor.ToCairoColor ());
-							cr.Stroke ();
-						}
-					}
-				}
-				return true;
-			}
+// 						if (ann != null) {
+// 							cr.MoveTo (0, curY + 0.5);
+// 							cr.LineTo (Allocation.Width, curY + 0.5);
+// 							cr.SetSourceColor (Styles.BlameView.AnnotationSplitterColor.ToCairoColor ());
+// 							cr.Stroke ();
+// 						}
+// 					}
+// 				}
+// 				return true;
+// 			}
 
 			void UpdateAccessiblity ()
 			{
