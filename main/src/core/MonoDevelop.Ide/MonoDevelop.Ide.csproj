@@ -77,7 +77,7 @@
     <IncludeCopyLocal Include="Mono.Addins.Gui.dll" />
     <IncludeCopyLocal Include="Mono.Debugging.dll" />
     <IncludeCopyLocal Include="Xwt.dll" />
-    <IncludeCopyLocal Include="Xwt.Gtk.dll" />
+    <IncludeCopyLocal Include="Xwt.Gtk3.dll" />
     <IncludeCopyLocal Include="YamlDotNet.dll" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'DebugWin32' Or '$(Configuration)' == 'ReleaseWin32' ">
@@ -120,10 +120,10 @@
       <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
       <Name>Xwt.Gtk</Name>
     </ProjectReference>-->
-    <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk3.csproj">
+    <!--<ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk3.csproj">
       <Project>{3B25FD1F-CEBA-4450-8893-DC330FDB56A7}</Project>
       <Name>Xwt.Gtk3</Name>
-    </ProjectReference>
+    </ProjectReference>-->
     <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins\Mono.Addins.csproj">
       <Project>{91DD5A2D-9FE3-4C3C-9253-876141874DAD}</Project>
       <Name>Mono.Addins</Name>
@@ -156,10 +156,10 @@
       <Project>{288994D1-C7E1-4740-99AB-A52B572EBA8A}</Project>
       <Name>MonoDevelop.GtkExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\external\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj">
+    <!--<ProjectReference Include="..\..\..\external\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj">
       <Project>{8F0B736F-8353-4A6C-B471-192D826BDD81}</Project>
       <Name>Xwt.GtkSharp</Name>
-    </ProjectReference>
+    </ProjectReference>-->
     <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.GuiGtk3\Mono.Addins.GuiGtk3.csproj">
       <Project>{410A7DC9-E7DA-43E6-B592-93E2A344B660}</Project>
       <Name>Mono.Addins.GuiGtk3</Name>
@@ -170,6 +170,10 @@
       <Project>{FED3E127-B64A-4E57-8D2A-C8817C5D593A}</Project>
       <Name>Xwt.Gtk2</Name>
     </ProjectReference>-->
+    <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk3.csproj">
+      <Project>{FED3E127-B64A-4E57-8D2A-C8817C5D593A}</Project>
+      <Name>Xwt.Gtk3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.Gui\Mono.Addins.Gui.csproj">
       <Project>{FEC19BDA-4904-4005-8C09-68E82E8BEF6A}</Project>
       <Name>Mono.Addins.Gui</Name>
