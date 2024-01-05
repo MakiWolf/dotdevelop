@@ -13,7 +13,7 @@
 	url = https://github.com/dotdevelop/mdtestharness.git
 [submodule "main/external/mono-addins"]
 	path = main/external/mono-addins
-	url = https://github.com/MakiWolf/mono-addins.git
+	url = https://github.com/dotdevelop/mono-addins.git
 [submodule "main/external/mono-tools"]
 	path = main/external/mono-tools
 	url = https://github.com/dotdevelop/mono-tools.git
@@ -41,4 +41,4 @@
 	branch = dotdevelop
 [submodule "main/external/xwt"]
 	path = main/external/xwt
-	url = https://github.com/MakiWolf/xwt.git
+	url = https://github.com/dotdevelop/xwt.git
