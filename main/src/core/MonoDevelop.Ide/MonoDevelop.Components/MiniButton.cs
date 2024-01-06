@@ -134,8 +134,8 @@ namespace MonoDevelop.Components
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			if (!backgroundColorSet)
-				normalColor = Parent.Style.Background (Gtk.StateType.Normal);
+			//if (!backgroundColorSet)
+				//normalColor = Parent.Style.Background (Gtk.StateType.Normal);
 		}
 		
 		protected override bool OnEnterNotifyEvent (Gdk.EventCrossing evnt)
@@ -160,9 +160,9 @@ namespace MonoDevelop.Components
 		
 		void SetBg (bool hilight)
 		{
-			if (hilight)
-				ModifyBg (StateType.Normal, Style.Base (Gtk.StateType.Normal));
-			else
+			//if (hilight)
+			//	ModifyBg (StateType.Normal, Style.Base (Gtk.StateType.Normal));
+			//else
 				ModifyBg (StateType.Normal, normalColor);
 		}
 	}

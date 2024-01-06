@@ -1148,7 +1148,7 @@ namespace MonoDevelop.Components.DockNotebook
 			drawActive?.Invoke (ctx);
 
 			if (HasFocus) {
-				Gtk.Style.PaintFocus (Style, ctx, State, /*focusRect,*/ this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
+				//Gtk.Style.PaintFocus (Style, ctx, State, /*focusRect,*/ this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
 			}
 		}
 

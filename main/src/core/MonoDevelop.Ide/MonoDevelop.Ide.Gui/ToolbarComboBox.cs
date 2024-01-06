@@ -68,7 +68,7 @@ namespace MonoDevelop.Ide.Gui
 				if (toolbar.IconSize == Gtk.IconSize.Menu || toolbar.IconSize == Gtk.IconSize.SmallToolbar) {
 					//ctx.FontDesc = IdeServices.FontService.SansFont.CopyModified (Ide.Gui.Styles.FontScale11);
 				} else {
-					ctx.FontDesc = Style.FontDescription;
+					//ctx.FontDesc = Style.FontDescription;
 				}
 			}
 		}

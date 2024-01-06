@@ -37,12 +37,12 @@ namespace MonoDevelop.Components
 	{
 		WindowTransparencyDecorator decorator;
 		
-		public string LinkColor {
-			get {
-				var color = HslColor.GenerateHighlightColors (Style.Background (State), Style.Text (State), 3)[2];
-				return color.ToPangoString ();
-			}
-		}
+		//public string LinkColor {
+			//get {
+				//var color = HslColor.GenerateHighlightColors (Style.Background (State), Style.Text (State), 3)[2];
+				//return color.ToPangoString ();
+			//}
+		//}
 		
 		protected TooltipWindow () : base (Gtk.WindowType.Popup)
 		{

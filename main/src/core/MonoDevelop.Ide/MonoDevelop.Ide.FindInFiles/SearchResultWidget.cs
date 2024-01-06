@@ -344,7 +344,7 @@ namespace MonoDevelop.Ide.FindInFiles
 			// This is a workaround for Bug 559804 - Strings in search result pad are near-invisible
 			// On mac it's not possible to get the white background color with the Base or Background
 			// methods. If this bug is fixed or a better work around is found - remove this hack.
-			Color baseColor = Platform.IsMac ?treeviewSearchResults.Style.Light (treeviewSearchResults.State) : treeviewSearchResults.Style.Base (treeviewSearchResults.State);
+			//Color baseColor = Platform.IsMac ?treeviewSearchResults.Style.Light (treeviewSearchResults.State) : treeviewSearchResults.Style.Base (treeviewSearchResults.State);
 
 			while (idx > 0) {
 				idx += "foreground=\"".Length;
@@ -358,8 +358,8 @@ namespace MonoDevelop.Ide.FindInFiles
 
 				Color color = Color.Zero;
 
-				if (Color.Parse(colorStr, ref color))
-					colorStr = ColorToPangoMarkup(AdjustColor(baseColor, color));
+				//if (Color.Parse(colorStr, ref color))
+					//colorStr = ColorToPangoMarkup(AdjustColor(baseColor, color));
 
 				result.Append (colorStr);
 				idx = markup.IndexOf ("foreground=\"", idx, StringComparison.Ordinal);

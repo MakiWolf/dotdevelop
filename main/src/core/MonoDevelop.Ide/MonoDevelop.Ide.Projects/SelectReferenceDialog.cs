@@ -495,7 +495,7 @@ namespace MonoDevelop.Ide.Projects
 
 		public CombinedBox ()
 		{
-			filterEntry = new SearchEntry ();
+			filterEntry = new MonoDevelop.Components.SearchEntry ();
 			filterEntry.WidthRequest = 180;
 			filterEntry.Ready = true;
 			filterEntry.ForceFilterButtonVisible = true;

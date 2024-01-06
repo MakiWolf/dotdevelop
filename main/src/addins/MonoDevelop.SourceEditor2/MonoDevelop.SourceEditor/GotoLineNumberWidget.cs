@@ -177,25 +177,25 @@ namespace MonoDevelop.SourceEditor
 		void PreviewLine ()
 		{
 			if (String.IsNullOrEmpty (entryLineNumber.Text) || entryLineNumber.Text == "+" || entryLineNumber.Text == "-") {
-				this.entryLineNumber.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
-				this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Style.Foreground (Gtk.StateType.Normal));
+				//this.entryLineNumber.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
+				//this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Style.Foreground (Gtk.StateType.Normal));
 				RestoreWidgetState ();
 				return;
 			}
-			try {
+			//try {
 				int targetLine = TargetLine;
-				if (targetLine >= textEditor.Document.LineCount || targetLine < 0) {
+				//if (targetLine >= textEditor.Document.LineCount || targetLine < 0) {
 					targetLine = Math.Max (1, Math.Min (textEditor.Document.LineCount, targetLine));
 					
-				} else {
-					this.entryLineNumber.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
-					this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Style.Foreground (Gtk.StateType.Normal));
-				}
+				// } else {
+				// 	this.entryLineNumber.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
+				// 	this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Style.Foreground (Gtk.StateType.Normal));
+				// }
 				textEditor.Caret.Line = targetLine;
 				textEditor.CenterToCaret ();
-			} catch (System.Exception) {
-				this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Ide.Gui.Styles.Editor.SearchErrorForegroundColor.ToGdkColor ());
-			}
+			//} catch (System.Exception) {
+				//this.entryLineNumber.ModifyText (Gtk.StateType.Normal, Ide.Gui.Styles.Editor.SearchErrorForegroundColor.ToGdkColor ());
+			//}
 		}
 		
 		public void Focus ()

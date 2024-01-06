@@ -95,16 +95,16 @@ namespace MonoDevelop.SourceEditor.QuickTasks
 		protected override void OnStyleSet (Style previous_style)
 		{
 			base.OnStyleSet (previous_style);
-			if (Core.Platform.IsWindows) {
-				using (var scrollstyle = Rc.GetStyleByPaths (Settings, null, null, VScrollbar.GType)) {
-					var scrl = new VScrollbar (null);
-					scrl.Style = scrollstyle;
-					win81Slider = scrollstyle.Background (StateType.Normal).ToCairoColor ();
-					win81SliderPrelight = scrollstyle.Background (StateType.Prelight).ToCairoColor ();
-					win81ScrollbarWidth = (int)scrl.StyleGetProperty ("slider-width");
-					scrl.Destroy ();
-				}
-			}
+			// if (Core.Platform.IsWindows) {
+			// 	using (var scrollstyle = Rc.GetStyleByPaths (Settings, null, null, VScrollbar.GType)) {
+			// 		var scrl = new VScrollbar (null);
+			// 		scrl.Style = scrollstyle;
+			// 		win81Slider = scrollstyle.Background (StateType.Normal).ToCairoColor ();
+			// 		win81SliderPrelight = scrollstyle.Background (StateType.Prelight).ToCairoColor ();
+			// 		win81ScrollbarWidth = (int)scrl.StyleGetProperty ("slider-width");
+			// 		scrl.Destroy ();
+			// 	}
+			// }
 		}
 
 		readonly int barPadding = MonoDevelop.Core.Platform.IsWindows ? 1 : 3;

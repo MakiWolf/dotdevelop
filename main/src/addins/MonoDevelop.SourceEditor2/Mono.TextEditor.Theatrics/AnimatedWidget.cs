@@ -128,7 +128,7 @@ namespace Mono.TextEditor.Theatrics
 			attributes.EventMask = (int)Gdk.EventMask.ExposureMask;
 			GdkWindow = new Gdk.Window (Parent.GdkWindow, attributes, 0);
 			GdkWindow.UserData = Handle;
-			GdkWindow.Background = Style.Background (State);
+			//GdkWindow.Background = Style.Background (State);
 			Style.Attach (GdkWindow);
 		}
 

@@ -176,8 +176,8 @@ namespace MonoDevelop.Ide
 			rect.Y = Allocation.Y + Allocation.Height - rect.Height;
 			if (Direction == TextDirection.Ltr)
 				rect.X = Allocation.X + Allocation.Width - rect.Width;
-			else
-				rect.X = Allocation.X + Style.XThickness;
+			//else
+				//rect.X = Allocation.X + Style.XThickness;
 			return rect;
 		}
 		

@@ -222,7 +222,7 @@ namespace Mono.TextEditor.PopupWindow
 			using (var cr = this.CreateXwtContext ()) {
 
 				//avoid recreating the GC objects that we use multiple times
-				var textColor = this.Style.Text (StateType.Normal).ToXwtColor ();
+				//var textColor = this.Style.Text (StateType.Normal).ToXwtColor ();
 
 				int n = 0;
 				n = (int)(vadj.Value / rowHeight);
@@ -341,7 +341,7 @@ namespace Mono.TextEditor.PopupWindow
 		
 		void UpdateStyle ()
 		{
-			this.GdkWindow.Background = this.Style.Base (StateType.Normal);
+			//this.GdkWindow.Background = this.Style.Base (StateType.Normal);
 			if (layout != null)
 				layout.Dispose ();
 			layout = new Xwt.Drawing.TextLayout ();

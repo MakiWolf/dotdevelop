@@ -55,7 +55,7 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 		
 		ToggleButton catToggleButton;
 		ToggleButton compactModeToggleButton;
-		SearchEntry filterEntry;
+		Gtk.SearchEntry filterEntry;
 		MonoDevelop.Ide.Gui.PadFontChanger fontChanger;
 		IPadWindow container;
 		Dictionary<string,int> categoryPriorities = new Dictionary<string, int> ();
@@ -69,8 +69,8 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 			#region Toolbar
 			DockItemToolbar toolbar = container.GetToolbar (DockPositionType.Top);
 		
-			filterEntry = new SearchEntry();
-			filterEntry.Ready = true;
+			filterEntry = new Gtk.SearchEntry();
+			//filterEntry.Ready = true;
 			filterEntry.HasFrame = true;
 			filterEntry.WidthRequest = 150;
 			filterEntry.Changed += new EventHandler (filterTextChanged);
@@ -195,7 +195,7 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 			foreach (ToolboxWidgetCategory cat in toolboxWidget.Categories) {
 				bool hasVisibleChild = false;
 				foreach (ToolboxWidgetItem child in cat.Items) {
-					child.IsVisible = ((ItemToolboxNode)child.Tag).Filter (filterEntry.Entry.Text);
+					//child.IsVisible = ((ItemToolboxNode)child.Tag).Filter (filterEntry.Entry.Text);
 					hasVisibleChild |= child.IsVisible;
 				}
 				cat.IsVisible = hasVisibleChild;

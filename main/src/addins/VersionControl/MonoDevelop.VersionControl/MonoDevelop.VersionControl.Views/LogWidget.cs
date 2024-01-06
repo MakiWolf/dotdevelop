@@ -61,7 +61,7 @@ namespace MonoDevelop.VersionControl.Views
 		TreeView treeviewFiles;
 		TreeStore changedpathstore;
 		DocumentToolButton revertButton, revertToButton, refreshButton;
-		SearchEntry searchEntry;
+		Gtk.SearchEntry searchEntry;
 		string currentFilter;
 
 		VersionControlDocumentInfo info;
@@ -158,13 +158,13 @@ namespace MonoDevelop.VersionControl.Views
 			refreshButton = new DocumentToolButton (Gtk.Stock.Refresh, GettextCatalog.GetString ("Refresh"));
 			refreshButton.Clicked += new EventHandler (RefreshClicked);
 
-			searchEntry = new SearchEntry ();
-			searchEntry.WidthRequest = 200;
-			searchEntry.ForceFilterButtonVisible = true;
-			searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
-			searchEntry.Changed += HandleSearchEntryFilterChanged;
-			searchEntry.Ready = true;
-			searchEntry.Show ();
+			// searchEntry = new SearchEntry ();
+			// searchEntry.WidthRequest = 200;
+			// searchEntry.ForceFilterButtonVisible = true;
+			// searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
+			// searchEntry.Changed += HandleSearchEntryFilterChanged;
+			// searchEntry.Ready = true;
+			// searchEntry.Show ();
 
 			messageRenderer.Ellipsize = Pango.EllipsizeMode.End;
 			TreeViewColumn colRevMessage = new TreeViewColumn ();
@@ -368,13 +368,13 @@ namespace MonoDevelop.VersionControl.Views
 
 		void UpdateStyle ()
 		{
-			var c = Style.Base (StateType.Normal).ToXwtColor ();
-			c.Light *= 0.8;
-			commitBox.ModifyBg (StateType.Normal, c.ToGdkColor ());
+			//var c = Style.Base (StateType.Normal).ToXwtColor ();
+			//c.Light *= 0.8;
+			//commitBox.ModifyBg (StateType.Normal, c.ToGdkColor ());
 
 			var tcol = Styles.LogView.CommitDescBackgroundColor.ToGdkColor ();
-			textviewDetails.ModifyBase (StateType.Normal, tcol);
-			scrolledwindow1.ModifyBase (StateType.Normal, tcol);
+			//textviewDetails.ModifyBase (StateType.Normal, tcol);
+			//scrolledwindow1.ModifyBase (StateType.Normal, tcol);
 		}
 
 		internal void SetToolbar (DocumentToolbar toolbar)
@@ -408,7 +408,7 @@ namespace MonoDevelop.VersionControl.Views
 			filtering = true;
 			GLib.Timeout.Add (100, delegate {
 				filtering = false;
-				currentFilter = searchEntry.Entry.Text;
+				//currentFilter = searchEntry.Entry.Text;
 				SetLogSearchFilter (logstore, currentFilter);
 				UpdateHistory ();
 				return false;

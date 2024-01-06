@@ -516,36 +516,36 @@ namespace MonoDevelop.VersionControl.Views
 
 			bool hScrollBarVisible = hScrollBars[0].Visible;
 
-			int hheight = hScrollBarVisible ? hScrollBars[0].Requisition.Height : 0;
+			//int hheight = hScrollBarVisible ? hScrollBars[0].Requisition.Height : 0;
 			int headerSize = 0;
 
 			if (headerWidgets != null)
 				headerSize = System.Math.Max (headerWidgets[0].SizeRequest ().Height, 16);
 
-			Rectangle childRectangle = new Rectangle (allocation.X + overviewWidth + 1, allocation.Y + headerSize + 1, allocation.Width - vwidth - overviewWidth * 2, allocation.Height - hheight - headerSize - 1);
+			//Rectangle childRectangle = new Rectangle (allocation.X + overviewWidth + 1, allocation.Y + headerSize + 1, allocation.Width - vwidth - overviewWidth * 2, allocation.Height - hheight - headerSize - 1);
 			
 			
-			leftDiffScrollBar.SizeAllocate (new Rectangle (allocation.Left, childRectangle.Y, overviewWidth - 1, childRectangle.Height));
-			rightDiffScrollBar.SizeAllocate (new Rectangle (allocation.Right - overviewWidth + 1, childRectangle.Y, overviewWidth - 1, childRectangle.Height ));
+			//leftDiffScrollBar.SizeAllocate (new Rectangle (allocation.Left, childRectangle.Y, overviewWidth - 1, childRectangle.Height));
+			//rightDiffScrollBar.SizeAllocate (new Rectangle (allocation.Right - overviewWidth + 1, childRectangle.Y, overviewWidth - 1, childRectangle.Height ));
 
 			const int middleAreaWidth = 42;
-			int editorWidth = (childRectangle.Width - middleAreaWidth * (editors.Length - 1)) / editors.Length;
+			//int editorWidth = (childRectangle.Width - middleAreaWidth * (editors.Length - 1)) / editors.Length;
 
-			for (int i = 0; i < editors.Length; i++) {
-				Rectangle editorRectangle = new Rectangle (childRectangle.X + (editorWidth + middleAreaWidth) * i  , childRectangle.Top, editorWidth, childRectangle.Height);
-				editors[i].SizeAllocate (editorRectangle);
+			//for (int i = 0; i < editors.Length; i++) {
+				//Rectangle editorRectangle = new Rectangle (childRectangle.X + (editorWidth + middleAreaWidth) * i  , childRectangle.Top, editorWidth, childRectangle.Height);
+				//editors[i].SizeAllocate (editorRectangle);
 
-				if (hScrollBarVisible) {
-					hScrollBars[i].SizeAllocate (new Rectangle (editorRectangle.X, editorRectangle.Y + editorRectangle.Height, editorRectangle.Width, hheight));
-				}
+				//if (hScrollBarVisible) {
+					//hScrollBars[i].SizeAllocate (new Rectangle (editorRectangle.X, editorRectangle.Y + editorRectangle.Height, editorRectangle.Width, hheight));
+				//}
 
-				if (headerWidgets != null)
-					headerWidgets[i].SizeAllocate (new Rectangle (editorRectangle.X, allocation.Y + 1, editorRectangle.Width, headerSize));
-			}
+				//if (headerWidgets != null)
+					//headerWidgets[i].SizeAllocate (new Rectangle (editorRectangle.X, allocation.Y + 1, editorRectangle.Width, headerSize));
+			//}
 
-			for (int i = 0; i < middleAreas.Length; i++) {
-				middleAreas[i].SizeAllocate (new Rectangle (childRectangle.X + editorWidth * (i + 1) + middleAreaWidth * i, childRectangle.Top, middleAreaWidth + 1, childRectangle.Height));
-			}
+			//for (int i = 0; i < middleAreas.Length; i++) {
+				//middleAreas[i].SizeAllocate (new Rectangle (childRectangle.X + editorWidth * (i + 1) + middleAreaWidth * i, childRectangle.Top, middleAreaWidth + 1, childRectangle.Height));
+			//}
 			base.OnSizeAllocated (allocation);
 		}
 		

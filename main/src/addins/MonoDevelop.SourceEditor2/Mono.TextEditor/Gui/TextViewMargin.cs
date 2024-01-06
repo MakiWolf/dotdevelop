@@ -646,7 +646,7 @@ namespace Mono.TextEditor
 
 			DisposeLayoutDict ();
 			caretX = caretY = -LineHeight;
-			base.cursor = GetDefaultTextCursor ();
+			//base.cursor = GetDefaultTextCursor ();
 		}
 
 		void DisposeGCs ()
@@ -2690,11 +2690,11 @@ namespace Mono.TextEditor
 		List<IActionTextLineMarker> oldMarkers = new List<IActionTextLineMarker> ();
 		List<IActionTextLineMarker> newMarkers = new List<IActionTextLineMarker> ();
 
-		Cursor GetDefaultTextCursor()
-		{
-			var baseColor = textEditor.Style.Background(StateType.Normal);
-			return  HslColor.Brightness(baseColor) < 0.5 ? xtermCursorInverted.Value : xtermCursor.Value;
-		}
+		//Cursor GetDefaultTextCursor()
+		//{
+			//var baseColor = textEditor.Style.Background(StateType.Normal);
+			//return  HslColor.Brightness(baseColor) < 0.5 ? xtermCursorInverted.Value : xtermCursor.Value;
+		//}
 
 		protected internal override void MouseHover (MarginMouseEventArgs args)
 		{
@@ -2735,7 +2735,7 @@ namespace Mono.TextEditor
 			} else {
 				oldMarkers.Clear ();
 			}
-			base.cursor = hoverResult.HasCursor ? hoverResult.Cursor : GetDefaultTextCursor ();
+			//base.cursor = hoverResult.HasCursor ? hoverResult.Cursor : GetDefaultTextCursor ();
 			if (textEditor.TooltipMarkup != hoverResult.TooltipMarkup) {
 				textEditor.TooltipMarkup = null;
 				textEditor.TriggerTooltipQuery ();
@@ -2755,11 +2755,11 @@ namespace Mono.TextEditor
 				ShowCodeSegmentPreviewTooltip (TextSegment.Invalid, Gdk.Rectangle.Zero);
 				string link = GetLink != null ? GetLink (args) : null;
 
-				if (!String.IsNullOrEmpty (link)) {
+				//if (!String.IsNullOrEmpty (link)) {
 					base.cursor = textLinkCursor.Value;
-				} else {
-					base.cursor = hoverResult.HasCursor ? hoverResult.Cursor : GetDefaultTextCursor ();
-				}
+				//} else {
+					//base.cursor = hoverResult.HasCursor ? hoverResult.Cursor : GetDefaultTextCursor ();
+				//}
 				return;
 			}
 

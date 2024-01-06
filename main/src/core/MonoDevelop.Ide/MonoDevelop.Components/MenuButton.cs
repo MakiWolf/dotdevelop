@@ -126,10 +126,10 @@ namespace MonoDevelop.Components
 			y += rect.Y + rect.Height;
 			
 			//if the menu would be off the bottom of the screen, "drop" it upwards
-			if (y + mn.Requisition.Height > this.Screen.Height) {
-				y -= mn.Requisition.Height;
-				y -= rect.Height;
-			}
+			//if (y + mn.Requisition.Height > this.Screen.Height) {
+			//	y -= mn.Requisition.Height;
+			//	y -= rect.Height;
+			//}
 			
 			//let GTK reposition the button if it still doesn't fit on the screen
 			push_in = true;

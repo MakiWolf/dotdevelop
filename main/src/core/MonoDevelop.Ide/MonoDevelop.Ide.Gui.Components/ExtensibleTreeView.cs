@@ -189,7 +189,7 @@ namespace MonoDevelop.Ide.Gui.Components
 
 		void UpdateFont ()
 		{
-			text_render.CustomFont = IdeApp.Preferences.CustomPadFont ?? tree.Style.FontDescription;
+			//text_render.CustomFont = IdeApp.Preferences.CustomPadFont ?? tree.Style.FontDescription;
 			tree.ColumnsAutosize ();
 		}
 
@@ -2480,7 +2480,7 @@ namespace MonoDevelop.Ide.Gui.Components
 				if (scaledFont == null) {
 					if (scaledFont != null)
 						scaledFont.Dispose ();
-					scaledFont = (customFont ?? parent.widget.Style.FontDesc).Copy ();
+					//scaledFont = (customFont ?? parent.widget.Style.FontDesc).Copy ();
 					scaledFont.Size = (int)(customFont.Size * Zoom);
 					if (layout != null)
 						layout.FontDescription = scaledFont;
@@ -2496,11 +2496,11 @@ namespace MonoDevelop.Ide.Gui.Components
 				string newmarkup = TextMarkup;
 				if (DisabledStyle) {
 					Gdk.Color fgColor;
-					if (Platform.IsMac && flags.HasFlag (Gtk.CellRendererState.Selected))
-						fgColor = widget.Style.Text (IdeTheme.UserInterfaceTheme == Theme.Light ? Gtk.StateType.Selected : Gtk.StateType.Normal);
-					else
-						fgColor = widget.Style.Text (Gtk.StateType.Insensitive);
-					newmarkup = "<span foreground='" + fgColor.GetHex () + "'>" + TextMarkup + "</span>";
+					//if (Platform.IsMac && flags.HasFlag (Gtk.CellRendererState.Selected))
+						//fgColor = widget.Style.Text (IdeTheme.UserInterfaceTheme == Theme.Light ? Gtk.StateType.Selected : Gtk.StateType.Normal);
+					//else
+						//fgColor = widget.Style.Text (Gtk.StateType.Insensitive);
+					//newmarkup = "<span foreground='" + fgColor.GetHex () + "'>" + TextMarkup + "</span>";
 				}
 
 				if (!string.IsNullOrEmpty (SecondaryTextMarkup)) {

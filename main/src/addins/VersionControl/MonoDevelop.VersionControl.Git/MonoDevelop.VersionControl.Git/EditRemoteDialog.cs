@@ -64,8 +64,8 @@ namespace MonoDevelop.VersionControl.Git
 
 		void SetPushUrlTextStyle (bool disabled)
 		{
-			entryPushUrl.ModifyText (Gtk.StateType.Normal, entryUrl.Style.Text (disabled ? Gtk.StateType.Insensitive : Gtk.StateType.Normal));
-			entryPushUrl.ModifyText (Gtk.StateType.Active, entryUrl.Style.Text (disabled ? Gtk.StateType.Insensitive : Gtk.StateType.Active));
+			//entryPushUrl.ModifyText (Gtk.StateType.Normal, entryUrl.Style.Text (disabled ? Gtk.StateType.Insensitive : Gtk.StateType.Normal));
+			//entryPushUrl.ModifyText (Gtk.StateType.Active, entryUrl.Style.Text (disabled ? Gtk.StateType.Insensitive : Gtk.StateType.Active));
 		}
 
 		public string RemoteName {

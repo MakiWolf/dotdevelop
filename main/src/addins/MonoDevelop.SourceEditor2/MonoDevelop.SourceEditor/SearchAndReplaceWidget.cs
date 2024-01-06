@@ -785,8 +785,8 @@ But I leave it in in the case I've missed something. Mike
 				}
 				if (string.IsNullOrEmpty (SearchPattern)) {
 					resultInformLabel.Text = "";
-					resultInformLabelEventBox.ModifyBg (StateType.Normal, entry.Style.Base (entry.State));
-					resultInformLabel.ModifyFg (StateType.Normal, entry.Style.Foreground (StateType.Insensitive));
+					//resultInformLabelEventBox.ModifyBg (StateType.Normal, entry.Style.Base (entry.State));
+					//resultInformLabel.ModifyFg (StateType.Normal, entry.Style.Foreground (StateType.Insensitive));
 					return;
 				}
 
@@ -823,8 +823,8 @@ But I leave it in in the case I've missed something. Mike
 					} else {
 						resultInformLabel.Text = String.Format (GettextCatalog.GetPluralString ("{0} match", "{0} matches", textEditor.TextViewMargin.SearchResultMatchCount), textEditor.TextViewMargin.SearchResultMatchCount);
 					}
-					resultInformLabelEventBox.ModifyBg (StateType.Normal, entry.Style.Base (entry.State));
-					resultInformLabel.ModifyFg (StateType.Normal, entry.Style.Foreground (StateType.Insensitive));
+					//resultInformLabelEventBox.ModifyBg (StateType.Normal, entry.Style.Base (entry.State));
+					//resultInformLabel.ModifyFg (StateType.Normal, entry.Style.Foreground (StateType.Insensitive));
 					textEditor.TextViewMargin.MainSearchResult = foundSegment;
 				}
 			} catch (Exception ex) {

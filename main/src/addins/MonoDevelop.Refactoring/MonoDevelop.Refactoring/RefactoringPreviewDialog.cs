@@ -113,13 +113,13 @@ namespace MonoDevelop.Refactoring
 			var loc = doc.OffsetToLocation (replaceChange.Offset);
 			
 			string text = string.Format (GettextCatalog.GetString ("(Line:{0}, Column:{1})"), loc.Line, loc.Column);
-			if (treeviewPreview.Selection.IterIsSelected (iter)) {
+			//if (treeviewPreview.Selection.IterIsSelected (iter)) {
 				cellRendererText.Text = text;
-			} else {
-				var color = Style.Text (StateType.Insensitive);
-				var c = string.Format ("#{0:X02}{1:X02}{2:X02}", color.Red / 256, color.Green / 256, color.Blue / 256);
-				cellRendererText.Markup = "<span foreground=\"" + c + "\">" + text + "</span>";
-			}
+			//} else {
+				//var color = Style.Text (StateType.Insensitive);
+				//var c = string.Format ("#{0:X02}{1:X02}{2:X02}", color.Red / 256, color.Green / 256, color.Blue / 256);
+				//cellRendererText.Markup = "<span foreground=\"" + c + "\">" + text + "</span>";
+			//}
 		}
 		
 		void SetDiffCellData (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)

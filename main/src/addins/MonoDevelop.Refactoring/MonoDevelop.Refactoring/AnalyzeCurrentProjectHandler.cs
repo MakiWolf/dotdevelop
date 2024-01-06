@@ -77,18 +77,18 @@ namespace MonoDevelop.Refactoring
 			try {
 				using (var monitor = IdeApp.Workbench.ProgressMonitors.GetStatusProgressMonitor (GettextCatalog.GetString ("Analyzing project"), null, false, true, false, null, true)) {
 					CancellationToken token = monitor.CancellationToken;
-					var allDiagnostics = await Task.Run (async delegate {
-						var diagnosticList = new List<Diagnostic> ();
-						monitor.BeginTask (GettextCatalog.GetString ("Analyzing {0}", project.Name), 1);
-						var providers = await AnalyzeWholeSolutionHandler.GetProviders (analysisProject);
-						diagnosticList.AddRange (await AnalyzeWholeSolutionHandler.GetDiagnostics (analysisProject, providers, token));
-						monitor.EndTask ();
-						return diagnosticList;
-					}).ConfigureAwait (false);
+					// var allDiagnostics = await Task.Run (async delegate {
+					// 	var diagnosticList = new List<Diagnostic> ();
+					// 	monitor.BeginTask (GettextCatalog.GetString ("Analyzing {0}", project.Name), 1);
+					// 	var providers = await AnalyzeWholeSolutionHandler.GetProviders (analysisProject);
+					// 	diagnosticList.AddRange (await AnalyzeWholeSolutionHandler.GetDiagnostics (analysisProject, providers, token));
+					// 	monitor.EndTask ();
+					// 	return diagnosticList;
+					// }).ConfigureAwait (false);
 
-					await Runtime.RunInMainThread (delegate {
-						AnalyzeWholeSolutionHandler.Report (monitor, allDiagnostics, project);
-					}).ConfigureAwait (false);
+					//await Runtime.RunInMainThread (delegate {
+						//AnalyzeWholeSolutionHandler.Report (monitor, allDiagnostics, project);
+					//}).ConfigureAwait (false);
 				}
 			} catch (OperationCanceledException) {
 			} catch (AggregateException ae) {

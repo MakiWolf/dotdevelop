@@ -26,6 +26,7 @@
 using System;
 using Xwt.Backends;
 using Xwt.GtkBackend;
+using Gtk;
 
 namespace MonoDevelop.Components.Extensions
 {
@@ -44,18 +45,18 @@ namespace MonoDevelop.Components.Extensions
 			toolbar = new HeaderBox ();
 			toolbar.GradientBackground = true;
 			toolbar.SetMargins (0, 1, 0, 0);
-			MainBox.PackStart (toolbar, false, false, 0);
-			((Gtk.Box.BoxChild)MainBox [toolbar]).Position = 0;
+			//MainBox.PackStart (toolbar, false, false, 0);
+			//((Gtk.Box.BoxChild)MainBox [toolbar]).Position = 0;
 		}
 
 		public void SetHeaderContent (IWidgetBackend backend)
 		{
 			if (toolbar.Child != null) {
-				WidgetBackend.RemoveChildPlacement (toolbar.Child);
+				//WidgetBackend.RemoveChildPlacement (toolbar.Child);
 				toolbar.Remove (toolbar.Child);
 			}
 			if (backend != null) {
-				toolbar.Child = WidgetBackend.GetWidgetWithPlacement (backend);
+				//toolbar.Child = WidgetBackend.GetWidgetWithPlacement (backend);
 				toolbar.Show ();
 			} else {
 				toolbar.Hide ();

@@ -49,7 +49,7 @@ namespace MonoDevelop.SourceEditor
 			this.filename = filename;
 			this.settings = SourceEditorPrintSettings.Load ();
 			
-			this.Unit = Unit.Pixel;
+			//this.Unit = Unit.Pixel;
 		}
 		
 		protected override void OnBeginPrint (PrintContext context)
@@ -67,12 +67,12 @@ namespace MonoDevelop.SourceEditor
 			
 			style = SyntaxHighlightingService.GetEditorTheme (settings.EditorTheme);
 
-			pageWidth = context.PageSetup.GetPageWidth (Unit.Pixel);
-			pageHeight = context.PageSetup.GetPageHeight (Unit.Pixel);
-			double contentHeight = pageHeight
-				- (headerLines > 0? settings.HeaderPadding : 0) 
-				- (footerLines > 0? settings.FooterPadding : 0);
-			linesPerPage = (int)(contentHeight / lineHeight) - (headerLines + footerLines);
+			//pageWidth = context.PageSetup.GetPageWidth (Unit.Pixel);
+			//pageHeight = context.PageSetup.GetPageHeight (Unit.Pixel);
+			//double contentHeight = pageHeight
+			//	- (headerLines > 0? settings.HeaderPadding : 0) 
+			//	- (footerLines > 0? settings.FooterPadding : 0);
+			//linesPerPage = (int)(contentHeight / lineHeight) - (headerLines + footerLines);
 			totalPages = (int)Math.Ceiling ((double)editor.LineCount / linesPerPage); 
 			
 			NPages = totalPages;

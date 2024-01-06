@@ -73,9 +73,9 @@ namespace Mono.Instrumentation.Monitor
 		{
 			base.OnRealized ();
 			
-			var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
-			c.Light -= 0.1;
-			headerBox.ModifyBg (Gtk.StateType.Normal, c.ToGdkColor ());
+			//var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
+			//c.Light -= 0.1;
+			//headerBox.ModifyBg (Gtk.StateType.Normal, c.ToGdkColor ());
 		}
 
 

@@ -607,8 +607,8 @@ namespace MonoDevelop.Components
 
 			void UpdateStyle ()
 			{
-				if (IsRealized)
-					GdkWindow.Background = Style.Base (StateType.Normal);
+				//if (IsRealized)
+				//	GdkWindow.Background = Style.Base (StateType.Normal);
 				if (layout != null)
 					layout.Dispose ();
 				layout = new Pango.Layout (PangoContext);

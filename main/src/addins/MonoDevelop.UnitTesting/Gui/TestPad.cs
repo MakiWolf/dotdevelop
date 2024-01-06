@@ -145,10 +145,10 @@ namespace MonoDevelop.UnitTesting
 			header.PackEnd (hb, false, false, 0);
 			
 			header.Add (detailLabel);
-			Gdk.Color hcol = eb.Style.Background (StateType.Normal);
-			hcol.Red = (ushort) (((double)hcol.Red) * 0.9);
-			hcol.Green = (ushort) (((double)hcol.Green) * 0.9);
-			hcol.Blue = (ushort) (((double)hcol.Blue) * 0.9);
+			//Gdk.Color hcol = eb.Style.Background (StateType.Normal);
+			//hcol.Red = (ushort) (((double)hcol.Red) * 0.9);
+			//hcol.Green = (ushort) (((double)hcol.Green) * 0.9);
+			//hcol.Blue = (ushort) (((double)hcol.Blue) * 0.9);
 		//	eb.ModifyBg (StateType.Normal, hcol);
 			
 			detailsPad.PackStart (eb, false, false, 0);

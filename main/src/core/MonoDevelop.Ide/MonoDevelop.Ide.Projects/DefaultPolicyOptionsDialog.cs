@@ -43,7 +43,7 @@ namespace MonoDevelop.Ide.Projects
 	public class DefaultPolicyOptionsDialog : OptionsDialog
 	{
 		ComboBoxText policiesCombo;
-		MenuButton newButton;
+		Gtk.MenuButton newButton;
 		Button deleteButton;
 		MonoDevelop.Components.MenuButton exportButton;
 		List<PolicySet> sets = new List<PolicySet> ();
@@ -69,7 +69,7 @@ namespace MonoDevelop.Ide.Projects
 			deleteButton = new Button (GettextCatalog.GetString ("Delete Policy"));
 			topBar.PackEnd (deleteButton, false, false, 0);
 
-			exportButton = new MenuButton ();
+			exportButton = new MonoDevelop.Components.MenuButton ();
 			exportButton.Label = GettextCatalog.GetString ("Export");
 			exportButton.ContextMenuRequested = delegate {
 				ContextMenu menu = new ContextMenu ();
@@ -89,28 +89,28 @@ namespace MonoDevelop.Ide.Projects
 			};
 			topBar.PackEnd (exportButton, false, false, 0);
 
-			newButton = new MonoDevelop.Components.MenuButton ();
+			newButton = new Gtk.MenuButton ();
 			newButton.Label = GettextCatalog.GetString ("Add Policy");
-			newButton.ContextMenuRequested = delegate {
-				ContextMenu menu = new ContextMenu ();
+			//newButton.ContextMenuRequested = delegate {
+			//	ContextMenu menu = new ContextMenu ();
 
-				ContextMenuItem item = new ContextMenuItem (GettextCatalog.GetString ("New policy..."));
-				item.Clicked += HandleNewButtonClicked;
-				menu.Items.Add (item);
+			//	ContextMenuItem item = new ContextMenuItem (GettextCatalog.GetString ("New policy..."));
+			//	item.Clicked += HandleNewButtonClicked;
+			//	menu.Items.Add (item);
 
-				item = new ContextMenuItem (GettextCatalog.GetString ("From file..."));
-				item.Clicked += HandleFromFile;
-				menu.Items.Add (item);
+			//	item = new ContextMenuItem (GettextCatalog.GetString ("From file..."));
+			//	item.Clicked += HandleFromFile;
+			//	menu.Items.Add (item);
 
-				item = new ContextMenuItem (GettextCatalog.GetString ("From project or solution..."));
-				item.Clicked += HandleFromProject;
-				if (!IdeApp.Workspace.IsOpen) {
-					item.Sensitive = false;
-				}
-				menu.Items.Add (item);
+			//	item = new ContextMenuItem (GettextCatalog.GetString ("From project or solution..."));
+			//	item.Clicked += HandleFromProject;
+			//	if (!IdeApp.Workspace.IsOpen) {
+			//		item.Sensitive = false;
+			//	}
+			//	menu.Items.Add (item);
 
-				return menu;
-			};
+			//	return menu;
+			//};
 			topBar.PackEnd (newButton, false, false, 0);
 
 			Alignment align = new Alignment (0f, 0f, 1f, 1f);

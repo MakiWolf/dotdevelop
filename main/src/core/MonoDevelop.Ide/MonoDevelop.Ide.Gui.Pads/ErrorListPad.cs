@@ -240,7 +240,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 			spacer.Accessible.SetShouldIgnore (true);
 			toolbar.Add (spacer, true);
 
-			searchEntry = new SearchEntry ();
+			searchEntry = new MonoDevelop.Components.SearchEntry ();
 			searchEntry.Accessible.SetLabel (GettextCatalog.GetString ("Search"));
 			searchEntry.Accessible.Name = "ErrorPad.Search";
 			searchEntry.Accessible.Description = GettextCatalog.GetString ("Search the error data");

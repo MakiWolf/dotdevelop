@@ -608,7 +608,7 @@ namespace MonoDevelop.Components.PropertyGrid
 					ctx.Rectangle (0, y, dividerX, h + PropertyTopBottomPadding*2);
 					ctx.Clip ();
 					ctx.MoveTo (x, y + PropertyTopBottomPadding);
-					ctx.SetSourceColor (Style.Text (state).ToCairoColor ());
+					//ctx.SetSourceColor (Style.Text (state).ToCairoColor ());
 					Pango.CairoHelper.ShowLayout (ctx, layout);
 					ctx.Restore ();
 

@@ -959,7 +959,7 @@ return;
 				typeof(GtkWorkarounds).Module,
 				true);
 
-			var invokerType = typeof(Gtk.Container.CallbackInvoker);
+			//var invokerType = typeof(Gtk.Container.CallbackInvoker);
 
 			//this was based on compiling a similar method and disassembling it
 			ILGenerator il = dm.GetILGenerator ();
@@ -970,7 +970,7 @@ return;
 
 			var loc_container = il.DeclareLocal (typeof(Gtk.Container));
 			var loc_obj = il.DeclareLocal (typeof(object));
-			var loc_invoker = il.DeclareLocal (invokerType);
+			//var loc_invoker = il.DeclareLocal (invokerType);
 			var loc_ex = il.DeclareLocal (typeof(Exception));
 
 			//check that the type is an exact match
@@ -1016,13 +1016,13 @@ return;
 			il.Emit (OpCodes.Ldloca_S, 2);
 			il.Emit (OpCodes.Ldarg_2);
 			il.Emit (OpCodes.Ldarg_3);
-			il.Emit (OpCodes.Call, invokerType.GetConstructor (
-				BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof (IntPtr), typeof (IntPtr) }, null));
+			//il.Emit (OpCodes.Call, invokerType.GetConstructor (
+			//	BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof (IntPtr), typeof (IntPtr) }, null));
 			il.Emit (OpCodes.Ldloc, loc_container);
 			il.Emit (OpCodes.Ldarg_1);
-			il.Emit (OpCodes.Ldloc, loc_invoker);
-			il.Emit (OpCodes.Box, invokerType);
-			il.Emit (OpCodes.Ldftn, invokerType.GetMethod ("Invoke"));
+			//il.Emit (OpCodes.Ldloc, loc_invoker);
+			//il.Emit (OpCodes.Box, invokerType);
+			//il.Emit (OpCodes.Ldftn, invokerType.GetMethod ("Invoke"));
 			il.Emit (OpCodes.Newobj, typeof (Gtk.Callback).GetConstructor (
 				BindingFlags.Instance | BindingFlags.Public, null, new Type[] { typeof (object), typeof (IntPtr) }, null));
 			var forallMeth = typeof (Gtk.Container).GetMethod ("ForAll",

@@ -30,6 +30,7 @@ using MonoDevelop.Core;
 using MonoDevelop.Ide;
 using MonoDevelop.Ide.Gui;
 using System.Linq;
+using Gtk;
 
 #if MAC
 using AppKit;
@@ -263,8 +264,8 @@ namespace MonoDevelop.Components
 		{
 			if (Platform.IsLinux) {
 				var defaultStyle = Gtk.Rc.GetStyle (IdeApp.Workbench.RootWindow);
-				var bgColor = defaultStyle.Background (Gtk.StateType.Normal);
-				UserInterfaceTheme = HslColor.Brightness (bgColor) < 0.5 ? Theme.Dark : Theme.Light;
+				//var bgColor = defaultStyle.Background (Gtk.StateType.Normal);
+				//UserInterfaceTheme = HslColor.Brightness (bgColor) < 0.5 ? Theme.Dark : Theme.Light;
 			}
 
 			if (UserInterfaceTheme == Theme.Dark)
@@ -446,7 +447,7 @@ namespace MonoDevelop.Components
 		public override void Initialize ()
 		{
 			base.Initialize ();
-			IdeTheme.ApplyTheme (Window);
+			//IdeTheme.ApplyTheme (Window);
 		}
 	}
 
@@ -455,7 +456,7 @@ namespace MonoDevelop.Components
 		public override void Initialize ()
 		{
 			base.Initialize ();
-			IdeTheme.ApplyTheme (Window);
+			//IdeTheme.ApplyTheme (Window);
 		}
 	}
 }

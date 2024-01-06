@@ -127,15 +127,15 @@ namespace Mono.TextEditor
 			get { return imContext; }
 		}
 
-		public MenuItem CreateInputMethodMenuItem (string label)
+		public Gtk.MenuItem CreateInputMethodMenuItem (string label)
 		{
 			if (GtkWorkarounds.GtkMinorVersion >= 16) {
-				bool showMenu = (bool) GtkWorkarounds.GetProperty (Settings, "gtk-show-input-method-menu").Val;
-				if (!showMenu)
+				//bool showMenu = (bool) GtkWorkarounds.GetProperty (Settings, "gtk-show-input-method-menu").Val;
+				//if (!showMenu)
 					return null;
 			}
-			MenuItem imContextMenuItem = new MenuItem (label);
-			Menu imContextMenu = new Menu ();
+			Gtk.MenuItem imContextMenuItem = new Gtk.MenuItem (label);
+			Gtk.Menu imContextMenu = new Gtk.Menu ();
 			imContextMenuItem.Submenu = imContextMenu;
 			IMContext.AppendMenuitems (imContextMenu);
 			return imContextMenuItem;

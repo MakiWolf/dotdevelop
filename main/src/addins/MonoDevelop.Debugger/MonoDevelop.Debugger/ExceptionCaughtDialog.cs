@@ -243,8 +243,8 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			} else 
 #endif
 			{
-				exceptionValueTreeView.ModifyBase (StateType.Normal, Styles.ExceptionCaughtDialog.ValueTreeBackgroundColor.ToGdkColor ());
-				exceptionValueTreeView.ModifyBase (StateType.Active, Styles.ObjectValueTreeActiveBackgroundColor.ToGdkColor ());
+				//exceptionValueTreeView.ModifyBase (StateType.Normal, Styles.ExceptionCaughtDialog.ValueTreeBackgroundColor.ToGdkColor ());
+				//exceptionValueTreeView.ModifyBase (StateType.Active, Styles.ObjectValueTreeActiveBackgroundColor.ToGdkColor ());
 				exceptionValueTreeView.ModifyFont (Pango.FontDescription.FromString (Platform.IsWindows ? "9" : "11"));
 				exceptionValueTreeView.RulesHint = false;
 				exceptionValueTreeView.CanFocus = true;
@@ -563,8 +563,8 @@ widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
 		Widget CreateInnerExceptionsTree ()
 		{
 			innerExceptionsTreeView = new InnerExceptionsTree ();
-			innerExceptionsTreeView.ModifyBase (StateType.Normal, Styles.ExceptionCaughtDialog.TreeBackgroundColor.ToGdkColor ()); // background
-			innerExceptionsTreeView.ModifyBase (StateType.Selected, Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor.ToGdkColor ()); // selected
+			//innerExceptionsTreeView.ModifyBase (StateType.Normal, Styles.ExceptionCaughtDialog.TreeBackgroundColor.ToGdkColor ()); // background
+			//innerExceptionsTreeView.ModifyBase (StateType.Selected, Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor.ToGdkColor ()); // selected
 			innerExceptionsTreeView.HeadersVisible = false;
 			innerExceptionsStore = new TreeStore (typeof (ExceptionInfo));
 

@@ -373,7 +373,7 @@ namespace MonoDevelop.Ide.CodeCompletion
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			this.GdkWindow.Background = this.Style.Base (StateType.Normal);
+			//this.GdkWindow.Background = this.Style.Base (StateType.Normal);
 		}
 		
 		protected override bool OnMotionNotifyEvent (EventMotion e)

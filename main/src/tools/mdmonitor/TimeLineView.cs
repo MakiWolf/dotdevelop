@@ -526,12 +526,12 @@ namespace Mono.Instrumentation.Monitor
 			ctx.NewPath ();
 			ctx.LineWidth = 1;
 			ctx.Rectangle (ex, ey, ExpanderSize, ExpanderSize);
-			if (hilight)
-				ctx.SetSourceColor (Style.Background (Gtk.StateType.Normal).ToCairoColor ());
-			else
+			//if (hilight)
+				//ctx.SetSourceColor (Style.Background (Gtk.StateType.Normal).ToCairoColor ());
+			//else
 				ctx.SetSourceColor (Style.White.ToCairoColor ());
 			ctx.FillPreserve ();
-			ctx.SetSourceColor (Style.Foreground (Gtk.StateType.Normal).ToCairoColor ());
+			//ctx.SetSourceColor (Style.Foreground (Gtk.StateType.Normal).ToCairoColor ());
 			ctx.Stroke ();
 			ctx.NewPath ();
 			ctx.MoveTo (ex + 2, ey + (ExpanderSize/2));

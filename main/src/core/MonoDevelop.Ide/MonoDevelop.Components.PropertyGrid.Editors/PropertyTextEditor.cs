@@ -99,8 +99,8 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 				entry.HasFrame = false;
 				entry.Changed += TextChanged;
 				entry.FocusOutEvent += FirePendingChangeEvent;
-				if (!entry.IsEditable)
-					entry.ModifyText (StateType.Normal, entry.Style.Text (Gtk.StateType.Insensitive));
+				//if (!entry.IsEditable)
+					//entry.ModifyText (StateType.Normal, entry.Style.Text (Gtk.StateType.Insensitive));
 			}
 
 			if (entry != null && ShouldShowDialogButton () && entry.IsEditable) {

@@ -114,33 +114,33 @@ namespace MonoDevelop.Components.Theming
 				for (int s = 0; s < sn; s++,i++) {
 					Gdk.Color color = Gdk.Color.Zero;
 					
-					if (widget != null && widget.IsRealized) {
-						switch ((GtkColorClass)c) {
-						case GtkColorClass.Light:
-							color = widget.Style.LightColors[s];
-							break;
-						case GtkColorClass.Mid:
-							color = widget.Style.MidColors[s];
-							break;
-						case GtkColorClass.Dark:
-							color = widget.Style.DarkColors[s];
-							break;
-						case GtkColorClass.Base:
-							color = widget.Style.BaseColors[s];
-							break;
-						case GtkColorClass.Text:
-							color = widget.Style.TextColors[s];
-							break;
-						case GtkColorClass.Background:
-							color = widget.Style.Backgrounds[s];
-							break;
-						case GtkColorClass.Foreground:
-							color = widget.Style.Foregrounds[s];
-							break;
-						}
-					} else {
+					//if (widget != null && widget.IsRealized) {
+					//	switch ((GtkColorClass)c) {
+					//	case GtkColorClass.Light:
+					//		color = widget.Style.LightColors[s];
+					//		break;
+					//	case GtkColorClass.Mid:
+					//		color = widget.Style.MidColors[s];
+					//		break;
+					//	case GtkColorClass.Dark:
+					//		color = widget.Style.DarkColors[s];
+					//		break;
+					//	case GtkColorClass.Base:
+					//		color = widget.Style.BaseColors[s];
+					//		break;
+					//	case GtkColorClass.Text:
+					//		color = widget.Style.TextColors[s];
+					//		break;
+					//	case GtkColorClass.Background:
+					//		color = widget.Style.Backgrounds[s];
+					//		break;
+					//	case GtkColorClass.Foreground:
+					//		color = widget.Style.Foregrounds[s];
+					//		break;
+					//	}
+					//} else {
 						color = new Gdk.Color (0, 0, 0);
-					}
+					//}
 					
 					gtk_colors[c * sn + s] = CairoExtensions.GdkColorToCairoColor (color);
 				}

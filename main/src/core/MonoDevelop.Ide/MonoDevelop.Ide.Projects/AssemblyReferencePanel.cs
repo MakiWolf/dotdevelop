@@ -290,8 +290,8 @@ namespace MonoDevelop.Ide.Projects
 		{
 			StringBuilder result = StringBuilderCache.Allocate ();
 			int lastPos = 0;
-			var color = HslColor.GenerateHighlightColors (widget.Style.Base (StateType.Normal),
-				widget.Style.Text (StateType.Normal), 3)[2];
+			//var color = HslColor.GenerateHighlightColors (widget.Style.Base (StateType.Normal),
+			//	widget.Style.Text (StateType.Normal), 3)[2];
 			for (int n=0; n < matches.Length; n++) {
 				int pos = matches[n] - startIndex;
 				if (pos < 0 || pos >= text.Length)
@@ -299,7 +299,7 @@ namespace MonoDevelop.Ide.Projects
 				if (pos - lastPos > 0)
 					result.Append (GLib.Markup.EscapeText (text.Substring (lastPos, pos - lastPos)));
 				result.Append ("<span foreground=\"");
-				result.Append (color.ToPangoString ());
+				//result.Append (color.ToPangoString ());
 				result.Append ("\">");
 				result.Append (GLib.Markup.EscapeText (text[pos].ToString ()));
 				result.Append ("</span>");

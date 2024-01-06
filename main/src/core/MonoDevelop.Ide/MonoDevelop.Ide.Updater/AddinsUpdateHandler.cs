@@ -99,7 +99,7 @@ namespace MonoDevelop.Ide.Updater
 			if (args.Button == Xwt.PointerButton.Left) {
 				HideAlert ();
 			//oe	OpenAddinManagerWindow ();
-				AddinManagerWindow.Run (IdeApp.Workbench.RootWindow.Visible ? IdeApp.Workbench.RootWindow : null);
+				//AddinManagerWindow.Run (IdeApp.Workbench.RootWindow.Visible ? IdeApp.Workbench.RootWindow : null);
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace MonoDevelop.Ide.Updater
 			}
 			HideAlert ();
 		//oe	OpenAddinManagerWindow ();
-			AddinManagerWindow.Run (IdeApp.Workbench.RootWindow.Visible ? IdeApp.Workbench.RootWindow : null);
+			//AddinManagerWindow.Run (IdeApp.Workbench.RootWindow.Visible ? IdeApp.Workbench.RootWindow : null);
 		}
 
 		public static void HideAlert ()

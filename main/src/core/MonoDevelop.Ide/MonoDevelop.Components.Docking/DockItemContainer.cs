@@ -145,8 +145,8 @@ namespace MonoDevelop.Components.Docking
 
 				if (VisualStyle.TabStyle == DockTabStyle.Normal)
 					ModifyBg (StateType.Normal, VisualStyle.PadBackgroundColor.Value.ToGdkColor ());
-				else 
-					ModifyBg (StateType.Normal, Style.Background(StateType.Normal));
+				//else 
+					//ModifyBg (StateType.Normal, Style.Background(StateType.Normal));
 			}
 		}
 
@@ -170,13 +170,13 @@ namespace MonoDevelop.Components.Docking
 		void OnTreeRealized (object sender, EventArgs e)
 		{
 			var w = (Gtk.TreeView)sender;
-			if (VisualStyle.TreeBackgroundColor != null) {
-				w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
-				w.ModifyBase (StateType.Insensitive, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
-			} else {
-				w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
-				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
-			}
+			//if (VisualStyle.TreeBackgroundColor != null) {
+				//w.ModifyBase (StateType.Normal, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
+				//w.ModifyBase (StateType.Insensitive, VisualStyle.TreeBackgroundColor.Value.ToGdkColor ());
+			//} else {
+			//	w.ModifyBase (StateType.Normal, Parent.Style.Base (StateType.Normal));
+			//	w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
+			//}
 		}
 		
 //		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
@@ -220,8 +220,8 @@ namespace MonoDevelop.Components.Docking
 		protected override void OnStyleSet (Style previous_style)
 		{
 			base.OnStyleSet (previous_style);
-			if (!borderColorSet)
-				borderColor = Style.Dark (Gtk.StateType.Normal);
+			//if (!borderColorSet)
+				//borderColor = Style.Dark (Gtk.StateType.Normal);
 		}
 		
 		public void SetMargins (int topMargin, int bottomMargin, int leftMargin, int rightMargin)

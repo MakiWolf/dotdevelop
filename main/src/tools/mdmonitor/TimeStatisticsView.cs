@@ -65,7 +65,7 @@ namespace Mono.Instrumentation.Monitor
                typeof(Gdk.Color)); // Color
 			
 			treeView.Model = store;
-			normalColor = parent.Style.Foreground (StateType.Normal);
+			//normalColor = parent.Style.Foreground (StateType.Normal);
 			
 			CellRendererText crt = new CellRendererText ();
 			CellRendererPixbuf crp = new CellRendererPixbuf ();

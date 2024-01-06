@@ -123,9 +123,9 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			fboxTree.Add (sw);
 			mainHBox.PackStart (fboxTree, false, false, 0);
 
-			Realized += delegate {
-				fboxTree.BackgroundColor = tree.Style.Base (Gtk.StateType.Normal);
-			};
+			//Realized += delegate {
+			//	fboxTree.BackgroundColor = tree.Style.Base (Gtk.StateType.Normal);
+			//};
 
 			var vbox = new VBox ();
 			vbox.Accessible.SetShouldIgnore (true);
@@ -154,18 +154,18 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			fboxHeader.Add (headerBox);
 //			fbox.GradientBackround = true;
 //			fbox.BackgroundColor = new Gdk.Color (255, 255, 255);
-			Realized += delegate {
-				var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
-				c.Light += 0.09;
-				fboxHeader.BackgroundColor = c.ToGdkColor ();
-			};
-			StyleSet += delegate {
-				if (IsRealized) {
-					var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
-					c.Light += 0.09;
-					fboxHeader.BackgroundColor = c.ToGdkColor ();
-				}
-			};
+			//Realized += delegate {
+				//var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
+				//c.Light += 0.09;
+				//fboxHeader.BackgroundColor = c.ToGdkColor ();
+			//};
+			//StyleSet += delegate {
+				//if (IsRealized) {
+					//var c = Style.Background (Gtk.StateType.Normal).ToXwtColor ();
+					//c.Light += 0.09;
+					//fboxHeader.BackgroundColor = c.ToGdkColor ();
+				//}
+			//};
 			vbox.PackStart (fboxHeader, false, false, 0);
 
 			pageFrame = new HBox ();

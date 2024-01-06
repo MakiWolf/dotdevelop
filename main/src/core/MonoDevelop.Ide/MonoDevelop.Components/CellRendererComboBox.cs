@@ -42,7 +42,7 @@ namespace MonoDevelop.Components
 		{
 			Mode |= Gtk.CellRendererMode.Editable;
 			Gtk.ComboBoxText dummyEntry = new Gtk.ComboBoxText ();
-			rowHeight = dummyEntry.SizeRequest ().Height + (2 * dummyEntry.Style?.YThickness ?? 0);
+			//rowHeight = dummyEntry.SizeRequest ().Height + (2 * dummyEntry.Style?.YThickness ?? 0);
 			Ypad = 0;
 		}
 

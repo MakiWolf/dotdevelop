@@ -402,7 +402,7 @@ namespace MonoDevelop.Components.Docking
 
 			//GdkWindow.SetBackPixmap (null, true);
 
-			ModifyBase (StateType.Normal, Styles.DockFrameBackground.ToGdkColor ());
+			//ModifyBase (StateType.Normal, Styles.DockFrameBackground.ToGdkColor ());
 		}
 		
 		protected override void OnUnrealized ()
@@ -554,7 +554,7 @@ namespace MonoDevelop.Components.Docking
 
 				// For testing purposes. Not being shown while VisibleWindow = false
 				ModifyBg (StateType.Normal, new Gdk.Color (255,0,0));
-				ModifyBase (StateType.Normal, new Gdk.Color (255,0,0));
+				//ModifyBase (StateType.Normal, new Gdk.Color (255,0,0));
 				ModifyFg (StateType.Normal, new Gdk.Color (255,0,0));
 			}
 

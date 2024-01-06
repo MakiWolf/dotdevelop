@@ -245,8 +245,8 @@ namespace MonoDevelop.Gettext
 			this.scrolledwindowPlural.Child = this.texteditorPlural;
 			this.scrolledwindowOriginal.Child.Show ();
 			this.scrolledwindowPlural.Child.Show ();
-			scrolledwindowOriginal.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Insensitive));
-			scrolledwindowPlural.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Insensitive));
+			//scrolledwindowOriginal.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Insensitive));
+			//scrolledwindowPlural.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Insensitive));
 			this.texteditorOriginal.Options = DefaultSourceEditorOptions.PlainEditor;
 			this.texteditorPlural.Options = DefaultSourceEditorOptions.PlainEditor;
 			this.texteditorOriginal.IsReadOnly = true;
@@ -276,30 +276,30 @@ namespace MonoDevelop.Gettext
 		{
 			CatalogEntry entry = (CatalogEntry)model.GetValue (iter, 0);
 			((CellRendererImage)cell).Image = ImageService.GetIcon (GetStockForEntry (entry), IconSize.Menu);
-			cell.CellBackgroundGdk = GetRowColorForEntry (entry);
+			//cell.CellBackgroundGdk = GetRowColorForEntry (entry);
 		}
 		
 		void FuzzyToggleDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			CatalogEntry entry = (CatalogEntry)model.GetValue (iter, 0);
 			((CellRendererToggle)cell).Active = entry.IsFuzzy;
-			cell.CellBackgroundGdk = GetRowColorForEntry (entry);
+			//cell.CellBackgroundGdk = GetRowColorForEntry (entry);
 		}
 		
 		void OriginalTextDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			CatalogEntry entry = (CatalogEntry)model.GetValue (iter, 0);
 			((CellRendererText)cell).Text = EscapeForTreeView (entry.String);
-			cell.CellBackgroundGdk = GetRowColorForEntry (entry);
-			((CellRendererText)cell).ForegroundGdk = GetForeColorForEntry (entry);
+			//cell.CellBackgroundGdk = GetRowColorForEntry (entry);
+			//((CellRendererText)cell).ForegroundGdk = GetForeColorForEntry (entry);
 		}
 		
 		void TranslationTextDataFunc (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			CatalogEntry entry = (CatalogEntry)model.GetValue (iter, 0);
 			((CellRendererText)cell).Text = EscapeForTreeView (entry.GetTranslation (0));
-			cell.CellBackgroundGdk = GetRowColorForEntry (entry);
-			((CellRendererText)cell).ForegroundGdk = GetForeColorForEntry (entry);
+			//cell.CellBackgroundGdk = GetRowColorForEntry (entry);
+			//((CellRendererText)cell).ForegroundGdk = GetForeColorForEntry (entry);
 		}
 		
 		void CheckbuttonWhiteSpacesToggled (object sender, EventArgs e)
@@ -493,10 +493,10 @@ namespace MonoDevelop.Gettext
 						AddChange (this.currentEntry, oldText, escapedText, index);
 					}
 					IdeApp.Workbench.StatusBar.ShowReady ();
-					window.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
+					//window.Child.ModifyBase (Gtk.StateType.Normal, Style.Base (Gtk.StateType.Normal));
 				} catch (System.Exception e) {
 					IdeApp.Workbench.StatusBar.ShowError (e.Message);
-					window.Child.ModifyBase (Gtk.StateType.Normal, errorColor);
+					//window.Child.ModifyBase (Gtk.StateType.Normal, errorColor);
 				}
 				treeviewEntries.QueueDraw ();
 				UpdateProgressBar ();
@@ -701,19 +701,19 @@ namespace MonoDevelop.Gettext
 		static string iconValid   = "md-done";//"md-translation-valid";
 		static string iconMissing = "md-warning";//"md-translation-missing";
 		
-		Color GetRowColorForEntry (CatalogEntry entry)
-		{
-			if (entry.References.Length == 0)
-				return Styles.POEditor.EntryMissingBackgroundColor;
-			return entry.IsFuzzy ? Styles.POEditor.EntryFuzzyBackgroundColor : entry.IsTranslated ? Style.Base (StateType.Normal) : Styles.POEditor.EntryUntranslatedBackgroundColor;
-		}
+		//Color GetRowColorForEntry (CatalogEntry entry)
+		//{
+		//	if (entry.References.Length == 0)
+		//		return Styles.POEditor.EntryMissingBackgroundColor;
+			//return entry.IsFuzzy ? Styles.POEditor.EntryFuzzyBackgroundColor : entry.IsTranslated ? Style.Base (StateType.Normal) : Styles.POEditor.EntryUntranslatedBackgroundColor;
+		//}
 		
-		Color GetForeColorForEntry (CatalogEntry entry)
-		{
-			if (entry.References.Length == 0)
-				return Styles.POEditor.EntryMissingBackgroundColor;
-			return entry.IsFuzzy ? Style.Black : entry.IsTranslated ? Style.Text (StateType.Normal) : Style.Black;
-		}
+		//Color GetForeColorForEntry (CatalogEntry entry)
+		//{
+		//	if (entry.References.Length == 0)
+		//		return Styles.POEditor.EntryMissingBackgroundColor;
+			//return entry.IsFuzzy ? Style.Black : entry.IsTranslated ? Style.Text (StateType.Normal) : Style.Black;
+		//}
 		
 		static int GetTypeSortIndicator (CatalogEntry entry)
 		{
@@ -810,12 +810,12 @@ namespace MonoDevelop.Gettext
 					regex = new System.Text.RegularExpressions.Regex (filter, options);
 				} catch (Exception e) {
 					IdeApp.Workbench.StatusBar.ShowError (e.Message);
-					this.searchEntryFilter.Entry.ModifyBase (StateType.Normal, errorColor);
+					//this.searchEntryFilter.Entry.ModifyBase (StateType.Normal, errorColor);
 					this.searchEntryFilter.QueueDraw ();
 					return;
 				}
 			}
-			this.searchEntryFilter.Entry.ModifyBase (StateType.Normal, Style.Base (StateType.Normal));
+			//this.searchEntryFilter.Entry.ModifyBase (StateType.Normal, Style.Base (StateType.Normal));
 			this.searchEntryFilter.QueueDraw ();
 			
 			int found = 0;
@@ -887,15 +887,15 @@ namespace MonoDevelop.Gettext
 					}
 				} while (store.IterNext (ref iter));
 			}
-			store.AppendValues (GetStockForEntry (entry), 
-			                    entry.IsFuzzy,
-			                    EscapeForTreeView (entry.String), 
-			                    EscapeForTreeView (entry.GetTranslation (0)), 
-			                    entry,
-			                    GetRowColorForEntry (entry),
-			                    GetTypeSortIndicator (entry),
-			                    GetForeColorForEntry (entry)
-			);
+			// store.AppendValues (GetStockForEntry (entry), 
+			//                     entry.IsFuzzy,
+			//                     EscapeForTreeView (entry.String), 
+			//                     EscapeForTreeView (entry.GetTranslation (0)), 
+			//                     entry,
+			//                     GetRowColorForEntry (entry),
+			//                     GetTypeSortIndicator (entry),
+			//                     GetForeColorForEntry (entry)
+			// );
 			SelectEntry (entry);
 		}
 		#endregion

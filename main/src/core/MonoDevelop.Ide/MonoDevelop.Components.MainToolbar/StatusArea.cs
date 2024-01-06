@@ -387,7 +387,7 @@ namespace MonoDevelop.Components.MainToolbar
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			ModifyText (StateType.Normal, Styles.StatusBarTextColor.ToGdkColor ());
+			//ModifyText (StateType.Normal, Styles.StatusBarTextColor.ToGdkColor ());
 			ModifyFg (StateType.Normal, Styles.StatusBarTextColor.ToGdkColor ());
 		}
 

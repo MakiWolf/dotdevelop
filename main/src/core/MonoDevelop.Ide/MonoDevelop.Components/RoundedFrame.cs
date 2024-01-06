@@ -63,7 +63,7 @@ namespace MonoDevelop.Components
 
 		public void SetFillColor (Cairo.Color color)
 		{
-			this.ModifyBase (Gtk.StateType.Normal, CairoExtensions.CairoColorToGdkColor (color));
+			//this.ModifyBase (Gtk.StateType.Normal, CairoExtensions.CairoColorToGdkColor (color));
 			this.ModifyBg (Gtk.StateType.Normal, CairoExtensions.CairoColorToGdkColor (color));
 			fill_color = color;
 			fill_color_set = true;

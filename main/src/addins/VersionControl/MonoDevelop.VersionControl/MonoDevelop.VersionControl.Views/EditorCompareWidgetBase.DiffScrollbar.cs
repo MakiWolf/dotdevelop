@@ -159,11 +159,11 @@ namespace MonoDevelop.VersionControl.Views
 
 				// FIXME: VV: Remove gradient features
 				using (var grad = new Cairo.LinearGradient (0, y, Allocation.Width, y)) {
-					var col = (HslColor)Style.Base (StateType.Normal);
-					col.L *= 0.95;
-					grad.AddColorStop (0, col);
-					grad.AddColorStop (0.7, (HslColor)Style.Base (StateType.Normal));
-					grad.AddColorStop (1, col);
+					//var col = (HslColor)Style.Base (StateType.Normal);
+					//col.L *= 0.95;
+					//grad.AddColorStop (0, col);
+					//grad.AddColorStop (0.7, (HslColor)Style.Base (StateType.Normal));
+					//grad.AddColorStop (1, col);
 					cr.SetSource (grad);
 					cr.Fill ();
 				}

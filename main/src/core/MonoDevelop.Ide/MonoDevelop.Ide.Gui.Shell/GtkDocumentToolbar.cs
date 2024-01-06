@@ -115,7 +115,7 @@ namespace MonoDevelop.Ide.Gui.Shell
 					w.ModifyFg (StateType.Prelight, textColor);
 					w.ModifyFg (StateType.Active, textColor);
 				} else
-					w.ModifyText (StateType.Normal, textColor);
+					//w.ModifyText (StateType.Normal, textColor);
 				w.ModifyFg (StateType.Normal, textColor);
 			};
 			if (w is Gtk.Container) {
