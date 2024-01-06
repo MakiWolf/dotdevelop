@@ -4,15 +4,16 @@
   </PropertyGroup>
   <PropertyGroup>
     <ReferencesGtkCopyToOutput Condition="$(ReferencesGtkCopyToOutput) == ''">false</ReferencesGtkCopyToOutput>
-    <HaveGtkSharp>false</HaveGtkSharp>
+    <HaveGtkSharp>true</HaveGtkSharp>
     <DefineConstants Condition="$(HaveGtkSharp)">$(DefineConstants);GTK3;GTK_SHARP</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="$(HaveGtkSharp)">
-    <PackageReference Include="GtkSharp" Version="3.22.25.98" />
+    <PackageReference Include="GtkSharp" Version="3.24.24.95" />
   </ItemGroup>
   <ItemGroup Condition="!$(HaveGtkSharp)">
-    <Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+   <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+    <!--<Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>$(ReferencesGtkCopyToOutput)</Private>
     </Reference>
     <Reference Include="gdk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
@@ -36,7 +37,7 @@
       <Reference Include="gio-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gio-sharp-3.0</Package>
     </Reference>
-    <!--<Reference Include="Mono.Cairo" />-->
+    <Reference Include="Mono.Cairo" />-->
   </ItemGroup>
   <ItemGroup>
     <!--   this should not be here: -->
