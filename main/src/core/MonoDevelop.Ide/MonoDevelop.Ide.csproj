@@ -73,6 +73,10 @@
     <IncludeCopyLocal Include="Xwt.dll" />
     <IncludeCopyLocal Include="Xwt.Gtk3.dll" />
     <IncludeCopyLocal Include="YamlDotNet.dll" />
+    <IncludeCopyLocal Include="GtkSharp.dll" />
+    <IncludeCopyLocal Include="GdkSharp.dll" />
+    <IncludeCopyLocal Include="GLibSharp.dll" />
+    <IncludeCopyLocal Include="AtkSharp.dll" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'DebugWin32' Or '$(Configuration)' == 'ReleaseWin32' ">
     <Reference Include="System.Windows" />
