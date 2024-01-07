@@ -77,6 +77,9 @@
     <IncludeCopyLocal Include="GdkSharp.dll" />
     <IncludeCopyLocal Include="GLibSharp.dll" />
     <IncludeCopyLocal Include="AtkSharp.dll" />
+    <IncludeCopyLocal Include="GioSharp.dll" />
+    <IncludeCopyLocal Include="CairoSharp.dll" />
+    <IncludeCopyLocal Include="PangoSharp.dll" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'DebugWin32' Or '$(Configuration)' == 'ReleaseWin32' ">
     <Reference Include="System.Windows" />
