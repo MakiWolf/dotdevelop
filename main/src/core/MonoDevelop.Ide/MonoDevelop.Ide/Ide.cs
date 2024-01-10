@@ -33,7 +33,11 @@ using System;
 using MonoDevelop.Core;
 using MonoDevelop.Core.Instrumentation;
 using Mono.Addins;
+#if GTK3
 using Mono.Addins.GuiGtk3;
+#else
+using Mono.Addins.Gui;
+#endif
 using Mono.Addins.Setup;
 using MonoDevelop.Components.Commands;
 

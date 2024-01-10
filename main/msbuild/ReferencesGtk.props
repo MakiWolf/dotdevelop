@@ -10,6 +10,7 @@
 
   <ItemGroup Condition="$(HaveGtkSharp)">
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+    <PackageReference Include="WebkitGtkSharp" Version="3.24.24.95" />
   </ItemGroup>
   <ItemGroup Condition="!$(HaveGtkSharp)">
    <PackageReference Include="GtkSharp" Version="3.24.24.95" />
