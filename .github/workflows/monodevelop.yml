@@ -45,7 +45,7 @@ jobs:
         # Synchronise Mono SSL certs
         cert-sync /etc/ssl/certs/ca-certificates.crt
         # Install extra packages required for dotdevelop build
-        sudo apt-get install -y sed git build-essential intltool nuget fsharp gtk-sharp3
+        sudo apt-get install -y sed git build-essential intltool nuget fsharp
         sudo apt-get install -y software-properties-common
         sudo apt-get update
     - name: Verify OS and tools versions
