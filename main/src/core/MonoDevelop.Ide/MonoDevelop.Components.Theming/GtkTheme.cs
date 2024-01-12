@@ -41,20 +41,20 @@ namespace MonoDevelop.Components.Theming
 		{
 		}
 
-		//public static Cairo.Color GetCairoTextMidColor (Widget widget)
-		//{
-			//Cairo.Color text_color = CairoExtensions.GdkColorToCairoColor (widget.Style.Foreground (StateType.Normal));
-			//Cairo.Color background_color = CairoExtensions.GdkColorToCairoColor (widget.Style.Background (StateType.Normal));
-			//return CairoExtensions.AlphaBlend (text_color, background_color, 0.5);
-		//}
+		public static Cairo.Color GetCairoTextMidColor (Widget widget)
+		{
+			Cairo.Color text_color = CairoExtensions.GdkColorToCairoColor (widget.Style.Foreground (StateType.Normal));
+			Cairo.Color background_color = CairoExtensions.GdkColorToCairoColor (widget.Style.Background (StateType.Normal));
+			return CairoExtensions.AlphaBlend (text_color, background_color, 0.5);
+		}
 
-		//public static Gdk.Color GetGdkTextMidColor (Widget widget)
-		//{
-			//Cairo.Color color = GetCairoTextMidColor (widget);
-			//Gdk.Color gdk_color = new Gdk.Color ((byte)(color.R * 255), (byte)(color.G * 255), (byte)(color.B * 255));
+		public static Gdk.Color GetGdkTextMidColor (Widget widget)
+		{
+			Cairo.Color color = GetCairoTextMidColor (widget);
+			Gdk.Color gdk_color = new Gdk.Color ((byte)(color.R * 255), (byte)(color.G * 255), (byte)(color.B * 255));
 //			Gdk.Colormap.System.AllocColor (ref gdk_color, true, true);
-			//return gdk_color;
-		//}
+			return gdk_color;
+		}
 
 		protected override void OnColorsRefreshed ()
 		{
