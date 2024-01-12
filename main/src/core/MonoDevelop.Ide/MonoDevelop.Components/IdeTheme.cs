@@ -30,7 +30,6 @@ using MonoDevelop.Core;
 using MonoDevelop.Ide;
 using MonoDevelop.Ide.Gui;
 using System.Linq;
-using Gtk;
 
 #if MAC
 using AppKit;
@@ -447,7 +446,7 @@ namespace MonoDevelop.Components
 		public override void Initialize ()
 		{
 			base.Initialize ();
-			//IdeTheme.ApplyTheme (Window);
+			IdeTheme.ApplyTheme (Window);
 		}
 	}
 
@@ -456,7 +455,7 @@ namespace MonoDevelop.Components
 		public override void Initialize ()
 		{
 			base.Initialize ();
-			//IdeTheme.ApplyTheme (Window);
+			IdeTheme.ApplyTheme (Window);
 		}
 	}
 }
