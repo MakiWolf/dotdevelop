@@ -44,7 +44,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 		public Task<int> Run (string[] arguments)
 		{
 			Gtk.Application.Init ();
-			//AddinManagerWindow.Run (null);
+			AddinManagerWindow.Run (null);
 			return Task.FromResult (0);
 		}
 	}
