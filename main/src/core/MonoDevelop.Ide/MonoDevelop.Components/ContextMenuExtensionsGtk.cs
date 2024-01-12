@@ -167,7 +167,7 @@ namespace MonoDevelop.Components
 					var img = new ImageView (item.Image);
 					img.ShowAll ();
 					imageItem.Image = img;
-					//Xwt.GtkBackend.GtkWorkarounds.ForceImageOnMenuItem (imageItem);
+					Xwt.GtkBackend.GtkWorkarounds.ForceImageOnMenuItem (imageItem);
 				}
 			}
 
