@@ -121,10 +121,10 @@ namespace MonoDevelop.SourceEditor.Wrappers
 			var wrappedEditor = WrapEditor (editor);
 			if (wrappedEditor == null)
 				return null;
-			//var control = provider.CreateTooltipWindow (wrappedEditor, IdeApp.Workbench.ActiveDocument.DocumentContext, item, offset, modifierState.ToXwtValue ());
-			//if (control == null)
+			var control = provider.CreateTooltipWindow (wrappedEditor, IdeApp.Workbench.ActiveDocument.DocumentContext, item, offset, modifierState.ToXwtValue ());
+			if (control == null)
 				return null;
-			//return control;
+			return control;
 		}
 
 		protected override void GetRequiredPosition (MonoTextEditor editor, Xwt.WindowFrame tipWindow, out int requiredWidth, out double xalign)
@@ -144,7 +144,7 @@ namespace MonoDevelop.SourceEditor.Wrappers
 			if (wrappedEditor == null) {
 				return tipWindow;
 			}
-			//provider.ShowTooltipWindow (wrappedEditor, tipWindow, item, modifierState.ToXwtValue (), mouseX, mouseY);
+			provider.ShowTooltipWindow (wrappedEditor, tipWindow, item, modifierState.ToXwtValue (), mouseX, mouseY);
 			return tipWindow;
 		}
 
