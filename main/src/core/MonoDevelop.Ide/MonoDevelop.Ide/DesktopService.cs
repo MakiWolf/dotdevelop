@@ -153,9 +153,9 @@ namespace MonoDevelop.Ide
 		// 	get { return PlatformService.DefaultSansFont; }
 		// }
 
-		// public static string PlatformName {
-		// 	get { return PlatformService.Name; }
-		// }
+		public string PlatformName {
+			get { return PlatformService.Name; }
+		}
 
 		public void ShowUrl (string url)
 		{
