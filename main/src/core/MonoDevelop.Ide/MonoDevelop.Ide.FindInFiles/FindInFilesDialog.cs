@@ -63,7 +63,7 @@ namespace MonoDevelop.Ide.FindInFiles
 		CheckButton checkbuttonRecursively;
 		ComboBoxText comboboxentryReplace;
 		ComboBoxText comboboxentryPath;
-		Gtk.SearchEntry searchentryFileMask;
+        MonoDevelop.Components.SearchEntry searchentryFileMask;
 		Button buttonBrowsePaths;
 		Button buttonReplace;
 		Label labelFileMask;
@@ -272,9 +272,9 @@ namespace MonoDevelop.Ide.FindInFiles
 
 		void SetupAccessibilityForSearch ()
 		{
-			//searchentryFileMask.SetEntryAccessibilityAttributes ("FindInFilesDialog.searchentryFileMask",
-			//	labelFileMask.Text,
-			//	GettextCatalog.GetString ("Enter the file mask"));
+			searchentryFileMask.SetEntryAccessibilityAttributes ("FindInFilesDialog.searchentryFileMask",
+				labelFileMask.Text,
+				GettextCatalog.GetString ("Enter the file mask"));
 		}
 
 		static void TableAddRow (Table table, uint row, Widget column1, Widget column2)
@@ -499,18 +499,18 @@ namespace MonoDevelop.Ide.FindInFiles
 			};
 			labelFileMask.Show ();
 
-			//searchentryFileMask = new Gtk.SearchEntry () {
-			//	ForceFilterButtonVisible = false,
-			//	IsCheckMenu = true,
-			//	ActiveFilterID = 0,
-			//	Visible = true,
-			//	Ready = true,
-			//};
+			searchentryFileMask = new MonoDevelop.Components.SearchEntry () {
+				ForceFilterButtonVisible = false,
+				IsCheckMenu = true,
+				ActiveFilterID = 0,
+				Visible = true,
+				Ready = true,
+			};
 
 
-			//searchentryFileMask.Query = properties.Get ("MonoDevelop.FindReplaceDialogs.FileMask", "");
+			searchentryFileMask.Query = properties.Get ("MonoDevelop.FindReplaceDialogs.FileMask", "");
 
-			//searchentryFileMask.Entry.ActivatesDefault = true;
+			searchentryFileMask.Entry.ActivatesDefault = true;
 			searchentryFileMask.Show ();
 
 			SetupAccessibilityForSearch ();
@@ -523,7 +523,7 @@ namespace MonoDevelop.Ide.FindInFiles
 			if (labelFileMask == null)
 				return;
 
-			//properties.Set ("MonoDevelop.FindReplaceDialogs.FileMask", searchentryFileMask.Query);
+			properties.Set ("MonoDevelop.FindReplaceDialogs.FileMask", searchentryFileMask.Query);
 
 			uint row = TableGetRowForItem (tableFindAndReplace, labelFileMask);
 			TableRemoveRow (tableFindAndReplace, row, labelFileMask, searchentryFileMask, true);
@@ -684,8 +684,8 @@ namespace MonoDevelop.Ide.FindInFiles
 			StoreHistory ("MonoDevelop.FindReplaceDialogs.FindHistory", comboboxentryFind);
 			if (replaceMode)
 				StoreHistory ("MonoDevelop.FindReplaceDialogs.ReplaceHistory", comboboxentryReplace);
-			//if (searchentryFileMask != null)
-			//	properties.Set ("MonoDevelop.FindReplaceDialogs.FileMask", searchentryFileMask.Query);
+			if (searchentryFileMask != null)
+				properties.Set ("MonoDevelop.FindReplaceDialogs.FileMask", searchentryFileMask.Query);
 //			StoreHistory ("MonoDevelop.FindReplaceDialogs.PathHistory", comboboxentryPath);
 			//StoreHistory ("MonoDevelop.FindReplaceDialogs.FileMaskHistory", comboboxentryFileMask);
 		}
@@ -798,7 +798,7 @@ namespace MonoDevelop.Ide.FindInFiles
 		FilterOptions GetFilterOptions ()
 		{
 			return new FilterOptions {
-				//FileMask = searchentryFileMask != null && !string.IsNullOrEmpty (searchentryFileMask.Query) ? searchentryFileMask.Query : "*",
+				FileMask = searchentryFileMask != null && !string.IsNullOrEmpty (searchentryFileMask.Query) ? searchentryFileMask.Query : "*",
 				CaseSensitive = checkbuttonCaseSensitive.Active,
 				RegexSearch = checkbuttonRegexSearch.Active,
 				WholeWordsOnly = checkbuttonWholeWordsOnly.Active
