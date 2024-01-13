@@ -43,7 +43,7 @@ namespace MonoDevelop.Ide.Projects
 	public class DefaultPolicyOptionsDialog : OptionsDialog
 	{
 		ComboBoxText policiesCombo;
-		Gtk.MenuButton newButton;
+        MonoDevelop.Components.MenuButton newButton;
 		Button deleteButton;
 		MonoDevelop.Components.MenuButton exportButton;
 		List<PolicySet> sets = new List<PolicySet> ();
@@ -89,29 +89,30 @@ namespace MonoDevelop.Ide.Projects
 			};
 			topBar.PackEnd (exportButton, false, false, 0);
 
-			newButton = new Gtk.MenuButton ();
+			newButton = new MonoDevelop.Components.MenuButton ();
 			newButton.Label = GettextCatalog.GetString ("Add Policy");
-			//newButton.ContextMenuRequested = delegate {
-			//	ContextMenu menu = new ContextMenu ();
+            newButton.ContextMenuRequested = delegate {
+                ContextMenu menu = new ContextMenu();
 
-			//	ContextMenuItem item = new ContextMenuItem (GettextCatalog.GetString ("New policy..."));
-			//	item.Clicked += HandleNewButtonClicked;
-			//	menu.Items.Add (item);
+                ContextMenuItem item = new ContextMenuItem(GettextCatalog.GetString("New policy..."));
+                item.Clicked += HandleNewButtonClicked;
+                menu.Items.Add(item);
 
-			//	item = new ContextMenuItem (GettextCatalog.GetString ("From file..."));
-			//	item.Clicked += HandleFromFile;
-			//	menu.Items.Add (item);
+                item = new ContextMenuItem(GettextCatalog.GetString("From file..."));
+                item.Clicked += HandleFromFile;
+                menu.Items.Add(item);
 
-			//	item = new ContextMenuItem (GettextCatalog.GetString ("From project or solution..."));
-			//	item.Clicked += HandleFromProject;
-			//	if (!IdeApp.Workspace.IsOpen) {
-			//		item.Sensitive = false;
-			//	}
-			//	menu.Items.Add (item);
+                item = new ContextMenuItem(GettextCatalog.GetString("From project or solution..."));
+                item.Clicked += HandleFromProject;
+                if (!IdeApp.Workspace.IsOpen)
+                {
+                    item.Sensitive = false;
+                }
+                menu.Items.Add(item);
 
-			//	return menu;
-			//};
-			topBar.PackEnd (newButton, false, false, 0);
+                return menu;
+            };
+            topBar.PackEnd (newButton, false, false, 0);
 
 			Alignment align = new Alignment (0f, 0f, 1f, 1f);
 			align.LeftPadding = 9;
