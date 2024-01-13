@@ -46,15 +46,22 @@ namespace MonoDevelop.Components.PropertyGrid.PropertyEditors
 
 		protected override void Initialize ()
 		{
-			IComponent comp = Instance as IComponent;
-			evtBind = (IEventBindingService) comp.Site.GetService (typeof (IEventBindingService));
-			base.Initialize ();
-		}
+            IComponent comp = Instance as IComponent;
+            if (comp != null)
+            {
+                evtBind = (IEventBindingService)comp.Site.GetService(typeof(IEventBindingService));
+                base.Initialize();
+            }
+        }
 		
 		protected override IPropertyEditor CreateEditor (Gdk.Rectangle cell_area, Gtk.StateType state)
 		{
-			//get existing method names
-			ICollection IColl = evtBind.GetCompatibleMethods (evtBind.GetEvent (Property)) ;
+            if (evtBind == null)
+            {
+                return null;
+            }
+            //get existing method names
+            ICollection IColl = evtBind.GetCompatibleMethods (evtBind.GetEvent (Property)) ;
 			string[] methods = new string [IColl.Count + 1];
 			IColl.CopyTo (methods, 1);
 			
