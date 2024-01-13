@@ -68,10 +68,14 @@ Console.WriteLine( "oeDEBUG :: CommonAboutDialog ctor" );
 		//oe	Title = string.Format (GettextCatalog.GetString ("About {0}"), BrandingService.ApplicationName);
 
 			Title = string.Format (GettextCatalog.GetString ("About {0}"), BrandingService.ApplicationLongName);
-			TransientFor = IdeApp.Workbench.RootWindow;
-			this.Resizable = true;
-//			HasSeparator = false;
-			BorderWidth = 0;
+            TransientFor = IdeApp.Workbench.RootWindow; // oe REVERTED from monodevelop-7.8
+#if GTK3
+            this.Resizable = false;
+#else
+            AllowGrow = false;
+            HasSeparator = false;
+#endif
+            BorderWidth = 0;
 
 			var notebook = new Notebook ();
 			notebook.ShowTabs = false;
