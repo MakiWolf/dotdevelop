@@ -70,17 +70,17 @@ namespace MonoDevelop.HexEditor
 			IdeApp.Preferences.ColorScheme.Changed -= ColorSchemeChanged;
 		}
 
-		// public override Color HexOffset {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.LineNumbers));
-		// 	}
-		// }
+		public override Color HexOffset {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.LineNumbers));
+			}
+		}
 
-		// public override Color HexOffsetBg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.LineNumbersBackground));
-		// 	}
-		// }
+		public override Color HexOffsetBg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.LineNumbersBackground));
+			}
+		}
 
 		/*		public override Color HexOffsetHighlighted {
 					get {
@@ -88,70 +88,70 @@ namespace MonoDevelop.HexEditor
 					}
 				}*/
 
-		// public override Color HexDigit {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
-		// 	}
-		// }
+		public override Color HexDigit {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
+			}
+		}
 
-		// public override Color HexDigitBg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Background));
-		// 	}
-		// }
+		public override Color HexDigitBg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Background));
+			}
+		}
 
-		// public override Color DashedLineFg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
-		// 	}
-		// }
+		public override Color DashedLineFg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
+			}
+		}
 
-		// public override Color DashedLineBg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Background));
-		// 	}
-		// }
+		public override Color DashedLineBg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Background));
+			}
+		}
 
-		// public override Color IconBarBg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.IndicatorMarginSeparator));
-		// 	}
-		// }
+		public override Color IconBarBg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.IndicatorMarginSeparator));
+			}
+		}
 
-		// public override Color IconBarSeperator {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.IndicatorMarginSeparator));
-		// 	}
-		// }
+		public override Color IconBarSeperator {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.IndicatorMarginSeparator));
+			}
+		}
 
-		// public override Color BookmarkColor1 {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.MessageBubbleWarningLine));
-		// 	}
-		// }
+		public override Color BookmarkColor1 {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.MessageBubbleWarningLine));
+			}
+		}
 
-		// public override Color BookmarkColor2 {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.MessageBubbleWarningLine2));
-		// 	}
-		// }
+		public override Color BookmarkColor2 {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.MessageBubbleWarningLine2));
+			}
+		}
 		
-		// public override Color Selection {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
-		// 	}
-		// }
+		public override Color Selection {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Foreground));
+			}
+		}
 		
-		// public override Color SelectionBg {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Selection));
-		// 	}
-		// }
+		public override Color SelectionBg {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.Selection));
+			}
+		}
 		
-		// public override Color HighlightOffset {
-		// 	get {
-		// 		return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.FindHighlight));
-		// 	}
-		// }
+		public override Color HighlightOffset {
+			get {
+				return ConvertColor (SyntaxHighlightingService.GetColor (colorStyle, EditorThemeColors.FindHighlight));
+			}
+		}
 	}
 }
