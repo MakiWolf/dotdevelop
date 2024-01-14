@@ -2329,10 +2329,10 @@ namespace Mono.TextEditor
 		DateTime started = DateTime.Now;
 #endif
 		Stopwatch timingsWatch = new Stopwatch ();
-// 		protected override bool OnDrawn (Context cr)
-// 		{
-// 			if (this.isDisposed)
-// 				return false;
+ 		protected override bool OnDrawn (Context cr)
+ 		{
+ 			if (this.isDisposed)
+ 				return false;
 
 // //			try {
 // //				ExposeEventInternal (e);
@@ -2340,9 +2340,9 @@ namespace Mono.TextEditor
 // //				GLib.ExceptionManager.RaiseUnhandledException (ex, false);
 // //			}
 
-// 			keyPressTimings.EndTimer (true);
-// 			return base.OnDrawn (cr);
-// 		}
+ 			keyPressTimings.EndTimer (true);
+ 			return base.OnDrawn (cr);
+ 		}
 
 		void ExposeEventInternal (Gdk.EventExpose e)
 		{
