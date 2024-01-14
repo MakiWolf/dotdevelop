@@ -50,9 +50,9 @@ namespace MonoDevelop.Ide
 			// macOS has native support for opening files in an open instance
 			// via AppleEvents for applications distributed as bundles, so disable
 			// this support.
-			// if (Platform.IsMac && Components.GtkWorkarounds.IsRunFromBundle ()) {
-			// 	return;
-			// }
+			if (Platform.IsMac && Components.GtkWorkarounds.IsRunFromBundle ()) {
+			 	return;
+			}
 
 			if (ipcTcp) {
 				listen_socket = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
