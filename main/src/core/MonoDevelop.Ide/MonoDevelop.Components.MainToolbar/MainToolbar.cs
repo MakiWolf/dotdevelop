@@ -95,9 +95,6 @@ namespace MonoDevelop.Components.MainToolbar
 				return statusArea;
 			}
 		}
-		internal static object LastCommandTarget {
-			get { return lastCommandTarget != null ? lastCommandTarget.Target : null; }
-		}
 
 		static bool RuntimeIsSeparator (ITreeModel model, TreeIter iter)
 		{
