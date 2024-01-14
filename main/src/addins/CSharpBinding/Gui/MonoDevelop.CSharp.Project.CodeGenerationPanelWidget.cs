@@ -22,11 +22,11 @@ namespace MonoDevelop.CSharp.Project
 		
 		private global::Gtk.HBox hbox1;
 		
-		private global::Gtk.ComboBox comboPlatforms;
+		private global::Gtk.ComboBoxText comboPlatforms;
 		
 		private global::Gtk.HBox hbox2;
 		
-		private global::Gtk.ComboBox comboDebug;
+		private global::Gtk.ComboBoxText comboDebug;
 		
 		private global::Gtk.HBox hbox4;
 		
@@ -142,14 +142,18 @@ namespace MonoDevelop.CSharp.Project
 			this.hbox1.Name = "hbox1";
 			this.hbox1.Spacing = 6;
 			// Container child hbox1.Gtk.Box+BoxChild
-			//this.comboPlatforms = global::Gtk.ComboBox.NewText ();
-			//this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("Any CPU"));
-			//this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("x86"));
-			//this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("x64"));
-			//this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("Itanium"));
-			//this.comboPlatforms.Name = "comboPlatforms";
-			//this.comboPlatforms.Active = 0;
-			//this.hbox1.Add (this.comboPlatforms);
+#if GTK3
+			this.comboPlatforms = new global::Gtk.ComboBoxText();
+#else
+			this.comboPlatforms = global::Gtk.ComboBox.NewText ();
+#endif
+			this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("Any CPU"));
+			this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("x86"));
+			this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("x64"));
+			this.comboPlatforms.AppendText (global::Mono.Unix.Catalog.GetString ("Itanium"));
+			this.comboPlatforms.Name = "comboPlatforms";
+			this.comboPlatforms.Active = 0;
+			this.hbox1.Add (this.comboPlatforms);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.comboPlatforms]));
 			w5.Position = 0;
 			w5.Expand = false;
@@ -167,15 +171,19 @@ namespace MonoDevelop.CSharp.Project
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			//this.comboDebug = global::Gtk.ComboBox.NewText ();
-			//this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Full"));
-			//this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Symbols only"));
-			//this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Portable"));
-			//this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Embedded"));
-			// this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("None"));
-			// this.comboDebug.Name = "comboDebug";
-			// this.comboDebug.Active = 0;
-			// this.hbox2.Add (this.comboDebug);
+#if GTK3
+			this.comboDebug = new global::Gtk.ComboBoxText();
+#else
+			this.comboDebug = global::Gtk.ComboBox.NewText ();
+#endif
+			this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Full"));
+			this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Symbols only"));
+			this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Portable"));
+			this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("Embedded"));
+			this.comboDebug.AppendText (global::Mono.Unix.Catalog.GetString ("None"));
+			this.comboDebug.Name = "comboDebug";
+			this.comboDebug.Active = 0;
+			this.hbox2.Add (this.comboDebug);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.comboDebug]));
 			w7.Position = 0;
 			w7.Expand = false;
