@@ -177,9 +177,9 @@ class MonoDevelopProcessHost
 	{
 		Runtime.Shutdown ();
 
-		// if (terminate) {
-		// 	MonoDevelop.Components.GtkWorkarounds.Terminate ();
-		// }
+		if (terminate) {
+			MonoDevelop.Components.GtkWorkarounds.Terminate ();
+		}
 	}
 
 	static void ShowHelp (bool shortHelp, string exeName)
