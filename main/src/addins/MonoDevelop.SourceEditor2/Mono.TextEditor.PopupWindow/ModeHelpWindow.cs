@@ -145,84 +145,84 @@ namespace Mono.TextEditor.PopupWindow
 		const int xBorder = 4;
 		const int yBorder = 2;
 
-// 		protected override bool OnDrawn (Context g)
-// 		{
-// 			g.Translate (Allocation.X, Allocation.Y);
-// 			g.LineWidth = 1;
-// //			Gdk.GC gc = new Gdk.GC (args.Window);
-// 			layout.SetMarkup (TitleText);
-// 			int width, height;
-// 			layout.GetPixelSize (out width, out height);
-// 			width += xBorder * 2;
-// 			FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, true, false, 0.5, 0.5, height + yBorder * 2 + 1.5, width, height + yBorder * 2);
-// 			g.SetSourceColor (Styles.TableLayoutModeTitleBackgroundColor.ToCairoColor ());
-// 			g.FillPreserve ();
-// 			g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
-// 			g.Stroke ();
+		protected override bool OnDrawn (Context g)
+		{
+			g.Translate (Allocation.X, Allocation.Y);
+			g.LineWidth = 1;
+//			Gdk.GC gc = new Gdk.GC (args.Window);
+			layout.SetMarkup (TitleText);
+			int width, height;
+			layout.GetPixelSize (out width, out height);
+			width += xBorder * 2;
+			FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, true, false, 0.5, 0.5, height + yBorder * 2 + 1.5, width, height + yBorder * 2);
+			g.SetSourceColor (Styles.TableLayoutModeTitleBackgroundColor.ToCairoColor ());
+			g.FillPreserve ();
+			g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
+			g.Stroke ();
 
-// 			g.Save ();
-// 			g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
-// 			g.Translate (xBorder, yBorder);
-// 			g.ShowLayout (layout);
-// 			g.Restore ();
+			g.Save ();
+			g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
+			g.Translate (xBorder, yBorder);
+			g.ShowLayout (layout);
+			g.Restore ();
 
-// 			FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, false, true, 0.5, height * 2 + yBorder * 2 + 0.5, height, Allocation.Width - 1, Allocation.Height - height * 2 - yBorder * 2 - 1);
-// 			g.SetSourceColor (Styles.TableLayoutModeBackgroundColor.ToCairoColor ());
-// 			g.FillPreserve ();
-// 			g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
-// 			g.Stroke ();
+			FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, false, true, 0.5, height * 2 + yBorder * 2 + 0.5, height, Allocation.Width - 1, Allocation.Height - height * 2 - yBorder * 2 - 1);
+			g.SetSourceColor (Styles.TableLayoutModeBackgroundColor.ToCairoColor ());
+			g.FillPreserve ();
+			g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
+			g.Stroke ();
 
-// 			g.MoveTo (xSpacer + 0.5, height * 2 + yBorder * 2);
-// 			g.LineTo (xSpacer + 0.5, Allocation.Height - 1);
-// 			g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
-// 			g.Stroke ();
+			g.MoveTo (xSpacer + 0.5, height * 2 + yBorder * 2);
+			g.LineTo (xSpacer + 0.5, Allocation.Height - 1);
+			g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
+			g.Stroke ();
 
-// 			int y = height + yBorder * 2;
+			int y = height + yBorder * 2;
 
-// 			for (int i = 0; i < Items.Count; i++) {
-// 				KeyValuePair<string, string> pair = Items [i];
+			for (int i = 0; i < Items.Count; i++) {
+				KeyValuePair<string, string> pair = Items [i];
 
-// 				layout.SetMarkup (pair.Key);
-// 				layout.GetPixelSize (out width, out height);
+				layout.SetMarkup (pair.Key);
+				layout.GetPixelSize (out width, out height);
 
-// 				if (i == 0) {
-// 					FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, false, true, false, false, 0, y + 0.5, height + 1.5, Allocation.Width, height);
-// 					g.SetSourceColor (Styles.TableLayoutModeCategoryBackgroundColor.ToCairoColor ());
-// 					g.FillPreserve ();
-// 					g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
-// 					g.Stroke ();
+				if (i == 0) {
+					FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, false, true, false, false, 0, y + 0.5, height + 1.5, Allocation.Width, height);
+					g.SetSourceColor (Styles.TableLayoutModeCategoryBackgroundColor.ToCairoColor ());
+					g.FillPreserve ();
+					g.SetSourceColor (Styles.TableLayoutModeBorderColor.ToCairoColor ());
+					g.Stroke ();
 
-// 					g.MoveTo (xSpacer + 0.5, height + yBorder * 2 + 1);
-// 					g.LineTo (xSpacer + 0.5, height * 2 + yBorder * 2 + 1);
-// 					g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
-// 					g.Stroke ();
-// 				}
+					g.MoveTo (xSpacer + 0.5, height + yBorder * 2 + 1);
+					g.LineTo (xSpacer + 0.5, height * 2 + yBorder * 2 + 1);
+					g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
+					g.Stroke ();
+				}
 
-// //				gc.RgbFgColor = (HslColor)(i == 0 ? Styles.TableLayoutModeBackgroundColor : Styles.TableLayoutModeTextColor).ToCairoColor ();
-// 				g.Save ();
-// 				g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
-// 				g.Translate (xBorder, y);
-// 				g.ShowLayout (layout);
-// 				g.Restore ();
+//				gc.RgbFgColor = (HslColor)(i == 0 ? Styles.TableLayoutModeBackgroundColor : Styles.TableLayoutModeTextColor).ToCairoColor ();
+				g.Save ();
+				g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
+				g.Translate (xBorder, y);
+				g.ShowLayout (layout);
+				g.Restore ();
 
-// 				g.Save ();
-// 				g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
-// 				g.Translate (xSpacer + xBorder, y);
-// 				layout.SetMarkup (pair.Value);
-// 				g.ShowLayout (layout);
-// 				g.Restore ();
+				g.Save ();
+				g.SetSourceColor (Styles.TableLayoutModeTextColor.ToCairoColor ());
+				g.Translate (xSpacer + xBorder, y);
+				layout.SetMarkup (pair.Value);
+				g.ShowLayout (layout);
+				g.Restore ();
 
-// 				// draw top line
-// 				if (i > 0) {
-// 					g.MoveTo (1, y + 0.5);
-// 					g.LineTo (Allocation.Width - 1, y + 0.5);
-// 					g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
-// 					g.Stroke ();
-// 				}
-// 				y += height;
-// 			}
-// 			return base.OnDrawn (g);
-// 		}
+				// draw top line
+				if (i > 0) {
+					g.MoveTo (1, y + 0.5);
+					g.LineTo (Allocation.Width - 1, y + 0.5);
+					g.SetSourceColor (Styles.TableLayoutModeGridColor.ToCairoColor ());
+					g.Stroke ();
+				}
+				y += height;
+			}
+			return base.OnDrawn (g);
+		}
 	}
 
 	enum SymbolTokenType {
@@ -497,58 +497,58 @@ namespace Mono.TextEditor.PopupWindow
 		const int yDescriptionBorder = 8;
 		const int yTitleBorder = 8;
 
-		// protected override bool OnDrawn (Context g)
-		// {
-		// 	g.Translate (Allocation.X, Allocation.Y);
-		// 	g.LineWidth = 1;
-		// 	titleLayout.SetMarkup (TitleText);
-		// 	int width, height;
-		// 	titleLayout.GetPixelSize (out width, out height);
-		// 	var tw = SupportsAlpha ? triangleWidth : 0;
-		// 	var th = SupportsAlpha ? triangleHeight : 0;
-		// 	width += xDescriptionBorder * 2;
+		protected override bool OnDrawn (Context g)
+		{
+			g.Translate (Allocation.X, Allocation.Y);
+			g.LineWidth = 1;
+			titleLayout.SetMarkup (TitleText);
+			int width, height;
+			titleLayout.GetPixelSize (out width, out height);
+			var tw = SupportsAlpha ? triangleWidth : 0;
+			var th = SupportsAlpha ? triangleHeight : 0;
+			width += xDescriptionBorder * 2;
 
-		// 	if (SupportsAlpha) {
-		// 		FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, true, true, tw + 0.5, 0.5, 12, Allocation.Width - 1 - tw, Allocation.Height);
-		// 	} else {
-		// 		g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-		// 	}
-		// 	g.SetSourceColor (Styles.InsertionCursorBackgroundColor.ToCairoColor ());
-		// 	g.FillPreserve ();
-		// 	g.SetSourceColor (Styles.InsertionCursorBorderColor.ToCairoColor ());
-		// 	g.Stroke ();
+			if (SupportsAlpha) {
+				FoldingScreenbackgroundRenderer.DrawRoundRectangle (g, true, true, tw + 0.5, 0.5, 12, Allocation.Width - 1 - tw, Allocation.Height);
+			} else {
+				g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+			}
+			g.SetSourceColor (Styles.InsertionCursorBackgroundColor.ToCairoColor ());
+			g.FillPreserve ();
+			g.SetSourceColor (Styles.InsertionCursorBorderColor.ToCairoColor ());
+			g.Stroke ();
 
 
-		// 	g.MoveTo (tw + xDescriptionBorder, yTitleBorder);
-		// 	g.SetSourceColor (Styles.InsertionCursorTitleTextColor.ToCairoColor ());
-		// 	g.ShowLayout (titleLayout);
+			g.MoveTo (tw + xDescriptionBorder, yTitleBorder);
+			g.SetSourceColor (Styles.InsertionCursorTitleTextColor.ToCairoColor ());
+			g.ShowLayout (titleLayout);
 
-		// 	if (SupportsAlpha) {
-		// 		g.MoveTo (tw, Allocation.Height / 2 - th / 2);
-		// 		g.LineTo (0, Allocation.Height / 2);
-		// 		g.LineTo (tw, Allocation.Height / 2 + th / 2);
-		// 		g.LineTo (tw + 5, Allocation.Height / 2 + th / 2);
-		// 		g.LineTo (tw + 5, Allocation.Height / 2 - th / 2);
-		// 		g.ClosePath ();
-		// 		g.SetSourceColor (Styles.InsertionCursorBackgroundColor.ToCairoColor ());
-		// 		g.Fill ();
+			if (SupportsAlpha) {
+				g.MoveTo (tw, Allocation.Height / 2 - th / 2);
+				g.LineTo (0, Allocation.Height / 2);
+				g.LineTo (tw, Allocation.Height / 2 + th / 2);
+				g.LineTo (tw + 5, Allocation.Height / 2 + th / 2);
+				g.LineTo (tw + 5, Allocation.Height / 2 - th / 2);
+				g.ClosePath ();
+				g.SetSourceColor (Styles.InsertionCursorBackgroundColor.ToCairoColor ());
+				g.Fill ();
 
-		// 		g.MoveTo (tw, Allocation.Height / 2 - th / 2);
-		// 		g.LineTo (0, Allocation.Height / 2);
-		// 		g.LineTo (tw, Allocation.Height / 2 + th / 2);
-		// 		g.SetSourceColor (Styles.InsertionCursorBorderColor.ToCairoColor ());
-		// 		g.Stroke ();
-		// 	}
+				g.MoveTo (tw, Allocation.Height / 2 - th / 2);
+				g.LineTo (0, Allocation.Height / 2);
+				g.LineTo (tw, Allocation.Height / 2 + th / 2);
+				g.SetSourceColor (Styles.InsertionCursorBorderColor.ToCairoColor ());
+				g.Stroke ();
+			}
 
-		// 	int y = height + yTitleBorder + yDescriptionBorder;
-		// 	int x = tw + xDescriptionBorder;
-		// 	g.SetSourceColor (Styles.InsertionCursorTextColor.ToCairoColor ());
+			int y = height + yTitleBorder + yDescriptionBorder;
+			int x = tw + xDescriptionBorder;
+			g.SetSourceColor (Styles.InsertionCursorTextColor.ToCairoColor ());
 
-		// 	foreach (var desc in descTexts) {
-		// 		desc.Render (g, x, y + 4);
-		// 		y += desc.Height + 8;
-		// 	}
-		// 	return base.OnDrawn (g);
-		// }
+			foreach (var desc in descTexts) {
+				desc.Render (g, x, y + 4);
+				y += desc.Height + 8;
+			}
+			return base.OnDrawn (g);
+		}
 	}
 }
