@@ -252,26 +252,26 @@ namespace Mono.TextEditor.Theatrics
 			children.ForEach (child => child.Child.SizeRequest ());
 		}
 
-		// protected override bool OnDrawn (Context cr)
-		// {
-		// 	if (BorderVisible) {
-		// 		cr.LineWidth = 1;
+		protected override bool OnDrawn (Context cr)
+		{
+			if (BorderVisible) {
+				cr.LineWidth = 1;
 
-		// 		var alloc = Allocation;
-		// 		int right = alloc.RightInside ();
-		// 		int bottom = alloc.BottomInside ();
+				var alloc = Allocation;
+				int right = alloc.RightInside ();
+				int bottom = alloc.BottomInside ();
 
-		// 		cr.SharpLineX (alloc.X, alloc.Y, alloc.X, bottom);
-		// 		cr.SharpLineX (right, alloc.Y, right, bottom);
+				cr.SharpLineX (alloc.X, alloc.Y, alloc.X, bottom);
+				cr.SharpLineX (right, alloc.Y, right, bottom);
 
-		// 		cr.SharpLineY (alloc.X, alloc.Y, right, alloc.Y);
-		// 		cr.SharpLineY (alloc.X, bottom, right, bottom);
+				cr.SharpLineY (alloc.X, alloc.Y, right, alloc.Y);
+				cr.SharpLineY (alloc.X, bottom, right, bottom);
 
-		// 		cr.SetSourceColor ((HslColor)Style.Dark (State));
-		// 		cr.Stroke ();
-		// 	}
-		// 	return base.OnDrawn (cr);
-		// }
+				//cr.SetSourceColor ((HslColor)Style.Dark (State));
+				cr.Stroke ();
+			}
+			return base.OnDrawn (cr);
+		}
 }
 }
 
