@@ -161,48 +161,48 @@ namespace MonoDevelop.SourceEditor
 				return base.OnEnterNotifyEvent (evnt);
 			}
 
-			// protected override void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context g)
-			// {
-			// 	g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-			// 	g.SetSourceColor (marker.TooltipColor);
-			// 	g.Fill ();
+			protected override void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context g)
+			{
+				g.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+				g.SetSourceColor (marker.TooltipColor);
+				g.Fill ();
 
-			// 	using (var drawingLayout = new Pango.Layout (this.PangoContext)) {
-			// 		drawingLayout.FontDescription = cache.tooltipFontDescription;
+				using (var drawingLayout = new Pango.Layout (this.PangoContext)) {
+					drawingLayout.FontDescription = cache.tooltipFontDescription;
 
-			// 		double y = verticalTextBorder;
-			// 		var showBulletedList = marker.Errors.Count > 1;
+					double y = verticalTextBorder;
+					var showBulletedList = marker.Errors.Count > 1;
 
-			// 		foreach (var msg in marker.Errors) {
-			// 			var icon = msg.IsError ? errorPixbuf : warningPixbuf;
-			// 			int w, h;
+					foreach (var msg in marker.Errors) {
+						var icon = msg.IsError ? errorPixbuf : warningPixbuf;
+						int w, h;
 
-			// 			if (!showBulletedList)
-			// 				drawingLayout.Width = maxTextWidth;
+						if (!showBulletedList)
+							drawingLayout.Width = maxTextWidth;
 
-			// 			drawingLayout.SetText (msg.FullErrorMessage);
-			// 			drawingLayout.GetPixelSize (out w, out h);
+						drawingLayout.SetText (msg.FullErrorMessage);
+						drawingLayout.GetPixelSize (out w, out h);
 
-			// 			if (showBulletedList) {
-			// 				g.Save ();
+						if (showBulletedList) {
+							g.Save ();
 
-			// 				g.Translate (textBorder, y + verticalTextSpace / 2 + Math.Max (0, (h - icon.Height) / 2));
-			// 				g.DrawImage (this, icon, 0, 0);
-			// 				g.Restore ();
-			// 			}
+							g.Translate (textBorder, y + verticalTextSpace / 2 + Math.Max (0, (h - icon.Height) / 2));
+							g.DrawImage (this, icon, 0, 0);
+							g.Restore ();
+						}
 
-			// 			g.Save ();
+						g.Save ();
 
-			// 			g.Translate (showBulletedList ? textBorder + iconTextSpacing + icon.Width: textBorder, y + verticalTextSpace / 2);
-			// 			g.SetSourceColor (marker.TagColor2);
-			// 			g.ShowLayout (drawingLayout);
+						g.Translate (showBulletedList ? textBorder + iconTextSpacing + icon.Width: textBorder, y + verticalTextSpace / 2);
+						g.SetSourceColor (marker.TagColor2);
+						g.ShowLayout (drawingLayout);
 
-			// 			g.Restore ();
+						g.Restore ();
 
-			// 			y += h + verticalTextSpace;
-			// 		}
-			// 	}
-			// }
+						y += h + verticalTextSpace;
+					}
+				}
+			}
 		}
 
 		public void StartHover (MessageBubbleTextMarker marker, double bubbleX, double bubbleY, double bubbleWidth, bool isReduced)
