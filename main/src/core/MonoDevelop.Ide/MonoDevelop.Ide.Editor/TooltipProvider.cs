@@ -168,7 +168,7 @@ namespace MonoDevelop.Ide.Editor
 
 
 			var xwtWindow = (Xwt.WindowFrame)tipWindow;
-			//xwtWindow.Location = CalculateWindowLocation (editor, item, xwtWindow, mouseX, mouseY, origin);
+			xwtWindow.Location = CalculateWindowLocation (editor, item, xwtWindow, mouseX, mouseY, origin);
 
 			var gtkWindow = Xwt.Toolkit.Load (Xwt.ToolkitType.Gtk3).GetNativeWindow (xwtWindow) as Gtk.Window;
 			if (gtkWindow != null)
