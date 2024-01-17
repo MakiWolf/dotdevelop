@@ -515,12 +515,6 @@ namespace MonoDevelop.Ide.FindInFiles
 			pathRenderer.Markup = projectNameMarkup;
 		}
 
-		static int TranslateIndexToUTF8 (string text, int index)
-		{
-			byte[] bytes = Encoding.UTF8.GetBytes (text);
-			return Encoding.UTF8.GetCharCount (bytes, 0, index);
-		}
-		List<Tuple<SearchResult, string>> markupCache = new List<Tuple<SearchResult, string>> ();
 		void ResultTextDataFunc (TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			if (TreeIter.Zero.Equals (iter))
