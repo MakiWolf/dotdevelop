@@ -330,11 +330,11 @@ namespace MonoDevelop.Components
 
 		private void UpdateStyle ()
 		{
-			//Gdk.Color color = entry.Style.Base (entry.State);
-			//filter_button.ModifyBg (entry.State, color);
-			//clear_button.ModifyBg (entry.State, color);
-			//if (statusLabelEventBox != null)
-				//statusLabelEventBox.ModifyBg (entry.State, color);
+			Gdk.Color color = entry.Style.Base (entry.State);
+			filter_button.ModifyBg (entry.State, color);
+			clear_button.ModifyBg (entry.State, color);
+			if (statusLabelEventBox != null)
+				statusLabelEventBox.ModifyBg (entry.State, color);
 
 			box.BorderWidth = 0;
 			var h = entry.SizeRequest ().Height + entry.Style.Ythickness * 2;
