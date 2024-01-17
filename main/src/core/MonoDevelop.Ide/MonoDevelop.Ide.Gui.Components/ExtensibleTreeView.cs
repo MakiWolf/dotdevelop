@@ -42,6 +42,11 @@ using MonoDevelop.Ide.Commands;
 using MonoDevelop.Ide.Extensions;
 using MonoDevelop.Ide.Gui.Pads;
 using MonoDevelop.Projects.Extensions;
+#if GTK3
+using TreeModel = Gtk.ITreeModel;
+#else
+using TreeModel = Gtk.TreeModel;
+#endif
 
 namespace MonoDevelop.Ide.Gui.Components
 {
@@ -303,7 +308,7 @@ namespace MonoDevelop.Ide.Gui.Components
 		}
 #endif
 
-		static void SetIconCellData (Gtk.TreeViewColumn col, Gtk.CellRenderer renderer, Gtk.ITreeModel model, Gtk.TreeIter it)
+		static void SetIconCellData (Gtk.TreeViewColumn col, Gtk.CellRenderer renderer, TreeModel model, Gtk.TreeIter it)
 		{
 			if (model == null)
 				return;
@@ -321,7 +326,7 @@ namespace MonoDevelop.Ide.Gui.Components
 			cell.OverlayTopRight = info.OverlayTopRight;
 		}
 
-		static void SetTextCellData (Gtk.TreeViewColumn col, Gtk.CellRenderer renderer, Gtk.ITreeModel model, Gtk.TreeIter it)
+		static void SetTextCellData (Gtk.TreeViewColumn col, Gtk.CellRenderer renderer, TreeModel model, Gtk.TreeIter it)
 		{
 			if (model == null)
 				return;
@@ -397,7 +402,13 @@ namespace MonoDevelop.Ide.Gui.Components
 				else if (!(nb is NodeBuilderExtension))
 					throw new InvalidOperationException (string.Format ("Invalid NodeBuilder type: {0}. NodeBuilders must inherit either from TypeNodeBuilder or NodeBuilderExtension", nb.GetType()));
 			}
-
+			if (NodeBuilders != null) {
+				var builderHash = new HashSet<NodeBuilder> (builders);
+				foreach (var builder in NodeBuilders) {
+					if (!builderHash.Contains (builder))
+						builder.Dispose ();
+				}
+			}
 			NodeBuilders = builders.ToArray ();
 
 			foreach (NodeBuilder nb in builders)
@@ -438,7 +449,7 @@ namespace MonoDevelop.Ide.Gui.Components
 			NodeBuilder[] chain = nav.BuilderChain;
 			bool foundHandler = false;
 
-//			DragOperation oper = ctx.Action == Gdk.DragAction.Copy ? DragOperation.Copy : DragOperation.Move;
+			//DragOperation oper = ctx.Action == Gdk.DragAction.Copy ? DragOperation.Copy : DragOperation.Move;
 			DropPosition dropPos;
 			if (pos == Gtk.TreeViewDropPosition.After)
 				dropPos = DropPosition.After;
@@ -454,16 +465,16 @@ namespace MonoDevelop.Ide.Gui.Components
 					try {
 						NodeCommandHandler handler = nb.CommandHandler;
 						handler.SetCurrentNode (nav);
-//						if (handler.CanDropMultipleNodes (obj, oper, dropPos)) {
-//							foundHandler = true;
-//							if (drop) {
-//								if (!updatesLocked) {
-//									LockUpdates ();
-//									updatesLocked = true;
-//								}
-//								handler.OnMultipleNodeDrop (obj, oper, dropPos);
-//							}
-//						}
+						// if (handler.CanDropMultipleNodes (obj, oper, dropPos)) {
+						// 	foundHandler = true;
+						// 	if (drop) {
+						// 		if (!updatesLocked) {
+						// 			LockUpdates ();
+						// 			updatesLocked = true;
+						// 		}
+						// 		handler.OnMultipleNodeDrop (obj, oper, dropPos);
+						// 	}
+						// }
 					} catch (Exception ex) {
 						LoggingService.LogError (ex.ToString ());
 					}
@@ -503,7 +514,7 @@ namespace MonoDevelop.Ide.Gui.Components
 						var rect = text_render.GetStatusIconArea (tree, cellArea);
 						if (cx >= rect.X && cx <= rect.Right) {
 							tree.ConvertBinWindowToWidgetCoords (rect.X, rect.Y, out rect.X, out rect.Y);
-							ShowStatusMessage (it, rect, info);
+							ShowStatusMessage (path, rect, info);
 							popupShown = true;
 						}
 					}
@@ -514,17 +525,17 @@ namespace MonoDevelop.Ide.Gui.Components
 		}
 
 		bool statusMessageVisible;
-		Gtk.TreeIter statusIconIter;
+		Gtk.TreePath statusIconPath;
 		TooltipPopoverWindow statusPopover;
 
-		void ShowStatusMessage (Gtk.TreeIter it, Gdk.Rectangle rect, NodeInfo info)
+		void ShowStatusMessage (Gtk.TreePath path, Gdk.Rectangle rect, NodeInfo info)
 		{
-			if (statusMessageVisible && store.GetPath (it).Equals (store.GetPath (statusIconIter)))
+			if (statusMessageVisible && path.Equals (statusIconPath))
 				return;
 			if (statusPopover != null)
 				statusPopover.Destroy ();
 			statusMessageVisible = true;
-			statusIconIter = it;
+			statusIconPath = path;
 
 			statusPopover = TooltipPopoverWindow.Create ();
 			statusPopover.ShowArrow = true;
@@ -1262,19 +1273,12 @@ namespace MonoDevelop.Ide.Gui.Components
 
 			try {
 				LockUpdates ();
-				TreeNodeNavigator node = (TreeNodeNavigator) GetSelectedNode ();
-				if (node != null) {
-					NodeBuilder[] chain = node.NodeBuilderChain;
-					NodePosition pos = node.CurrentPosition;
-					foreach (NodeBuilder b in chain) {
-						NodeCommandHandler handler = b.CommandHandler;
-						handler.SetCurrentNode (node);
-						if (handler.CanDropMultipleNodes (copyObjects, currentTransferOperation, DropPosition.Into)) {
-							node.MoveToPosition (pos);
-							handler.OnMultipleNodeDrop (copyObjects, currentTransferOperation, DropPosition.Into);
-						}
-						node.MoveToPosition (pos);
-					}
+				var node = (TreeNodeNavigator) GetSelectedNode ();
+
+				if (!TryHandlePaste(node, copyObjects, currentTransferOperation, false, false)) {
+					// if the current node can't handle the data, try to paste it into the parent node
+					if (node.MoveToParent ())
+						TryHandlePaste (node, copyObjects, currentTransferOperation, false, true);
 				}
 				if (currentTransferOperation == DragOperation.Move)
 					CancelTransfer ();
@@ -1290,24 +1294,33 @@ namespace MonoDevelop.Ide.Gui.Components
 				info.Bypass = true;
 				return;
 			}
+			var node = (TreeNodeNavigator)GetSelectedNode ();
+			info.Enabled = TryHandlePaste (node, copyObjects, currentTransferOperation, true, false);
+			// if the current node can't handle the data, see if the parent can
+			if (!info.Enabled && node.MoveToParent ())
+				info.Enabled = TryHandlePaste (node, copyObjects, currentTransferOperation, true, true);
+		}
 
-			if (copyObjects != null) {
-				TreeNodeNavigator node = (TreeNodeNavigator) GetSelectedNode ();
-				if (node != null) {
-					NodeBuilder[] chain = node.NodeBuilderChain;
-					NodePosition pos = node.CurrentPosition;
-					foreach (NodeBuilder b in chain) {
-						NodeCommandHandler handler = b.CommandHandler;
-						handler.SetCurrentNode (node);
-						if (handler.CanDropMultipleNodes (copyObjects, currentTransferOperation, DropPosition.Into)) {
-							info.Enabled = true;
-							return;
-						}
+		static bool TryHandlePaste (TreeNodeNavigator node, object[] copyObjects, DragOperation currentTransferOperation, bool simulatePaste, bool parentDrop)
+		{
+			if (node == null || copyObjects == null || copyObjects.Length == 0)
+				return false;
+			var pos = node.CurrentPosition;
+			foreach (var b in node.NodeBuilderChain) {
+				var handler = b.CommandHandler;
+				handler.SetCurrentNode (node);
+				if (parentDrop && !handler.CanHandleDropFromChild (copyObjects, currentTransferOperation, DropPosition.Into))
+					return false;
+				if (handler.CanDropMultipleNodes (copyObjects, currentTransferOperation, DropPosition.Into)) {
+					if (!simulatePaste) {
 						node.MoveToPosition (pos);
+						handler.OnMultipleNodeDrop (copyObjects, currentTransferOperation, DropPosition.Into);
 					}
+					return true;
 				}
+				node.MoveToPosition (pos);
 			}
-			info.Enabled = false;
+			return false;
 		}
 
 		void CancelTransfer ()
@@ -1388,11 +1401,11 @@ namespace MonoDevelop.Ide.Gui.Components
 				selectionLength = editTextLength - selectionStart;
 			// This will apply the selection as soon as possible
 			GLib.Idle.Add (() => {
-//				var editable = currentLabelEditable;
-//				if (editable == null)
+				//var editable = currentLabelEditable;
+				//if (editable == null)
 					return false;
 
-//				editable.SelectRegion (selectionStart, selectionStart + selectionLength);
+				//editable.SelectRegion (selectionStart, selectionStart + selectionLength);
 				return false;
 			});
 			// Ensure we set all our state variables before calling SetCursor
@@ -1457,7 +1470,7 @@ namespace MonoDevelop.Ide.Gui.Components
 		{
 			editingText = false;
 			text_render.Editable = false;
-//			currentLabelEditable = null;
+			//currentLabelEditable = null;
 
 			TreeNodeNavigator node = (TreeNodeNavigator) GetSelectedNode ();
 			if (node == null)
@@ -1528,7 +1541,7 @@ namespace MonoDevelop.Ide.Gui.Components
 				globalOptions[opt.Id] = val;
 			}
 			globalOptions.Pad = this;
-			RefreshTree ();
+			RefreshRoots ();
 		}
 
 		TypeNodeBuilder GetTypeNodeBuilder (Type type)
@@ -1587,7 +1600,7 @@ namespace MonoDevelop.Ide.Gui.Components
 			return null;
 		}
 
-		internal int CompareNodes (Gtk.ITreeModel model, Gtk.TreeIter a, Gtk.TreeIter b)
+		internal int CompareNodes (TreeModel model, Gtk.TreeIter a, Gtk.TreeIter b)
 		{
 			sorting = true;
 			try {
@@ -1967,6 +1980,7 @@ namespace MonoDevelop.Ide.Gui.Components
 				if (options.Length > 0) {
 					CommandEntrySet opset = new CommandEntrySet ();
 					opset.AddItem (ViewCommands.TreeDisplayOptionList);
+					opset.AddItem (ProjectCommands.ToggleFileNesting);
 					opset.AddItem (Command.Separator);
 					opset.AddItem (ViewCommands.ResetTreeDisplayOptions);
 					return opset;
@@ -1987,6 +2001,7 @@ namespace MonoDevelop.Ide.Gui.Components
 				if (!tnav.Clone ().MoveToParent ()) {
 					CommandEntrySet opset = eset.AddItemSet (GettextCatalog.GetString ("Display Options"));
 					opset.AddItem (ViewCommands.TreeDisplayOptionList);
+					opset.AddItem (ProjectCommands.ToggleFileNesting);
 					opset.AddItem (Command.Separator);
 					opset.AddItem (ViewCommands.ResetTreeDisplayOptions);
 				//	opset.AddItem (ViewCommands.CollapseAllTreeNodes);
@@ -2054,7 +2069,7 @@ namespace MonoDevelop.Ide.Gui.Components
 		void OnKeyPress (object o, Gtk.KeyPressEventArgs args)
 		{
 			HideStatusMessage ();
-			
+
 			if (args.Event.Key == Gdk.Key.Delete || args.Event.Key == Gdk.Key.KP_Delete) {
 				DeleteCurrentItem ();
 				args.RetVal = true;
@@ -2151,25 +2166,23 @@ namespace MonoDevelop.Ide.Gui.Components
 				SelectionChanged (this, EventArgs.Empty);
 		}
 
+		public bool IsDestroyed { get; set; }
+
 		void Destroy ()
 		{
+			IsDestroyed = true;
 			IdeApp.Preferences.CustomPadFont.Changed -= CustomFontPropertyChanged;
 			if (pix_render != null) {
-//				pix_render.Destroy ();
+				//pix_render.Destroy ();
 				pix_render = null;
 			}
 			if (complete_column != null) {
-//				complete_column.Destroy ();
+				//complete_column.Destroy ();
 				complete_column = null;
 			}
 			if (text_render != null) {
-//				text_render.Destroy ();
+				//text_render.Destroy ();
 				text_render = null;
-			}
-
-			if (store != null) {
-				Clear ();
-				store = null;
 			}
 
 			if (builders != null) {
@@ -2182,12 +2195,27 @@ namespace MonoDevelop.Ide.Gui.Components
 				}
 				builders = null;
 			}
+
+			if (store != null) {
+				Clear ();
+				store = null;
+			}
+
 			builderChains.Clear ();
 		}
 
 		object ICommandRouter.GetNextCommandTarget ()
 		{
 			return widget.Parent;
+		}
+
+		/// <summary>
+		/// Forces the select on release feature to be disabled since the ContextMenuTreeView
+		/// does not always reset the SelectFunction for the tree.
+		/// </summary>
+		internal void ClearSelectOnRelease ()
+		{
+			tree.ClearSelectOnRelease ();
 		}
 
 		internal class PadCheckMenuItem: Gtk.CheckMenuItem
@@ -2212,6 +2240,8 @@ namespace MonoDevelop.Ide.Gui.Components
 
 			public ITreeBuilder GetTreeBuilder ()
 			{
+				if (pad.IsDestroyed)
+					throw new InvalidOperationException ("TreeView is destroyed.");
 				Gtk.TreeIter iter;
 				if (!pad.store.GetIterFirst (out iter))
 					return pad.CreateBuilder (Gtk.TreeIter.Zero);
@@ -2390,7 +2420,6 @@ namespace MonoDevelop.Ide.Gui.Components
 
 			ExtensibleTreeView parent;
 			Gdk.Rectangle buttonScreenRect;
-			Gdk.Rectangle buttonAllocation;
 			string markup;
 			string secondarymarkup;
 
@@ -2480,7 +2509,7 @@ namespace MonoDevelop.Ide.Gui.Components
 				if (scaledFont == null) {
 					if (scaledFont != null)
 						scaledFont.Dispose ();
-					//scaledFont = (customFont ?? parent.widget.Style.FontDesc).Copy ();
+					scaledFont = (customFont ?? parent.widget.Style.FontDesc).Copy ();
 					scaledFont.Size = (int)(customFont.Size * Zoom);
 					if (layout != null)
 						layout.FontDescription = scaledFont;
@@ -2513,42 +2542,42 @@ namespace MonoDevelop.Ide.Gui.Components
 				layout.SetMarkup (newmarkup);
 			}
 
-//			protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
-//			{
-//				Gtk.StateType st = Gtk.StateType.Normal;
-//				if ((flags & Gtk.CellRendererState.Prelit) != 0)
-//					st = Gtk.StateType.Prelight;
-//				if ((flags & Gtk.CellRendererState.Focused) != 0)
-//					st = Gtk.StateType.Normal;
-//				if ((flags & Gtk.CellRendererState.Insensitive) != 0)
-//					st = Gtk.StateType.Insensitive;
-//				if ((flags & Gtk.CellRendererState.Selected) != 0)
-//					st = widget.HasFocus ? Gtk.StateType.Selected : Gtk.StateType.Active;
-//
-//				SetupLayout (widget, flags);
-//
-//				int w, h;
-//				layout.GetPixelSize (out w, out h);
-//
-//				int tx = cell_area.X + (int)Xpad;
-//				int ty = cell_area.Y + (cell_area.Height - h) / 2;
-//
-//				bool hasStatusIcon = StatusIcon != CellRendererImage.NullImage && StatusIcon != null;
-//
-//				if (hasStatusIcon) {
-//					var img = GetResized (StatusIcon, zoom);
-//					if (st == Gtk.StateType.Selected)
-//						img = img.WithStyles ("sel");
-//					var x = tx + w + StatusIconSpacing;
-//					using (var ctx = Gdk.CairoHelper.Create (window)) {
-//						ctx.DrawImage (widget, img, x, cell_area.Y + (cell_area.Height - img.Height) / 2);
-//					}
-//				}
-//
-//				window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
-//
-//				hasStatusIcon = false;
-//			}
+			// protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
+			// {
+			// 	Gtk.StateType st = Gtk.StateType.Normal;
+			// 	if ((flags & Gtk.CellRendererState.Prelit) != 0)
+			// 		st = Gtk.StateType.Prelight;
+			// 	if ((flags & Gtk.CellRendererState.Focused) != 0)
+			// 		st = Gtk.StateType.Normal;
+			// 	if ((flags & Gtk.CellRendererState.Insensitive) != 0)
+			// 		st = Gtk.StateType.Insensitive;
+			// 	if ((flags & Gtk.CellRendererState.Selected) != 0)
+			// 		st = widget.HasFocus ? Gtk.StateType.Selected : Gtk.StateType.Active;
+
+			// 	SetupLayout (widget, flags);
+
+			// 	int w, h;
+			// 	layout.GetPixelSize (out w, out h);
+
+			// 	int tx = cell_area.X + (int)Xpad;
+			// 	int ty = cell_area.Y + (cell_area.Height - h) / 2;
+
+			// 	bool hasStatusIcon = StatusIcon != CellRendererImage.NullImage && StatusIcon != null;
+
+			// 	if (hasStatusIcon) {
+			// 		var img = GetResized (StatusIcon, zoom);
+			// 		if (st == Gtk.StateType.Selected)
+			// 			img = img.WithStyles ("sel");
+			// 		var x = tx + w + StatusIconSpacing;
+			// 		using (var ctx = Gdk.CairoHelper.Create (window)) {
+			// 			ctx.DrawImage (widget, img, x, cell_area.Y + (cell_area.Height - img.Height) / 2);
+			// 		}
+			// 	}
+
+			// 	window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
+
+			// 	hasStatusIcon = false;
+			// }
 
 			public Gdk.Rectangle GetStatusIconArea (Gtk.Widget widget, Gdk.Rectangle cell_area)
 			{
@@ -2563,20 +2592,20 @@ namespace MonoDevelop.Ide.Gui.Components
 				return new Gdk.Rectangle (x, cell_area.Y, (int) iconSize.Width, (int) cell_area.Height);
 			}
 
-//			public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-//			{
-//				SetupLayout (widget);
-//
-//				x_offset = y_offset = 0;
-//
-//				layout.GetPixelSize (out width, out height);
-//				width += (int)Xpad * 2;
-//
-//				if (StatusIcon != CellRendererImage.NullImage && StatusIcon != null) {
-//					var iconSize = GetZoomedIconSize (StatusIcon, zoom);
-//					width += (int)iconSize.Width + StatusIconSpacing;
-//				}
-//			}
+			// public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+			// {
+			// 	SetupLayout (widget);
+
+			// 	x_offset = y_offset = 0;
+
+			// 	layout.GetPixelSize (out width, out height);
+			// 	width += (int)Xpad * 2;
+
+			// 	if (StatusIcon != CellRendererImage.NullImage && StatusIcon != null) {
+			// 		var iconSize = GetZoomedIconSize (StatusIcon, zoom);
+			// 		width += (int)iconSize.Width + StatusIconSpacing;
+			// 	}
+			// }
 
 			protected override void OnEditingStarted (Gtk.ICellEditable editable, string path)
 			{
@@ -2606,18 +2635,14 @@ namespace MonoDevelop.Ide.Gui.Components
 
 			public Gdk.Point PointerPosition { get; set; }
 
-			public Gdk.Rectangle PopupAllocation {
-				get { return buttonAllocation; }
-			}
-
-//			protected override void OnDestroyed ()
-//			{
-//				base.OnDestroyed ();
-//				if (scaledFont != null)
-//					scaledFont.Dispose ();
-//				if (layout != null)
-//					layout.Dispose ();
-//			}
+			// protected override void OnDestroyed ()
+			// {
+			// 	base.OnDestroyed ();
+			// 	if (scaledFont != null)
+			// 		scaledFont.Dispose ();
+			// 	if (layout != null)
+			// 		layout.Dispose ();
+			// }
 		}
 	}
 
@@ -2795,53 +2820,53 @@ namespace MonoDevelop.Ide.Gui.Components
 			return resized;
 		}
 
-//		public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-//		{
-//			base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-//			/*			if (overlayBottomLeft != null || overlayBottomRight != null)
-//				height += overlayOverflow;
-//			if (overlayTopLeft != null || overlayTopRight != null)
-//				height += overlayOverflow;
-//			if (overlayBottomRight != null || overlayTopRight != null)
-//				width += overlayOverflow;*/
-//		}
+		// public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+		// {
+		// 	base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+		// 	/*			if (overlayBottomLeft != null || overlayBottomRight != null)
+		// 		height += overlayOverflow;
+		// 	if (overlayTopLeft != null || overlayTopRight != null)
+		// 		height += overlayOverflow;
+		// 	if (overlayBottomRight != null || overlayTopRight != null)
+		// 		width += overlayOverflow;*/
+		// }
 
 		const int overlayOverflow = 2;
 
-//		protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
-//		{
-//			base.Render (window, widget, background_area, cell_area, expose_area, flags);
-//
-//			if (overlayBottomLeft != null || overlayBottomRight != null || overlayTopLeft != null || overlayTopRight != null) {
-//				int x, y;
-//				Xwt.Drawing.Image image;
-//				GetImageInfo (cell_area, out image, out x, out y);
-//
-//				if (image == null)
-//					return;
-//
-//				bool selected = (flags & Gtk.CellRendererState.Selected) != 0;
-//
-//				using (var ctx = Gdk.CairoHelper.Create (window)) {
-//					if (overlayBottomLeft != null && overlayBottomLeft != NullImage) {
-//						var img = selected ? overlayBottomLeft.WithStyles ("sel") : overlayBottomLeft;
-//						ctx.DrawImage (widget, img, x - overlayOverflow, y + image.Height - img.Height + overlayOverflow);
-//					}
-//					if (overlayBottomRight != null && overlayBottomRight != NullImage) {
-//						var img = selected ? overlayBottomRight.WithStyles ("sel") : overlayBottomRight;
-//						ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y + image.Height - img.Height + overlayOverflow);
-//					}
-//					if (overlayTopLeft != null && overlayTopLeft != NullImage) {
-//						var img = selected ? overlayTopLeft.WithStyles ("sel") : overlayTopLeft;
-//						ctx.DrawImage (widget, img, x - overlayOverflow, y - overlayOverflow);
-//					}
-//					if (overlayTopRight != null && overlayTopRight != NullImage) {
-//						var img = selected ? overlayTopRight.WithStyles ("sel") : overlayTopRight;
-//						ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y - overlayOverflow);
-//					}
-//				}
-//			}
-//		}
+		// protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
+		// {
+		// 	base.Render (window, widget, background_area, cell_area, expose_area, flags);
+
+		// 	if (overlayBottomLeft != null || overlayBottomRight != null || overlayTopLeft != null || overlayTopRight != null) {
+		// 		int x, y;
+		// 		Xwt.Drawing.Image image;
+		// 		GetImageInfo (cell_area, out image, out x, out y);
+
+		// 		if (image == null)
+		// 			return;
+
+		// 		bool selected = (flags & Gtk.CellRendererState.Selected) != 0;
+
+		// 		using (var ctx = Gdk.CairoHelper.Create (window)) {
+		// 			if (overlayBottomLeft != null && overlayBottomLeft != NullImage) {
+		// 				var img = selected ? overlayBottomLeft.WithStyles ("sel") : overlayBottomLeft;
+		// 				ctx.DrawImage (widget, img, x - overlayOverflow, y + image.Height - img.Height + overlayOverflow);
+		// 			}
+		// 			if (overlayBottomRight != null && overlayBottomRight != NullImage) {
+		// 				var img = selected ? overlayBottomRight.WithStyles ("sel") : overlayBottomRight;
+		// 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y + image.Height - img.Height + overlayOverflow);
+		// 			}
+		// 			if (overlayTopLeft != null && overlayTopLeft != NullImage) {
+		// 				var img = selected ? overlayTopLeft.WithStyles ("sel") : overlayTopLeft;
+		// 				ctx.DrawImage (widget, img, x - overlayOverflow, y - overlayOverflow);
+		// 			}
+		// 			if (overlayTopRight != null && overlayTopRight != NullImage) {
+		// 				var img = selected ? overlayTopRight.WithStyles ("sel") : overlayTopRight;
+		// 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y - overlayOverflow);
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 
 	class NodeHashtable: Dictionary<object,object>
