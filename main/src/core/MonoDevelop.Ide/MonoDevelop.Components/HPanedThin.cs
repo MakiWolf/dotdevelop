@@ -297,19 +297,19 @@ namespace MonoDevelop.Components
 		// 	SizeRequest ();
 		// }
 
-		// protected override void OnParentSizeAllocated (Gtk.SizeAllocatedArgs args)
-		// {
-		// 	if (ParentPaned.Child1 != null && ParentPaned.Child1.Visible && ParentPaned.Child2 != null && ParentPaned.Child2.Visible) {
-		// 		Show ();
-		// 		int centerSize = Child == null ? GrabAreaSize / 2 : 0;
-		// 		if (horizontal)
-		// 			SizeAllocate (new Gdk.Rectangle (ParentPaned.Child1.Allocation.X + ParentPaned.Child1.Allocation.Width - centerSize, args.Allocation.Y, GrabAreaSize, args.Allocation.Height));
-		// 		else
-		// 			SizeAllocate (new Gdk.Rectangle (args.Allocation.X, ParentPaned.Child1.Allocation.Y + ParentPaned.Child1.Allocation.Height - centerSize, args.Allocation.Width, GrabAreaSize));
-		// 	} else
-		// 		Hide ();
-		// 	base.OnParentSizeAllocated (args);
-		// }
+		protected override void OnParentSizeAllocated (Gtk.SizeAllocatedArgs args)
+		{
+			if (ParentPaned.Child1 != null && ParentPaned.Child1.Visible && ParentPaned.Child2 != null && ParentPaned.Child2.Visible) {
+				Show ();
+				int centerSize = Child == null ? GrabAreaSize / 2 : 0;
+				if (horizontal)
+					SizeAllocate (new Gdk.Rectangle (ParentPaned.Child1.Allocation.X + ParentPaned.Child1.Allocation.Width - centerSize, args.Allocation.Y, GrabAreaSize, args.Allocation.Height));
+				else
+					SizeAllocate (new Gdk.Rectangle (args.Allocation.X, ParentPaned.Child1.Allocation.Y + ParentPaned.Child1.Allocation.Height - centerSize, args.Allocation.Width, GrabAreaSize));
+			} else
+				Hide ();
+			base.OnParentSizeAllocated (args);
+		}
 
 		public override int GrabAreaSize {
 			get {
