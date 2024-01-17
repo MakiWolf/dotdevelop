@@ -120,23 +120,18 @@ namespace MonoDevelop.Components
 		// 	SizeRequest ();
 		// }
 
-		// protected virtual void OnParentSizeAllocated (Gtk.SizeAllocatedArgs args)
-		// {
-		// }
+		protected virtual void OnParentSizeAllocated (Gtk.SizeAllocatedArgs args)
+		{
+		}
 
 		// void HandleSizeRequested (object o, Gtk.SizeRequestedArgs args)
 		// {
 		// 	OnParentSizeRequested (args);
-//			parent.SizeRequested += delegate {
-//				SizeRequest ();
-//			};
-		// 	parent.SizeAllocated += HandleSizeAllocated;
-		// 	HandleWidget = null;
 		// }
 
 		void HandleSizeAllocated (object o, Gtk.SizeAllocatedArgs args)
 		{
-			//OnParentSizeAllocated (args);
+			OnParentSizeAllocated (args);
 		}
 
 		protected override void OnDestroyed ()
