@@ -60,7 +60,7 @@ namespace MonoDevelop.Ide.Gui.Pads
 
 			tree_view.AppendColumn ("name_col", tree_view.TextRenderer, "text", 0);
 			tree_view.RowExpanded += new Gtk.RowExpandedHandler (RowExpanded);
-			tree_view.Selection.Changed += new EventHandler (RowActivated);	
+			tree_view.RowActivated += RowActivated;
 			store = new TreeStore (typeof (string), typeof (Monodoc.Node));
 			tree_view.Model = store;
 			tree_view.HeadersVisible = false;
@@ -123,8 +123,8 @@ namespace MonoDevelop.Ide.Gui.Pads
 					return;
 				}
 				Monodoc.Node n = (Monodoc.Node)store.GetValue (iter, 1);
-				
-				//IdeApp.HelpOperations.ShowHelp (n.PublicUrl);
+
+				IdeServices.HelpOperations.ShowHelp (n.PublicUrl);
 			}
 		}
 
