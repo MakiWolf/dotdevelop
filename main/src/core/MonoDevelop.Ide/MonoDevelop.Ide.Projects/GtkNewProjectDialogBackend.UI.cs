@@ -146,7 +146,6 @@ namespace MonoDevelop.Ide.Projects
 			topLabelHBox.Name = "topLabelHBox";
 			topLabelHBox.PackStart (topBannerLabel, false, false, 20);
 			topLabelEventBox.Add (topLabelHBox);
-			//ContentArea.PackStart (topBannerTopEdgeLineEventBox, false, false, 0);
 			ContentArea.PackStart (topLabelEventBox, false, false, 0);
 			ContentArea.PackStart (topBannerBottomEdgeLineEventBox, false, false, 0);
 			// Main templates section.
@@ -180,6 +179,7 @@ namespace MonoDevelop.Ide.Projects
 			templateCategoriesTreeView.HeadersVisible = false;
 			templateCategoriesTreeView.Model = templateCategoriesTreeStore;
 			templateCategoriesTreeView.SearchColumn = -1; // disable the interactive search
+			templateCategoriesTreeView.ShowExpanders = false;
 			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
 			templateCategoriesScrolledWindow.Add (templateCategoriesTreeView);
 			templateCategoriesBgBox.Add (templateCategoriesScrolledWindow);
@@ -205,6 +205,7 @@ namespace MonoDevelop.Ide.Projects
 			templatesTreeView.HeadersVisible = false;
 			templatesTreeView.Model = templatesTreeStore;
 			templatesTreeView.SearchColumn = -1; // disable the interactive search
+			templatesTreeView.ShowExpanders = false;
 			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
 			templatesScrolledWindow.Add (templatesTreeView);
 			templatesBgBox.Add (templatesScrolledWindow);
