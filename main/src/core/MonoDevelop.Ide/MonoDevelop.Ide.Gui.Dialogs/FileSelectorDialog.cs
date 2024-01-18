@@ -108,25 +108,24 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				closeWorkspaceCheck.Visible = ShowViewerSelector = false;
 		}
 
-		// public TextEncoding SelectedEncoding {
-		// 	get {
-		// 		if (!ShowEncodingSelector)
-		// 			return -1;
-		// 		else if (encodingMenu.Active < firstEncIndex || encodingMenu.Active == selectOption)
-		// 			return -1;
-		// 		return TextEncoding.ConversionEncodings [encodingMenu.Active - firstEncIndex].CodePage;
-		// 	}
-		// 	set {
-		// 		for (uint n=0; n < TextEncoding.ConversionEncodings.Length; n++) {
-		
-		// 			if (TextEncoding.ConversionEncodings [n].CodePage == value) {
-		// 				encodingMenu.Active = (int)(n + firstEncIndex);
-		// 				return;
-		// 			}
-		// 		}
-		// 		encodingMenu.Active = 0;
-		// 	}
-		// }
+		public TextEncoding SelectedEncoding {
+			get {
+				if (!ShowEncodingSelector)
+					return null;
+				else if (encodingMenu.Active < firstEncIndex || encodingMenu.Active == selectOption)
+					return null;
+				return TextEncoding.ConversionEncodings [encodingMenu.Active - firstEncIndex];
+			}
+			set {
+				for (uint n=0; n < TextEncoding.ConversionEncodings.Length; n++) {
+					if (TextEncoding.ConversionEncodings [n] == value) {
+						encodingMenu.Active = (int)(n + firstEncIndex);
+						return;
+					}
+				}
+				encodingMenu.Active = 0;
+			}
+		}
 		
 		public bool ShowEncodingSelector {
 			get { return encodingLabel.Visible; }
