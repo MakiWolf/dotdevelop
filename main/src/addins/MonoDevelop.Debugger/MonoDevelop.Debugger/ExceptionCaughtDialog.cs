@@ -283,66 +283,21 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			return vbox;
 		}
 
-		class ExpanderWithMinSize : Expander
-		{
-			public ExpanderWithMinSize (string label) : base (label)
-			{
-			}
+		// static void StackFrameLayout (CellLayout layout, CellRenderer cr, ITreeModel model, TreeIter iter)
+		// {
+		// 	var frame = (ExceptionStackFrame)model.GetValue (iter, (int)ModelColumn.StackFrame);
+		// 	var renderer = (StackFrameCellRenderer)cr;
 
-			protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
-			{
-				base.OnGetPreferredHeight (out minimum_height, out natural_height);
-				minimum_height = natural_height = 28;
-			}
+		// 	renderer.Markup = (string)model.GetValue (iter, (int)ModelColumn.Markup);
+		// 	renderer.Frame = frame;
 
-		}
+		// 	if (frame == null) {
+		// 		renderer.IsUserCode = false;
+		// 		return;
+		// 	}
 
-		Expander WrapInExpander (string title, Widget widget)
-		{
-			var expander = new ExpanderWithMinSize ($"<b>{GLib.Markup.EscapeText (title)}</b>");
-			expander.Name = "exception_dialog_expander";
-			Gtk.Rc.ParseString (@"style ""exception-dialog-expander""
-{
-	GtkExpander::expander-spacing = 10
-}
-widget ""*.exception_dialog_expander"" style ""exception-dialog-expander""
-");
-			expander.Child = widget;
-			expander.Spacing = 0;
-			expander.Show ();
-			expander.CanFocus = false;
-			expander.UseMarkup = true;
-			expander.Expanded = true;
-			expander.Activated += Expander_Activated;
-			expander.ModifyBg (StateType.Prelight, Ide.Gui.Styles.PrimaryBackgroundColor.ToGdkColor ());
-			return expander;
-		}
-
-		void Expander_Activated (object sender, EventArgs e)
-		{
-			// if (expanderProperties.Expanded && expanderStacktrace.Expanded)
-			// 	paned.PositionSet = false;
-			// else if (expanderStacktrace.Expanded)
-			// 	paned.Position = paned.MaxPosition;
-			// else
-			// 	paned.Position = paned.MinPosition;
-		}
-
-//		static void StackFrameLayout (CellLayout layout, CellRenderer cr, ITreeModel model, TreeIter iter)
-//		{
-//			var frame = (ExceptionStackFrame)model.GetValue (iter, (int)ModelColumn.StackFrame);
-//			var renderer = (StackFrameCellRenderer)cr;
-//
-//			renderer.Markup = (string)model.GetValue (iter, (int)ModelColumn.Markup);
-//			renderer.Frame = frame;
-//
-//			if (frame == null) {
-//				renderer.IsUserCode = false;
-//				return;
-//			}
-//
-//			renderer.IsUserCode = (bool)model.GetValue (iter, (int)ModelColumn.IsUserCode);
-//		}
+		// 	renderer.IsUserCode = (bool)model.GetValue (iter, (int)ModelColumn.IsUserCode);
+		// }
 		Widget CreateStackTraceTreeView ()
 		{
 			var store = new ListStore (typeof (ExceptionStackFrame), typeof (string), typeof (bool));
