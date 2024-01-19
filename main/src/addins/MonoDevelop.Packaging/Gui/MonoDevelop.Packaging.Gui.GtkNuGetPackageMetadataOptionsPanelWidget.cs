@@ -258,7 +258,7 @@ namespace MonoDevelop.Packaging.Gui
 			this.packageCopyrightTextBox.CanFocus = true;
 			this.packageCopyrightTextBox.Name = "packageCopyrightTextBox";
 			this.packageCopyrightTextBox.IsEditable = true;
-			//this.packageCopyrightTextBox.InvisibleChar = '●';
+			this.packageCopyrightTextBox.InvisibleChar = '●';
 			this.detailsTable.Add(this.packageCopyrightTextBox);
 			global::Gtk.Table.TableChild w14 = ((global::Gtk.Table.TableChild)(this.detailsTable[this.packageCopyrightTextBox]));
 			w14.TopAttach = ((uint)(1));
@@ -321,9 +321,9 @@ namespace MonoDevelop.Packaging.Gui
 			this.packageLanguageHBox.Name = "packageLanguageHBox";
 			this.packageLanguageHBox.Spacing = 6;
 			// Container child packageLanguageHBox.Gtk.Box+BoxChild
-			//this.packageLanguageComboBox = global::Gtk.ComboBox.NewText();
-			//this.packageLanguageComboBox.Name = "packageLanguageComboBox";
-			//this.packageLanguageHBox.Add(this.packageLanguageComboBox);
+			this.packageLanguageComboBox = new global::Gtk.ComboBoxText();
+			this.packageLanguageComboBox.Name = "packageLanguageComboBox";
+			this.packageLanguageHBox.Add(this.packageLanguageComboBox);
 			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.packageLanguageHBox[this.packageLanguageComboBox]));
 			w19.Position = 0;
 			w19.Expand = false;

@@ -259,10 +259,10 @@ namespace MonoDevelop.Packaging.Gui
 			this.sharedProjectRadioButton.Active = true;
 			this.sharedProjectRadioButton.DrawIndicator = true;
 			this.sharedProjectRadioButton.UseUnderline = true;
-			//this.sharedProjectRadioButton.Group = new global::GLib.SList (global::System.IntPtr.Zero);
-			//this.usePortableClassLibraryHBox.Add (this.sharedProjectRadioButton);
-			//global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.usePortableClassLibraryHBox [this.sharedProjectRadioButton]));
-			//w14.Position = 0;
+			this.sharedProjectRadioButton.Group = new Gtk.RadioButton [0];
+			this.usePortableClassLibraryHBox.Add (this.sharedProjectRadioButton);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.usePortableClassLibraryHBox [this.sharedProjectRadioButton]));
+			w14.Position = 0;
 			// Container child usePortableClassLibraryHBox.Gtk.Box+BoxChild
 			this.usePortableLibraryInfoVBox = new global::Gtk.VBox ();
 			this.usePortableLibraryInfoVBox.Name = "usePortableLibraryInfoVBox";
