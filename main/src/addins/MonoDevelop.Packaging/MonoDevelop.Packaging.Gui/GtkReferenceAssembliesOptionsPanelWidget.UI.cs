@@ -80,7 +80,7 @@ namespace MonoDevelop.Packaging.Gui
 			pclProfilesStore = new ListStore (typeof (bool), typeof (string), typeof (string), typeof (object));
 			pclProfilesTreeView.Model = pclProfilesStore;
 
-			//vbox.PackStart (scrolledWindow);
+			vbox.PackStart (scrolledWindow, false, true, 0);
 
 			Add (vbox);
 
