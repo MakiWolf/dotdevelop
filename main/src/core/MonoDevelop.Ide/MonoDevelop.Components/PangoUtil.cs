@@ -32,10 +32,10 @@ namespace MonoDevelop.Components
 {
 	public static class PangoUtil
 	{
-		internal const string LIBGTK          = "libgtk-3-0.dll";
+		internal const string LIBGTK          = "GtkSharp.dll";
 		internal const string LIBATK          = "libatk-1.0-0.dll";
 		internal const string LIBGLIB         = "libglib-2.0-0.dll";
-		internal const string LIBGDK          = "libgdk-3-0.dll";
+		internal const string LIBGDK          = "GdkSharp.dll";
 		internal const string LIBGOBJECT      = "libgobject-2.0-0.dll";
 		internal const string LIBPANGO        = "libpango-1.0-0.dll";
 		internal const string LIBPANGOCAIRO   = "libpangocairo-1.0-0.dll";

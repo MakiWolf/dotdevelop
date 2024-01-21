@@ -83,6 +83,15 @@
     <Reference Include="System.Xml.Linq"/>
     <Reference Include="System.Runtime.Serialization"/>
   </ItemGroup>
+  <ItemGroup>
+  <IncludeCopyLocal Include="GtkSharp.dll" />
+    <IncludeCopyLocal Include="GdkSharp.dll" />
+    <IncludeCopyLocal Include="GLibSharp.dll" />
+    <IncludeCopyLocal Include="AtkSharp.dll" />
+    <IncludeCopyLocal Include="GioSharp.dll" />
+    <IncludeCopyLocal Include="CairoSharp.dll" />
+    <IncludeCopyLocal Include="PangoSharp.dll" />
+    </ItemGroup>
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <Reference Include="PresentationCore"/>
     <Reference Include="PresentationFramework" Condition=" '$(OS)' == 'Windows_NT' "/>

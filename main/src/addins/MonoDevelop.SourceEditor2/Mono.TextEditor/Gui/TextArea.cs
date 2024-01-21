@@ -141,10 +141,10 @@ namespace Mono.TextEditor
 			return imContextMenuItem;
 		}
 
-		[DllImport (PangoUtil.LIBGTK, CallingConvention = CallingConvention.Cdecl)]
+		//[DllImport (PangoUtil.LIBGTK, CallingConvention = CallingConvention.Cdecl)]
 		static extern void gtk_im_multicontext_set_context_id (IntPtr context, string context_id);
 
-		[DllImport (PangoUtil.LIBGTK, CallingConvention = CallingConvention.Cdecl)]
+		//[DllImport (PangoUtil.LIBGTK, CallingConvention = CallingConvention.Cdecl)]
 		static extern string gtk_im_multicontext_get_context_id (IntPtr context);
 		
 		[GLib.Property ("im-module")]
@@ -1091,7 +1091,7 @@ namespace Mono.TextEditor
 
 		void HeightTree_LineUpdateFrom (object sender, TextEditor.HeightTree.HeightChangedEventArgs e)
 		{
-			//Console.WriteLine ("redraw from :" + e.Line);
+			Console.WriteLine ("redraw from :" + e.Line);
 			RedrawFromLine (e.Line);
 
 		}
@@ -1162,7 +1162,7 @@ namespace Mono.TextEditor
 		{
 			if (isDisposed)
 				return;
-//				Console.WriteLine ("Redraw position: logicalLine={0}, logicalColumn={1}", logicalLine, logicalColumn);
+				Console.WriteLine ("Redraw position: logicalLine={0}, logicalColumn={1}", logicalLine, logicalColumn);
 			RedrawLine (logicalLine, false);
 		}
 		
@@ -1181,7 +1181,7 @@ namespace Mono.TextEditor
 			
 		internal void RedrawLines (int start, int end, bool removeLineCache = true)
 		{
-//			Console.WriteLine ("redraw lines: start={0}, end={1}", start, end);
+			Console.WriteLine ("redraw lines: start={0}, end={1}", start, end);
 			if (isDisposed)
 				return;
 			if (start < 0)
@@ -1200,7 +1200,7 @@ namespace Mono.TextEditor
 		
 		public void RedrawFromLine (int logicalLine)
 		{
-//			Console.WriteLine ("Redraw from line: logicalLine={0}", logicalLine);
+			Console.WriteLine ("Redraw from line: logicalLine={0}", logicalLine);
 			if (isDisposed)
 				return;
 			int y = System.Math.Max (0, (int)(-this.textEditorData.VAdjustment.Value + LineToY (logicalLine)));
@@ -1372,7 +1372,7 @@ namespace Mono.TextEditor
 //			} else if (key == Gdk.Key.ISO_Left_Tab || key == Gdk.Key.Left) {
 //				return FocusNextMargin (DirectionType.TabBackward);
 //			} else {
-				return false;
+//				return false;
 //			}
 
 			return true;
@@ -2335,7 +2335,7 @@ namespace Mono.TextEditor
  				return false;
 
 // //			try {
-// //				ExposeEventInternal (e);
+	//			ExposeEventInternal (cr);
 // //			} catch (Exception ex) {
 // //				GLib.ExceptionManager.RaiseUnhandledException (ex, false);
 // //			}
