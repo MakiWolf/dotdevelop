@@ -47,26 +47,17 @@ namespace MonoDevelop.Components
 		/// </summary>
 		public static Pango.Layout CreateLayout (Widget widget)
 		{
-			var ptr = gtk_widget_create_pango_layout (widget.Handle, IntPtr.Zero);
-			return GLib.Object.GetObject (ptr, true) as Pango.Layout;
+			return widget.CreatePangoLayout (default);
 		}
 
 		public static Pango.Layout CreateLayout (Widget widget, string text)
 		{
-			IntPtr textPtr = text == null? IntPtr.Zero : GLib.Marshaller.StringToPtrGStrdup (text);
-
-			var ptr = gtk_widget_create_pango_layout (widget.Handle, textPtr);
-
-			if (textPtr != IntPtr.Zero)
-				GLib.Marshaller.Free (textPtr);
-
-			return GLib.Object.GetObject (ptr, true) as Pango.Layout;
+			return widget.CreatePangoLayout (text);
 		}
 
 		public static Pango.Layout CreateLayout (PrintContext context)
 		{
-			var ptr = gtk_print_context_create_pango_layout (context.Handle);
-			return ptr == IntPtr.Zero? null : new Pango.Layout (ptr);
+			return context.CreatePangoLayout ();
 		}
 
 		[DllImport (LIBGTK, CallingConvention=CallingConvention.Cdecl)]

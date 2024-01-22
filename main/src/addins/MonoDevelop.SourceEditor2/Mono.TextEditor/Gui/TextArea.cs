@@ -453,9 +453,9 @@ namespace Mono.TextEditor
 				args.RetVal = true;
 			};
 
-//			using (Pixmap inv = new Pixmap (null, 1, 1, 1)) {
-//				invisibleCursor = new Cursor (inv, inv, Gdk.Color.Zero, Gdk.Color.Zero, 0, 0);
-//			}
+
+			invisibleCursor = new Cursor (CursorType.BlankCursor);
+
 
 			InitAnimations ();
 			this.Document.HeightChanged += HandleDocumentHeightChanged;
