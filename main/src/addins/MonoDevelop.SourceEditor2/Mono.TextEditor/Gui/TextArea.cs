@@ -924,9 +924,9 @@ namespace Mono.TextEditor
 				Mask = this.Events | Gdk.EventMask.ExposureMask,
 			};
 
-//			WindowAttributesType mask = WindowAttributesType.X | WindowAttributesType.Y | WindowAttributesType.Colormap | WindowAttributesType.Visual;
-//			GdkWindow = new Gdk.Window (ParentWindow, attributes, mask);
-//			GdkWindow.UserData = Raw;
+			WindowAttributesType mask = WindowAttributesType.X | WindowAttributesType.Y /*| WindowAttributesType.Colormap */| WindowAttributesType.Visual;
+			GdkWindow = new Gdk.Window (ParentWindow, attributes, mask);
+			GdkWindow.UserData = Raw;
 //			GdkWindow.Background = Style.Background (StateType.Normal);
 //			Style = Style.Attach (GdkWindow);
 

@@ -148,10 +148,10 @@ namespace MonoDevelop.Ide
 			get { return PlatformService.DefaultMonospaceFont; }
 		}
 
-		// [Obsolete ("Use FontService")]
-		// public static string DefaultSansFont {
-		// 	get { return PlatformService.DefaultSansFont; }
-		// }
+		[Obsolete ("Use FontService")]
+		internal string DefaultSansFont {
+			get { return PlatformService.DefaultSansFont; }
+		}
 
 		public string PlatformName {
 			get { return PlatformService.Name; }
