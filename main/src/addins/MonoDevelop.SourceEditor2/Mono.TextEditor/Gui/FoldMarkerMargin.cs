@@ -57,14 +57,14 @@ namespace Mono.TextEditor
 				return marginWidth;
 			}
 		}
-		
+
 		bool isInCodeFocusMode;
 		public bool IsInCodeFocusMode {
-			get { 
-				return isInCodeFocusMode; 
+			get {
+				return isInCodeFocusMode;
 			}
 			set {
-				isInCodeFocusMode = value; 
+				isInCodeFocusMode = value;
 				if (!isInCodeFocusMode) {
 					RemoveBackgroundRenderer ();
 				} else {
@@ -73,7 +73,7 @@ namespace Mono.TextEditor
 				}
 			}
 		}
-		
+
 		public FoldMarkerMargin (MonoTextEditor editor)
 		{
 			this.editor = editor;
@@ -204,22 +204,22 @@ namespace Mono.TextEditor
 
 		void HandleEditorCaretPositionChanged (object sender, DocumentLocationEventArgs e)
 		{
-			if (!IsInCodeFocusMode) 
+			if (!IsInCodeFocusMode)
 				return;
 			DocumentLine lineSegment = editor.Document.GetLine (editor.Caret.Line);
 			if (lineSegment == null) {
 				RemoveBackgroundRenderer ();
 				return;
 			}
-			
+
 			IEnumerable<FoldSegment> newFoldings = editor.Document.GetFoldingContaining (lineSegment);
 			if (newFoldings == null) {
 				RemoveBackgroundRenderer ();
 				return;
 			}
-			
+
 			bool areEqual = foldings != null;
-			
+
 			if (areEqual && foldings.Count () != newFoldings.Count ())
 				areEqual = false;
 			if (areEqual) {
@@ -232,13 +232,13 @@ namespace Mono.TextEditor
 					}
 				}
 			}
-			
+
 			if (!areEqual) {
 				foldings = newFoldings;
 				StopTimer ();
 			}
 		}
-		
+
 		internal protected override void MousePressed (MarginMouseEventArgs args)
 		{
 			base.MousePressed (args);
@@ -252,7 +252,7 @@ namespace Mono.TextEditor
             editor.SetAdjustments ();
 			editor.Caret.MoveCaretBeforeFoldings ();
 		}
-		
+
 		internal protected override void MouseHover (MarginMouseEventArgs args)
 		{
 			base.MouseHover (args);
@@ -266,7 +266,7 @@ namespace Mono.TextEditor
 					lineHover = lineSegment;
 					editor.RedrawMargin (this);
 				}
-			} 
+			}
 			lineHover = lineSegment;
 			bool found = false;
 			foreach (FoldSegment segment in editor.Document.GetFoldingContaining (lineSegment)) {
@@ -315,7 +315,7 @@ namespace Mono.TextEditor
 			timerId = 0;
 			return false;
 		}
-		
+
 		void StopTimer ()
 		{
 			if (timerId != 0) {
@@ -323,7 +323,7 @@ namespace Mono.TextEditor
 				timerId = 0;
 			}
 		}
-		
+
 		uint timerId;
 		IEnumerable<FoldSegment> foldings;
 		void RemoveBackgroundRenderer ()
@@ -334,11 +334,11 @@ namespace Mono.TextEditor
 				editor.QueueDraw ();
 			}
 		}
-		
+
 		internal protected override void MouseLeft ()
 		{
 			base.MouseLeft ();
-			
+
 			if (lineHover != null) {
 				lineHover = null;
 				editor.RedrawMargin (this);
@@ -346,14 +346,14 @@ namespace Mono.TextEditor
 			StopTimer ();
 			RemoveBackgroundRenderer ();
 		}
-		
+
 		internal protected override void OptionsChanged ()
 		{
 			drawer.OptionsChanged ();
 
 			marginWidth = editor.LineHeight  * 3 / 4;
 		}
-		
+
 		public override void Dispose ()
 		{
 			base.Dispose ();
@@ -361,7 +361,7 @@ namespace Mono.TextEditor
 			animationStage.ActorStep -= AnimationStage_ActorStep;
 			animationStage.Exeunt ();
 			editor.TextArea.MouseHover -= TextArea_MouseHover;
-			editor.TextArea.MouseLeft -= TextArea_MouseLeft; 
+			editor.TextArea.MouseLeft -= TextArea_MouseLeft;
 			editor.Caret.PositionChanged -= HandleEditorCaretPositionChanged;
 			editor.Caret.PositionChanged -= EditorCarethandlePositionChanged;
 			editor.Document.FoldTreeUpdated -= HandleEditorDocumentFoldTreeUpdated;
@@ -382,7 +382,7 @@ namespace Mono.TextEditor
 				accessibles.Clear ();
 			}
 		}
-		
+
 
 		internal protected override void Draw (Cairo.Context cr, Cairo.Rectangle area, DocumentLine line, int lineNumber, double x, double y, double lineHeight)
 		{

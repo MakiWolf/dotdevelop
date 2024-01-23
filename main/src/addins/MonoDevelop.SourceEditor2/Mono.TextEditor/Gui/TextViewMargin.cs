@@ -846,8 +846,8 @@ namespace Mono.TextEditor
 			return caretChar;
 		}
 
-//		public void DrawCaret (Gdk.Drawable win, Gdk.Rectangle rect)
-//		{
+		public void DrawCaret (Gdk.Window win, Gdk.Rectangle rect)
+		{
 //			if (!this.textEditor.IsInDrag && !(this.caretX >= 0 && (!this.textEditor.IsSomethingSelected || this.textEditor.SelectionRange.Length == 0)))
 //				return;
 //			if (win == null || Settings.Default.CursorBlink && !Caret.IsVisible || !caretBlink)
@@ -920,7 +920,7 @@ namespace Mono.TextEditor
 //					break;
 //				}
 //			}
-//		}
+		}
 
 		void GetSelectionOffsets (DocumentLine line, out int selectionStart, out int selectionEnd)
 		{
