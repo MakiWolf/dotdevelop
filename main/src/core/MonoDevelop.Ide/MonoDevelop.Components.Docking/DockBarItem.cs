@@ -30,6 +30,7 @@
 
 
 using System;
+using Cairo;
 using Gtk;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Components;

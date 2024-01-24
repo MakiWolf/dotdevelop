@@ -30,6 +30,7 @@ using Gtk;
 using System;
 using MonoDevelop.Ide.Gui;
 using System.Linq;
+using Cairo;
 using MonoDevelop.Core;
 using MonoDevelop.Ide;
 using MonoDevelop.Components;
@@ -739,78 +740,80 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			if (VisualStyle.TabStyle == DockTabStyle.Normal)
-//				DrawAsBrowser (evnt);
-//			else
-//				DrawNormal (evnt);
-//
-//			if (HasFocus) {
-//				var alloc = labelWidget.Allocation;
-//				Gtk.Style.PaintFocus (Style, GdkWindow, State, alloc, this, "label",
-//				                      alloc.X, alloc.Y, alloc.Width, alloc.Height);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Context cr)
+		{
+			if (VisualStyle.TabStyle == DockTabStyle.Normal)
+				DrawAsBrowser (cr);
+			else
+				DrawNormal (cr);
 
-		void DrawAsBrowser (Gdk.EventExpose evnt)
+			if (HasFocus) {
+				var alloc = labelWidget.Allocation;
+				StyleContext.RenderFocus (cr, alloc.X, alloc.Y, alloc.Width, alloc.Height);
+			}
+
+			return base.OnDrawn (cr);
+		}
+
+		void DrawAsBrowser (Context ctx)
 		{
 			bool first = true;
 			bool last = true;
 
 			if (Parent is TabStrip.TabStripBox) {
-				var tsb = (TabStrip.TabStripBox) Parent;
+				var tsb = (TabStrip.TabStripBox)Parent;
 				var cts = tsb.Children;
 				first = cts[0] == this;
 				last = cts[cts.Length - 1] == this;
 			}
 
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-				if (first && last) {
-					ctx.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-					ctx.SetSourceColor (VisualStyle.PadBackgroundColor.Value.ToCairoColor ());
-					ctx.Fill ();
-				} else {
-					var image = Active ? dockTabActiveBackImage : dockTabBackImage;
-					image = image.WithSize (Allocation.Width, Allocation.Height);
+			ctx.Save ();
+			if (first && last) {
+				ctx.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+				ctx.SetSourceColor (VisualStyle.PadBackgroundColor.Value.ToCairoColor ());
+				ctx.Fill ();
+			} else {
+				var image = Active ? dockTabActiveBackImage : dockTabBackImage;
+				image = image.WithSize (Allocation.Width, Allocation.Height);
 
-					ctx.DrawImage (this, image, Allocation.X, Allocation.Y);
-				}
+				ctx.DrawImage (this, image, Allocation.X, Allocation.Y);
 			}
+
+			ctx.Restore ();
 		}
 
-		void DrawNormal (Gdk.EventExpose evnt)
+		void DrawNormal (Context ctx)
 		{
-			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-				var x = Allocation.X;
-				var y = Allocation.Y;
+			ctx.Save ();
+			var x = Allocation.X;
+			var y = Allocation.Y;
 
-				ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
-				ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+			ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
+			ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+			ctx.Fill ();
+
+			/*
+			if (active) {
+				double offset = Allocation.Height * 0.25;
+				var rect = new Cairo.Rectangle (x - Allocation.Height + offset, y, Allocation.Height, Allocation.Height);
+				var cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
+				cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
+				cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
+				ctx.Pattern = cg;
+				ctx.Rectangle (rect);
 				ctx.Fill ();
 
-				/*
-				if (active) {
-					double offset = Allocation.Height * 0.25;
-					var rect = new Cairo.Rectangle (x - Allocation.Height + offset, y, Allocation.Height, Allocation.Height);
-					var cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
-					cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
-					cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
-					ctx.Pattern = cg;
-					ctx.Rectangle (rect);
-					ctx.Fill ();
-
-					rect = new Cairo.Rectangle (x + Allocation.Width - offset, y, Allocation.Height, Allocation.Height);
-					cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
-					cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
-					cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
-					ctx.Pattern = cg;
-					ctx.Rectangle (rect);
-					ctx.Fill ();
-				}
-				*/
+				rect = new Cairo.Rectangle (x + Allocation.Width - offset, y, Allocation.Height, Allocation.Height);
+				cg = new Cairo.RadialGradient (rect.X + rect.Width / 2, rect.Y + rect.Height / 2, 0, rect.X, rect.Y + rect.Height / 2, rect.Height / 2);
+				cg.AddColorStop (0, Styles.DockTabBarShadowGradientStart);
+				cg.AddColorStop (1, Styles.DockTabBarShadowGradientEnd);
+				ctx.Pattern = cg;
+				ctx.Rectangle (rect);
+				ctx.Fill ();
 			}
+			*/
+			ctx.Restore ();
+
 		}
 	}
 }
