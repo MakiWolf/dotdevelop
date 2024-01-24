@@ -104,18 +104,18 @@ namespace MonoDevelop.Components.Docking
 			min_width = (int) primary.Width;
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (Cairo.Context context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				if (secondaryOpacity < 1.0f)
-//					RenderIcon (context, primary, 1.0f - (float)Math.Pow (secondaryOpacity, 3.0f));
-//
-//				if (secondaryOpacity > 0.0f)
-//					RenderIcon (context, secondary, secondaryOpacity);
-//			}
-//
-//			return false;
-//		}
+		protected override bool OnDrawn (Context context)
+		{
+
+			if (secondaryOpacity < 1.0f)
+				RenderIcon (context, primary, 1.0f - (float)Math.Pow (secondaryOpacity, 3.0f));
+
+			if (secondaryOpacity > 0.0f)
+				RenderIcon (context, secondary, secondaryOpacity);
+
+
+			return false;
+		}
 
 		void RenderIcon (Cairo.Context context, Xwt.Drawing.Image surface, double opacity)
 		{
@@ -539,44 +539,48 @@ namespace MonoDevelop.Components.Docking
 			return true;
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				var alloc = Allocation;
-//
-//				// TODO: VV: Remove preflight gradient features and replace with a flat color
-//
-//				Cairo.LinearGradient lg;
-//
-//				if (bar.Orientation == Orientation.Horizontal) {
-//					lg = new Cairo.LinearGradient (alloc.X, 0, alloc.X + alloc.Width, 0);
-//				} else {
-//					lg = new Cairo.LinearGradient (0, alloc.Y, 0, alloc.Y + alloc.Height);
-//				}
-//
-//				using (lg) {
-//					Cairo.Color primaryColor = Styles.DockBarPrelightColor.ToCairoColor ();
-//					primaryColor.A = hoverProgress;
-//
-//					Cairo.Color transparent = primaryColor;
-//					transparent.A = 0;
-//
-//					lg.AddColorStop (0.0, transparent);
-//					lg.AddColorStop (0.35, primaryColor);
-//					lg.AddColorStop (0.65, primaryColor);
-//					lg.AddColorStop (1.0, transparent);
-//
-//					context.Rectangle (alloc.ToCairoRect ());
-//					context.SetSource (lg);
-//				}
-//				context.Fill ();
-//			}
-//
-//			if (HasFocus) {
-//				Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button", Allocation.X + 2, Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Context context)
+		{
+			context.Save ();
+			var alloc = Allocation;
+
+			// TODO: VV: Remove preflight gradient features and replace with a flat color
+
+			Cairo.LinearGradient lg;
+
+			if (bar.Orientation == Orientation.Horizontal) {
+				lg = new Cairo.LinearGradient (alloc.X, 0, alloc.X + alloc.Width, 0);
+			} else {
+				lg = new Cairo.LinearGradient (0, alloc.Y, 0, alloc.Y + alloc.Height);
+			}
+
+			using (lg) {
+				Cairo.Color primaryColor = Styles.DockBarPrelightColor.ToCairoColor ();
+				primaryColor.A = hoverProgress;
+
+				Cairo.Color transparent = primaryColor;
+				transparent.A = 0;
+
+				lg.AddColorStop (0.0, transparent);
+				lg.AddColorStop (0.35, primaryColor);
+				lg.AddColorStop (0.65, primaryColor);
+				lg.AddColorStop (1.0, transparent);
+
+				context.Rectangle (alloc.ToCairoRect ());
+				context.SetSource (lg);
+			}
+
+			context.Fill ();
+
+			if (HasFocus) {
+				StyleContext.RenderFocus (context, Allocation.X + 2,
+					Allocation.Y + 2, Allocation.Width - 4, Allocation.Height - 4);
+			}
+
+			context.Restore ();
+
+			return base.OnDrawn (context);
+		}
 
 		protected override bool OnFocusInEvent (Gdk.EventFocus evnt)
 		{
