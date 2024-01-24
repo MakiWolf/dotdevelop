@@ -29,6 +29,7 @@
 //
 
 using System;
+using Cairo;
 using Gtk;
 
 using MonoDevelop.Components;
@@ -178,17 +179,19 @@ namespace MonoDevelop.Components.Docking
 				w.ModifyBase (StateType.Insensitive, Parent.Style.Base (StateType.Insensitive));
 			}
 		}
-		
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
-//				Gdk.GC gc = new Gdk.GC (GdkWindow);
-//				gc.RgbFgColor = VisualStyle.PadBackgroundColor.Value.ToGdkColor ();
-//				evnt.Window.DrawRectangle (gc, true, Allocation);
-//				gc.Dispose ();
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+
+		protected override bool OnDrawn (Context cr)
+		{
+			if (VisualStyle.TabStyle == DockTabStyle.Normal) {
+				var col = VisualStyle.PadBackgroundColor.Value.ToCairoColor ();
+				cr.Save ();
+				cr.SetSourceColor (col);
+				cr.Rectangle (Allocation.ToCairoRect ());
+				cr.Restore ();
+			}
+
+			return base.OnDrawn (cr);
+		}
 	}
 
 	class CustomFrame: Bin
@@ -301,73 +304,72 @@ namespace MonoDevelop.Components.Docking
 				child.SizeAllocate (allocation);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			Gdk.Rectangle rect = Allocation;
-//			
-//			//Gdk.Rectangle.Right and Bottom are inconsistent
-//			int right = rect.X + rect.Width, bottom = rect.Y + rect.Height;
-//
-//			var bcolor = backgroundColorSet ? BackgroundColor : Style.Background (Gtk.StateType.Normal);
-//			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-//			
-//				if (GradientBackround) {
-//					cr.NewPath ();
-//					cr.MoveTo (rect.X, rect.Y);
-//					cr.RelLineTo (rect.Width, 0);
-//					cr.RelLineTo (0, rect.Height);
-//					cr.RelLineTo (-rect.Width, 0);
-//					cr.RelLineTo (0, -rect.Height);
-//					cr.ClosePath ();
-//
-//					// FIXME: VV: Remove gradient features
-//					using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, bottom)) {
-//						pat.AddColorStop (0, bcolor.ToCairoColor ());
-//						Xwt.Drawing.Color gcol = bcolor.ToXwtColor ();
-//						gcol.Light -= 0.1;
-//						if (gcol.Light < 0)
-//							gcol.Light = 0;
-//						pat.AddColorStop (1, gcol.ToCairoColor ());
-//						cr.SetSource (pat);
-//						cr.Fill ();
-//					}
-//				} else {
-//					if (backgroundColorSet) {
-//						Gdk.GC gc = new Gdk.GC (GdkWindow);
-//						gc.RgbFgColor = bcolor;
-//						evnt.Window.DrawRectangle (gc, true, rect.X, rect.Y, rect.Width, rect.Height);
-//						gc.Dispose ();
-//					}
-//				}
-//			
-//			}
-//			base.OnExposeEvent (evnt);
-//
-//			using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-//				cr.SetSourceColor (BorderColor.ToCairoColor ());
-//				
-//				double y = rect.Y + topMargin / 2d;
-//				cr.LineWidth = topMargin;
-//				cr.Line (rect.X, y, right, y);
-//				cr.Stroke ();
-//				
-//				y = bottom - bottomMargin / 2d;
-//				cr.LineWidth = bottomMargin;
-//				cr.Line (rect.X, y, right, y);
-//				cr.Stroke ();
-//				
-//				double x = rect.X + leftMargin / 2d;
-//				cr.LineWidth = leftMargin;
-//				cr.Line (x, rect.Y, x, bottom);
-//				cr.Stroke ();
-//				
-//				x = right - rightMargin / 2d;
-//				cr.LineWidth = rightMargin;
-//				cr.Line (x, rect.Y, x, bottom);
-//				cr.Stroke ();
-//
-//				return false;
-//			}
-//		}
+		protected override bool OnDrawn (Context cr)
+		{
+
+			Gdk.Rectangle rect = Allocation;
+
+			//Gdk.Rectangle.Right and Bottom are inconsistent
+			int right = rect.X + rect.Width, bottom = rect.Y + rect.Height;
+
+			var bcolor = backgroundColorSet ? BackgroundColor : StyleContext.GetColor (Gtk.StateFlags.Normal).ToGdkColor ();
+
+			if (GradientBackround) {
+				cr.NewPath ();
+				cr.MoveTo (rect.X, rect.Y);
+				cr.RelLineTo (rect.Width, 0);
+				cr.RelLineTo (0, rect.Height);
+				cr.RelLineTo (-rect.Width, 0);
+				cr.RelLineTo (0, -rect.Height);
+				cr.ClosePath ();
+
+				// FIXME: VV: Remove gradient features
+				using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, bottom)) {
+					pat.AddColorStop (0, bcolor.ToCairoColor ());
+					Xwt.Drawing.Color gcol = bcolor.ToXwtColor ();
+					gcol.Light -= 0.1;
+					if (gcol.Light < 0)
+						gcol.Light = 0;
+					pat.AddColorStop (1, gcol.ToCairoColor ());
+					cr.SetSource (pat);
+					cr.Fill ();
+				}
+			} else {
+				if (backgroundColorSet) {
+					cr.Save ();
+					cr.Rectangle (rect.X, rect.Y, rect.Width, rect.Height);
+					cr.SetSourceColor (bcolor.ToCairoColor ());
+					cr.Fill ();
+					cr.Restore ();
+				}
+			}
+
+			base.OnDrawn (cr);
+
+			cr.SetSourceColor (BorderColor.ToCairoColor ());
+
+			double y = rect.Y + topMargin / 2d;
+			cr.LineWidth = topMargin;
+			cr.Line (rect.X, y, right, y);
+			cr.Stroke ();
+
+			y = bottom - bottomMargin / 2d;
+			cr.LineWidth = bottomMargin;
+			cr.Line (rect.X, y, right, y);
+			cr.Stroke ();
+
+			double x = rect.X + leftMargin / 2d;
+			cr.LineWidth = leftMargin;
+			cr.Line (x, rect.Y, x, bottom);
+			cr.Stroke ();
+
+			x = right - rightMargin / 2d;
+			cr.LineWidth = rightMargin;
+			cr.Line (x, rect.Y, x, bottom);
+			cr.Stroke ();
+
+			return false;
+
+		}
 	}
 }

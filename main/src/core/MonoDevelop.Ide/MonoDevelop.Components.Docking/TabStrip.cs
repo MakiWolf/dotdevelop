@@ -33,6 +33,7 @@ using Gtk;
 using System;
 using MonoDevelop.Ide.Gui;
 using System.Linq;
+using Cairo;
 using MonoDevelop.Components.AtkCocoaHelper;
 using MonoDevelop.Core;
 using MonoDevelop.Ide;
@@ -320,17 +321,17 @@ namespace MonoDevelop.Components.Docking
 			public TabStrip TabStrip;
 			static Xwt.Drawing.Image tabbarBackImage = Xwt.Drawing.Image.FromResource ("tabbar-back.9.png");
 
-//			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//			{
-//				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
-//					using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//						ctx.DrawImage (this, tabbarBackImage.WithSize (Allocation.Width, Allocation.Height), 0, 0);
-//					}
-//				}	
-//				return base.OnExposeEvent (evnt);
-//			}
+			protected override bool OnDrawn (Context ctx)
+			{
+				if (TabStrip.VisualStyle.TabStyle == DockTabStyle.Normal) {
+					ctx.DrawImage (this, tabbarBackImage.WithSize (Allocation.Width, Allocation.Height), 0, 0);
+
+				}
+
+				return base.OnDrawn (ctx);
+			}
 		}
-		
+
 	}
 	
 }

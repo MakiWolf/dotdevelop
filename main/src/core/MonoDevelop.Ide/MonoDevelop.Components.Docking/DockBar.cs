@@ -30,6 +30,7 @@
 
 
 using System;
+using Cairo;
 using Gtk;
 using MonoDevelop.Ide.Gui;
 
@@ -222,35 +223,51 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			var alloc = Allocation;
-//			using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//				ctx.Rectangle (alloc.X, alloc.Y, alloc.X + alloc.Width, alloc.Y + alloc.Height);
-//				ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
-//				ctx.Fill ();
-//			}
-//
-//			if (Child != null)
-//				PropagateExpose (Child, evnt);
-//
-//			if (ShowBorder) {
-//				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//					ctx.LineWidth = 1;
-//
-//					// Dark separator
-//					switch (Position) {
-//					case PositionType.Left:ctx.MoveTo (alloc.X + alloc.Width - 0.5, alloc.Y); ctx.RelLineTo (0, Allocation.Height); break;
-//					case PositionType.Right: ctx.MoveTo (alloc.X + 0.5, alloc.Y); ctx.RelLineTo (0, Allocation.Height); break;
-//					case PositionType.Top: ctx.MoveTo (alloc.X, alloc.Y + alloc.Height + 0.5); ctx.RelLineTo (Allocation.Width, 0); break;
-//					case PositionType.Bottom: ctx.MoveTo (alloc.X, alloc.Y + 0.5); ctx.RelLineTo (Allocation.Width, 0); break;
-//					}
-//					ctx.SetSourceColor (Styles.DockSeparatorColor.ToCairoColor ());
-//					ctx.Stroke ();
-//				}
-//			}
-//			return true;
-//		}
+		protected override bool OnDrawn (Context ctx)
+		{
+			var alloc = Allocation;
+			ctx.Save ();
+			ctx.Rectangle (alloc.X, alloc.Y, alloc.X + alloc.Width, alloc.Y + alloc.Height);
+			ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+			ctx.Fill ();
+
+			if (Child != null)
+				Child.Draw (ctx);
+
+			ctx.Restore ();
+
+			if (ShowBorder) {
+				ctx.Save ();
+
+				ctx.LineWidth = 1;
+
+				// Dark separator
+				switch (Position) {
+				case PositionType.Left:
+					ctx.MoveTo (alloc.X + alloc.Width - 0.5, alloc.Y);
+					ctx.RelLineTo (0, Allocation.Height);
+					break;
+				case PositionType.Right:
+					ctx.MoveTo (alloc.X + 0.5, alloc.Y);
+					ctx.RelLineTo (0, Allocation.Height);
+					break;
+				case PositionType.Top:
+					ctx.MoveTo (alloc.X, alloc.Y + alloc.Height + 0.5);
+					ctx.RelLineTo (Allocation.Width, 0);
+					break;
+				case PositionType.Bottom:
+					ctx.MoveTo (alloc.X, alloc.Y + 0.5);
+					ctx.RelLineTo (Allocation.Width, 0);
+					break;
+				}
+
+				ctx.SetSourceColor (Styles.DockSeparatorColor.ToCairoColor ());
+				ctx.Stroke ();
+				ctx.Restore ();
+			}
+
+			return true;
+		}
 	}
 }
 

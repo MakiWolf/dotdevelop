@@ -32,10 +32,12 @@ using System.Collections.Generic;
 using Gtk;
 using Gdk;
 using System.Linq;
+using Cairo;
 using MonoDevelop.Components.AtkCocoaHelper;
 using MonoDevelop.Core;
 using MonoDevelop.Ide.Gui;
 using GLib;
+using Rectangle = Gdk.Rectangle;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -205,16 +207,16 @@ namespace MonoDevelop.Components.Docking
 				if (s.Parent != null)
 					callback (s.Widget);
 		}
-		
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			bool res = base.OnExposeEvent (evnt);
-//			
-//			if (layout != null) {
-//				layout.Draw (evnt.Area, null, 0);
-//			}
-//			return res;
-//		}
+
+		protected override bool OnDrawn (Context cr)
+		{
+			bool res = base.OnDrawn (cr);
+			var area = Allocation;
+			if (layout != null) {
+				layout.Draw (area, null, 0);
+			}
+			return res;
+		}
 
 		protected override void OnAdded (Widget widget)
 		{
