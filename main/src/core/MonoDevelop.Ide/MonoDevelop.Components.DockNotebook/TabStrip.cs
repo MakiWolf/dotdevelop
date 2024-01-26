@@ -1148,17 +1148,16 @@ namespace MonoDevelop.Components.DockNotebook
 			drawActive?.Invoke (ctx);
 
 			if (HasFocus) {
-				//Gtk.Style.PaintFocus (Style, ctx, State, /*focusRect,*/ this, "tab", focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
+				StyleContext.RenderFocus (ctx, focusRect.X, focusRect.Y, focusRect.Width, focusRect.Height);
 			}
 		}
 
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			using (var context = CairoHelper.Create (evnt.Window)) {
-//				Draw (context);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Context cr)
+		{
+			Draw (cr);
+
+			return base.OnDrawn (cr);
+		}
 
 		void DrawTab (Context ctx, DockNotebookTab tab, Gdk.Rectangle allocation, Gdk.Rectangle tabBounds, bool highlight, bool active, bool dragging, Pango.Layout la, bool focused)
 		{
@@ -1269,7 +1268,7 @@ namespace MonoDevelop.Components.DockNotebook
 		Pango.Layout CreateSizedLayout (bool active)
 		{
 			var la = new Pango.Layout (PangoContext);
-			//la.FontDescription = IdeServices.FontService.SansFont.Copy ();
+			la.FontDescription = IdeServices.FontService.SansFont.Copy ();
 			if (!Core.Platform.IsWindows)
 				la.FontDescription.Weight = Pango.Weight.Bold;
 			la.FontDescription.AbsoluteSize = Pango.Units.FromPixels (VerticalTextSize);
