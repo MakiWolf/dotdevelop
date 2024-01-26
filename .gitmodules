@@ -20,7 +20,7 @@
 	url = https://github.com/dotdevelop/mono-tools.git
 [submodule "main/external/nrefactory"]
 	path = main/external/nrefactory
-	url = https://github.com/dotdevelop/NRefactory.git
+	url = https://github.com/easysimplified/NRefactory.git
 [submodule "main/external/sharpsvn-binary"]
 	path = main/external/sharpsvn-binary
 	url = https://github.com/dotdevelop/sharpsvn-binary.git
@@ -34,7 +34,7 @@
 	branch = master
 [submodule "main/external/vs-editor-api"]
 	path = main/external/vs-editor-api
-	url = https://github.com/dotdevelop/vs-editor-api.git
+	url = https://github.com/easysimplified/vs-editor-api.git
     branch = dotdevelop_oe_8.1.5
 [submodule "main/external/Monodevelop.Netcoredbg"]
 	path = main/external/Monodevelop.Netcoredbg
