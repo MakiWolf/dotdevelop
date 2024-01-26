@@ -32,7 +32,9 @@ using System.Collections.Generic;
 using MonoDevelop.Ide.Gui;
 using System;
 using System.Linq;
+using Cairo;
 using MonoDevelop.Ide.Gui.Shell;
+using Rectangle = Gdk.Rectangle;
 
 namespace MonoDevelop.Components.DockNotebook
 {
@@ -82,7 +84,7 @@ namespace MonoDevelop.Components.DockNotebook
 			titleWindow.FocusOutEvent += delegate {
 				timeout = GLib.Timeout.Add (100, () => {
 					timeout = 0;
-					titleWindow.Close ();
+					titleWindow.ClosePlaceholder ();
 					return false;
 				});
 			};
@@ -236,7 +238,7 @@ namespace MonoDevelop.Components.DockNotebook
 		{
 			timeout = GLib.Timeout.Add (100, () => {
 				timeout = 0;
-				titleWindow.Close ();
+				titleWindow.ClosePlaceholder ();
 				return false;
 			});
 
@@ -248,18 +250,20 @@ namespace MonoDevelop.Components.DockNotebook
 			base.OnRealized ();
 			GdkWindow.Opacity = 0.4;
 		}
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			int w, h;
-//			GetSize (out w, out h);
-//
-//			using (var ctx = CairoHelper.Create (evnt.Window)) {
-//				ctx.SetSourceColor (new Cairo.Color (0.17, 0.55, 0.79));
-//				ctx.Rectangle (Allocation.ToCairoRect ());
-//				ctx.Fill ();
-//			}
-//			return true;
-//		}
+
+		protected override bool OnDrawn (Context ctx)
+		{
+
+			GetSize (out var w, out int h);
+
+			ctx.Save ();
+			ctx.SetSourceColor (new Cairo.Color (0.17, 0.55, 0.79));
+			ctx.Rectangle (Allocation.ToCairoRect ());
+			ctx.Fill ();
+			ctx.Restore ();
+
+			return true;
+		}
 
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{
@@ -437,7 +441,7 @@ namespace MonoDevelop.Components.DockNotebook
 		protected override bool OnKeyPressEvent (EventKey evnt)
 		{
 			if (evnt.Key == Gdk.Key.Escape)
-				Close ();
+				ClosePlaceholder ();
 			if (evnt.Key == Gdk.Key.Control_L)
 				controlKeyMask |= 1;
 			if (evnt.Key == Gdk.Key.Control_R)
@@ -461,17 +465,17 @@ namespace MonoDevelop.Components.DockNotebook
 
 		protected override bool OnButtonReleaseEvent (EventButton evnt)
 		{
-			Close ();
+			ClosePlaceholder ();
 			return base.OnButtonReleaseEvent (evnt);
 		}
 
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 		{
-			Close ();
+			ClosePlaceholder ();
 			return base.OnLeaveNotifyEvent (evnt);
 		}
 
-		public void Close ()
+		public void ClosePlaceholder ()
 		{
 			Application.Invoke ((o, args) => {
 				placeholder.Destroy ();
