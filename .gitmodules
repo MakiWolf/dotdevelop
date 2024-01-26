@@ -1,10 +1,10 @@
 [submodule "main/external/debugger-libs"]
 	path = main/external/debugger-libs
-	url = https://github.com/dotdevelop/debugger-libs.git
+	url = https://github.com/easysimplified/debugger-libs.git
 	branch = master
 [submodule "main/external/guiunit"]
 	path = main/external/guiunit
-	url = https://github.com/dotdevelop/guiunit.git
+	url = https://github.com/easysimplified/guiunit.git
 [submodule "main/external/macdoc"]
 	path = main/external/macdoc
 	url = https://github.com/dotdevelop/macdoc
