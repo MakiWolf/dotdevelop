@@ -159,20 +159,20 @@ namespace MonoDevelop.Ide
 
 			// XWT initialization
 			FilePath p = typeof (IdeStartup).Assembly.Location;
-			//Runtime.LoadAssemblyFrom (p.ParentDirectory.Combine ("Xwt.Gtk.dll"));
-			//Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk);
-			//Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarWindowBackend, GtkExtendedTitleBarWindowBackend> ();
-			//Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarDialogBackend, GtkExtendedTitleBarDialogBackend> ();
-			//IdeTheme.SetupXwtTheme ();
+			Runtime.LoadAssemblyFrom (p.ParentDirectory.Combine ("Xwt.Gtk.dll"));
+			Xwt.Application.InitializeAsGuest (Xwt.ToolkitType.Gtk);
+			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarWindowBackend, GtkExtendedTitleBarWindowBackend> ();
+			Xwt.Toolkit.CurrentEngine.RegisterBackend<IExtendedTitleBarDialogBackend, GtkExtendedTitleBarDialogBackend> ();
+			IdeTheme.SetupXwtTheme ();
 
 			IdeStartupTracker.StartupTracker.MarkSection ("XwtInitialization");
 
 			//default to Windows IME on Windows
 			//if (Platform.IsWindows && GtkWorkarounds.GtkMinorVersion >= 16) {
 				var settings = Gtk.Settings.Default;
-			//	var val = GtkWorkarounds.GetProperty (settings, "gtk-im-module");
+				var val = GtkWorkarounds.GetProperty (settings, "gtk-im-module");
 			//	if (string.IsNullOrEmpty (val.Val as string))
-			//		GtkWorkarounds.SetProperty (settings, "gtk-im-module", new GLib.Value ("ime"));
+					GtkWorkarounds.SetProperty (settings, "gtk-im-module", new GLib.Value ("ime"));
 			//}
 
 			DispatchService.Initialize ();

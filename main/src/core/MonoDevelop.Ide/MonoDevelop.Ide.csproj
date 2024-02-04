@@ -74,7 +74,7 @@
     <IncludeCopyLocal Include="Mono.Addins.Gui.dll" />
     <IncludeCopyLocal Include="Mono.Debugging.dll" />
     <IncludeCopyLocal Include="Xwt.dll" />
-   
+    <IncludeCopyLocal Include="Xwt.Gtk.dll" />
     <IncludeCopyLocal Include="YamlDotNet.dll" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'DebugWin32' Or '$(Configuration)' == 'ReleaseWin32' ">
