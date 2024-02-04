@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <Import Project="..\..\..\MonoDevelop.props" />
   <Import Project="$(ReferencesGtk)" />
   <Import Project="$(ReferencesVSEditor)" />
@@ -17,7 +17,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugGnome|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseGnome|AnyCPU' " />
   <ItemGroup>
-    <Reference Include="monodoc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+     <Reference Include="monodoc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <HintPath Condition="'$(OS)' == 'Windows_NT'">$(MSBuildProgramFiles32)\Mono\lib\mono\monodoc\monodoc.dll</HintPath>
+      <Private Condition="'$(OS)' == 'Windows_NT'">True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -71,7 +74,7 @@
     <IncludeCopyLocal Include="Mono.Addins.Gui.dll" />
     <IncludeCopyLocal Include="Mono.Debugging.dll" />
     <IncludeCopyLocal Include="Xwt.dll" />
-    <IncludeCopyLocal Include="Xwt.Gtk.dll" />
+   
     <IncludeCopyLocal Include="YamlDotNet.dll" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'DebugWin32' Or '$(Configuration)' == 'ReleaseWin32' ">
@@ -133,14 +136,6 @@
       <Project>{288994D1-C7E1-4740-99AB-A52B572EBA8A}</Project>
       <Name>MonoDevelop.GtkExtensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\external\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj">
-      <Project>{8F0B736F-8353-4A6C-B471-192D826BDD81}</Project>
-      <Name>Xwt.GtkSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.GuiGtk3\Mono.Addins.GuiGtk3.csproj">
-      <Project>{410A7DC9-E7DA-43E6-B592-93E2A344B660}</Project>
-      <Name>Mono.Addins.GuiGtk3</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition="!$(HaveGtkSharp)">
     <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk2\Xwt.Gtk2.csproj">
@@ -158,7 +153,6 @@
     <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\**\*.png" LinkBase="MonoDevelop.Components.Docking\icons" />
     <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\**\*.png" LinkBase="MonoDevelop.Components.MainToolbar\assets" />
     <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\**\*.png" LinkBase="MonoDevelop.Components.MainToolbar\icons" />
-
     <EmbeddedResource Include="templates\images\**\*.png" LinkBase="templates\images" />
     <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\**\*.png" LinkBase="MonoDevelop.Ide.WelcomePage\icons\" />
     <EmbeddedResource Include="resources\**\*.png" LinkBase="resources" />
@@ -166,7 +160,6 @@
   <ItemGroup>
     <EmbeddedResource Include="templates\**\*.xml" LinkBase="templates" />
     <EmbeddedResource Include="options\**\KeyBinding*.xml" LinkBase="options" />
-
     <EmbeddedResource Include="ExtensionModel\Commands.addin.xml" />
     <EmbeddedResource Include="ExtensionModel\DefaultPolicyPanels.addin.xml" />
     <EmbeddedResource Include="ExtensionModel\GlobalOptionsDialog.addin.xml" />
@@ -179,13 +172,11 @@
     <EmbeddedResource Include="ExtensionModel\Policies.addin.xml" />
     <EmbeddedResource Include="ExtensionModel\StockIcons.addin.xml" />
     <EmbeddedResource Include="ExtensionModel\Templates.addin.xml" />
-
     <EmbeddedResource Include="MonoDevelop.Components.Commands\CommandsExtensionModel.addin.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.BuildOutputView\BuildOutputExtension.addin.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassPadContextMenu.addin.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectPadContextMenu.addin.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.Projects.FileNesting\FileNestingExtensionModel.addin.xml" />
-
     <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\InvariantTextStylePolicy.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\MonoTextStylePolicy.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\VisualStudioTextStylePolicy.xml" />
@@ -197,7 +188,6 @@
     <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\LGPL3LicencePolicy.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\MITX11LicencePolicy.xml" />
     <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\NewBSDLicencePolicy.xml" />
-
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\ASP\Ashx.sublime-syntax" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\ASP\AspNet.sublime-syntax" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\ASP\Razor.sublime-syntax" />
@@ -212,7 +202,6 @@
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\Markdown\Markdown.sublime-syntax" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\T4\T4.sublime-syntax" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\syntaxes\Yaml\Yaml.sublime-syntax" />
-
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\DarkStyle.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\FallbackStyle.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\GruvboxStyle.json" />
@@ -226,7 +215,6 @@
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\SolarizedLightStyle.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\TangoStyle.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\themes\VisualStudioStyle.json" />
-
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\bat\syntaxes\BatchFile.tmLanguage" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\cpp\syntaxes\c.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\cpp\syntaxes\c++.json" />
@@ -248,8 +236,6 @@
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\xml\syntaxes\xaml.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\xml\syntaxes\xml.json" />
     <EmbeddedResource Include="MonoDevelop.Ide.Editor.Highlighting\VSCodeImport\xml\syntaxes\xsl.json" />
-
-
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MonoDevelop.Components.Commands\ICustomCommandTarget.cs" />
@@ -1602,11 +1588,7 @@
     <InternalsVisibleTo Include="Xamarin.OSXEditor" />
     <InternalsVisibleTo Include="Xamarin.Sketches" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MonoDevelop.Components\Shared\" />
-    <Folder Include="MonoDevelop.Ide.Projects.FileNesting\" />
-    <Folder Include="MonoDevelop.Components\Cairo\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(Data)" DestinationFolder="..\..\..\build\data\%(Data.RelativeDir)" SkipUnchangedFiles="true" />
