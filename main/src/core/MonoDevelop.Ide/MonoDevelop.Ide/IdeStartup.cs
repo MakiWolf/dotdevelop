@@ -168,12 +168,12 @@ namespace MonoDevelop.Ide
 			IdeStartupTracker.StartupTracker.MarkSection ("XwtInitialization");
 
 			//default to Windows IME on Windows
-			//if (Platform.IsWindows && GtkWorkarounds.GtkMinorVersion >= 16) {
+			if (Platform.IsWindows && GtkWorkarounds.GtkMinorVersion >= 16) {
 				var settings = Gtk.Settings.Default;
 				var val = GtkWorkarounds.GetProperty (settings, "gtk-im-module");
-			//	if (string.IsNullOrEmpty (val.Val as string))
+				if (string.IsNullOrEmpty (val.Val as string))
 					GtkWorkarounds.SetProperty (settings, "gtk-im-module", new GLib.Value ("ime"));
-			//}
+			}
 
 			DispatchService.Initialize ();
 
