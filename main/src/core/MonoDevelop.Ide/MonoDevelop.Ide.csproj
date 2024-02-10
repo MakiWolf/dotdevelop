@@ -95,10 +95,6 @@
     <IncludeCopyLocal Include="Xwt.XamMac.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk.csproj">
-      <Project>{c3887a93-b2bd-4097-8e2f-3a063eff32fd}</Project>
-      <Name>Xwt.Gtk</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MonoDevelop.Core\MonoDevelop.Core.csproj">
       <Project>{7525BB88-6142-4A26-93B9-A30C6983390A}</Project>
       <Name>MonoDevelop.Core</Name>
@@ -142,6 +138,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition="!$(HaveGtkSharp)">
+    <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk2\Xwt.Gtk2.csproj">
+      <Project>{FED3E127-B64A-4E57-8D2A-C8817C5D593A}</Project>
+      <Name>Xwt.Gtk2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.Gui\Mono.Addins.Gui.csproj">
       <Project>{FEC19BDA-4904-4005-8C09-68E82E8BEF6A}</Project>
       <Name>Mono.Addins.Gui</Name>
