@@ -26,7 +26,7 @@
 	url = https://github.com/dotdevelop/sharpsvn-binary.git
 [submodule "main/external/xwt"]
 	path = main/external/xwt
-	url = https://github.com/MakiWolf/xwt
+	url = https://github.com/easysimplified/xwt
 	branch = dotdevelop
 [submodule "main/external/Xamarin.PropertyEditing"]
 	path = main/external/Xamarin.PropertyEditing
