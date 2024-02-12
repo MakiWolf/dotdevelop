@@ -1,10 +1,10 @@
 [submodule "main/external/debugger-libs"]
 	path = main/external/debugger-libs
-	url = https://github.com/dotdevelop/debugger-libs.git
+	url = https://github.com/easysimplified/debugger-libs.git
 	branch = master
 [submodule "main/external/guiunit"]
 	path = main/external/guiunit
-	url = https://github.com/dotdevelop/guiunit.git
+	url = https://github.com/easysimplified/guiunit.git
 [submodule "main/external/macdoc"]
 	path = main/external/macdoc
 	url = https://github.com/dotdevelop/macdoc
@@ -19,7 +19,7 @@
 	url = https://github.com/dotdevelop/mono-tools.git
 [submodule "main/external/nrefactory"]
 	path = main/external/nrefactory
-	url = https://github.com/dotdevelop/NRefactory.git
+	url = https://github.com/easysimplified/NRefactory.git
 [submodule "main/external/sharpsvn-binary"]
 	path = main/external/sharpsvn-binary
 	url = https://github.com/dotdevelop/sharpsvn-binary.git
@@ -29,7 +29,7 @@
 	branch = master
 [submodule "main/external/vs-editor-api"]
 	path = main/external/vs-editor-api
-	url = https://github.com/dotdevelop/vs-editor-api.git
+	url = https://github.com/easysimplified/vs-editor-api.git
     branch = dotdevelop_oe_8.1.5
 [submodule "main/external/Monodevelop.Netcoredbg"]
 	path = main/external/Monodevelop.Netcoredbg
@@ -41,4 +41,4 @@
 	branch = dotdevelop
 [submodule "main/external/xwt"]
 	path = main/external/xwt
-	url = https://github.com/dotdevelop/xwt.git
+	url = https://github.com/easysimplified/xwt.git
