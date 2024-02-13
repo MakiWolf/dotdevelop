@@ -1,4 +1,4 @@
-﻿//
+//
 // GtkWPFWidget.cs
 //
 // Author:
@@ -42,28 +42,28 @@ namespace MonoDevelop.Components.Windows
 			private set;
 		}
 
-		public GtkWPFWidget (System.Windows.Controls.Control wpfControl)
-		{
-			wpfWidgetHost = new System.Windows.Forms.Integration.ElementHost
-			{
-				BackColor = System.Drawing.Color.SeaGreen,
-				Child = wpfControl,
-			};
+		//public GtkWPFWidget (System.Windows.Controls.Control wpfControl)
+		//{
+		//	wpfWidgetHost = new System.Windows.Forms.Integration.ElementHost
+		//	{
+		//		BackColor = System.Drawing.Color.SeaGreen,
+		//		Child = wpfControl,
+		//	};
 
-			wpfControl.PreviewKeyDown += (sender, e) => {
-				// TODO: Some commands check for toplevels, and this window is not a toplevel.
-				if (e.Key == System.Windows.Input.Key.Escape)
-				{
-					System.Windows.Input.Keyboard.ClearFocus();
-					MonoDevelop.Ide.IdeApp.Workbench.Present();
-					return;
-				}
+		//	wpfControl.PreviewKeyDown += (sender, e) => {
+		//		// TODO: Some commands check for toplevels, and this window is not a toplevel.
+		//		if (e.Key == System.Windows.Input.Key.Escape)
+		//		{
+		//			System.Windows.Input.Keyboard.ClearFocus();
+		//			MonoDevelop.Ide.IdeApp.Workbench.Present();
+		//			return;
+		//		}
 
-				var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
-				e.Handled = Ide.IdeApp.CommandService.ProcessKeyEvent (GtkWin32Interop.ConvertKeyEvent (e.KeyboardDevice.Modifiers, key));
-			};
-			WidgetFlags |= WidgetFlags.NoWindow;
-		}
+		//		var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
+		//		e.Handled = Ide.IdeApp.CommandService.ProcessKeyEvent (GtkWin32Interop.ConvertKeyEvent (e.KeyboardDevice.Modifiers, key));
+		//	};
+		//	WidgetFlags |= WidgetFlags.NoWindow;
+		//}
 
         protected virtual void RepositionWpfWindow ()
         {
