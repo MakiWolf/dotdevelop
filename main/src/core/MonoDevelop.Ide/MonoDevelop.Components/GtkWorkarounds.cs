@@ -959,7 +959,7 @@ namespace MonoDevelop.Components
 		static extern void gtksharp_container_override_forall (IntPtr gtype, ForallDelegate cb);
 #endif
 
-		//public static string MarkupLinks (string text) => Xwt.GtkBackend.GtkWorkarounds.MarkupLinks (text);
+		public static string MarkupLinks (string text) => Xwt.GtkBackend.GtkWorkarounds.MarkupLinks (text);
 
 		public static void SetLinkHandler (this Gtk.Label label, Action<string> urlHandler)
 		{
