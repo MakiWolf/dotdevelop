@@ -182,9 +182,10 @@ namespace MonoDevelop.Components
 			if (!use_bundled_theme && Platform.IsWindows) {
 				var gtkBasePath = Environment.GetEnvironmentVariable ("GTK_BASEPATH");
 				if (String.IsNullOrEmpty (gtkBasePath))
-					gtkBasePath = "C:\\Program Files (x86)\\GtkSharp\\2.12\\";
-				if (File.Exists (Path.Combine (gtkBasePath, "lib\\gtk-2.0\\2.10.0\\engines\\libxamarin.dll")))
-				    use_bundled_theme = true;
+				
+					gtkBasePath = "C:\\Program Files\\Gtk3-Runtime Win64\\";
+				//if (File.Exists (Path.Combine (gtkBasePath, "lib\\gtk-2.0\\2.10.0\\engines\\libxamarin.dll")))
+				//    use_bundled_theme = true;
 			}
 			
 			if (use_bundled_theme) {
