@@ -25,89 +25,89 @@ using MonoDevelop.Components;
 
 namespace MonoDevelop.TextEditor
 {
-	class WpfTextViewContent : TextViewContent<IWpfTextView, WpfTextViewImports>, Ide.Gui.Content.IZoomable
-	{
-		IWpfTextViewHost wpfTextViewHost;
+	// class WpfTextViewContent : TextViewContent<IWpfTextView, WpfTextViewImports>, Ide.Gui.Content.IZoomable
+	// {
+	// 	//IWpfTextViewHost wpfTextViewHost;
 
-		public WpfTextViewContent (WpfTextViewImports imports)
-			: base (imports)
-		{
-		}
+	// 	public WpfTextViewContent (WpfTextViewImports imports)
+	// 		: base (imports)
+	// 	{
+	// 	}
 
-		protected override IWpfTextView CreateTextView (ITextViewModel viewModel, ITextViewRoleSet roles)
-			=> Imports.TextEditorFactoryService.CreateTextView (viewModel, roles, Imports.EditorOptionsFactoryService.GlobalOptions);
+	// 	protected override IWpfTextView CreateTextView (ITextViewModel viewModel, ITextViewRoleSet roles)
+	// 		=> Imports.TextEditorFactoryService.CreateTextView (viewModel, roles, Imports.EditorOptionsFactoryService.GlobalOptions);
 
-		public System.Windows.Controls.Control HostControl => wpfTextViewHost.HostControl;
+	// 	public System.Windows.Controls.Control HostControl => wpfTextViewHost.HostControl;
 
-		public XwtControl XwtControl { get; private set; }
+	// 	public XwtControl XwtControl { get; private set; }
 
-		protected override Control CreateControl ()
-		{
-			wpfTextViewHost = Imports.TextEditorFactoryService.CreateTextViewHost (TextView, setFocus: true);
-			var wpfControl = wpfTextViewHost.HostControl;
+	// 	protected override Control CreateControl ()
+	// 	{
+	// 		//wpfTextViewHost = Imports.TextEditorFactoryService.CreateTextViewHost (TextView, setFocus: true);
+	// 		//var wpfControl = wpfTextViewHost.HostControl;
 
-			Gtk.Widget widget = new RootWpfWidget (wpfControl) {
-				HeightRequest = 50,
-				WidthRequest = 100
-			};
+	// 		//Gtk.Widget widget = new RootWpfWidget (wpfControl) {
+	// 		//	HeightRequest = 50,
+	// 		//	WidthRequest = 100
+	// 		//};
 
-			TextView.VisualElement.Tag = widget;
+	// 		TextView.VisualElement.Tag = widget;
 
-			var xwtWidget = Xwt.Toolkit.CurrentEngine.WrapWidget (widget, Xwt.NativeWidgetSizing.External);
-			xwtWidget.Show ();
+	// 		var xwtWidget = Xwt.Toolkit.CurrentEngine.WrapWidget (widget, Xwt.NativeWidgetSizing.External);
+	// 		xwtWidget.Show ();
 
-			XwtControl = new XwtControl (xwtWidget);
-			return XwtControl;
-		}
+	// 		XwtControl = new XwtControl (xwtWidget);
+	// 		return XwtControl;
+	// 	}
 
-		protected override ITextViewRoleSet GetAllPredefinedRoles () => Imports.TextEditorFactoryService.AllPredefinedRoles;
+	// 	protected override ITextViewRoleSet GetAllPredefinedRoles () => Imports.TextEditorFactoryService.AllPredefinedRoles;
 
-		protected override void SubscribeToEvents ()
-		{
-			base.SubscribeToEvents ();
-			TextView.VisualElement.LostKeyboardFocus += HandleWpfLostKeyboardFocus;
-		}
+	// 	protected override void SubscribeToEvents ()
+	// 	{
+	// 		base.SubscribeToEvents ();
+	// 		TextView.VisualElement.LostKeyboardFocus += HandleWpfLostKeyboardFocus;
+	// 	}
 
-		protected override void UnsubscribeFromEvents ()
-		{
-			base.UnsubscribeFromEvents ();
-			TextView.VisualElement.LostKeyboardFocus -= HandleWpfLostKeyboardFocus;
-		}
+	// 	protected override void UnsubscribeFromEvents ()
+	// 	{
+	// 		base.UnsubscribeFromEvents ();
+	// 		TextView.VisualElement.LostKeyboardFocus -= HandleWpfLostKeyboardFocus;
+	// 	}
 
-		void HandleWpfLostKeyboardFocus (object sender, KeyboardFocusChangedEventArgs e)
-			=> Components.Commands.CommandManager.LastFocusedWpfElement = TextView.VisualElement;
+	// 	void HandleWpfLostKeyboardFocus (object sender, KeyboardFocusChangedEventArgs e)
+	// 		=> Components.Commands.CommandManager.LastFocusedWpfElement = TextView.VisualElement;
 
-		protected override void OnDispose ()
-		{
-			base.OnDispose ();
-			if (wpfTextViewHost != null) {
-				wpfTextViewHost.Close ();
-				wpfTextViewHost = null;
-			}
-		}
+	// 	protected override void OnDispose ()
+	// 	{
+	// 		base.OnDispose ();
+	// 		if (wpfTextViewHost != null) {
+	// 			wpfTextViewHost.Close ();
+	// 			wpfTextViewHost = null;
+	// 		}
+	// 	}
 
-		#region IZoomable
+	// 	#region IZoomable
 
-		// the base TextViewContent impl of IZoomable doesn't work on Windows as it requires IEditorOperations4
+	// 	// the base TextViewContent impl of IZoomable doesn't work on Windows as it requires IEditorOperations4
 
-		const double MAX_ZOOM = 400.0;
-		const double MIN_ZOOM = 20.0;
-		const double DEFAULT_ZOOM = 100.0;
+	// 	const double MAX_ZOOM = 400.0;
+	// 	const double MIN_ZOOM = 20.0;
+	// 	const double DEFAULT_ZOOM = 100.0;
 
-		bool IsZoomable => TextView.Roles.Contains (PredefinedTextViewRoles.Zoomable);
+	// 	bool IsZoomable => TextView.Roles.Contains (PredefinedTextViewRoles.Zoomable);
 
-		public bool EnableZoomIn => IsZoomable && TextView.ZoomLevel < MAX_ZOOM;
+	// 	public bool EnableZoomIn => IsZoomable && TextView.ZoomLevel < MAX_ZOOM;
 
-		public bool EnableZoomOut => IsZoomable && TextView.ZoomLevel < MIN_ZOOM;
+	// 	public bool EnableZoomOut => IsZoomable && TextView.ZoomLevel < MIN_ZOOM;
 
-		public bool EnableZoomReset => IsZoomable && TextView.ZoomLevel != DEFAULT_ZOOM;
+	// 	public bool EnableZoomReset => IsZoomable && TextView.ZoomLevel != DEFAULT_ZOOM;
 
-		public void ZoomIn () => EditorOperations.ZoomIn ();
+	// 	public void ZoomIn () => EditorOperations.ZoomIn ();
 
-		public void ZoomOut () => EditorOperations.ZoomOut ();
+	// 	public void ZoomOut () => EditorOperations.ZoomOut ();
 
-		public void ZoomReset () => EditorOperations.ZoomTo (DEFAULT_ZOOM);
+	// 	public void ZoomReset () => EditorOperations.ZoomTo (DEFAULT_ZOOM);
 
-		#endregion
-	}
+	// 	#endregion
+	// }
 }

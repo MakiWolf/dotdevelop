@@ -34,9 +34,9 @@ namespace MonoDevelop.TextEditor
 
 		public void PushTip (ITextView view, IObscuringTip tip)
 		{
-			if (!(view is IWpfTextView)) {
-				return;
-			}
+			//if (!(view is IWpfTextView)) {
+			//	return;
+			//}
 
 			if (!tipStacks.TryGetValue (view, out var stack)) {
 				view.Closed += OnTextViewClosed;
@@ -48,9 +48,9 @@ namespace MonoDevelop.TextEditor
 
 		public void RemoveTip (ITextView view, IObscuringTip tip)
 		{
-			if (!(view is IWpfTextView)) {
-				return;
-			}
+			//if (!(view is IWpfTextView)) {
+			//	return;
+			//}
 
 			if (tipStacks.TryGetValue (view, out var stack)) {
 				stack.Remove (tip);
