@@ -32,44 +32,44 @@ using MonoDevelop.Ide.Gui.Documents;
 
 namespace MonoDevelop.TextEditor.Wpf
 {
-	[Export (typeof (IMouseProcessorProvider))]
-	[Name (nameof (WpfMouseProcessorProvider))]
-	[Order (Before = "WordSelection")]
-	[ContentType ("Text")]
-	[TextViewRole (PredefinedTextViewRoles.Interactive)]
-	class WpfMouseProcessorProvider : IMouseProcessorProvider
-	{
-		[Import]
-		public ITextDocumentFactoryService TextDocumentFactory { get; private set; }
+	// [Export (typeof (IMouseProcessorProvider))]
+	// [Name (nameof (WpfMouseProcessorProvider))]
+	// [Order (Before = "WordSelection")]
+	// [ContentType ("Text")]
+	// [TextViewRole (PredefinedTextViewRoles.Interactive)]
+	// class WpfMouseProcessorProvider : IMouseProcessorProvider
+	// {
+	// 	[Import]
+	// 	public ITextDocumentFactoryService TextDocumentFactory { get; private set; }
 
-		[Import]
-		public IEditorCommandHandlerServiceFactory CommandServiceFactory { get; private set; }
+	// 	[Import]
+	// 	public IEditorCommandHandlerServiceFactory CommandServiceFactory { get; private set; }
 
-		public IMouseProcessor GetAssociatedProcessor (IWpfTextView textView)
-		{
-			return new WfpMouseProcessor (CommandServiceFactory.GetService (textView), textView);
-		}
-	}
+	// 	// public IMouseProcessor GetAssociatedProcessor (IWpfTextView textView)
+	// 	// {
+	// 	// 	return new WfpMouseProcessor (CommandServiceFactory.GetService (textView), textView);
+	// 	// }
+	// }
 
-	class WfpMouseProcessor : MouseProcessorBase
-	{
-		IWpfTextView textView;
-		private readonly IEditorCommandHandlerService commandServiceFactory;
-		readonly string menuPath = "/MonoDevelop/TextEditor/ContextMenu/Editor";
+	// class WfpMouseProcessor : MouseProcessorBase
+	// {
+	// 	IWpfTextView textView;
+	// 	private readonly IEditorCommandHandlerService commandServiceFactory;
+	// 	readonly string menuPath = "/MonoDevelop/TextEditor/ContextMenu/Editor";
 
-		public WfpMouseProcessor (IEditorCommandHandlerService commandServiceFactory, IWpfTextView textView)
-		{
-			this.textView = textView;
-			this.commandServiceFactory = commandServiceFactory;
-		}
+	// 	public WfpMouseProcessor (IEditorCommandHandlerService commandServiceFactory, IWpfTextView textView)
+	// 	{
+	// 		this.textView = textView;
+	// 		this.commandServiceFactory = commandServiceFactory;
+	// 	}
 
-		public override void PreprocessMouseRightButtonUp (MouseButtonEventArgs e)
-		{
-			var controller = (WpfTextViewContent)textView.Properties[typeof (DocumentController)];
-			var ctx = controller.ExtensionContext ?? Mono.Addins.AddinManager.AddinEngine;
-			var cset = IdeApp.CommandService.CreateCommandEntrySet (ctx, menuPath);
-			var pt = e.GetPosition (controller.HostControl);
-			IdeApp.CommandService.ShowContextMenu (controller.XwtControl, (int)pt.X, (int)pt.Y, cset, controller);
-		}
-	}
+	// 	public override void PreprocessMouseRightButtonUp (MouseButtonEventArgs e)
+	// 	{
+	// 		var controller = (WpfTextViewContent)textView.Properties[typeof (DocumentController)];
+	// 		var ctx = controller.ExtensionContext ?? Mono.Addins.AddinManager.AddinEngine;
+	// 		var cset = IdeApp.CommandService.CreateCommandEntrySet (ctx, menuPath);
+	// 		var pt = e.GetPosition (controller.HostControl);
+	// 		IdeApp.CommandService.ShowContextMenu (controller.XwtControl, (int)pt.X, (int)pt.Y, cset, controller);
+	// 	}
+	// }
 }
