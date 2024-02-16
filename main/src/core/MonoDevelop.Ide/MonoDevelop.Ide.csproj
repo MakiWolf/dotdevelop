@@ -1588,6 +1588,11 @@
     <InternalsVisibleTo Include="Xamarin.OSXEditor" />
     <InternalsVisibleTo Include="Xamarin.Sketches" />
   </ItemGroup>
+    <ItemGroup>
+    <Folder Include="MonoDevelop.Components\Shared\" />
+    <Folder Include="MonoDevelop.Ide.Projects.FileNesting\" />
+    <Folder Include="MonoDevelop.Components\Cairo\" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">

@@ -126,7 +126,7 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 				//textView.VisualElement.SizeChanged -= OnViewSizeChanged;
 				//textView.Closed -= OnViewClosed;
 				//textView = null;
-			}
+			//}
 		}
 
 		private void RaiseFindOptionsChanged (object sender, EventArgs args)
