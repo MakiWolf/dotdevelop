@@ -14,8 +14,3 @@ using Mono.Addins.Description;
 
 [assembly:AddinDependency ("Core", MonoDevelop.BuildInfo.Version)]
 [assembly:AddinDependency ("Ide", MonoDevelop.BuildInfo.Version)]
-
-#if MAC
-[assembly: ImportAddinAssembly ("Xamarin.PropertyEditing.dll")]
-[assembly: ImportAddinAssembly ("Xamarin.PropertyEditing.Mac.dll")]
-#endif
