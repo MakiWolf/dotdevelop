@@ -5,7 +5,7 @@
   <PropertyGroup>
     <ReferencesGtkCopyToOutput Condition="$(ReferencesGtkCopyToOutput) == ''">false</ReferencesGtkCopyToOutput>
     <HaveGtkSharp>false</HaveGtkSharp>
-    <DefineConstants Condition="$(HaveGtkSharp)">$(DefineConstants);GTK3;GTK_SHARP</DefineConstants>
+    <DefineConstants Condition="$(HaveGtkSharp)">$(DefineConstants);GTK3;GTK_SHARP;MAC</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="$(HaveGtkSharp)">

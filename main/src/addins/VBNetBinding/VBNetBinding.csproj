@@ -55,9 +55,7 @@
     <Compile Include="Gui\ImportsOptionsPanel.cs" />
     <Compile Include="AddinInfo.cs" />
     <Compile Include="Project\VBProjectExtension.cs" />
-    <Compile Include="Project\ImprovedCodeDomProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Project\ImprovedCodeDomProvider.cs" />
     <Compile Include="MonoDevelop.VBNet\VBNetTextEditorExtension.cs" />
     <Compile Include="Gui\MonoDevelop.VBNetBinding.ConfigurationOptionsPanelWidget.cs" />
     <Compile Include="Gui\MonoDevelop.VBNetBinding.ImportsOptionsPanelWidget.cs" />

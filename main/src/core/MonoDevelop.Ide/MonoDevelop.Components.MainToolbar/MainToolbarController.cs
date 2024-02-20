@@ -851,27 +851,27 @@ namespace MonoDevelop.Components.MainToolbar
 
 		static CommandInfo GetStartButtonCommandInfo (out OperationIcon operation)
 		{
-			//if (!IdeApp.ProjectOperations.CurrentRunOperation.IsCompleted || !IdeApp.ProjectOperations.CurrentBuildOperation.IsCompleted) {
+			if (!IdeApp.ProjectOperations.CurrentRunOperation.IsCompleted || !IdeApp.ProjectOperations.CurrentBuildOperation.IsCompleted) {
 				operation = OperationIcon.Stop;
 				return IdeApp.CommandService.GetCommandInfo (MonoDevelop.Ide.Commands.ProjectCommands.Stop);
-			//}
-			//else {
-			//	operation = OperationIcon.Run;
-			//	var ci = IdeApp.CommandService.GetCommandInfo ("MonoDevelop.Debugger.DebugCommands.Debug");
-			//	if (!ci.Enabled || !ci.Visible) {
-			//		// If debug is not enabled, try Run
-			//		ci = IdeApp.CommandService.GetCommandInfo (MonoDevelop.Ide.Commands.ProjectCommands.Run);
-			//		if (!ci.Enabled || !ci.Visible) {
-			//			// Running is not possible, then allow building
-			//			var bci = IdeApp.CommandService.GetCommandInfo (MonoDevelop.Ide.Commands.ProjectCommands.BuildSolution);
-			//			if (bci.Enabled && bci.Visible) {
-			//				operation = OperationIcon.Build;
-			//				ci = bci;
-			//			}
-			//		}
-			//	}
-			//	return ci;
-			//}
+			}
+			else {
+				operation = OperationIcon.Run;
+				var ci = IdeApp.CommandService.GetCommandInfo ("MonoDevelop.Debugger.DebugCommands.Debug");
+				if (!ci.Enabled || !ci.Visible) {
+					// If debug is not enabled, try Run
+					ci = IdeApp.CommandService.GetCommandInfo (MonoDevelop.Ide.Commands.ProjectCommands.Run);
+					if (!ci.Enabled || !ci.Visible) {
+						// Running is not possible, then allow building
+						var bci = IdeApp.CommandService.GetCommandInfo (MonoDevelop.Ide.Commands.ProjectCommands.BuildSolution);
+						if (bci.Enabled && bci.Visible) {
+							operation = OperationIcon.Build;
+							ci = bci;
+						}
+					}
+				}
+				return ci;
+			}
 		}
 
 		#region ICommandBar implementation
