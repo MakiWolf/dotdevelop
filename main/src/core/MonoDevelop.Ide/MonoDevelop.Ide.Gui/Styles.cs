@@ -335,7 +335,7 @@ namespace MonoDevelop.Ide.Gui
 				TooltipInfoSpacing = 0;
 			else
 				TooltipInfoSpacing = -4;
-			LoadStyle ();
+			//LoadStyle ();
 		}
 
 		internal static void LoadStyle ()
@@ -344,7 +344,7 @@ namespace MonoDevelop.Ide.Gui
 			Gtk.Widget styledWidget;
 			if (IdeApp.Workbench == null || IdeApp.Workbench.RootWindow == null) {
 				styledWidget = new Gtk.Label (String.Empty);
-				defaultStyle = styledWidget.StyleContext;
+				//defaultStyle = styledWidget.StyleContext;
 			} else {
 				styledWidget = IdeApp.Workbench.RootWindow;
 				//defaultStyle = Gtk.Rc.GetStyle (styledWidget);

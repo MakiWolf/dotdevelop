@@ -51,7 +51,8 @@ namespace MonoDevelop.Ide
 		
 		public static string GetGtkVersion ()
 		{
-			return Gtk.Global.MajorVersion + "." + Gtk.Global.MinorVersion + "." + Gtk.Global.MicroVersion;
+			//return Gtk.Global.MajorVersion + "." + Gtk.Global.MinorVersion + "." + Gtk.Global.MicroVersion;
+			return "";
 		}
 		
 		static string GetGtkTheme ()
