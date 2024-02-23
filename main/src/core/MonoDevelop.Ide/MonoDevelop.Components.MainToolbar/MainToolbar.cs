@@ -378,38 +378,38 @@ namespace MonoDevelop.Components.MainToolbar
 			contentBox.PackStart (widget, false, false, 0);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				context.Rectangle (
-//					evnt.Area.X,
-//					evnt.Area.Y,
-//					evnt.Area.Width,
-//					evnt.Area.Height
-//				);
-//				context.Clip ();
-//				context.LineWidth = 1;
-//				if (Background != null && Background.Width > 0) {
-//					for (int x=0; x < Allocation.Width; x += Background.Width) {
-//						Background.Show (context, x, -TitleBarHeight);
-//					}
-//				} else {
-//					context.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-//					using (var lg = new LinearGradient (0, 0, 0, Allocation.Height)) {
-//						lg.AddColorStop (0, Style.Light (StateType.Normal).ToCairoColor ());
-//						lg.AddColorStop (1, Style.Mid (StateType.Normal).ToCairoColor ());
-//						context.SetSource (lg);
-//					}
-//					context.Fill ();
-//
-//				}
-//				context.MoveTo (0, Allocation.Height - 0.5);
-//				context.RelLineTo (Allocation.Width, 0);
-//				context.SetSourceColor (Styles.ToolbarBottomBorderColor.ToCairoColor ());
-//				context.Stroke ();
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				//context.Rectangle (
+				//	evnt.Area.X,
+				//	evnt.Area.Y,
+				//	evnt.Area.Width,
+				//	evnt.Area.Height
+				//);
+				context.Clip ();
+				context.LineWidth = 1;
+				if (Background != null && Background.Width > 0) {
+					for (int x=0; x < Allocation.Width; x += Background.Width) {
+						Background.Show (context, x, -TitleBarHeight);
+					}
+				} else {
+					context.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+					using (var lg = new LinearGradient (0, 0, 0, Allocation.Height)) {
+						//lg.AddColorStop (0, Style.Light (StateType.Normal).ToCairoColor ());
+						//lg.AddColorStop (1, Style.Mid (StateType.Normal).ToCairoColor ());
+						context.SetSource (lg);
+					}
+					context.Fill ();
+
+				}
+				context.MoveTo (0, Allocation.Height - 0.5);
+				context.RelLineTo (Allocation.Width, 0);
+				context.SetSourceColor (Styles.ToolbarBottomBorderColor.ToCairoColor ());
+				context.Stroke ();
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		void HandleStartButtonClicked (object sender, EventArgs e)
 		{
