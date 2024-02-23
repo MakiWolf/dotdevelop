@@ -186,36 +186,36 @@ namespace MonoDevelop.Components.MainToolbar
 			min_width = VisibleButtons.Sum (b => b.Visible ? (!b.IsSeparator ? (int)btnNormalOriginal[0].Width : SeparatorSpacing) : 0);
 		}
 
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			ScaleImages (Allocation.Height);
-//
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				double x = Allocation.X, y = Allocation.Y;
-//				for (int i = 0; i < VisibleButtons.Length; i++) {
-//					bool nextIsSeparator = (i < VisibleButtons.Length - 1 && VisibleButtons[i + 1].IsSeparator) || i == VisibleButtons.Length - 1;
-//					bool lastWasSeparator = (i > 0 && VisibleButtons[i - 1].IsSeparator) || i == 0;
-//					IButtonBarButton button = VisibleButtons [i];
-//					if (button.IsSeparator) {
-//						if (!lastWasSeparator)
-//							x += SeparatorSpacing;
-//						continue;
-//					}
-//					Xwt.Drawing.Image[] images = State == StateType.Selected && pushedButton == button ? btnPressed : btnNormal;
-//					Xwt.Drawing.Image img = images [lastWasSeparator ? 0 : nextIsSeparator ? 2 : 1];
-//					context.DrawImage (this, img, x, y);
-//
-//					allocations [button] = new Gdk.Rectangle ((int)x, (int)y, (int)img.Width, (int)img.Height);
-//
-//					var icon = ImageService.GetIcon (button.Image, IconSize.Menu);
-//					if (!Sensitive || !button.Enabled)
-//						icon = icon.WithAlpha (0.4);
-//					context.DrawImage (this, icon, Math.Truncate (x + (img.Width - icon.Width) / 2), Math.Truncate (y + (img.Height - icon.Height) / 2));
-//					x += img.Width;
-//				}
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			ScaleImages (Allocation.Height);
+
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				double x = Allocation.X, y = Allocation.Y;
+				for (int i = 0; i < VisibleButtons.Length; i++) {
+					bool nextIsSeparator = (i < VisibleButtons.Length - 1 && VisibleButtons[i + 1].IsSeparator) || i == VisibleButtons.Length - 1;
+					bool lastWasSeparator = (i > 0 && VisibleButtons[i - 1].IsSeparator) || i == 0;
+					IButtonBarButton button = VisibleButtons [i];
+					if (button.IsSeparator) {
+						if (!lastWasSeparator)
+							x += SeparatorSpacing;
+						continue;
+					}
+					Xwt.Drawing.Image[] images = State == StateType.Selected && pushedButton == button ? btnPressed : btnNormal;
+					Xwt.Drawing.Image img = images [lastWasSeparator ? 0 : nextIsSeparator ? 2 : 1];
+					context.DrawImage (this, img, x, y);
+
+					allocations [button] = new Gdk.Rectangle ((int)x, (int)y, (int)img.Width, (int)img.Height);
+
+					var icon = ImageService.GetIcon (button.Image, IconSize.Menu);
+					if (!Sensitive || !button.Enabled)
+						icon = icon.WithAlpha (0.4);
+					context.DrawImage (this, icon, Math.Truncate (x + (img.Width - icon.Width) / 2), Math.Truncate (y + (img.Height - icon.Height) / 2));
+					x += img.Width;
+				}
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		Xwt.Drawing.Image ExpandImageVertically (Xwt.Drawing.Image img, int newHeight)
 		{
