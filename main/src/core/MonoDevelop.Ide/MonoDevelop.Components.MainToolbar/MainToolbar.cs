@@ -102,34 +102,34 @@ namespace MonoDevelop.Components.MainToolbar
 			return runtime == null || runtime.IsSeparator;
 		}
 
-//		void RuntimeRenderCell (CellLayout layout, CellRenderer cell, ITreeModel model, TreeIter iter)
-//		{
-//			var runtime = (IRuntimeModel)model.GetValue (iter, 0);
-//			var renderer = (CellRendererText) cell;
-//
-//			if (runtime == null || runtime.IsSeparator) {
-//				renderer.Xpad = (uint)0;
-//				return;
-//			}
-//
-//			using (var mutableModel = runtime.GetMutableModel ()) {
-//				renderer.Visible = mutableModel.Visible;
-//				renderer.Sensitive = mutableModel.Enabled;
-//				renderer.Xpad = (uint)(runtime.IsIndented ? 18 : 3);
-//
-//				if (!runtimeCombo.PopupShown) {
-//					// no need to ident text when the combo dropdown is not showing
-//					if (Platform.IsWindows)
-//						renderer.Xpad = 3;
-//					renderer.Text = mutableModel.FullDisplayString;
-//					renderer.Attributes = normalAttributes;
-//				} else {
-//					renderer.Text = mutableModel.DisplayString;
-//					renderer.Attributes = runtime.Notable ? boldAttributes : normalAttributes;
-//				}
-//
-//			}
-//		}
+		void RuntimeRenderCell (/*CellLayout layout,*/ CellRenderer cell, ITreeModel model, TreeIter iter)
+		{
+			var runtime = (IRuntimeModel)model.GetValue (iter, 0);
+			var renderer = (CellRendererText) cell;
+
+			if (runtime == null || runtime.IsSeparator) {
+				renderer.Xpad = (uint)0;
+				return;
+			}
+
+			using (var mutableModel = runtime.GetMutableModel ()) {
+				renderer.Visible = mutableModel.Visible;
+				renderer.Sensitive = mutableModel.Enabled;
+				renderer.Xpad = (uint)(runtime.IsIndented ? 18 : 3);
+
+				if (!runtimeCombo.PopupShown) {
+					// no need to ident text when the combo dropdown is not showing
+					if (Platform.IsWindows)
+						renderer.Xpad = 3;
+					renderer.Text = mutableModel.FullDisplayString;
+					renderer.Attributes = normalAttributes;
+				} else {
+					renderer.Text = mutableModel.DisplayString;
+					renderer.Attributes = runtime.Notable ? boldAttributes : normalAttributes;
+				}
+
+			}
+		}
 
 		TreeIter lastSelection = TreeIter.Zero;
 		public MainToolbar ()
