@@ -30,6 +30,7 @@
 using MonoDevelop.Ide;
 using Gtk;
 using Gdk;
+using Cairo;
 
 namespace MonoDevelop.Components
 {
@@ -76,15 +77,15 @@ namespace MonoDevelop.Components
 			}
 		}
 		
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			int winWidth, winHeight;
-//			this.GetSize (out winWidth, out winHeight);
-//			Gtk.Style.PaintFlatBox (Style, this.GdkWindow, StateType.Normal, ShadowType.Out, evnt.Area, this, "tooltip", 0, 0, winWidth, winHeight);
-//			foreach (var child in this.Children)
-//				this.PropagateExpose (child, evnt);
-//			return false;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			int winWidth, winHeight;
+			this.GetSize (out winWidth, out winHeight);
+			//Gtk.Style.PaintFlatBox (Style, this.GdkWindow, StateType.Normal, ShadowType.Out, evnt.Area, this, "tooltip", 0, 0, winWidth, winHeight);
+			//foreach (var child in this.Children)
+			//	this.PropagateExpose (child, evnt);
+			return false;
+		}
 		
 		protected override void OnDestroyed ()
 		{
