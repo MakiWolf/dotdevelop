@@ -327,12 +327,14 @@ namespace MonoDevelop.Components
 						continue;
 					}
 					var tab = tabs[i];
+					if (!tab.Visible)
+						continue;
 					var bounds = GetBounds (tab);
 					tab.HoverPosition = tab == hoverTab ? new Cairo.PointD (mx - bounds.X, my) : new Cairo.PointD (-1, -1);
 					tab.Draw (cr, bounds);
 				}
 
-				if (active != null) {
+				if (active != null && active.Visible) {
 					active.Draw (cr, GetBounds (active));
 				}
 			}
