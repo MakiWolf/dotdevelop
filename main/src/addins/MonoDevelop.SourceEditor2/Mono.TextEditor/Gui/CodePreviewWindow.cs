@@ -23,6 +23,7 @@
 
 using System;
 using Gdk;
+using Cairo;
 using MonoDevelop.Components;
 using MonoDevelop.Ide.Editor;
 using MonoDevelop.Ide.Editor.Highlighting;
@@ -167,16 +168,16 @@ namespace Mono.TextEditor
 			base.OnDestroyed ();
 		}
 
-		// protected override bool OnExposeEvent (EventExpose evnt)
-		// {
-		// 	using (var cr = CairoHelper.Create (GdkWindow)) {
-		// 		CairoHelper.Region (cr, evnt.Region);
-		// 		cr.Clip ();
-		// 		cr.Translate (Allocation.X, Allocation.Y);
-		// 		Draw (cr);
-		// 	}
-		// 	return true;
-		// }
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var cr = Gdk.CairoHelper.Create (GdkWindow)) {
+				//CairoHelper.Region (cr, evnt.Region);
+				cr.Clip ();
+				cr.Translate (Allocation.X, Allocation.Y);
+				Draw (cr);
+			}
+			return true;
+		}
 
 		void Draw (Cairo.Context cr)
 		{
