@@ -29,6 +29,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 using MonoDevelop.Core;
 using MonoDevelop.Ide.Fonts;
 using MonoDevelop.Ide.Gui;
@@ -431,11 +432,11 @@ namespace MonoDevelop.Components
 			return base.OnKeyPressEvent (evnt);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			var alloc = new Gdk.Rectangle (alignment.Allocation.X, box.Allocation.Y, alignment.Allocation.Width, box.Allocation.Height);
-//
-//			if (hasFrame && (!roundedShape || (roundedShape && !customRoundedShapeDrawing))) {
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			var alloc = new Gdk.Rectangle (alignment.Allocation.X, box.Allocation.Y, alignment.Allocation.Width, box.Allocation.Height);
+
+			if (hasFrame && (!roundedShape || (roundedShape && !customRoundedShapeDrawing))) {
 //				if (Platform.IsLinux)
 //					Style.PaintFlatBox (Style, GdkWindow, entry.State, ShadowType.None,
 //					                    evnt.Area, this, "entry_bg", alloc.X + 2, alloc.Y + 2, alloc.Width - 4, alloc.Height - 4);
@@ -447,34 +448,34 @@ namespace MonoDevelop.Components
 					ctx.Color = new Cairo.Color (1,0,0);
 					ctx.Stroke ();
 				}*/
-//			}
-//			else if (!roundedShape) {
-//				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//					CairoExtensions.RoundedRectangle (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1, 4);
-//					ctx.SetSourceColor (entry.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
-//					ctx.Fill ();
-//				}
-//			}
-//			else {
-//				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//					RoundBorder (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1);
-//					ctx.SetSourceColor (entry.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
-//					ctx.Fill ();
-//				}
-//			}
-//
+			}
+			else if (!roundedShape) {
+				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+					CairoExtensions.RoundedRectangle (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1, 4);
+					ctx.SetSourceColor (entry.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
+					ctx.Fill ();
+				}
+			}
+			else {
+				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+					RoundBorder (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1);
+					ctx.SetSourceColor (entry.Style.Base (Gtk.StateType.Normal).ToCairoColor ());
+					ctx.Fill ();
+				}
+			}
+
 //			PropagateExpose (Child, evnt);
-//
-//			if (hasFrame && roundedShape && customRoundedShapeDrawing) {
-//				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-//					RoundBorder (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1);
-//					ctx.SetSourceColor (Styles.WidgetBorderColor.ToCairoColor ());
-//					ctx.LineWidth = 1;
-//					ctx.Stroke ();
-//				}
-//			}
-//			return true;
-//		}
+
+			if (hasFrame && roundedShape && customRoundedShapeDrawing) {
+				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+					RoundBorder (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1);
+					ctx.SetSourceColor (Styles.WidgetBorderColor.ToCairoColor ());
+					ctx.LineWidth = 1;
+					ctx.Stroke ();
+				}
+			}
+			return true;
+		}
 
 		static void RoundBorder (Cairo.Context ctx, double x, double y, double w, double h)
 		{
@@ -695,7 +696,7 @@ namespace MonoDevelop.Components
 		{
 			private SearchEntry parent;
 			private Pango.Layout layout;
-//			private Gdk.GC text_gc;
+//			private Gdk.gc text_gc;
 
 			public FramelessEntry (SearchEntry parent) : base()
 			{
@@ -762,43 +763,43 @@ namespace MonoDevelop.Components
 //				Gdk.Colormap.System.AllocColor (ref color, true, true);
 				return color;
 			}
-//			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//			{
-//				// The Entry's GdkWindow is the top level window onto which
-//				// the frame is drawn; the actual text entry is drawn into a
-//				// separate window, so we can ensure that for themes that don't
-//				// respect HasFrame, we never ever allow the base frame drawing
-//				// to happen
-//				if (evnt.Window == GdkWindow) {
-//					return true;
-//				}
-//
-//				bool ret = base.OnExposeEvent (evnt);
-//
-//				if (text_gc == null) {
-//					text_gc = new Gdk.GC (evnt.Window);
-//					text_gc.Copy (Style.TextGC (StateType.Normal));
-//					Gdk.Color color_a = parent.Style.Base (StateType.Normal);
-//					Gdk.Color color_b = parent.Style.Text (StateType.Normal);
-//					text_gc.RgbFgColor = ColorBlend (color_a, color_b);
-//				}
-//
-//				if (Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
-//					return ret;
-//				}
-//
-//				if (layout == null) {
-//					layout = new Pango.Layout (PangoContext);
-//					layout.FontDescription = FontService.SansFont.CopyModified (Styles.FontScale11);
-//				}
-//
-//				int width, height;
-//				layout.SetMarkup (parent.EmptyMessage);
-//				layout.GetPixelSize (out width, out height);
-//				evnt.Window.DrawLayout (text_gc, 2, (SizeRequest ().Height - height) / 2, layout);
-//
-//				return ret;
-//			}
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
+				// The Entry's GdkWindow is the top level window onto which
+				// the frame is drawn; the actual text entry is drawn into a
+				// separate window, so we can ensure that for themes that don't
+				// respect HasFrame, we never ever allow the base frame drawing
+				// to happen
+				//if (event.GdkWindow) {
+				//	return true;
+				//}
+
+				bool ret = base.OnDrawn (evnt);
+
+				// if (text_gc == null) {
+				// 	text_gc = new Gdk.GC (evnt.GdkWindow);
+				// 	text_gc.Copy (Style.TextGC (StateType.Normal));
+				// 	Gdk.Color color_a = parent.Style.Base (StateType.Normal);
+				// 	Gdk.Color color_b = parent.Style.Text (StateType.Normal);
+				// 	text_gc.RgbFgColor = ColorBlend (color_a, color_b);
+				// }
+
+				if (Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
+					return ret;
+				}
+
+				if (layout == null) {
+					layout = new Pango.Layout (PangoContext);
+					//layout.FontDescription = FontService.SansFont.CopyModified (Styles.FontScale11);
+				}
+
+				int width, height;
+				layout.SetMarkup (parent.EmptyMessage);
+				layout.GetPixelSize (out width, out height);
+				//evnt.Window.DrawLayout (text_gc, 2, (SizeRequest ().Height - height) / 2, layout);
+
+				return ret;
+			}
 		}
 	}
 }
