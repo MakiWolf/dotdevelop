@@ -28,6 +28,7 @@ using Mono.TextEditor;
 using Gtk;
 using MonoDevelop.Components;
 using Gdk;
+using Cairo;
 using MonoDevelop.Ide.Editor.Highlighting;
 
 namespace MonoDevelop.SourceEditor
@@ -100,24 +101,24 @@ namespace MonoDevelop.SourceEditor
 			textEditor.MoveTopLevelWidget (this, (textEditor.Allocation.Width - alloc.Width) / 2, textEditor.Allocation.Height - alloc.Height - 8);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var cr = CairoHelper.Create (evnt.Window)) {
-//				cr.LineWidth = 1;
-//				cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-//
-//				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationTextBackground));
-//				cr.Fill ();
-//				cr.RoundedRectangle (0, 0, Allocation.Width, Allocation.Height, 3);
-//				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationTextBackground));
-//				cr.FillPreserve ();
-//
-//				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationBorder));
-//				cr.Stroke();
-//			}
-//
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var cr = Gdk.CairoHelper.Create (GdkWindow)) {
+				cr.LineWidth = 1;
+				cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+
+				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationTextBackground));
+				cr.Fill ();
+				cr.RoundedRectangle (0, 0, Allocation.Width, Allocation.Height, 3);
+				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationTextBackground));
+				cr.FillPreserve ();
+
+				cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.NotificationBorder));
+				cr.Stroke();
+			}
+
+			return base.OnDrawn (evnt);
+		}
 
 	}
 }
