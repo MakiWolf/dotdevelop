@@ -28,6 +28,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 using MonoDevelop.Ide;
 using MonoDevelop.Components.AtkCocoaHelper;
 
@@ -165,17 +166,17 @@ namespace MonoDevelop.Components
             return base.OnButtonReleaseEvent(evnt);
         }
 
-//        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
-//        {
-//            base.OnExposeEvent(evnt);
-//
-//            if(HasFocus && draw_focus) {
-//                Style.PaintFocus(Style, GdkWindow, StateType.Normal, evnt.Area, this, "button",
-//                    0, 0, Allocation.Width, Allocation.Height);
-//            }
-//
-//            return true;
-//        }
+       protected override bool OnDrawn(Cairo.Context evnt)
+       {
+           base.OnDrawn(evnt);
+
+           //if(HasFocus && draw_focus) {
+           //    Style.PaintFocus(Style, GdkWindow, StateType.Normal, evnt.Area, this, "button",
+           //        0, 0, Allocation.Width, Allocation.Height);
+           //}
+
+           return true;
+       }
 
         private void UpdateImage()
         {

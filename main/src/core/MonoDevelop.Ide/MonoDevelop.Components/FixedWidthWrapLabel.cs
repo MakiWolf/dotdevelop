@@ -31,6 +31,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 
 namespace MonoDevelop.Components
 {
@@ -173,18 +174,18 @@ namespace MonoDevelop.Components
 //		}
 
 		
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			UpdateLayout ();
-//			if (evnt.Window != GdkWindow) {
-//				return base.OnExposeEvent (evnt);
-//			}
-//            
-//			Gtk.Style.PaintLayout (Style, GdkWindow, State, false, evnt.Area, 
-//			    this, null, Allocation.X, Allocation.Y, layout);
-//			
-//			return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			UpdateLayout ();
+			//if (evnt.Window != GdkWindow) {
+			//	return base.OnExposeEvent (evnt);
+			//}
+           
+			//Gtk.Style.PaintLayout (Style, GdkWindow, State, false, evnt.Area, 
+			//    this, null, Allocation.X, Allocation.Y, layout);
+			
+			return true;
+		}
         
 		public string Markup {
 			get { return text; }

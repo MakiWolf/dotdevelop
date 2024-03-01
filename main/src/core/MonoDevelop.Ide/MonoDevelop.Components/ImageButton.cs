@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Gdk;
+using Cairo;
 using MonoDevelop.Components.AtkCocoaHelper;
 using MonoDevelop.Ide;
 
@@ -99,15 +100,15 @@ namespace MonoDevelop.Components
 			}
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			if (HasFocus && image != null) {
-//				Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button",
-//				                      Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-//			}
-//
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			//if (HasFocus && image != null) {
+			//	Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button",
+			//	                      Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+			//}
+
+			return base.OnDrawn (evnt);
+		}
 
 		protected override bool OnEnterNotifyEvent (Gdk.EventCrossing evnt)
 		{
