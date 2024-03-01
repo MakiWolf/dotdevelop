@@ -84,7 +84,7 @@ namespace MonoDevelop.Components
 			//Gtk.Style.PaintFlatBox (Style, this.GdkWindow, StateType.Normal, ShadowType.Out, evnt.Area, this, "tooltip", 0, 0, winWidth, winHeight);
 			//foreach (var child in this.Children)
 			//	this.PropagateExpose (child, evnt);
-			Child.Draw (evnt);
+			//Child.Draw (evnt);
 			return false;
 		}
 		
