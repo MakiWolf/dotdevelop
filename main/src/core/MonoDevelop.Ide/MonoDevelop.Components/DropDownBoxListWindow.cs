@@ -27,6 +27,7 @@
 using System;
 using MonoDevelop.Ide;
 using Gtk;
+using Cairo;
 using System.Text;
 using MonoDevelop.Components.AtkCocoaHelper;
 using MonoDevelop.Ide.Fonts;
@@ -452,12 +453,12 @@ namespace MonoDevelop.Components
 				return base.OnScrollEvent (evnt);
 			}
 
-//			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//			{
-//				base.OnExposeEvent (evnt);
-//				DrawList ();
-//				return false;
-//			}
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
+				base.OnDrawn (evnt);
+				DrawList ();
+				return false;
+			}
 
 			void DrawList ()
 			{
