@@ -534,24 +534,24 @@ namespace MonoDevelop.Components.PropertyGrid
 			layout.Dispose ();
 		}
 
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			using (Cairo.Context ctx = CairoHelper.Create (evnt.Window)) {
-//				int dx = (int)((double)Allocation.Width * dividerPosition);
-//				ctx.LineWidth = 1;
-//				ctx.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-//				ctx.SetSourceColor (Styles.PropertyPadLabelBackgroundColor.ToCairoColor ());
-//				ctx.Fill ();
-//				ctx.MoveTo (dx + 0.5, 0);
-//				ctx.RelLineTo (0, Allocation.Height);
-//				ctx.SetSourceColor (Styles.PropertyPadDividerColor.ToCairoColor ());
-//				ctx.Stroke ();
-//
-//				int y = 0;
-//				Draw (ctx, rows, dx, PropertyLeftPadding, ref y);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+				int dx = (int)((double)Allocation.Width * dividerPosition);
+				ctx.LineWidth = 1;
+				ctx.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+				ctx.SetSourceColor (Styles.PropertyPadLabelBackgroundColor.ToCairoColor ());
+				ctx.Fill ();
+				ctx.MoveTo (dx + 0.5, 0);
+				ctx.RelLineTo (0, Allocation.Height);
+				ctx.SetSourceColor (Styles.PropertyPadDividerColor.ToCairoColor ());
+				ctx.Stroke ();
+
+				int y = 0;
+				Draw (ctx, rows, dx, PropertyLeftPadding, ref y);
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		void Draw (Cairo.Context ctx, List<TableRow> rowList, int dividerX, int x, ref int y)
 		{
