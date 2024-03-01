@@ -27,6 +27,7 @@
 using System;
 using Gtk;
 using Gdk;
+using Cairo;
 using Xwt.Motion;
 
 namespace MonoDevelop.Components
@@ -161,34 +162,34 @@ namespace MonoDevelop.Components
 				AnimatedResize (); //Desired size changed mid animation
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			if ((position & PopupPosition.Top) != 0 || (position & PopupPosition.Bottom) != 0)
-//				theme.ArrowOffset = Allocation.Width / 2;
-//			else
-//				theme.ArrowOffset = Allocation.Height / 2;
-//
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				context.Save ();
-//				Theme.SetBorderPath (context, BorderAllocation, position);
-//				context.Clip ();
-//				OnDrawContent (evnt, context); // Draw content first so we can easily clip it
-//				context.Restore ();
-//
-//
-//				// protect against overriden methods which leave in a bad state
-//				context.Save ();
-//				if (Theme.DrawPager) {
-//					Theme.RenderPager (context, 
-//					                   PangoContext,
-//					                   BorderAllocation);
-//				}
-//
-//				Theme.RenderShadow (context, BorderAllocation, position);
-//				context.Restore ();
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			if ((position & PopupPosition.Top) != 0 || (position & PopupPosition.Bottom) != 0)
+				theme.ArrowOffset = Allocation.Width / 2;
+			else
+				theme.ArrowOffset = Allocation.Height / 2;
+
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				context.Save ();
+				Theme.SetBorderPath (context, BorderAllocation, position);
+				context.Clip ();
+				//OnDrawContent (evnt, context); // Draw content first so we can easily clip it
+				context.Restore ();
+
+
+				// protect against overriden methods which leave in a bad state
+				context.Save ();
+				if (Theme.DrawPager) {
+					Theme.RenderPager (context, 
+					                   PangoContext,
+					                   BorderAllocation);
+				}
+
+				Theme.RenderShadow (context, BorderAllocation, position);
+				context.Restore ();
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		protected virtual void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context context)
 		{
@@ -219,7 +220,7 @@ namespace MonoDevelop.Components
 			QueueDraw ();
 		}
 
-		protected override void OnSizeAllocated (Rectangle allocation)
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			if (!this.AnimationIsRunning ("Resize"))
 				paintSize = new Gdk.Size (allocation.Width, allocation.Height);
@@ -227,7 +228,7 @@ namespace MonoDevelop.Components
 			base.OnSizeAllocated (allocation);
 		}
 
-		protected Rectangle ChildAllocation {
+		protected Gdk.Rectangle ChildAllocation {
 			get {
 				var rect = BorderAllocation;
 				rect.Inflate (-Theme.Padding - 1, -Theme.Padding - 1);
@@ -235,7 +236,7 @@ namespace MonoDevelop.Components
 			}
 		}
 
-		Rectangle BorderAllocation {
+		Gdk.Rectangle BorderAllocation {
 			get {
 				var rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, paintSize.Width, paintSize.Height);
 				if (ShowArrow) {

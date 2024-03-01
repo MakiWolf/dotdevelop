@@ -154,19 +154,19 @@ namespace MonoDevelop.Components
 //			// its child not being scrollable.
 //		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			if (!IsDrawable) {
-//				return false;
-//			}
-//			
-//			using (Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-//				DrawFrame (cr, evnt.Area);
-//				if (child != null) 
-//					PropagateExpose (child, evnt);
-//				return false;
-//			}
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			if (!IsDrawable) {
+				return false;
+			}
+			
+			using (Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+				//DrawFrame (cr, evnt.Area);
+				//if (child != null) 
+				//	PropagateExpose (child, evnt);
+				return false;
+			}
+		}
 
 		private void DrawFrame (Cairo.Context cr, Gdk.Rectangle clip)
 		{
