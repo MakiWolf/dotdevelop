@@ -464,7 +464,7 @@ namespace MonoDevelop.Components
 				}
 			}
 
-//			PropagateExpose (Child, evnt);
+			Child.Draw (evnt);
 
 			if (hasFrame && roundedShape && customRoundedShapeDrawing) {
 				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
