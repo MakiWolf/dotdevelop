@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using Gdk;
+using Cairo;
 using Gtk;
 using MonoDevelop.Components;
 using MonoDevelop.Core;
@@ -62,7 +63,7 @@ namespace Mono.TextEditor.Theatrics
 
 		private readonly bool horizontal;
 		private double percent;
-		private Rectangle widget_alloc;
+		private Gdk.Rectangle widget_alloc;
 //		private Pixmap canvas;
 
 		public AnimatedWidget (Widget widget, uint duration, Easing easing, Blocking blocking, bool horizontal)
@@ -162,7 +163,7 @@ namespace Mono.TextEditor.Theatrics
 			minimum_height = natural_height = Height;
 		}
 
-		protected override void OnSizeAllocated (Rectangle allocation)
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			if (Widget != null) {
@@ -186,15 +187,15 @@ namespace Mono.TextEditor.Theatrics
 			}
 		}
 
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			if (canvas != null) {
-//				GdkWindow.DrawDrawable (Style.BackgroundGC (State), canvas, 0, 0, widget_alloc.X, widget_alloc.Y, widget_alloc.Width, widget_alloc.Height);
-//				return true;
-//			}
-//
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			//if (canvas != null) {
+				//GdkWindow.DrawDrawable (Style.BackgroundGC (State), canvas, 0, 0, widget_alloc.X, widget_alloc.Y, widget_alloc.Width, widget_alloc.Height);
+			//	return true;
+			//}
+
+			return base.OnDrawn (evnt);
+		}
 
 		protected override void ForAll (bool include_internals, Callback callback)
 		{
