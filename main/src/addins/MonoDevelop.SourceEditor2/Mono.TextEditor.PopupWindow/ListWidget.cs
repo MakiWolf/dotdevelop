@@ -190,12 +190,12 @@ namespace Mono.TextEditor.PopupWindow
 			base.OnSizeAllocated (allocation);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose args)
-//		{
-//			base.OnExposeEvent (args);
-//			DrawList (args);
-//	  		return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context args)
+		{
+			base.OnDrawn (args);
+			//DrawList (args);
+	  		return true;
+		}
 		
 		public int TextOffset {
 			get {
@@ -208,9 +208,9 @@ namespace Mono.TextEditor.PopupWindow
 		}
 
 		//FIXME: we could use the expose event's clipbox to make the drawing more efficient
-		void DrawList (Gdk.EventExpose args)
+		void DrawList (Cairo.Context args)
 		{
-			var window = args.Window;
+			var window = GdkWindow;
 			
 			int winWidth, winHeight;
 //			window.GetSize (out winWidth, out winHeight);

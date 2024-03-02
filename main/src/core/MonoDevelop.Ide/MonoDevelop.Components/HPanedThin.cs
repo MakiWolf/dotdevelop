@@ -26,6 +26,7 @@
 using MonoDevelop.Ide.Gui;
 using System.Collections.Generic;
 using System;
+using Cairo;
 
 #if MAC
 using AppKit;
@@ -81,20 +82,20 @@ namespace MonoDevelop.Components
 				callback (handle);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			base.OnExposeEvent (evnt);
-//
-//			if (Child1 != null && Child1.Visible && Child2 != null && Child2.Visible) {
-//				var gc = new Gdk.GC (evnt.Window);
-//				gc.RgbFgColor = Styles.ThinSplitterColor.ToGdkColor ();
-//				var x = Child1.Allocation.X + Child1.Allocation.Width;
-//				evnt.Window.DrawLine (gc, x, Allocation.Y, x, Allocation.Y + Allocation.Height);
-//				gc.Dispose ();
-//			}
-//
-//			return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			base.OnDrawn (evnt);
+
+			if (Child1 != null && Child1.Visible && Child2 != null && Child2.Visible) {
+				//var gc = new Gdk.GC (evnt.Window);
+				//gc.RgbFgColor = Styles.ThinSplitterColor.ToGdkColor ();
+				var x = Child1.Allocation.X + Child1.Allocation.Width;
+				//evnt.Window.DrawLine (gc, x, Allocation.Y, x, Allocation.Y + Allocation.Height);
+				//gc.Dispose ();
+			}
+
+			return true;
+		}
 	}
 
 	abstract class CustomPanedHandle : Gtk.EventBox

@@ -528,7 +528,7 @@ namespace MonoDevelop.Debugger
 
 		/// <summary>
 		/// Notifies the treeview that the specified nodes have been added to the root node's children
-		/// </summnsPanelWidget.ary>
+		/// </summary>
 		/// <param name="nodes">The nodes that were appended.</param>
 		void IObjectValueTreeView.Appended (IList<ObjectValueNode> nodes)
 		{

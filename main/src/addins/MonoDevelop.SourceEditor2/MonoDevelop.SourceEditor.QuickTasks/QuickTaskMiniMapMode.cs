@@ -28,6 +28,7 @@ using System;
 using Gtk;
 using Mono.TextEditor;
 using Gdk;
+using Cairo;
 using MonoDevelop.Core;
 using MonoDevelop.Components;
 using MonoDevelop.Core.Text;
@@ -178,7 +179,7 @@ namespace MonoDevelop.SourceEditor.QuickTasks
 				DestroyBgBuffer ();
 			}
 
-			protected override void OnSizeAllocated (Rectangle allocation)
+			protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 			{
 				base.OnSizeAllocated (allocation);
 				if (allocation.Width > 1 && (allocation.Width != curWidth || allocation.Height != curHeight))
@@ -321,48 +322,48 @@ namespace MonoDevelop.SourceEditor.QuickTasks
 //				return Math.Max (0, (int)(h * (vadjustment.Value) / (vadjustment.Upper - vadjustment.Lower - vadjustment.PageSize)));
 			}
 
-//			protected override bool OnExposeEvent (Gdk.EventExpose e)
-//			{
-//				if (TextEditor == null)
-//					return true;
-//				using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
-//					cr.LineWidth = 1;
-//					if (backgroundPixbuf != null) {
-//						e.Window.DrawDrawable (Style.BlackGC, backgroundPixbuf, 0, GetBufferYOffset (), 0, 0, Allocation.Width, Allocation.Height);
-//					} else {
-//						cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-//						if (TextEditor.EditorTheme != null)
-//							cr.SetSourceColor (SyntaxHighlightingService.GetColor (TextEditor.EditorTheme, EditorThemeColors.Background));
-//						cr.Fill ();
-//					}
-//					/*
-//					cr.Color = (HslColor)Style.Dark (State);
-//					cr.MoveTo (-0.5, 0.5);
-//					cr.LineTo (Allocation.Width, 0.5);
-//					cr.MoveTo (-0.5, Allocation.Height - 0.5);
-//					cr.LineTo (Allocation.Width, Allocation.Height - 0.5);
-//					cr.Stroke ();*/
-//
-//					if (backgroundPixbuf != null) {
-//						int y = GetBufferYOffset ();
-//
-//						int startLine = TextEditor.YToLine (vadjustment.Value);
-//						double dy = TextEditor.LogicalToVisualLocation (startLine, 1).Line * lineHeight;
-//
-//						cr.Rectangle (0,
-//									  dy - y,
-//									  Allocation.Width,
-//									  lineHeight * vadjustment.PageSize / TextEditor.LineHeight);
-//						var c = (Cairo.Color)(HslColor)Style.Dark (State);
-//						c.A = 0.2;
-//						cr.SetSourceColor (c);
-//						cr.Fill ();
-//					}
-//					DrawLeftBorder (cr);
-//				}
-//
-//				return true;
-//			}
+			protected override bool OnDrawn (Cairo.Context e)
+			{
+				if (TextEditor == null)
+					return true;
+				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+					cr.LineWidth = 1;
+					// if (backgroundPixbuf != null) {
+					// 	e.Window.DrawDrawable (Style.BlackGC, backgroundPixbuf, 0, GetBufferYOffset (), 0, 0, Allocation.Width, Allocation.Height);
+					// } else {
+					// 	cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+					// 	if (TextEditor.EditorTheme != null)
+					// 		cr.SetSourceColor (SyntaxHighlightingService.GetColor (TextEditor.EditorTheme, EditorThemeColors.Background));
+					// 	cr.Fill ();
+					// }
+					/*
+					cr.Color = (HslColor)Style.Dark (State);
+					cr.MoveTo (-0.5, 0.5);
+					cr.LineTo (Allocation.Width, 0.5);
+					cr.MoveTo (-0.5, Allocation.Height - 0.5);
+					cr.LineTo (Allocation.Width, Allocation.Height - 0.5);
+					cr.Stroke ();*/
+
+					// if (backgroundPixbuf != null) {
+					// 	int y = GetBufferYOffset ();
+
+					// 	int startLine = TextEditor.YToLine (vadjustment.Value);
+					// 	double dy = TextEditor.LogicalToVisualLocation (startLine, 1).Line * lineHeight;
+
+					// 	cr.Rectangle (0,
+					// 				  dy - y,
+					// 				  Allocation.Width,
+					// 				  lineHeight * vadjustment.PageSize / TextEditor.LineHeight);
+					// 	var c = (Cairo.Color)(HslColor)Style.Dark (State);
+					// 	c.A = 0.2;
+					// 	cr.SetSourceColor (c);
+					// 	cr.Fill ();
+					// }
+					DrawLeftBorder (cr);
+				}
+
+				return true;
+			}
 		}
 	}
 

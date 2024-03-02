@@ -28,6 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using Gtk;
+using Cairo;
 using Mono.TextEditor;
 //using Mono.TextEditor.AtkCocoaHelper;
 using MonoDevelop.Ide.Gui.Content;
@@ -195,11 +196,11 @@ namespace MonoDevelop.SourceEditor
 		
 		class Border : Gtk.DrawingArea
 		{
-//			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//			{
-//				evnt.Window.DrawRectangle (this.Style.DarkGC (State), true, evnt.Area);
-//				return true;
-//			}
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
+				//evnt.Window.DrawRectangle (this.Style.DarkGC (State), true, evnt.Area);
+				return true;
+			}
 		}
 		
 		

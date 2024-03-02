@@ -338,21 +338,21 @@ namespace Mono.TextEditor.Theatrics
 			return true;
 		}
 
-		// protected override bool OnDrawn (Context cr)
-		// {
-		// 	try {
-		// 		var alloc = Allocation;
-		// 		cr.Translate (alloc.X, alloc.Y);
-		// 		cr.Translate (xExpandedOffset * (1 - scale), yExpandedOffset * (1 - scale));
-		// 		var scaleX = (alloc.Width / userspaceArea.Width - 1) * scale + 1;
-		// 		var scaleY = (alloc.Height / userspaceArea.Height - 1) * scale + 1;
-		// 		cr.Scale (scaleX, scaleY);
-		// 		Draw (cr, userspaceArea);
-		// 	} catch (Exception e) {
-		// 		LoggingService.LogError ("Exception in animation:", e);
-		// 	}
-		// 	return true;
-		// }
+		protected override bool OnDrawn (Context cr)
+		{
+			try {
+				var alloc = Allocation;
+				cr.Translate (alloc.X, alloc.Y);
+				cr.Translate (xExpandedOffset * (1 - scale), yExpandedOffset * (1 - scale));
+				var scaleX = (alloc.Width / userspaceArea.Width - 1) * scale + 1;
+				var scaleY = (alloc.Height / userspaceArea.Height - 1) * scale + 1;
+				cr.Scale (scaleX, scaleY);
+				Draw (cr, userspaceArea);
+			} catch (Exception e) {
+				LoggingService.LogError ("Exception in animation:", e);
+			}
+			return true;
+		}
 
 		protected abstract void Draw (Cairo.Context context, Cairo.Rectangle area);
 

@@ -34,7 +34,7 @@ namespace MonoDevelop.DotNetCore.Gui
 		VBox mainVBox;
 		HBox mainHBox;
 		Label targetFrameworkLabel;
-		ComboBox runtimeVersionCombo;
+		ComboBoxText runtimeVersionCombo;
 
 		void Build ()
 		{
@@ -56,8 +56,8 @@ namespace MonoDevelop.DotNetCore.Gui
 			targetFrameworkLabel.LabelProp = GettextCatalog.GetString ("Target _framework:");
 			targetFrameworkLabel.UseUnderline = true;
 			mainHBox.PackStart (targetFrameworkLabel, false, true, 0);
-
-			//runtimeVersionCombo = ComboBox.NewText ();
+			
+			runtimeVersionCombo = new global::Gtk.ComboBoxText();
 			runtimeVersionCombo.Name = "runtimeVersionCombo";
 			mainHBox.PackStart (runtimeVersionCombo, false, false, 0);
 			mainVBox.PackStart (mainHBox, false, false, 0);

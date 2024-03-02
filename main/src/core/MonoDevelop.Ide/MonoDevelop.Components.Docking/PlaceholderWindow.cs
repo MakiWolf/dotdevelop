@@ -31,6 +31,7 @@
 using System;
 using Gdk;
 using Gtk;
+using Cairo;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -101,22 +102,22 @@ namespace MonoDevelop.Components.Docking
 //			}
 		}
 		
-		protected override void OnSizeAllocated (Rectangle allocation)
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			base.OnSizeAllocated (allocation);
 			CreateShape (allocation.Width, allocation.Height);
 		}
 
 		
-//		protected override bool OnExposeEvent (Gdk.EventExpose args)
-//		{
-//			//base.OnExposeEvent (args);
-//			int w, h;
-//			this.GetSize (out w, out h);
-//			this.GdkWindow.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
-//			this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
-//	  		return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context args)
+		{
+			//base.OnExposeEvent (args);
+			int w, h;
+			this.GetSize (out w, out h);
+			//this.GdkWindow.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
+			//this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
+	  		return true;
+		}
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)
 		{

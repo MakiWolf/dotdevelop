@@ -26,6 +26,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 
 namespace MonoDevelop.Components
 {
@@ -137,12 +138,12 @@ namespace MonoDevelop.Components
 		}
 		
 		
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
 //			Style.PaintFlatBox (Style, evnt.Window, StateType.Normal, ShadowType.Out, evnt.Area, this, "tooltip", 
 //				Allocation.X + 1, Allocation.Y + 1, Allocation.Width - 2, Allocation.Height - 2);
-//			return base.OnExposeEvent (evnt);
-//		}
+			return base.OnDrawn (evnt);
+		}
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{

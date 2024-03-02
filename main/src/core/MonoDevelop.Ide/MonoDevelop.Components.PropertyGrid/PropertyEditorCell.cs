@@ -30,6 +30,7 @@ using System;
 using System.ComponentModel;
 using Gdk;
 using Gtk;
+using Cairo;
 using MonoDevelop.Ide.Fonts;
 using MonoDevelop.Core;
 using MonoDevelop.Ide;
@@ -79,7 +80,7 @@ namespace MonoDevelop.Components.PropertyGrid
 			Initialize ();
 		}
 
-		public EditSession StartEditing (Rectangle cellArea, StateType state)
+		public EditSession StartEditing (Gdk.Rectangle cellArea, StateType state)
 		{
 			IPropertyEditor ed = CreateEditor (cellArea, state);
 			if (ed == null)
@@ -141,20 +142,20 @@ namespace MonoDevelop.Components.PropertyGrid
 			layout.GetPixelSize (out width, out height);
 		}
 
-//		public virtual void Render (Drawable window, Cairo.Context ctx, Rectangle bounds, StateType state)
-//		{
-//			int w, h;
-//			layout.GetPixelSize (out w, out h);
-//			int dy = (bounds.Height - h) / 2;
-//
-//			ctx.Save ();
-//			ctx.SetSourceColor (container.Style.Text (state).ToCairoColor ());
-//			ctx.MoveTo (bounds.X, dy + bounds.Y);
-//			Pango.CairoHelper.ShowLayout (ctx, layout);
-//			ctx.Restore ();
-//		}
+		// public virtual void Render (Drawable window, Cairo.Context ctx, Rectangle bounds, StateType state)
+		// {
+		// 	int w, h;
+		// 	layout.GetPixelSize (out w, out h);
+		// 	int dy = (bounds.Height - h) / 2;
+
+		// 	ctx.Save ();
+		// 	ctx.SetSourceColor (container.Style.Text (state).ToCairoColor ());
+		// 	ctx.MoveTo (bounds.X, dy + bounds.Y);
+		// 	Pango.CairoHelper.ShowLayout (ctx, layout);
+		// 	ctx.Restore ();
+		// }
 		
-		protected virtual IPropertyEditor CreateEditor (Rectangle cellArea, StateType state)
+		protected virtual IPropertyEditor CreateEditor (Gdk.Rectangle cellArea, StateType state)
 		{
 			if (DialogueEdit && (!Property.IsReadOnly || EditsReadOnlyObject)) {
 				return new PropertyDialogueEditor (this, context);
@@ -344,19 +345,19 @@ namespace MonoDevelop.Components.PropertyGrid
 			this.ModifyBg (StateType.Normal, this.Style.White);
 		}
 		
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			bool res = base.OnExposeEvent (evnt);
-//			cell.Initialize (this, em, context);
-//			
-//			Rectangle rect = Allocation;
-//			rect.Inflate (-3, 0);// Add some margin
-//
-//			using (Cairo.Context ctx = CairoHelper.Create (GdkWindow)) {
-//				cell.Render (GdkWindow, ctx, rect, StateType.Normal);
-//			}
-//			return res;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			bool res = base.OnDrawn (evnt);
+			cell.Initialize (this, em, context);
+			
+			Gdk.Rectangle rect = Allocation;
+			rect.Inflate (-3, 0);// Add some margin
+
+			//using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+			//	cell.Render (GdkWindow, ctx, rect, StateType.Normal);
+			//}
+			return res;
+		}
 	}
 	
 	class PropertyDialogueEditor: HBox, IPropertyEditor

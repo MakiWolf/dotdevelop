@@ -148,15 +148,15 @@ namespace MonoDevelop.Components.MainToolbar
 			}
 		}
 
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				DrawBackground (context, Allocation, 15, State);
-//				var icon = GetIcon();
-//				context.DrawImage (this, icon, Allocation.X + Math.Max (0, (Allocation.Width - icon.Width) / 2), Allocation.Y + Math.Max (0, (Allocation.Height - icon.Height) / 2));
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				DrawBackground (context, Allocation, 15, State);
+				var icon = GetIcon();
+				context.DrawImage (this, icon, Allocation.X + Math.Max (0, (Allocation.Width - icon.Width) / 2), Allocation.Y + Math.Max (0, (Allocation.Height - icon.Height) / 2));
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		void DrawBackground (Cairo.Context context, Gdk.Rectangle region, int radius, StateType state)
 		{

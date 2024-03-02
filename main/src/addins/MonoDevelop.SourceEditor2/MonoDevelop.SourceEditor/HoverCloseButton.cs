@@ -26,6 +26,7 @@
 using System;
 using Gtk;
 using Gdk;
+using Cairo;
 
 namespace MonoDevelop.SourceEditor
 {
@@ -84,13 +85,13 @@ namespace MonoDevelop.SourceEditor
 				handler (this, e);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var cr = CairoHelper.Create (evnt.Window)) {
-//				DrawCloseButton (cr, new Gdk.Point (Allocation.X + Allocation.Width / 2, Allocation.Y + Allocation.Height / 2), hovered, 1.0, 0);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var cr = Gdk.CairoHelper.Create (GdkWindow)) {
+				DrawCloseButton (cr, new Gdk.Point (Allocation.X + Allocation.Width / 2, Allocation.Y + Allocation.Height / 2), hovered, 1.0, 0);
+			}
+			return base.OnDrawn (evnt);
+		}
 
 		static void DrawCloseButton (Cairo.Context context, Gdk.Point center, bool hovered, double opacity, double animationProgress)
 		{

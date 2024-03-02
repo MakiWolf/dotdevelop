@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gdk;
 using Gtk;
+using Cairo;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Core;
 using MonoDevelop.Components;
@@ -161,102 +162,102 @@ namespace MonoDevelop.Ide
 		}
 		
 		const int upperGradientHeight = 16;
-//		protected override bool OnExposeEvent (Gdk.EventExpose e)
-//		{
-//			
-//			using (Cairo.Context cr = Gdk.CairoHelper.Create (e.Window)) {
-//				double xPos = padding, yPos = padding;
-//				var layout = PangoUtil.CreateLayout (this);
-//				int w, h;
-//				layout.SetText (new string ('X', maxLength));
-//				layout.GetPixelSize (out w, out h);
-//				
-//				foreach (Category cat in categories) {
-//					yPos = padding;
-//					cr.MoveTo (xPos, yPos);
-//					layout.SetMarkup ("<b>" + cat.Title + "</b>");
-//					cr.SetSourceColor (Style.Text (StateType.Normal).ToCairoColor ());
-//					cr.ShowLayout (layout);
-//					
-//					if (cat.Items.Count == 0)
-//						continue;
-//					
-//					layout.SetMarkup ("");
-//					int w2, h2;
-//					layout.GetPixelSize (out w2, out h2);
-//					yPos += h2;
-//					yPos += headerDistance;
-//					var startY = yPos;
-//					int curItem = 0;
-//					int row = 0;
-//					var iconHeight = Math.Max (h, cat.Items [0].Icon.Height + 2) + itemPadding * 2;
-//					if (cat.FirstVisibleItem > 0) {
-//						Gtk.Style.PaintArrow (Style, e.Window, State, ShadowType.None, 
-//								new Rectangle ((int)xPos, (int)yPos, w, h), 
-//								this, 
-//								"", 
-//								ArrowType.Up, 
-//								true, 
-//								(int)xPos, 
-//								(int)yPos, 
-//								w, 
-//								h);
-//						yPos += iconHeight;
-//						curItem++;
-//					}
-//					
-//					for (int i = cat.FirstVisibleItem; i < cat.Items.Count; i++) {
-//						var item = cat.Items [i];
-//						
-//						if (curItem + 1 >= maxItems && row + 1 >= maxRows && i + 1 < cat.Items.Count) {
-//							Gtk.Style.PaintArrow (Style, e.Window, State, ShadowType.None, 
-//								new Rectangle ((int)xPos, (int)yPos, w, h), 
-//								this, 
-//								"", 
-//								ArrowType.Down, 
-//								true, 
-//								(int)xPos, 
-//								(int)yPos, 
-//								w, 
-//								h);
-//							break;
-//						}
-//						
-//						if (item == ActiveItem) {
-//							int itemWidth = w + (int)item.Icon.Width + 2 + itemPadding * 2;
-//							cr.Rectangle (xPos, yPos, itemWidth, iconHeight);
-//							cr.LineWidth = 1;
-//							cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
-//							cr.Fill ();
-//						} else if (item == hoverItem) {
-//							int itemWidth = w + (int)item.Icon.Width + 2 + itemPadding * 2;
-//							cr.Rectangle (xPos + 0.5, yPos + 0.5, itemWidth - 1, iconHeight);
-//							cr.LineWidth = 1;
-//							cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
-//							cr.Stroke ();
-//						}
-//						cr.SetSourceColor (Style.Text (item == ActiveItem? StateType.Selected : StateType.Normal).ToCairoColor ());
-//						cr.MoveTo (xPos + item.Icon.Width + 2 + itemPadding, yPos + (iconHeight - h) / 2);
-//						layout.SetText (Ellipsize (item.ListTitle ?? item.Title, maxLength));
-//						cr.ShowLayout (layout);
-//						cr.DrawImage (this, item == ActiveItem ? item.Icon.WithStyles ("sel") : item.Icon, (int)xPos + itemPadding,
-//						                                 (int)(yPos + (iconHeight - item.Icon.Height) / 2));
-//						yPos += iconHeight;
-//						if (++curItem >= maxItems) {
-//							curItem = 0;
-//							yPos = startY;
-//							xPos += w + cat.Items [0].Icon.Width + 2 + padding + itemPadding * 2;
-//							row++;
-//						}
-//					}
-//					
-//				
-//					xPos += w + cat.Items [0].Icon.Width + 2 + padding + itemPadding * 2;
-//				}
-//				layout.Dispose ();
-//			}
-//			return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context e)
+		{
+			
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+				double xPos = padding, yPos = padding;
+				var layout = PangoUtil.CreateLayout (this);
+				int w, h;
+				layout.SetText (new string ('X', maxLength));
+				layout.GetPixelSize (out w, out h);
+				
+				foreach (Category cat in categories) {
+					yPos = padding;
+					cr.MoveTo (xPos, yPos);
+					layout.SetMarkup ("<b>" + cat.Title + "</b>");
+					//cr.SetSourceColor (Style.Text (StateType.Normal).ToCairoColor ());
+					cr.ShowLayout (layout);
+					
+					if (cat.Items.Count == 0)
+						continue;
+					
+					layout.SetMarkup ("");
+					int w2, h2;
+					layout.GetPixelSize (out w2, out h2);
+					yPos += h2;
+					yPos += headerDistance;
+					var startY = yPos;
+					int curItem = 0;
+					int row = 0;
+					var iconHeight = Math.Max (h, cat.Items [0].Icon.Height + 2) + itemPadding * 2;
+					// if (cat.FirstVisibleItem > 0) {
+					// 	Gtk.Style.PaintArrow (Style, e.GdkWindow, State, ShadowType.None, 
+					// 			new Gdk.Rectangle ((int)xPos, (int)yPos, w, h), 
+					// 			this, 
+					// 			"", 
+					// 			ArrowType.Up, 
+					// 			true, 
+					// 			(int)xPos, 
+					// 			(int)yPos, 
+					// 			w, 
+					// 			h);
+					// 	yPos += iconHeight;
+					// 	curItem++;
+					// }
+					
+					for (int i = cat.FirstVisibleItem; i < cat.Items.Count; i++) {
+						var item = cat.Items [i];
+						
+						// if (curItem + 1 >= maxItems && row + 1 >= maxRows && i + 1 < cat.Items.Count) {
+						// 	Gtk.Style.PaintArrow (Style, e.GdkWindow, State, ShadowType.None, 
+						// 		new Gdk.Rectangle ((int)xPos, (int)yPos, w, h), 
+						// 		this, 
+						// 		"", 
+						// 		ArrowType.Down, 
+						// 		true, 
+						// 		(int)xPos, 
+						// 		(int)yPos, 
+						// 		w, 
+						// 		h);
+						// 	break;
+						// }
+						
+						if (item == ActiveItem) {
+							int itemWidth = w + (int)item.Icon.Width + 2 + itemPadding * 2;
+							cr.Rectangle (xPos, yPos, itemWidth, iconHeight);
+							cr.LineWidth = 1;
+							cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
+							cr.Fill ();
+						} else if (item == hoverItem) {
+							int itemWidth = w + (int)item.Icon.Width + 2 + itemPadding * 2;
+							cr.Rectangle (xPos + 0.5, yPos + 0.5, itemWidth - 1, iconHeight);
+							cr.LineWidth = 1;
+							cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
+							cr.Stroke ();
+						}
+						//cr.SetSourceColor (Style.Text (item == ActiveItem? StateType.Selected : StateType.Normal).ToCairoColor ());
+						cr.MoveTo (xPos + item.Icon.Width + 2 + itemPadding, yPos + (iconHeight - h) / 2);
+						layout.SetText (Ellipsize (item.ListTitle ?? item.Title, maxLength));
+						cr.ShowLayout (layout);
+						cr.DrawImage (this, item == ActiveItem ? item.Icon.WithStyles ("sel") : item.Icon, (int)xPos + itemPadding,
+						                                 (int)(yPos + (iconHeight - item.Icon.Height) / 2));
+						yPos += iconHeight;
+						if (++curItem >= maxItems) {
+							curItem = 0;
+							yPos = startY;
+							xPos += w + cat.Items [0].Icon.Width + 2 + padding + itemPadding * 2;
+							row++;
+						}
+					}
+					
+				
+					xPos += w + cat.Items [0].Icon.Width + 2 + padding + itemPadding * 2;
+				}
+				layout.Dispose ();
+			}
+			return true;
+		}
 		
 		protected override bool OnKeyPressEvent (EventKey evnt)
 		{
@@ -804,15 +805,15 @@ namespace MonoDevelop.Ide
 			IdeApp.CommandService.IsEnabled = true;
 		}
 		
-//		protected override bool OnExposeEvent (EventExpose evnt)
-//		{
-//			base.OnExposeEvent (evnt);
-//			
-//			int winWidth, winHeight;
-//			this.GetSize (out winWidth, out winHeight);
-//			
-//			this.GdkWindow.DrawRectangle (this.Style.ForegroundGC (StateType.Insensitive), false, 0, 0, winWidth - 1, winHeight - 1);
-//			return false;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			base.OnDrawn (evnt);
+			
+			int winWidth, winHeight;
+			this.GetSize (out winWidth, out winHeight);
+			
+			//this.GdkWindow.DrawRectangle (this.Style.ForegroundGC (StateType.Insensitive), false, 0, 0, winWidth - 1, winHeight - 1);
+			return false;
+		}
 	}
 }

@@ -14,7 +14,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 		
 		private global::Gtk.Label label3;
 		
-		private global::Gtk.ComboBox repCombo;
+		private global::Gtk.ComboBoxText repCombo;
 		
 		private global::Gtk.HSeparator hseparator1;
 		
@@ -76,10 +76,10 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.VersionControl.Dialogs.SelectRepositoryDialog.VBox
-			// global::Gtk.VBox w1 = this.VBox;
-			// w1.Events = ((global::Gdk.EventMask)(256));
-			// w1.Name = "dialog_VBox";
-			// w1.Spacing = 6;
+			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			w1.Events = ((global::Gdk.EventMask)(256));
+			w1.Name = "dialog_VBox";
+			w1.Spacing = 6;
 			// Container child dialog_VBox.Gtk.Box+BoxChild
 			this.vbox1 = new global::Gtk.VBox ();
 			this.vbox1.Name = "vbox1";
@@ -109,11 +109,11 @@ namespace MonoDevelop.VersionControl.Dialogs
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child hbox1.Gtk.Box+BoxChild
-			// this.repCombo = global::Gtk.ComboBox.NewText ();
-			// this.repCombo.Name = "repCombo";
-			// this.hbox1.Add (this.repCombo);
-			// global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.repCombo]));
-			// w3.Position = 1;
+			this.repCombo = new global::Gtk.ComboBoxText ();
+			this.repCombo.Name = "repCombo";
+			this.hbox1.Add (this.repCombo);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.repCombo]));
+			w3.Position = 1;
 			this.vbox2.Add (this.hbox1);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox1]));
 			w4.Position = 0;
@@ -336,22 +336,22 @@ namespace MonoDevelop.VersionControl.Dialogs
 			w26.TopAttach = ((uint)(1));
 			w26.BottomAttach = ((uint)(2));
 			w26.XOptions = ((global::Gtk.AttachOptions)(4));
-			//w26.YOptions = ((global::Gtk.AttachOptions)(4));
+			w26.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.vbox1.Add (this.table1);
 			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.table1]));
 			w27.Position = 1;
 			w27.Expand = false;
 			w27.Fill = false;
-			//w1.Add (this.vbox1);
-			//global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
-			//w28.Position = 0;
+			w1.Add (this.vbox1);
+			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
+			w28.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Dialogs.SelectRepositoryDialog.ActionArea
-			// global::Gtk.HButtonBox w29 = this.ActionArea;
-			// w29.Events = ((global::Gdk.EventMask)(256));
-			// w29.Name = "VersionControlAddIn.SelectRepositoryDialog_ActionArea";
-			// w29.Spacing = 10;
-			// w29.BorderWidth = ((uint)(5));
-			// w29.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w29 = (Gtk.HButtonBox)this.ActionArea;
+			w29.Events = ((global::Gdk.EventMask)(256));
+			w29.Name = "VersionControlAddIn.SelectRepositoryDialog_ActionArea";
+			w29.Spacing = 10;
+			w29.BorderWidth = ((uint)(5));
+			w29.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child VersionControlAddIn.SelectRepositoryDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button559 = new global::Gtk.Button ();
 			this.button559.CanDefault = true;
@@ -361,9 +361,9 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.button559.UseUnderline = true;
 			this.button559.Label = "gtk-cancel";
 			this.AddActionWidget (this.button559, -6);
-			// global::Gtk.ButtonBox.ButtonBoxChild w30 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w29 [this.button559]));
-			// w30.Expand = false;
-			// w30.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w30 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w29 [this.button559]));
+			w30.Expand = false;
+			w30.Fill = false;
 			// Container child VersionControlAddIn.SelectRepositoryDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -372,11 +372,11 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			//w29.Add (this.buttonOk);
-			// global::Gtk.ButtonBox.ButtonBoxChild w31 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w29 [this.buttonOk]));
-			// w31.Position = 1;
-			// w31.Expand = false;
-			// w31.Fill = false;
+			w29.Add (this.buttonOk);
+			global::Gtk.ButtonBox.ButtonBoxChild w31 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w29 [this.buttonOk]));
+			w31.Position = 1;
+			w31.Expand = false;
+			w31.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

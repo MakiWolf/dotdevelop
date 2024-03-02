@@ -327,17 +327,17 @@ namespace MonoDevelop.Components.MainToolbar
 				}
 
 
-				// using (var font = IdeServices.FontService.SansFont.CopyModified (MonoDevelop.Ide.Gui.Styles.FontScale11)) {
-				// 	errors.Visible = ec > 0;
-				// 	errors.ModifyFont (font);
-				// 	errors.Text = ec.ToString ();
-				// 	errorImage.Visible = ec > 0;
+				using (var font = IdeServices.FontService.SansFont.CopyModified (MonoDevelop.Ide.Gui.Styles.FontScale11)) {
+					errors.Visible = ec > 0;
+					errors.ModifyFont (font);
+					errors.Text = ec.ToString ();
+					errorImage.Visible = ec > 0;
 
-				// 	warnings.Visible = wc > 0;
-				// 	warnings.ModifyFont (font);
-				// 	warnings.Text = wc.ToString ();
-				// 	warningImage.Visible = wc > 0;
-				// }
+					warnings.Visible = wc > 0;
+					warnings.ModifyFont (font);
+					warnings.Text = wc.ToString ();
+					warningImage.Visible = wc > 0;
+				}
 
 				ebox.Visible = ec > 0 || wc > 0;
 
@@ -397,18 +397,18 @@ namespace MonoDevelop.Components.MainToolbar
 			base.OnGetPreferredHeight (out min_height, out natural_height);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				renderArg.Allocation            = Allocation;
-//				renderArg.ChildAllocation       = messageBox.Allocation;
-//				renderArg.MousePosition         = tracker.MousePosition;
-//				renderArg.Pango                 = PangoContext;
-//
-//				theme.Render (context, renderArg, this);
-//			}
-//			return base.OnExposeEvent (evnt);
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				renderArg.Allocation            = Allocation;
+				renderArg.ChildAllocation       = messageBox.Allocation;
+				renderArg.MousePosition         = tracker.MousePosition;
+				renderArg.Pango                 = PangoContext;
+
+				theme.Render (context, renderArg, this);
+			}
+			return base.OnDrawn (evnt);
+		}
 
 
 		#region StatusBar implementation
@@ -899,24 +899,24 @@ namespace MonoDevelop.Components.MainToolbar
 
 	class StatusAreaSeparator: HBox
 	{
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			using (var ctx = Gdk.CairoHelper.Create (this.GdkWindow)) {
-//				var alloc = Allocation;
-//				//alloc.Inflate (0, -2);
-//				ctx.Rectangle (alloc.X, alloc.Y, 1, alloc.Height);
-//
-//				// FIXME: VV: Remove gradient features
-//				using (Cairo.LinearGradient gr = new LinearGradient (alloc.X, alloc.Y, alloc.X, alloc.Y + alloc.Height)) {
-//					gr.AddColorStop (0, new Cairo.Color (0, 0, 0, 0));
-//					gr.AddColorStop (0.5, new Cairo.Color (0, 0, 0, 0.2));
-//					gr.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
-//					ctx.SetSource (gr);
-//					ctx.Fill ();
-//				}
-//			}
-//			return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			using (var ctx = Gdk.CairoHelper.Create (this.GdkWindow)) {
+				var alloc = Allocation;
+				//alloc.Inflate (0, -2);
+				ctx.Rectangle (alloc.X, alloc.Y, 1, alloc.Height);
+
+				// FIXME: VV: Remove gradient features
+				using (Cairo.LinearGradient gr = new LinearGradient (alloc.X, alloc.Y, alloc.X, alloc.Y + alloc.Height)) {
+					gr.AddColorStop (0, new Cairo.Color (0, 0, 0, 0));
+					gr.AddColorStop (0.5, new Cairo.Color (0, 0, 0, 0.2));
+					gr.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+					ctx.SetSource (gr);
+					ctx.Fill ();
+				}
+			}
+			return true;
+		}
 
 		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
 		{

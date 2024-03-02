@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Gtk;
+using Cairo;
 using MonoDevelop.Ide;
 using MonoDevelop.Ide.Gui;
 using Gdk;
@@ -40,7 +41,7 @@ namespace MonoDevelop.Components
 		Gtk.Alignment alignment;
 
 		Gdk.Rectangle currentCaret;
-		Gdk.Point targetWindowOrigin = new Point (-1, -1);
+		Gdk.Point targetWindowOrigin = new Gdk.Point (-1, -1);
 		Gtk.Widget parent;
 		Xwt.Widget xwtParent;
 		bool eventProvided;
@@ -133,9 +134,9 @@ namespace MonoDevelop.Components
 		public void ShowPopup (Xwt.Rectangle onScreenArea, PopupPosition position)
 		{
 			this.parent = IdeApp.Workbench.RootWindow;
-			this.currentCaret = new Rectangle ((int)onScreenArea.X, (int)onScreenArea.Y, (int)onScreenArea.Width, (int)onScreenArea.Height);
+			this.currentCaret = new Gdk.Rectangle ((int)onScreenArea.X, (int)onScreenArea.Y, (int)onScreenArea.Width, (int)onScreenArea.Height);
 			Theme.TargetPosition = position;
-			targetWindowOrigin = new Point ((int)onScreenArea.X, (int)onScreenArea.Y);
+			targetWindowOrigin = new Gdk.Point ((int)onScreenArea.X, (int)onScreenArea.Y);
 			RepositionWindow ();
 		}
 
@@ -145,7 +146,7 @@ namespace MonoDevelop.Components
 			this.currentCaret = new Gdk.Rectangle ((int)caret.X, (int)caret.Y, (int)caret.Width, (int)caret.Height);
 			Theme.TargetPosition = position;
 			var pos = GtkUtil.GetSceenBounds (widget);
-			targetWindowOrigin = new Point ((int)pos.X, (int)pos.Y);
+			targetWindowOrigin = new Gdk.Point ((int)pos.X, (int)pos.Y);
 			RepositionWindow ();
 		}
 
@@ -164,7 +165,7 @@ namespace MonoDevelop.Components
 			if (targetWindow != null) {
 				int x, y;
 				targetWindow.GetOrigin (out x, out y);
-				targetWindowOrigin = new Point (x, y);
+				targetWindowOrigin = new Gdk.Point (x, y);
 			}
 			RepositionWindow ();
 		}
@@ -433,48 +434,48 @@ namespace MonoDevelop.Components
 			CheckScreenColormap ();
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			bool retVal;
-//			bool changed;
-//			using (var context = Gdk.CairoHelper.Create (evnt.Window)) {
-//				context.Save ();
-//				if (SupportsAlpha) {
-//					context.Operator = Cairo.Operator.Source;
-//					context.SetSourceRGBA (1, 1, 1, 0);
-//				} else {
-//					context.Operator = Cairo.Operator.Over;
-//					context.SetSourceRGB (1, 1, 1);
-//				}
-//				context.Paint ();
-//				context.Restore ();
-//
-//				OnDrawContent (evnt, context); // Draw content first so we can easily clip it
-//				retVal = base.OnExposeEvent (evnt);
-//
-//				changed = Theme.SetBorderPath (context, BorderAllocation, position);
-//				context.Operator = Cairo.Operator.DestIn;
-//				context.SetSourceRGBA (1, 1, 1, 1);
-//				context.Fill ();
-//				context.Operator = Cairo.Operator.Over;
-//
-//				// protect against overriden methods which leave in a bad state
-//				context.Save ();
-//				if (Theme.DrawPager) {
-//					Theme.RenderPager (context, 
-//					                   PangoContext,
-//					                   BorderAllocation);
-//				}
-//
-//				Theme.RenderShadow (context, BorderAllocation, position);
-//				context.Restore ();
-//			}
-//
-//			if (changed)
-//				GtkWorkarounds.UpdateNativeShadow (this);
-//
-//			return retVal;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			bool retVal;
+			bool changed;
+			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				context.Save ();
+				if (SupportsAlpha) {
+					context.Operator = Cairo.Operator.Source;
+					context.SetSourceRGBA (1, 1, 1, 0);
+				} else {
+					context.Operator = Cairo.Operator.Over;
+					context.SetSourceRGB (1, 1, 1);
+				}
+				context.Paint ();
+				context.Restore ();
+
+				//OnDrawContent (evnt, context); // Draw content first so we can easily clip it
+				retVal = base.OnDrawn (evnt);
+
+				changed = Theme.SetBorderPath (context, BorderAllocation, position);
+				context.Operator = Cairo.Operator.DestIn;
+				context.SetSourceRGBA (1, 1, 1, 1);
+				context.Fill ();
+				context.Operator = Cairo.Operator.Over;
+
+				// protect against overriden methods which leave in a bad state
+				context.Save ();
+				if (Theme.DrawPager) {
+					Theme.RenderPager (context, 
+					                   PangoContext,
+					                   BorderAllocation);
+				}
+
+				Theme.RenderShadow (context, BorderAllocation, position);
+				context.Restore ();
+			}
+
+			if (changed)
+				GtkWorkarounds.UpdateNativeShadow (this);
+
+			return retVal;
+		}
 
 		protected virtual void OnDrawContent (Gdk.EventExpose evnt, Cairo.Context context)
 		{
@@ -505,7 +506,7 @@ namespace MonoDevelop.Components
 			QueueDraw ();
 		}
 
-		protected override void OnSizeAllocated (Rectangle allocation)
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
 			if (!this.AnimationIsRunning ("Resize"))
 				paintSize = new Gdk.Size (allocation.Width, allocation.Height);
@@ -513,7 +514,7 @@ namespace MonoDevelop.Components
 			base.OnSizeAllocated (allocation);
 		}
 
-		protected Rectangle ChildAllocation {
+		protected Gdk.Rectangle ChildAllocation {
 			get {
 				var rect = BorderAllocation;
 				rect.Inflate (-Theme.Padding - 1, -Theme.Padding - 1);
@@ -521,7 +522,7 @@ namespace MonoDevelop.Components
 			}
 		}
 
-		Rectangle BorderAllocation {
+		Gdk.Rectangle BorderAllocation {
 			get {
 				var rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, paintSize.Width, paintSize.Height);
 				if (ShowArrow) {
@@ -581,9 +582,9 @@ namespace MonoDevelop.Components
 				return base.OnButtonPressEvent (evnt);
 
 			var retval = false;
-			if (retval = Theme.HitTestPagerLeftArrow (PangoContext, BorderAllocation, new Point ((int)evnt.X, (int)evnt.Y)))
+			if (retval = Theme.HitTestPagerLeftArrow (PangoContext, BorderAllocation, new Gdk.Point ((int)evnt.X, (int)evnt.Y)))
 				OnPagerLeftClicked ();
-			else if (retval = Theme.HitTestPagerRightArrow (PangoContext, BorderAllocation, new Point ((int)evnt.X, (int)evnt.Y)))
+			else if (retval = Theme.HitTestPagerRightArrow (PangoContext, BorderAllocation, new Gdk.Point ((int)evnt.X, (int)evnt.Y)))
 				OnPagerRightClicked ();
 
 			return retval;

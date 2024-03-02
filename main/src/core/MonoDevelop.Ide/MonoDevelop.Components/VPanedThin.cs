@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using MonoDevelop.Ide.Gui;
+using Cairo;
 
 namespace MonoDevelop.Components
 {
@@ -58,20 +59,20 @@ namespace MonoDevelop.Components
 				callback (handle);
 		}
 
-//		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//		{
-//			base.OnExposeEvent (evnt);
-//			
-//			if (Child1 != null && Child1.Visible && Child2 != null && Child2.Visible) {
-//				var gc = new Gdk.GC (evnt.Window);
-//				gc.RgbFgColor = Styles.ThinSplitterColor.ToGdkColor ();
-//				var y = Child1.Allocation.Y + Child1.Allocation.Height;
-//				evnt.Window.DrawLine (gc, Allocation.X, y, Allocation.X + Allocation.Width, y);
-//				gc.Dispose ();
-//			}
-//			
-//			return true;
-//		}
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			base.OnDrawn (evnt);
+			
+			if (Child1 != null && Child1.Visible && Child2 != null && Child2.Visible) {
+				//var gc = new Gdk.GC (evnt.Window);
+				//gc.RgbFgColor = Styles.ThinSplitterColor.ToGdkColor ();
+				var y = Child1.Allocation.Y + Child1.Allocation.Height;
+				//evnt.Window.DrawLine (gc, Allocation.X, y, Allocation.X + Allocation.Width, y);
+				//gc.Dispose ();
+			}
+			
+			return true;
+		}
 	}
 }
 

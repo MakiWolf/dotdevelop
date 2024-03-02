@@ -130,23 +130,43 @@ namespace MonoDevelop.Components
 
 		bool? ignoreSelection;
 
-//		protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
-//		{
-//			var img = GetImage ();
-//			if (img == null)
-//				return;
-//
-//			if ((flags & Gtk.CellRendererState.Selected) != 0)
-//				img = img.WithStyles ("sel");
-//			if (!img.HasFixedSize)
-//				img = img.WithSize (Gtk.IconSize.Menu);
-//			
-//			using (var ctx = Gdk.CairoHelper.Create (window)) {
-//				var x = cell_area.X + cell_area.Width / 2 - (int)(img.Width / 2);
-//				var y = cell_area.Y + cell_area.Height / 2 - (int)(img.Height / 2);
-//				ctx.DrawImage (widget, img, x, y);
-//			}
-//		}
+		// protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
+		// {
+		// 	// In light theme:
+		// 	// On the Mac, the default unfocused selection background is lighter, so the icon should be black
+		// 	// but our `sel` icons are white.
+		// 	//
+		// 	// Except in the solution treeview, because the Mac's default unfocused selection background is too light for the
+		// 	// custom treeview background
+		// 	if (!ignoreSelection.HasValue) {
+		// 		if (Platform.IsMac) {
+		// 			if (IdeTheme.UserInterfaceTheme == Theme.Light) {
+		// 				var baseColor = widget.Style.Base (widget.State).ToXwtColor ();
+		// 				ignoreSelection = baseColor.Brightness == 1;
+		// 			} else {
+		// 				ignoreSelection = false;
+		// 			}
+		// 		} else {
+		// 			ignoreSelection = false;
+		// 		}
+		// 	}
+
+		// 	var img = GetImage ();
+		// 	if (img == null)
+		// 		return;
+
+		// 	var shouldIgnoreSelection = ignoreSelection.GetValueOrDefault () && !widget.HasFocus;
+		// 	if (!shouldIgnoreSelection && ((flags & Gtk.CellRendererState.Selected) != 0))
+		// 		img = img.WithStyles ("sel");
+		// 	if (!img.HasFixedSize)
+		// 		img = img.WithSize (Gtk.IconSize.Menu);
+			
+		// 	using (var ctx = Gdk.CairoHelper.Create (window)) {
+		// 		var x = cell_area.X + cell_area.Width / 2 - (int)(img.Width / 2);
+		// 		var y = cell_area.Y + cell_area.Height / 2 - (int)(img.Height / 2);
+		// 		ctx.DrawImage (widget, img, x, y);
+		// 	}
+		// }
 
 		protected void GetImageInfo (Gdk.Rectangle cell_area, out Image img, out int x, out int y)
 		{
