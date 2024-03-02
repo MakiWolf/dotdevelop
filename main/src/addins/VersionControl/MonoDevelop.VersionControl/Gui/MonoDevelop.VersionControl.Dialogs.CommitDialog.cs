@@ -27,11 +27,11 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.VersionControl.Dialogs.CommitDialog.VBox
-			// global::Gtk.VBox w1 = this.VBox;
-			// w1.Events = ((global::Gdk.EventMask)(256));
-			// w1.Name = "dialog_VBox";
-			// w1.Spacing = 6;
-			// w1.BorderWidth = ((uint)(2));
+			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			w1.Events = ((global::Gdk.EventMask)(256));
+			w1.Name = "dialog_VBox";
+			w1.Spacing = 6;
+			w1.BorderWidth = ((uint)(2));
 			// Container child dialog_VBox.Gtk.Box+BoxChild
 			this.mainBox = new global::Gtk.VBox ();
 			this.mainBox.Name = "mainBox";
@@ -115,16 +115,16 @@ namespace MonoDevelop.VersionControl.Dialogs
 			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.mainBox [this.scrolledwindow2]));
 			w10.PackType = ((global::Gtk.PackType)(1));
 			w10.Position = 4;
-			//w1.Add (this.mainBox);
-			// global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(w1 [this.mainBox]));
-			// w11.Position = 0;
+			w1.Add (this.mainBox);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(w1 [this.mainBox]));
+			w11.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Dialogs.CommitDialog.ActionArea
-			// global::Gtk.HButtonBox w12 = this.ActionArea;
-			// w12.Events = ((global::Gdk.EventMask)(256));
-			// w12.Name = "VersionControlAddIn.CommitDialog_ActionArea";
-			// w12.Spacing = 6;
-			// w12.BorderWidth = ((uint)(5));
-			// w12.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w12 = (Gtk.HButtonBox)this.ActionArea;
+			w12.Events = ((global::Gdk.EventMask)(256));
+			w12.Name = "VersionControlAddIn.CommitDialog_ActionArea";
+			w12.Spacing = 6;
+			w12.BorderWidth = ((uint)(5));
+			w12.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child VersionControlAddIn.CommitDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button29 = new global::Gtk.Button ();
 			this.button29.CanDefault = true;
@@ -134,9 +134,9 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.button29.UseUnderline = true;
 			this.button29.Label = "gtk-cancel";
 			this.AddActionWidget (this.button29, -6);
-			// global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.button29]));
-			// w13.Expand = false;
-			// w13.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.button29]));
+			w13.Expand = false;
+			w13.Fill = false;
 			// Container child VersionControlAddIn.CommitDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCommit = new global::Gtk.Button ();
 			this.buttonCommit.CanDefault = true;
@@ -145,10 +145,10 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.buttonCommit.UseUnderline = true;
 			this.buttonCommit.Label = global::Mono.Unix.Catalog.GetString ("C_ommit");
 			this.AddActionWidget (this.buttonCommit, -5);
-			// global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonCommit]));
-			// w14.Position = 1;
-			// w14.Expand = false;
-			// w14.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonCommit]));
+			w14.Position = 1;
+			w14.Expand = false;
+			w14.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
