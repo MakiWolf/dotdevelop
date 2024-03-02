@@ -133,7 +133,7 @@ namespace Mono.TextEditor
 			if (GtkWorkarounds.GtkMinorVersion >= 16) {
 				//bool showMenu = (bool) GtkWorkarounds.GetProperty (Settings, "gtk-show-input-method-menu").Val;
 				//if (!showMenu)
-					return null;
+				//	return null;
 			}
 			Gtk.MenuItem imContextMenuItem = new Gtk.MenuItem (label);
 			Gtk.Menu imContextMenu = new Gtk.Menu ();
