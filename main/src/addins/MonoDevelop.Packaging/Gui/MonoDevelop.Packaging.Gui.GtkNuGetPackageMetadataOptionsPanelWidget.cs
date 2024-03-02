@@ -48,7 +48,7 @@ namespace MonoDevelop.Packaging.Gui
 
 		private global::Gtk.HBox packageLanguageHBox;
 
-		private global::Gtk.ComboBox packageLanguageComboBox;
+		private global::Gtk.ComboBoxText packageLanguageComboBox;
 
 		private global::Gtk.Label packageLanguageLabel;
 
