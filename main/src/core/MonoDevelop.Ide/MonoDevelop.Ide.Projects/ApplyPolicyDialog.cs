@@ -222,6 +222,8 @@ namespace MonoDevelop.Ide.Projects
 			var win = GdkWindow;
 			//win.Clear ();
 			if (string.IsNullOrEmpty (message)) {
+				if (ShowEmptyItem)
+					return base.OnDrawn (evnt);
 				return true;
 			}
 			
