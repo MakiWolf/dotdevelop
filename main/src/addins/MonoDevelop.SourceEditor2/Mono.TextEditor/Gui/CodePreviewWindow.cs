@@ -74,9 +74,9 @@ namespace Mono.TextEditor
 			}
 			layout.Ellipsize = Pango.EllipsizeMode.End;
 
-			// var geometry = Screen.GetUsableMonitorGeometry (Screen.GetMonitorAtWindow (ParentWindow));
-			// maxWidth = geometry.Width * 2 / 5;
-			// maxHeight = geometry.Height * 2 / 5;
+			var geometry = Screen.GetUsableMonitorGeometry (Screen.GetMonitorAtWindow (ParentWindow));
+			maxWidth = geometry.Width * 2 / 5;
+			maxHeight = geometry.Height * 2 / 5;
 
 			layout.SetText ("n");
 			layout.GetPixelSize (out int _, out int lineHeight);
