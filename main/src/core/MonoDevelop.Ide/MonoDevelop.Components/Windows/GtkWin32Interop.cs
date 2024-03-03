@@ -32,7 +32,7 @@ namespace MonoDevelop.Components.Windows
 {
 	public static class GtkWin32Interop
 	{
-		internal const string LIBGDK = "libgdk-win32-2.0-0.dll";
+		internal const string LIBGDK = "libgdk-3-0.dll";
 		internal const string USER32 = "user32.dll";
 
 		public enum ExtendedWindowStyles
