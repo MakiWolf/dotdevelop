@@ -513,18 +513,18 @@ namespace MonoDevelop.Ide
 			string location = null;
 			Version version = null;
 			Version minVersion = new Version (2, 12, 22);
-
-			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
-				if (key != null)
-					location = key.GetValue (null) as string;
-			}
-			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\Version")) {
-				if (key != null)
-					Version.TryParse (key.GetValue (null) as string, out version);
-			}
+			location = "C:\\msys64\\mingw64";
+			// using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
+			// 	if (key != null)
+			// 		location = key.GetValue (null) as string;
+			// }
+			// using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\Version")) {
+			// 	if (key != null)
+			// 		Version.TryParse (key.GetValue (null) as string, out version);
+			// }
 
 			//TODO: check build version of GTK# dlls in GAC
-			if (version == null || version < minVersion || location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-win32-2.0-0.dll"))) {
+			if (/*version == null || version < minVersion || */ location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-3-0.dll"))) {
 				LoggingService.LogError ("Did not find required GTK# installation");
 				string url = "http://monodevelop.com/Download";
 				string caption = "Fatal Error";

@@ -99,12 +99,13 @@ namespace MonoDevelop.Core
 		static void InitWindowsNativeLibs ()
 		{
 			string location = null;
-			using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
-				if (key != null) {
-					location = key.GetValue (null) as string;
-				}
-			}
-			if (location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-win32-2.0-0.dll"))) {
+			location = "C:\\msys64\\mingw64";
+			// using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
+			// 	if (key != null) {
+			// 		location = key.GetValue (null) as string;
+			// 	}
+			// }
+			if (location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-3-0.dll"))) {
 				LoggingService.LogError ("Did not find registered GTK# installation");
 				return;
 			}
