@@ -175,7 +175,24 @@
 
 	=================================================================
 	-->
-
+	<Target Name="_NuGetPrivateAssetsWorkaround_FilterLocalCopyReferences" BeforeTargets="_CopyFilesMarkedCopyLocal">
+		<FilterLocalCopyReferences
+			ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+			IncludeList="@(IncludeCopyLocal)"
+			SuppressList="@(SuppressCopyLocal)"
+			ReferencedProjects="@(_MSBuildProjectReferenceExistent)"
+			Configuration="$(Configuration)"
+			Platform="$(Platform)"
+			ProjectDir="$(MSBuildProjectDirectory)"
+			ProjectName="$(MSBuildProjectName)"
+			DebugCopies="$(DebugFilterCopyReferences)">
+			<Output TaskParameter="ItemsToRemove" ItemName="_ReferenceCopyLocalPathsRemove" />
+		</FilterLocalCopyReferences>
+		<ItemGroup>
+		  <ReferenceCopyLocalPaths Remove="@(_ReferenceCopyLocalPathsRemove)" />
+			<_ReferenceCopyLocalPathsRemove Remove="@(_ReferenceCopyLocalPathsRemove)" />
+		</ItemGroup>
+	</Target>
 
 	<!--
 	HACK: Another workaround for broken PrivateAssets.
