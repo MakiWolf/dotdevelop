@@ -42,7 +42,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			Modal = true;
 			foreach (VersionControlSystem vcs in VersionControlService.GetVersionControlSystems ()) {
 				if (vcs.IsInstalled) {
-					//repCombo.AppendText (vcs.Name);
+					repCombo.AppendText (vcs.Name);
 					systems.Add (vcs);
 				}
 			}

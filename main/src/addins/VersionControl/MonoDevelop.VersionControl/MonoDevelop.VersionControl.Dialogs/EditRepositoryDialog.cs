@@ -17,7 +17,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			
 			if (repo != null) {
 				versionControlType.Sensitive = false;
-				//versionControlType.AppendText (repo.VersionControlSystem.Name);
+				versionControlType.AppendText (repo.VersionControlSystem.Name);
 				versionControlType.Active = 0;
 				
 				editor = repo.VersionControlSystem.CreateRepositoryEditor (repo);
@@ -27,7 +27,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			else {
 				foreach (VersionControlSystem vcs in VersionControlService.GetVersionControlSystems ()) {
 					if (vcs.IsInstalled) {
-						//versionControlType.AppendText (vcs.Name);
+						versionControlType.AppendText (vcs.Name);
 						systems.Add (vcs);
 					}
 				}
