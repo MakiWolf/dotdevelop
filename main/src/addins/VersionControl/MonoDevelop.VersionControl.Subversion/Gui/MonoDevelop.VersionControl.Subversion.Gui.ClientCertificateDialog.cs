@@ -23,10 +23,10 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.Name = "MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Client Certificate Required");
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog.VBox
-			// global::Gtk.VBox w1 = this.VBox;
-			// w1.Events = ((global::Gdk.EventMask)(256));
-			// w1.Name = "dialog_VBox";
-			// w1.BorderWidth = ((uint)(2));
+			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			w1.Events = ((global::Gdk.EventMask)(256));
+			w1.Name = "dialog_VBox";
+			w1.BorderWidth = ((uint)(2));
 			// Container child dialog_VBox.Gtk.Box+BoxChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
@@ -100,18 +100,18 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			w8.Position = 4;
 			w8.Expand = false;
 			w8.Fill = false;
-			// w1.Add (this.vbox2);
-			// global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			// w9.Position = 0;
-			// w9.Expand = false;
-			// w9.Fill = false;
+			w1.Add (this.vbox2);
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w9.Position = 0;
+			w9.Expand = false;
+			w9.Fill = false;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog.ActionArea
-			// global::Gtk.HButtonBox w10 = this.ActionArea;
-			// w10.Events = ((global::Gdk.EventMask)(256));
-			// w10.Name = "MonoDevelop.VersionControl.Subversion.ClientCertificateDialog_ActionArea";
-			// w10.Spacing = 10;
-			// w10.BorderWidth = ((uint)(5));
-			// w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w10 = (Gtk.HButtonBox)this.ActionArea;
+			w10.Events = ((global::Gdk.EventMask)(256));
+			w10.Name = "MonoDevelop.VersionControl.Subversion.ClientCertificateDialog_ActionArea";
+			w10.Spacing = 10;
+			w10.BorderWidth = ((uint)(5));
+			w10.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child MonoDevelop.VersionControl.Subversion.ClientCertificateDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button34 = new global::Gtk.Button ();
 			this.button34.CanDefault = true;
@@ -121,9 +121,9 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.button34.UseUnderline = true;
 			this.button34.Label = "gtk-cancel";
 			this.AddActionWidget (this.button34, -6);
-			// global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button34]));
-			// w11.Expand = false;
-			// w11.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button34]));
+			w11.Expand = false;
+			w11.Fill = false;
 			// Container child MonoDevelop.VersionControl.Subversion.ClientCertificateDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button24 = new global::Gtk.Button ();
 			this.button24.CanDefault = true;
@@ -133,10 +133,10 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.button24.UseUnderline = true;
 			this.button24.Label = "gtk-ok";
 			this.AddActionWidget (this.button24, -5);
-			// global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button24]));
-			// w12.Position = 1;
-			// w12.Expand = false;
-			// w12.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w10 [this.button24]));
+			w12.Position = 1;
+			w12.Expand = false;
+			w12.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
