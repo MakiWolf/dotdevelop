@@ -46,9 +46,9 @@ namespace MonoDevelop.VersionControl.Git
 			this.Title = global::Mono.Unix.Catalog.GetString ("Git Repository Configuration");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.VersionControl.Git.GitConfigurationDialog.VBox
-			// global::Gtk.VBox w1 = this.VBox;
-			// w1.Name = "dialog1_VBox";
-			// w1.BorderWidth = ((uint)(2));
+			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			w1.Name = "dialog1_VBox";
+			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
 			this.notebook1 = new global::Gtk.Notebook ();
 			this.notebook1.CanFocus = true;
@@ -327,15 +327,15 @@ namespace MonoDevelop.VersionControl.Git
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Remote Sources");
 			this.notebook1.SetTabLabel (this.vbox4, this.label2);
 			this.label2.ShowAll ();
-			//w1.Add (this.notebook1);
-			// global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook1]));
-			// w30.Position = 0;
+			w1.Add (this.notebook1);
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(w1 [this.notebook1]));
+			w30.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Git.GitConfigurationDialog.ActionArea
-			// global::Gtk.HButtonBox w31 = this.ActionArea;
-			// w31.Name = "dialog1_ActionArea";
-			// w31.Spacing = 10;
-			// w31.BorderWidth = ((uint)(5));
-			// w31.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w31 = (Gtk.HButtonBox)this.ActionArea;
+			w31.Name = "dialog1_ActionArea";
+			w31.Spacing = 10;
+			w31.BorderWidth = ((uint)(5));
+			w31.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -345,9 +345,9 @@ namespace MonoDevelop.VersionControl.Git
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-close";
 			this.AddActionWidget (this.buttonOk, -7);
-			// global::Gtk.ButtonBox.ButtonBoxChild w32 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w31 [this.buttonOk]));
-			// w32.Expand = false;
-			// w32.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w32 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w31 [this.buttonOk]));
+			w32.Expand = false;
+			w32.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
