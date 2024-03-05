@@ -15,7 +15,7 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
 
 		private global::Gtk.CheckButton skipBuildingUnmodifiedProjectsCheckbox;
 
-		private global::Gtk.ComboBox verbosityCombo;
+		private global::Gtk.ComboBoxText verbosityCombo;
 
 		private global::Gtk.Label buildAndRunOptionsLabel;
 
@@ -97,12 +97,12 @@ namespace MonoDevelop.Ide.Gui.OptionPanels
  			label.LabelProp = global::Mono.Unix.Catalog.GetString("Log _verbosity:");		
  			label.UseUnderline = true;
 			logContainer.PackStart (label, false, false, 6);
-			//this.verbosityCombo = global::Gtk.ComboBox.NewText ();
-			//this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Quiet"));
-			//this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Minimal"));
-			//this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
-			//this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Detailed"));
-			//this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Diagnostic"));
+			this.verbosityCombo = new global::Gtk.ComboBoxText();
+			this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Quiet"));
+			this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Minimal"));
+			this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Detailed"));
+			this.verbosityCombo.AppendText (global::Mono.Unix.Catalog.GetString ("Diagnostic"));
 			this.verbosityCombo.Name = "verbosityCombo";
 			this.verbosityCombo.Active = 2;
 			logContainer.PackStart (this.verbosityCombo, false, false, 6);
