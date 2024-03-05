@@ -46,7 +46,7 @@ namespace MonoDevelop.VersionControl.Git
 
 			this.UseNativeContextMenus ();
 
-			//changeList.DiffLoader = DiffLoader;
+			changeList.DiffLoader = DiffLoader;
 			var token = destroyTokenSource.Token;
 
 			Task.Run (async () => (await repo.GetRemotesAsync (token), await repo.GetCurrentRemoteAsync (token))).ContinueWith (t => {
@@ -55,21 +55,21 @@ namespace MonoDevelop.VersionControl.Git
 				var tuple = t.Result;
 
 				var list = new List<string> (tuple.Item1.Select (r => r.Name));
-				//foreach (string s in list)
-					//remoteCombo.AppendText (s);
+				foreach (string s in list)
+					remoteCombo.AppendText (s);
 				remoteCombo.Active = list.IndexOf (t.Result.Item2);
 			}, token, TaskContinuationOptions.NotOnCanceled, Runtime.MainTaskScheduler).Ignore ();
 
 			UpdateChangeSet ();
 		}
 
-		//public string SelectedRemote {
-			//get { return remoteCombo.ActiveText; }
-		//}
+		public string SelectedRemote {
+			get { return remoteCombo.ActiveText; }
+		}
 
-		// public string SelectedRemoteBranch {
-		// 	get { return branchCombo.ActiveText; }
-		// }
+		public string SelectedRemoteBranch {
+			get { return branchCombo.ActiveText; }
+		}
 
 		void UpdateRemoteBranches ()
 		{
@@ -80,14 +80,14 @@ namespace MonoDevelop.VersionControl.Git
 			}
 			branchCombo.Sensitive = true;
 			var token = destroyTokenSource.Token;
-			//repo.GetRemoteBranchesAsync (remoteCombo.ActiveText).ContinueWith (t => {
-			//	if (token.IsCancellationRequested)
-			//		return;
-			//	var list = t.Result;
-				//foreach (string s in list)
-				//	branchCombo.AppendText (s);
-			//	branchCombo.Active = list.IndexOf (repo.GetCurrentBranch ());
-			//}, token, TaskContinuationOptions.NotOnCanceled, Runtime.MainTaskScheduler).Ignore ();
+			repo.GetRemoteBranchesAsync (remoteCombo.ActiveText).ContinueWith (t => {
+				if (token.IsCancellationRequested)
+					return;
+				var list = t.Result;
+				foreach (string s in list)
+					branchCombo.AppendText (s);
+				branchCombo.Active = list.IndexOf (repo.GetCurrentBranch ());
+			}, token, TaskContinuationOptions.NotOnCanceled, Runtime.MainTaskScheduler).Ignore ();
 		}
 
 		void UpdateChangeSet ()
@@ -96,14 +96,14 @@ namespace MonoDevelop.VersionControl.Git
 				changeList.Clear ();
 				return;
 			}
-			//ChangeSet changeSet = repo.GetPushChangeSet (remoteCombo.ActiveText, branchCombo.ActiveText);
-			//changeList.Load (changeSet);
+			ChangeSet changeSet = repo.GetPushChangeSet (remoteCombo.ActiveText, branchCombo.ActiveText);
+			changeList.Load (changeSet);
 		}
 
-		// DiffInfo[] DiffLoader (FilePath path)
-		// {
-		// 	return repo.GetPushDiff (remoteCombo.ActiveText, branchCombo.ActiveText);
-		// }
+		DiffInfo[] DiffLoader (FilePath path)
+		{
+			return repo.GetPushDiff (remoteCombo.ActiveText, branchCombo.ActiveText);
+		}
 
 		protected virtual void OnRemoteComboChanged (object sender, System.EventArgs e)
 		{
