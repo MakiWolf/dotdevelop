@@ -157,7 +157,7 @@ namespace MonoDevelop.Ide.Gui
 		public static Color StatusBarProgressBackgroundColor { get; internal set; }
 		public static Color StatusBarProgressOutlineColor { get; internal set; }
 
-		public static readonly Pango.FontDescription StatusFont = Pango.FontDescription.FromString ("Normal");
+		//public static readonly Pango.FontDescription StatusFont = Pango.FontDescription.FromString ("Normal");
 
 		public static int StatusFontPixelHeight { get { return 11; } }
 		public static int ProgressBarHeight { get { return 18; } }

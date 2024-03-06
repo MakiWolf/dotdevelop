@@ -130,11 +130,11 @@ namespace Mono.TextEditor
 
 		public Gtk.MenuItem CreateInputMethodMenuItem (string label)
 		{
-			if (GtkWorkarounds.GtkMinorVersion >= 16) {
+			//if (GtkWorkarounds.GtkMinorVersion >= 16) {
 				//bool showMenu = (bool) GtkWorkarounds.GetProperty (Settings, "gtk-show-input-method-menu").Val;
 				//if (!showMenu)
 				//	return null;
-			}
+			//}
 			Gtk.MenuItem imContextMenuItem = new Gtk.MenuItem (label);
 			Gtk.Menu imContextMenu = new Gtk.Menu ();
 			imContextMenuItem.Submenu = imContextMenu;
@@ -151,13 +151,13 @@ namespace Mono.TextEditor
 		[GLib.Property ("im-module")]
 		public string IMModule {
 			get {
-				if (GtkWorkarounds.GtkMinorVersion < 16 || imContext == null)
-					return null;
+				//if (GtkWorkarounds.GtkMinorVersion < 16 || imContext == null)
+				//	return null;
 				return gtk_im_multicontext_get_context_id (imContext.Handle);
 			}
 			set {
-				if (GtkWorkarounds.GtkMinorVersion < 16 || imContext == null)
-					return;
+				//if (GtkWorkarounds.GtkMinorVersion < 16 || imContext == null)
+				//	return;
 				gtk_im_multicontext_set_context_id (imContext.Handle, value);
 			}
 		}
