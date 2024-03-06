@@ -123,10 +123,10 @@ namespace MonoDevelop.CSharp.Formatting
 					UpdateExample (model, iter);
 			};
 			notebookCategories.ShowTabs = false;
-			//comboboxCategories.AppendText (GettextCatalog.GetString ("Indentation"));
-			//comboboxCategories.AppendText (GettextCatalog.GetString ("New Lines"));
-			//comboboxCategories.AppendText (GettextCatalog.GetString ("Spacing"));
-			//comboboxCategories.AppendText (GettextCatalog.GetString ("Wrapping"));
+			comboboxCategories.AppendText (GettextCatalog.GetString ("Indentation"));
+			comboboxCategories.AppendText (GettextCatalog.GetString ("New Lines"));
+			comboboxCategories.AppendText (GettextCatalog.GetString ("Spacing"));
+			comboboxCategories.AppendText (GettextCatalog.GetString ("Wrapping"));
 			comboboxCategories.Changed += delegate {
 				texteditor.Text = "";
 				notebookCategories.Page = comboboxCategories.Active;

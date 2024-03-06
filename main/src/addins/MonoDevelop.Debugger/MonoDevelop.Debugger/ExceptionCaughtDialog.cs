@@ -860,43 +860,56 @@ widget ""*.exception_help_link_label"" style ""exception-help-link-label""
 			return $"<span foreground='{foregroundColor}'>{markup}</span>";
 		}
 
-//		public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-//		{
-//			using (var layout = new Pango.Layout (Context)) {
-//				Pango.Rectangle ink, logical;
-//				layout.FontDescription = font;
-//				layout.SetMarkup (GetMethodMarkup (false));
-//				layout.GetPixelExtents (out ink, out logical);
-//
-//				height = logical.Height;
-//				width = 0;
-//				x_offset = 0;
-//				y_offset = 0;
-//			}
-//		}
+		// public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+		// {
+		// 	using (var layout = new Pango.Layout (Context)) {
+		// 		Pango.Rectangle ink, logical;
+		// 		layout.FontDescription = font;
 
-//		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-//		{
-//			using (var cr = Gdk.CairoHelper.Create (window)) {
-//				Pango.Rectangle ink, logical;
-//				using (var layout = new Pango.Layout (Context)) {
-//					layout.FontDescription = font;
-//					layout.SetMarkup (GetFileMarkup ((flags & CellRendererState.Selected) != 0));
-//					layout.GetPixelExtents (out ink, out logical);
-//					var width = widget.Allocation.Width;
-//					cr.Translate (width - logical.Width - 10, cell_area.Y);
-//					cr.ShowLayout (layout);
-//
-//					cr.IdentityMatrix ();
-//
-//					layout.SetMarkup (GetMethodMarkup ((flags & CellRendererState.Selected) != 0));
-//					layout.Width = (int)((width - logical.Width - 35) * Pango.Scale.PangoScale);
-//					layout.Ellipsize = Pango.EllipsizeMode.Middle;
-//					cr.Translate (cell_area.X + 10, cell_area.Y);
-//					cr.ShowLayout (layout);
-//				}
-//			}
-//		}
+		// 		var selected = false;
+		// 		var foregroundColor = Styles.GetStackFrameForegroundHexColor (selected, IsUserCode);
+
+		// 		layout.SetMarkup (GetMethodMarkup (selected, foregroundColor));
+		// 		layout.GetPixelExtents (out ink, out logical);
+
+		// 		height = logical.Height;
+		// 		width = 0;
+		// 		x_offset = 0;
+		// 		y_offset = 0;
+		// 	}
+		// }
+
+		// protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+		// {
+		// 	using (var cr = Gdk.CairoHelper.Create (window)) {
+
+		// 		cr.Rectangle (background_area.ToCairoRect ());
+
+		// 		Pango.Rectangle ink, logical;
+		// 		using (var layout = new Pango.Layout (Context)) {
+		// 			layout.FontDescription = font;
+
+		// 			var selected = (flags & CellRendererState.Selected) != 0;
+		// 			var backgroundColor = selected ? Styles.ExceptionCaughtDialog.TreeSelectedBackgroundColor : Styles.ExceptionCaughtDialog.TreeBackgroundColor;
+		// 			cr.SetSourceColor (backgroundColor.ToCairoColor ());
+		// 			cr.Fill ();
+		// 			var foregroundColor = Styles.GetStackFrameForegroundHexColor (selected, IsUserCode);
+		// 			layout.SetMarkup (GetFileMarkup (selected, foregroundColor));
+		// 			layout.GetPixelExtents (out ink, out logical);
+		// 			var width = widget.Allocation.Width;
+		// 			cr.Translate (width - logical.Width - 10, cell_area.Y);
+		// 			cr.ShowLayout (layout);
+
+		// 			cr.IdentityMatrix ();
+
+		// 			layout.SetMarkup (GetMethodMarkup (selected, foregroundColor));
+		// 			layout.Width = (int)((width - logical.Width - 35) * Pango.Scale.PangoScale);
+		// 			layout.Ellipsize = Pango.EllipsizeMode.Middle;
+		// 			cr.Translate (cell_area.X + 10, cell_area.Y);
+		// 			cr.ShowLayout (layout);
+		// 		}
+		// 	}
+		// }
 	}
 
 	class ExceptionCaughtMessage : IDisposable

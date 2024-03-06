@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using MonoDevelop.Ide;
 using MonoDevelop.Ide.Editor;
 using System.Threading;
+using Cairo;
 
 namespace MonoDevelop.CodeGeneration
 {
@@ -207,8 +208,8 @@ namespace MonoDevelop.CodeGeneration
 				BorderWidth = 3;
 			}
 			
-			// protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-			// {
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
 			// 	Style.PaintFlatBox (Style,
 			// 	                    evnt.Window,
 			// 	                    StateType.Normal,
@@ -221,8 +222,8 @@ namespace MonoDevelop.CodeGeneration
 			// 	                    Allocation.Width - 2,
 			// 	                    Allocation.Height - 2);
 				
-			// 	return base.OnExposeEvent (evnt);
-			// }
+				return base.OnDrawn (evnt);
+			}
 		}
 		
 /*		protected override bool OnExposeEvent (Gdk.EventExpose evnt)

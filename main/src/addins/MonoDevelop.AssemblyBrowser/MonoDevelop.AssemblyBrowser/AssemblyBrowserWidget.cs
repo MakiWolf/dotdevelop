@@ -69,9 +69,9 @@ namespace MonoDevelop.AssemblyBrowser
 	[System.ComponentModel.ToolboxItem(true)]
 	partial class AssemblyBrowserWidget : Gtk.Bin
 	{
-		Gtk.ComboBox comboboxVisibilty;
+		Gtk.ComboBoxText comboboxVisibilty;
 		MonoDevelop.Components.SearchEntry searchentry1;
-		Gtk.ComboBox languageCombobox;
+		Gtk.ComboBoxText languageCombobox;
 
 		public AssemblyBrowserTreeView? TreeView {
 			get;
@@ -112,16 +112,16 @@ namespace MonoDevelop.AssemblyBrowser
 		{
 			this.Build ();
 
-			//comboboxVisibilty = ComboBox.NewText ();
-			//comboboxVisibilty.InsertText (0, GettextCatalog.GetString ("Only public members"));
-			//comboboxVisibilty.InsertText (1, GettextCatalog.GetString ("All members"));
-			//comboboxVisibilty.Active = Math.Min (1, Math.Max (0, PropertyService.Get ("AssemblyBrowser.MemberSelection", 0)));
-			//comboboxVisibilty.Changed += delegate {
-			//	if (TreeView != null)
-			//		TreeView.PublicApiOnly = comboboxVisibilty.Active == 0;
-			//	PropertyService.Set ("AssemblyBrowser.MemberSelection", comboboxVisibilty.Active);
-			//	GenerateOutput (); 
-			//};
+			comboboxVisibilty = new Gtk.ComboBoxText ();
+			comboboxVisibilty.InsertText (0, GettextCatalog.GetString ("Only public members"));
+			comboboxVisibilty.InsertText (1, GettextCatalog.GetString ("All members"));
+			comboboxVisibilty.Active = Math.Min (1, Math.Max (0, PropertyService.Get ("AssemblyBrowser.MemberSelection", 0)));
+			comboboxVisibilty.Changed += delegate {
+				if (TreeView != null)
+					TreeView.PublicApiOnly = comboboxVisibilty.Active == 0;
+				PropertyService.Set ("AssemblyBrowser.MemberSelection", comboboxVisibilty.Active);
+				GenerateOutput (); 
+			};
 
 			searchentry1 = new MonoDevelop.Components.SearchEntry ();
 			searchentry1.Ready = true;
@@ -171,12 +171,12 @@ namespace MonoDevelop.AssemblyBrowser
 
 			};
 
-			//languageCombobox = Gtk.ComboBox.NewText ();
-			//languageCombobox.AppendText (GettextCatalog.GetString ("Summary"));
-			//languageCombobox.AppendText (GettextCatalog.GetString ("IL"));
-			//languageCombobox.AppendText (GettextCatalog.GetString ("C#"));
-			//languageCombobox.Active = Math.Min (2, Math.Max (0, PropertyService.Get ("AssemblyBrowser.Language", 0)));
-			//languageCombobox.Changed += LanguageComboboxhandleChanged;
+			languageCombobox = new Gtk.ComboBoxText ();
+			languageCombobox.AppendText (GettextCatalog.GetString ("Summary"));
+			languageCombobox.AppendText (GettextCatalog.GetString ("IL"));
+			languageCombobox.AppendText (GettextCatalog.GetString ("C#"));
+			languageCombobox.Active = Math.Min (2, Math.Max (0, PropertyService.Get ("AssemblyBrowser.Language", 0)));
+			languageCombobox.Changed += LanguageComboboxhandleChanged;
 #pragma warning disable 618
 			TreeView = new AssemblyBrowserTreeView (new NodeBuilder[] { 
 				new ErrorNodeBuilder (),

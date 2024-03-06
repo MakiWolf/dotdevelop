@@ -14,7 +14,7 @@ namespace MonoDevelop.CSharp.Formatting
 		
 		private global::Gtk.Label label12;
 		
-		private global::Gtk.ComboBox comboboxCategories;
+		private global::Gtk.ComboBoxText comboboxCategories;
 		
 		private global::Gtk.Notebook notebookCategories;
 		

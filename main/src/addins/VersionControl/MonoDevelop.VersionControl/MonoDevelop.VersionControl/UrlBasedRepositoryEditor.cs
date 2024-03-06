@@ -27,8 +27,8 @@ namespace MonoDevelop.VersionControl
 			protocols.AddRange (repo.SupportedNonUrlProtocols);
 
 			this.repo = repo;
-			//foreach (string p in protocols)
-				//comboProtocol.AppendText (p);
+			foreach (string p in protocols)
+				comboProtocol.AppendText (p);
 
 			updating = true;
 			repositoryUrlEntry.Text = repo.Url;
