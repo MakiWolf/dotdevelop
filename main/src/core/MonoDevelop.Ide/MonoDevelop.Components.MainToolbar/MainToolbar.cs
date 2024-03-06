@@ -134,7 +134,7 @@ namespace MonoDevelop.Components.MainToolbar
 		TreeIter lastSelection = TreeIter.Zero;
 		public MainToolbar ()
 		{
-//			WidgetFlags |= Gtk.WidgetFlags.AppPaintable;
+			this.AppPaintable = true;
 
 			AddWidget (button);
 			AddSpace (8);
