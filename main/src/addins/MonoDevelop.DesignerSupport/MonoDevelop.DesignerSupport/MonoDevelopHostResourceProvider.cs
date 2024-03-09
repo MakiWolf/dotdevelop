@@ -25,46 +25,46 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// #if MAC
-// using AppKit;
-// using MonoDevelop.Components;
-// using MonoDevelop.Ide;
-// using Xamarin.PropertyEditing.Mac;
-// using static Xamarin.PropertyEditing.Mac.NamedResources;
+#if MAC
+using AppKit;
+using MonoDevelop.Components;
+using MonoDevelop.Ide;
+using Xamarin.PropertyEditing.Mac;
+using static Xamarin.PropertyEditing.Mac.NamedResources;
 
-// namespace MonoDevelop.DesignerSupport
-// {
-// 	internal class MonoDevelopHostResourceProvider : HostResourceProvider
-// 	{
-// 		public MonoDevelopHostResourceProvider ()
-// 		{
-// 			CurrentAppearance = NSAppearance.GetAppearance (IdeApp.Preferences.UserInterfaceTheme == Theme.Dark ? NSAppearance.NameDarkAqua : NSAppearance.NameAqua);
-// 		}
+namespace MonoDevelop.DesignerSupport
+{
+	internal class MonoDevelopHostResourceProvider : HostResourceProvider
+	{
+		public MonoDevelopHostResourceProvider ()
+		{
+			CurrentAppearance = NSAppearance.GetAppearance (IdeApp.Preferences.UserInterfaceTheme == Theme.Dark ? NSAppearance.NameDarkAqua : NSAppearance.NameAqua);
+		}
 
-// 		public override NSColor GetNamedColor (string name)
-// 		{
-// 			switch (name) {
-// 			case Checkerboard0Color:
-// 				return Styles.PropertyPad.Checkerboard0;
-// 			case Checkerboard1Color:
-// 				return Styles.PropertyPad.Checkerboard1;
-// 			case DescriptionLabelColor:
-// 				return NSColor.SecondaryLabelColor;
-// 			case ForegroundColor:
-// 				return (HslColor)Ide.Gui.Styles.BaseForegroundColor;
-// 			case PadBackgroundColor:
-// 				return (HslColor)Ide.Gui.Styles.PadBackground;
-// 			case PanelTabBackground:
-// 				return Styles.PropertyPad.PanelTabBackground;
-// 			case TabBorderColor:
-// 				return Styles.PropertyPad.TabBorderColor;
-// 			case ValueBlockBackgroundColor:
-// 				return Styles.PropertyPad.ValueBlockBackgroundColor;
-// 			case FrameBoxButtonBackgroundColor:
-// 				return Styles.PropertyPad.FrameBoxButtonBackgroundColor;
-// 			}
-// 			return NSColor.FromName (name);
-// 		}
-// 	}
-// }
-//#endif
+		public override NSColor GetNamedColor (string name)
+		{
+			switch (name) {
+			case Checkerboard0Color:
+				return Styles.PropertyPad.Checkerboard0;
+			case Checkerboard1Color:
+				return Styles.PropertyPad.Checkerboard1;
+			case DescriptionLabelColor:
+				return NSColor.SecondaryLabelColor;
+			case ForegroundColor:
+				return (HslColor)Ide.Gui.Styles.BaseForegroundColor;
+			case PadBackgroundColor:
+				return (HslColor)Ide.Gui.Styles.PadBackground;
+			case PanelTabBackground:
+				return Styles.PropertyPad.PanelTabBackground;
+			case TabBorderColor:
+				return Styles.PropertyPad.TabBorderColor;
+			case ValueBlockBackgroundColor:
+				return Styles.PropertyPad.ValueBlockBackgroundColor;
+			case FrameBoxButtonBackgroundColor:
+				return Styles.PropertyPad.FrameBoxButtonBackgroundColor;
+			}
+			return NSColor.FromName (name);
+		}
+	}
+}
+#endif

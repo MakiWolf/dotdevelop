@@ -136,6 +136,14 @@
       <Project>{288994D1-C7E1-4740-99AB-A52B572EBA8A}</Project>
       <Name>MonoDevelop.GtkExtensions</Name>
     </ProjectReference>
+      <ProjectReference Include="..\..\..\external\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj">
+      <Project>{8F0B736F-8353-4A6C-B471-192D826BDD81}</Project>
+      <Name>Xwt.GtkSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.GuiGtk3\Mono.Addins.GuiGtk3.csproj">
+      <Project>{410A7DC9-E7DA-43E6-B592-93E2A344B660}</Project>
+      <Name>Mono.Addins.GuiGtk3</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition="!$(HaveGtkSharp)">
     <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk2\Xwt.Gtk2.csproj">
@@ -1593,7 +1601,6 @@
     <Folder Include="MonoDevelop.Ide.Projects.FileNesting\" />
     <Folder Include="MonoDevelop.Components\Cairo\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(Data)" DestinationFolder="..\..\..\build\data\%(Data.RelativeDir)" SkipUnchangedFiles="true" />

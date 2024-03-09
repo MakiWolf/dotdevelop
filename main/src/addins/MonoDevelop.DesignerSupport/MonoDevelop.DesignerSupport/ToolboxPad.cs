@@ -35,7 +35,7 @@ using Xwt;
 using Gtk;
 using MonoDevelop.DesignerSupport.Toolbox;
 #if MAC
-//using MonoDevelop.Components.Mac;
+using MonoDevelop.Components.Mac;
 #endif
 
 namespace MonoDevelop.DesignerSupport
@@ -45,130 +45,130 @@ namespace MonoDevelop.DesignerSupport
 		public const string ToolBoxDragDropFormat = "MonoDevelopToolBox";
 		Gtk.Widget widget;
 
-//#if MAC
-		//Toolbox.MacToolbox toolbox;
-		//IPadWindow window;
-//#endif
+#if MAC
+		Toolbox.MacToolbox toolbox;
+		IPadWindow window;
+#endif
 		protected override void Initialize (IPadWindow window)
 		{
 			base.Initialize (window);
-//#if MAC
-			// this.window = window;
-			// toolbox = new Toolbox.MacToolbox (DesignerSupport.Service.ToolboxService, window);
-			// widget = new GtkNSViewHost (toolbox);
+#if MAC
+			this.window = window;
+			toolbox = new Toolbox.MacToolbox (DesignerSupport.Service.ToolboxService, window);
+			widget = new GtkNSViewHost (toolbox);
 
-			// widget.DragDataGet += Widget_DragDataGet;
-			// widget.DragBegin += Widget_DragBegin;
-			// widget.DragEnd += Widget_DragEnd;
+			widget.DragDataGet += Widget_DragDataGet;
+			widget.DragBegin += Widget_DragBegin;
+			widget.DragEnd += Widget_DragEnd;
 
-			// this.window.PadContentShown += Container_PadContentShown;
-			// this.window.PadContentHidden += Container_PadContentHidden;
+			this.window.PadContentShown += Container_PadContentShown;
+			this.window.PadContentHidden += Container_PadContentHidden;
 
-			// toolbox.DragSourceSet += Toolbox_DragSourceSet;
-			// toolbox.DragBegin += Toolbox_DragBegin;
+			toolbox.DragSourceSet += Toolbox_DragSourceSet;
+			toolbox.DragBegin += Toolbox_DragBegin;
 		
-			// widget.ShowAll ();
+			widget.ShowAll ();
 
-			// toolbox.Refresh ();
+			toolbox.Refresh ();
 
-//#else
+#else
 			widget = new Toolbox.Toolbox (DesignerSupport.Service.ToolboxService, window);
-//#endif
+#endif
 		}
 
-// #if MAC
+#if MAC
 
-// 		void Container_PadContentShown (object sender, EventArgs args)
-// 		{
-// 			//sanity check
-// 			isDragging = false;
-// 			toolbox.Hidden = false;
-// 		}
-// 		void Container_PadContentHidden (object sender, EventArgs args) => toolbox.Hidden = true;
+		void Container_PadContentShown (object sender, EventArgs args)
+		{
+			//sanity check
+			isDragging = false;
+			toolbox.Hidden = false;
+		}
+		void Container_PadContentHidden (object sender, EventArgs args) => toolbox.Hidden = true;
 
-// 		private void Widget_DragEnd (object o, DragEndArgs args)
-// 		{
-// 			isDragging = false;
-// 		}
+		private void Widget_DragEnd (object o, DragEndArgs args)
+		{
+			isDragging = false;
+		}
 
-// 		void Widget_DragBegin (object sender, DragBeginArgs args)
-// 		{
-// 			if (!isDragging) {
-// 				DesignerSupport.Service.ToolboxService.DragSelectedItem (widget, args.Context);
-// 				isDragging = true;
-// 			}
-// 		}
+		void Widget_DragBegin (object sender, DragBeginArgs args)
+		{
+			if (!isDragging) {
+				DesignerSupport.Service.ToolboxService.DragSelectedItem (widget, args.Context);
+				isDragging = true;
+			}
+		}
 
-// 		void Toolbox_DragSourceSet (object sender, Gtk.TargetEntry [] e)
-// 		{
-// 			targets = CreateDefaultTargeList ();
-// 			targets.AddTable (e);
-// 		}
+		void Toolbox_DragSourceSet (object sender, Gtk.TargetEntry [] e)
+		{
+			targets = CreateDefaultTargeList ();
+			targets.AddTable (e);
+		}
 
-// 		void Widget_DragDataGet (object o, DragDataGetArgs args)
-// 		{
-// 			if (toolbox.SelectedNode is IDragDataToolboxNode node) {
-// 				foreach (var format in node.Formats) {
-// 					args.SelectionData.Set (Gdk.Atom.Intern (format, false), 8, node.GetData (format));
-// 				}
-// 			}
-// 		}
+		void Widget_DragDataGet (object o, DragDataGetArgs args)
+		{
+			if (toolbox.SelectedNode is IDragDataToolboxNode node) {
+				foreach (var format in node.Formats) {
+					args.SelectionData.Set (Gdk.Atom.Intern (format, false), 8, node.GetData (format));
+				}
+			}
+		}
 
-// 		void Toolbox_DragBegin (object sender, EventArgs args)
-// 		{
-// 			var selectedNode = toolbox.SelectedNode;
-// 			if (!isDragging && selectedNode != null) {
+		void Toolbox_DragBegin (object sender, EventArgs args)
+		{
+			var selectedNode = toolbox.SelectedNode;
+			if (!isDragging && selectedNode != null) {
 
-// 				DesignerSupport.Service.ToolboxService.SelectItem (selectedNode);
+				DesignerSupport.Service.ToolboxService.SelectItem (selectedNode);
 
-// 				Gtk.Drag.SourceUnset (widget);
-// 				if (selectedNode is IDragDataToolboxNode node) {
-// 					foreach (var format in node.Formats) {
-// 						targets.Add (format, 0, 0);
-// 					}
-// 				}
-// 				// Gtk.Application.CurrentEvent and other copied gdk_events seem to have a problem
-// 				// when used as they use gdk_event_copy which seems to crash on de-allocating the private slice.
-// 				IntPtr currentEvent = GtkWorkarounds.GetCurrentEventHandle ();
-// 				Gtk.Drag.Begin (widget, targets, Gdk.DragAction.Copy | Gdk.DragAction.Move, 1, new Gdk.Event (currentEvent, false));
+				Gtk.Drag.SourceUnset (widget);
+				if (selectedNode is IDragDataToolboxNode node) {
+					foreach (var format in node.Formats) {
+						targets.Add (format, 0, 0);
+					}
+				}
+				// Gtk.Application.CurrentEvent and other copied gdk_events seem to have a problem
+				// when used as they use gdk_event_copy which seems to crash on de-allocating the private slice.
+				IntPtr currentEvent = GtkWorkarounds.GetCurrentEventHandle ();
+				Gtk.Drag.Begin (widget, targets, Gdk.DragAction.Copy | Gdk.DragAction.Move, 1, new Gdk.Event (currentEvent, false));
 
-// 				// gtk_drag_begin does not store the event, so we're okay
-// 				GtkWorkarounds.FreeEvent (currentEvent);
-// 			}
-// 		}
+				// gtk_drag_begin does not store the event, so we're okay
+				GtkWorkarounds.FreeEvent (currentEvent);
+			}
+		}
 
-// 		Gtk.TargetList targets = CreateDefaultTargeList ();
+		Gtk.TargetList targets = CreateDefaultTargeList ();
 
-// 		private static TargetList CreateDefaultTargeList () =>
-// 			new Gtk.TargetList (new TargetEntry [] { new TargetEntry (ToolBoxDragDropFormat, TargetFlags.OtherWidget, 0) });
+		private static TargetList CreateDefaultTargeList () =>
+			new Gtk.TargetList (new TargetEntry [] { new TargetEntry (ToolBoxDragDropFormat, TargetFlags.OtherWidget, 0) });
 
-// 		bool isDragging;
+		bool isDragging;
 
-// 		public override void Dispose ()
-// 		{
-// 			if (window != null) {
-// 				window.PadContentShown -= Container_PadContentShown;
-// 				window.PadContentHidden -= Container_PadContentHidden;
-// 				window = null;
-// 			}
+		public override void Dispose ()
+		{
+			if (window != null) {
+				window.PadContentShown -= Container_PadContentShown;
+				window.PadContentHidden -= Container_PadContentHidden;
+				window = null;
+			}
 
-// 			if (widget != null) {
-// 				widget.DragDataGet -= Widget_DragDataGet;
-// 				widget.DragBegin -= Widget_DragBegin;
-// 				widget.DragEnd -= Widget_DragEnd;
-// 				widget.Destroy ();
-// 				widget.Dispose ();
-// 				widget = null;
-// 			}
-// 			if (toolbox != null) {
-// 				toolbox.DragBegin -= Toolbox_DragBegin;
-// 				toolbox.DragSourceSet -= Toolbox_DragSourceSet;
-// 				toolbox.Dispose ();
-// 				toolbox = null;
-// 			}
-// 			base.Dispose ();
-// 		}
-// #endif
+			if (widget != null) {
+				widget.DragDataGet -= Widget_DragDataGet;
+				widget.DragBegin -= Widget_DragBegin;
+				widget.DragEnd -= Widget_DragEnd;
+				widget.Destroy ();
+				widget.Dispose ();
+				widget = null;
+			}
+			if (toolbox != null) {
+				toolbox.DragBegin -= Toolbox_DragBegin;
+				toolbox.DragSourceSet -= Toolbox_DragSourceSet;
+				toolbox.Dispose ();
+				toolbox = null;
+			}
+			base.Dispose ();
+		}
+#endif
 
 #region AbstractPadContent implementations
 		

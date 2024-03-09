@@ -105,11 +105,11 @@ namespace MonoDevelop.DesignerSupport
 
 		public PropertyGridWrapper ()
 		{
-// #if MAC
-// 			nativeWidget = new PropertyMacHostWidget ();
-// #else
+#if MAC
+ 			nativeWidget = new PropertyMacHostWidget ();
+#else
 			nativeWidget = new PropertyXwtHostWidget ();
-//#endif
+#endif
 			nativeWidget.PropertyGridChanged += NativeWidget_PropertyGridChanged;
 		}
 
@@ -190,13 +190,13 @@ namespace MonoDevelop.DesignerSupport
 
 			propertyGridWrapper.SetToolbarProvider (toolbarProvider);
 
-// #if MAC
-// 			//native cocoa needs content shown to initialize stuff
-// 			if (isNative) {
-// 				container.PadContentShown += Window_PadContentShown;
-// 				container.PadContentHidden += Window_PadContentHidden;
-// 			}
-// #endif
+#if MAC
+ 			//native cocoa needs content shown to initialize stuff
+ 			if (isNative) {
+ 				container.PadContentShown += Window_PadContentShown;
+ 				container.PadContentHidden += Window_PadContentHidden;
+ 			}
+#endif
 
 			this.container = container;
 			DesignerSupport.Service.SetPad (this);
@@ -214,12 +214,12 @@ namespace MonoDevelop.DesignerSupport
 
 		public override void Dispose()
 		{
-// #if MAC
-// 			if (isNative) {
-// 				container.PadContentShown -= Window_PadContentShown;
-// 				container.PadContentHidden -= Window_PadContentHidden;
-// 			}
-// #endif
+#if MAC
+ 			if (isNative) {
+ 				container.PadContentShown -= Window_PadContentShown;
+ 				container.PadContentHidden -= Window_PadContentHidden;
+ 			}
+#endif
 
 			propertyGridWrapper.PropertyGridChanged -= Grid_Changed;
 			propertyGridWrapper.Dispose ();
@@ -269,23 +269,23 @@ namespace MonoDevelop.DesignerSupport
 			CommandRouteOrigin = null;
 		}
 
-// #if MAC
-// 		void Window_PadContentShown (object sender, EventArgs e)
-// 		{
-// 			propertyGridWrapper.OnPadContentShown ();
+#if MAC
+ 		void Window_PadContentShown (object sender, EventArgs e)
+ 		{
+ 			propertyGridWrapper.OnPadContentShown ();
 
-// 			if (customWidget && frame.Child is GtkNSViewHost viewHost) {
-// 				viewHost.Visible = true;
-// 			}
-// 		}
+ 			if (customWidget && frame.Child is GtkNSViewHost viewHost) {
+ 				viewHost.Visible = true;
+ 			}
+ 		}
 
-// 		void Window_PadContentHidden (object sender, EventArgs e)
-// 		{
-// 			if (customWidget && frame.Child is GtkNSViewHost viewHost) {
-// 				viewHost.Visible = false;
-// 			}
-// 		}
-// #endif
+ 		void Window_PadContentHidden (object sender, EventArgs e)
+ 		{
+ 			if (customWidget && frame.Child is GtkNSViewHost viewHost) {
+ 				viewHost.Visible = false;
+ 			}
+ 		}
+#endif
 
 		void AttachToolbarIfCustomWidget ()
 		{
@@ -293,15 +293,16 @@ namespace MonoDevelop.DesignerSupport
 				customWidget = false;
 				frame.Remove (frame.Child);
 
-// #if MAC
-// 				if (isNative) {
-// 					frame.Add (propertyGridWrapper.Widget);
-// 				} else {
-// #endif
+#if MAC
+ 				if (isNative) {
+ 					frame.Add (propertyGridWrapper.Widget);
+ 				} else {
+#endif
 					frame.Add (propertyGridWrapper.Widget);
-// #if MAC
-// 				}
-// #endif
+
+#if MAC
+ 				}
+#endif
 				toolbarProvider.Attach (container.GetToolbar (DockPositionType.Top));
 			}
 		}
