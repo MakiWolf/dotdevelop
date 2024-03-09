@@ -31,7 +31,7 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 {
 	public partial class FindUI : UserControl
 	{
-		//private IWpfTextView currentTextView; // The text view on which the UI is being displayed at any given time
+		private IWpfTextView currentTextView; // The text view on which the UI is being displayed at any given time
 
 		/// <summary>
 		/// Used for resizing of the control
@@ -71,45 +71,45 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 			UpdateReplaceVisibility (false);
 		}
 
-		// public void ShowAdornment (IWpfTextView view)
-		// {
-		// 	IAdornmentLayer adornmentLayer = view.GetAdornmentLayer (FindUIAdornmentLayer);
+		public void ShowAdornment (IWpfTextView view)
+		{
+			IAdornmentLayer adornmentLayer = view.GetAdornmentLayer (FindUIAdornmentLayer);
 
-		// 	// Make sure anti-aliasing doesn't cause trouble
-		// 	((UIElement)adornmentLayer).SnapsToDevicePixels = true;
+			// Make sure anti-aliasing doesn't cause trouble
+			((UIElement)adornmentLayer).SnapsToDevicePixels = true;
 
-		// 	currentTextView = view;
+			currentTextView = view;
 
-		// 	if (adornmentLayer.Elements.Count == 0) {
-		// 		adornmentLayer.AddAdornment (AdornmentPositioningBehavior.OwnerControlled, null, this, this, null);
-		// 	}
+			if (adornmentLayer.Elements.Count == 0) {
+				adornmentLayer.AddAdornment (AdornmentPositioningBehavior.OwnerControlled, null, this, this, null);
+			}
 
-		// 	Position ();
+			Position ();
 
-		// 	Visibility = Visibility.Visible;
+			Visibility = Visibility.Visible;
 
-		// 	view.VisualElement.SizeChanged += OnViewSizeChanged;
-		// 	view.Closed += OnViewClosed;
+			view.VisualElement.SizeChanged += OnViewSizeChanged;
+			view.Closed += OnViewClosed;
 
-		// 	FocusFindBox ();
-		// }
+			FocusFindBox ();
+		}
 
 		public void HideAdornment ()
 		{
-			//IWpfTextView textView = currentTextView;
+			IWpfTextView textView = currentTextView;
 
 			// Send the focus back to the editor.
-			//if (textView != null && !textView.IsClosed) {
-			//	textView.VisualElement.Focus ();
-			//}
+			if (textView != null && !textView.IsClosed) {
+				textView.VisualElement.Focus ();
+			}
 
 			// Hide the adornment (Note that this calls DetachFromView on us)
 			// This has to be done after the focus transfer because the FindAdornmentManager
 			// needs to respond to the focus transfer before it disconnects itself from the view.
 			Visibility = Visibility.Collapsed;
 
-			//if (textView != null) {
-				//if (this.IsKeyboardFocusWithin) {
+			if (textView != null) {
+				if (this.IsKeyboardFocusWithin) {
 					// This method will remove the Find UI adornment from the visual tree but that on its own
 					// won't move the focus from the Find UI. WPF would later get around to restoring a valid focus.
 					// There is a problematic case when the adornment is being hidden while doing a FindNext to
@@ -117,16 +117,16 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 					// the other top-level window frame, WPF will detect that focus is still "disconnected"
 					// and will restore focus to this editor instead of moving it as we request.
 					// By manually moving focus here, it will not get into this "disconnected" state.
-					//textView.VisualElement.Focus ();
-				//}
+					textView.VisualElement.Focus ();
+				}
 
-				//currentTextView = null;
+				currentTextView = null;
 
-				//textView.GetAdornmentLayer (FindUIAdornmentLayer).RemoveAllAdornments ();
-				//textView.VisualElement.SizeChanged -= OnViewSizeChanged;
-				//textView.Closed -= OnViewClosed;
-				//textView = null;
-			//}
+				textView.GetAdornmentLayer (FindUIAdornmentLayer).RemoveAllAdornments ();
+				textView.VisualElement.SizeChanged -= OnViewSizeChanged;
+				textView.Closed -= OnViewClosed;
+				textView = null;
+			}
 		}
 
 		private void RaiseFindOptionsChanged (object sender, EventArgs args)
@@ -299,13 +299,13 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 
 		public void Position ()
 		{
-			//if (currentTextView != null) {
-				//this.MaxWidth = currentTextView.ViewportWidth;
+			if (currentTextView != null) {
+				this.MaxWidth = currentTextView.ViewportWidth;
 				this.Width = Math.Min (Math.Max (this.Width, this.MinWidth), this.MaxWidth);
 
 				Canvas.SetTop (this, 0.0);
 				//Canvas.SetLeft (this, currentTextView.ViewportWidth - this.Width);
-			//}
+			}
 		}
 
 		protected override void OnPreviewKeyDown (KeyEventArgs e)

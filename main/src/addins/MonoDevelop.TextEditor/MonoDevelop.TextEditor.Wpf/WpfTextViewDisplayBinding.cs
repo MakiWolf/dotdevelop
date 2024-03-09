@@ -33,40 +33,40 @@ using MonoDevelop.Projects;
 
 namespace MonoDevelop.TextEditor
 {
-	//[ExportDocumentControllerFactory (FileExtension = "*", InsertBefore = "TextEditor")]
-	// class WpfTextViewDisplayBinding : TextViewDisplayBinding<WpfTextViewImports>
-	// {
-	// 	static WpfTextViewDisplayBinding ()
-	// 	{
-	// 		AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
-	// 	}
+	[ExportDocumentControllerFactory (FileExtension = "*", InsertBefore = "TextEditor")]
+	class WpfTextViewDisplayBinding : TextViewDisplayBinding<WpfTextViewImports>
+	{
+		static WpfTextViewDisplayBinding ()
+		{
+			AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+		}
 
-	// 	private static Assembly OnAssemblyResolve (object sender, ResolveEventArgs args)
-	// 	{
-	// 		if (args.Name == "MonoDevelop.TextEditor.Wpf, Version=2.6.0, Culture=neutral") {
-	// 			return typeof (WpfTextViewDisplayBinding).Assembly;
-	// 		}
+		private static Assembly OnAssemblyResolve (object sender, ResolveEventArgs args)
+		{
+			if (args.Name == "MonoDevelop.TextEditor.Wpf, Version=2.6.0, Culture=neutral") {
+				return typeof (WpfTextViewDisplayBinding).Assembly;
+			}
 
-	// 		return null;
-	// 	}
+			return null;
+		}
 
-	// 	//protected override DocumentController CreateContent (WpfTextViewImports imports)
-	// 	//{
-	// 	//	return new WpfTextViewContent (imports);
-	// 	//}
+		//protected override DocumentController CreateContent (WpfTextViewImports imports)
+		//{
+		//	return new WpfTextViewContent (imports);
+		//}
 
-	// 	protected override ThemeToClassification CreateThemeToClassification (IEditorFormatMapService editorFormatMapService)
-	// 		=> new WpfThemeToClassification (editorFormatMapService);
-	// }
+		protected override ThemeToClassification CreateThemeToClassification (IEditorFormatMapService editorFormatMapService)
+			=> new WpfThemeToClassification (editorFormatMapService);
+	}
 
-	// class WpfThemeToClassification : ThemeToClassification
-	// {
-	// 	public WpfThemeToClassification (IEditorFormatMapService editorFormatMapService) : base (editorFormatMapService) { }
+	class WpfThemeToClassification : ThemeToClassification
+	{
+		public WpfThemeToClassification (IEditorFormatMapService editorFormatMapService) : base (editorFormatMapService) { }
 
-	// 	protected override void AddFontToDictionary (ResourceDictionary resourceDictionary, string appearanceCategory, string fontName, double fontSize)
-	// 	{
-	// 		resourceDictionary[ClassificationFormatDefinition.TypefaceId] = new Typeface (fontName);
-	// 		resourceDictionary[ClassificationFormatDefinition.FontRenderingSizeId] = fontSize * 96 / 72;
-	// 	}
-	// }
+		protected override void AddFontToDictionary (ResourceDictionary resourceDictionary, string appearanceCategory, string fontName, double fontSize)
+		{
+			resourceDictionary[ClassificationFormatDefinition.TypefaceId] = new Typeface (fontName);
+			resourceDictionary[ClassificationFormatDefinition.FontRenderingSizeId] = fontSize * 96 / 72;
+		}
+	}
 }

@@ -11,6 +11,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+  <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" ExcludeAssets="all" />
     <ProjectReference Include="..\..\core\MonoDevelop.Core\MonoDevelop.Core.csproj"/>
     <ProjectReference Include="..\..\core\MonoDevelop.Ide\MonoDevelop.Ide.csproj"/>
     <ProjectReference Include="..\..\..\external\xwt\Xwt\Xwt.csproj"/>
