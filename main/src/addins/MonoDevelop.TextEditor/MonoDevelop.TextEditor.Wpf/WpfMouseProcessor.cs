@@ -45,10 +45,10 @@ namespace MonoDevelop.TextEditor.Wpf
 		[Import]
 		public IEditorCommandHandlerServiceFactory CommandServiceFactory { get; private set; }
 
-		// public IMouseProcessor GetAssociatedProcessor (IWpfTextView textView)
-		// {
-		// 	return new WfpMouseProcessor (CommandServiceFactory.GetService (textView), textView);
-		// }
+		public IMouseProcessor GetAssociatedProcessor (IWpfTextView textView)
+		{
+		 	return new WfpMouseProcessor (CommandServiceFactory.GetService (textView), textView);
+		}
 	}
 
 	class WfpMouseProcessor : MouseProcessorBase

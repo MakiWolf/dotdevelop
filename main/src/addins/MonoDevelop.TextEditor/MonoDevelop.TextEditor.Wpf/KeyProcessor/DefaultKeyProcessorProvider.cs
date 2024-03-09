@@ -52,7 +52,7 @@ namespace MonoDevelop.Ide.Text
         {
             if (wpfTextView == null)
             {
-                throw new ArgumentNullException("wpfTextView");
+                throw new ArgumentNullException(nameof(wpfTextView));
             }
 
             return new DefaultKeyProcessor(

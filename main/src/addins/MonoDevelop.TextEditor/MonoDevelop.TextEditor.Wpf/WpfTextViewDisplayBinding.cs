@@ -50,10 +50,10 @@ namespace MonoDevelop.TextEditor
 			return null;
 		}
 
-		//protected override DocumentController CreateContent (WpfTextViewImports imports)
-		//{
-		//	return new WpfTextViewContent (imports);
-		//}
+		protected override DocumentController CreateContent (WpfTextViewImports imports)
+		{
+			return new WpfTextViewContent (imports);
+		}
 
 		protected override ThemeToClassification CreateThemeToClassification (IEditorFormatMapService editorFormatMapService)
 			=> new WpfThemeToClassification (editorFormatMapService);

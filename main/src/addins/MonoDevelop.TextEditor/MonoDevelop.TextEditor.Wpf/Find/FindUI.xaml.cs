@@ -273,7 +273,7 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 				this.Width = Math.Min (Math.Max (this.MinWidth, _resizingBaselineWidth + delta), this.MaxWidth);
 
 				Canvas.SetTop (this, 0.0);
-				//Canvas.SetLeft (this, currentTextView.ViewportWidth - this.Width);
+				Canvas.SetLeft (this, currentTextView.ViewportWidth - this.Width);
 
 				e.Handled = true;
 			}
@@ -304,7 +304,7 @@ namespace MonoDevelop.TextEditor.Wpf.Find
 				this.Width = Math.Min (Math.Max (this.Width, this.MinWidth), this.MaxWidth);
 
 				Canvas.SetTop (this, 0.0);
-				//Canvas.SetLeft (this, currentTextView.ViewportWidth - this.Width);
+				Canvas.SetLeft (this, currentTextView.ViewportWidth - this.Width);
 			}
 		}
 

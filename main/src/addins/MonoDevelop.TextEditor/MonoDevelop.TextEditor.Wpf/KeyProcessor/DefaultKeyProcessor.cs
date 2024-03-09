@@ -33,7 +33,7 @@ namespace MonoDevelop.Ide.Text
 {
 	sealed class DefaultKeyProcessor : KeyProcessor
 	{
-		//readonly IWpfTextView _textView;
+		readonly IWpfTextView _textView;
 		readonly IEditorOperations _editorOperations;
 		readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
 		readonly IEditorCommandHandlerService _editorCommandHandlerService;
@@ -42,12 +42,12 @@ namespace MonoDevelop.Ide.Text
 		static Action Noop { get; } = () => { };
 
 		internal DefaultKeyProcessor (
-			//IWpfTextView textView,
+			IWpfTextView textView,
 			IEditorOperations editorOperations,
 			ITextUndoHistoryRegistry undoHistoryRegistry,
 			IEditorCommandHandlerService editorCommandHandlerService)
 		{
-			//this._textView = textView;
+			this._textView = textView;
 			this._editorOperations = editorOperations;
 			this._undoHistoryRegistry = undoHistoryRegistry;
 			this._editorCommandHandlerService = editorCommandHandlerService;

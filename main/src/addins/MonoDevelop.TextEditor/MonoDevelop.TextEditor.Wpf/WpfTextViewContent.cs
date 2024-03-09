@@ -27,7 +27,7 @@ namespace MonoDevelop.TextEditor
 {
 	class WpfTextViewContent : TextViewContent<IWpfTextView, WpfTextViewImports>, Ide.Gui.Content.IZoomable
 	{
-		//IWpfTextViewHost wpfTextViewHost;
+		IWpfTextViewHost wpfTextViewHost;
 
 		public WpfTextViewContent (WpfTextViewImports imports)
 			: base (imports)
@@ -43,13 +43,13 @@ namespace MonoDevelop.TextEditor
 
 		protected override Control CreateControl ()
 		{
-			//wpfTextViewHost = Imports.TextEditorFactoryService.CreateTextViewHost (TextView, setFocus: true);
-			//var wpfControl = wpfTextViewHost.HostControl;
+			wpfTextViewHost = Imports.TextEditorFactoryService.CreateTextViewHost (TextView, setFocus: true);
+			var wpfControl = wpfTextViewHost.HostControl;
 
-			//Gtk.Widget widget = new RootWpfWidget (wpfControl) {
-			//	HeightRequest = 50,
-			//	WidthRequest = 100
-			//};
+			Gtk.Widget widget = new RootWpfWidget (wpfControl) {
+				HeightRequest = 50,
+				WidthRequest = 100
+			};
 
 			TextView.VisualElement.Tag = widget;
 
