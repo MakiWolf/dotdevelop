@@ -11,7 +11,7 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Diagnostics;
-using Mono.Remoting.Channels.Unix;
+using Mono.Unix;
 using Mono.Cecil;
 
 namespace Stetic
@@ -60,7 +60,7 @@ namespace Stetic
 				IChannel ch = ChannelServices.GetChannel ("unix");
 				if (ch == null) {
 					string unixRemotingFile = Path.GetTempFileName ();
-					ChannelServices.RegisterChannel (new UnixChannel (unixRemotingFile), false);
+					//ChannelServices.RegisterChannel (new UnixChannel (unixRemotingFile), false);
 				}
 			}
 			return remotingChannel;

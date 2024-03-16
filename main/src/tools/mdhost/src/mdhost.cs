@@ -40,7 +40,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Remoting.Lifetime;
 using System.Reflection;
 using System.Collections;
-using Mono.Remoting.Channels.Unix;
+using Mono.Unix;
 using Mono.Addins;
 using System.Runtime.Remoting.Channels.Tcp;
 

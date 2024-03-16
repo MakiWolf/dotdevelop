@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
-using Mono.Remoting.Channels.Unix;
+using Mono.Unix;
 
 namespace Stetic
 {
@@ -57,7 +57,7 @@ namespace Stetic
 				Hashtable props = new Hashtable ();
 				props ["path"] = unixPath;
 				props ["name"] = "__internal_unix";
-				ChannelServices.RegisterChannel (new UnixChannel (props, null, formatterSink), false);
+				//ChannelServices.RegisterChannel (new UnixChannel (props, null, formatterSink), false);
 			} else {
 				Hashtable props = new Hashtable ();
 				props ["port"] = 0;
