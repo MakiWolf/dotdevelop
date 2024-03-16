@@ -67,7 +67,7 @@ jobs:
         ./configure --profile=gnome
         make
         
-    ubuntu2004msbuild:  
+  ubuntu2004msbuild:  
     runs-on: ubuntu-latest
     container:
     # This is (currently) the cached docker image SHA256:aba80b77...40417fe dated 17/06/2021
