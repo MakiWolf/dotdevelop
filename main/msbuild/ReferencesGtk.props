@@ -34,9 +34,10 @@
   </ItemGroup>
   <ItemGroup>
     <!--   this should not be here: -->
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+  <!--  <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
       <Private>$(ReferencesGtkCopyToOutput)</Private>
-    </Reference>
+    </Reference>-->
+<PackageReference Include="Mono.Posix" Version="7.1.0-final.1.21458.1" />
 
   </ItemGroup>
 
