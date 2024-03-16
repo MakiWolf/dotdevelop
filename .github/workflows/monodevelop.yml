@@ -118,6 +118,9 @@ jobs:
         submodules: true
     - name: Checkout configure and build
       run: |
-        cd main
-        /external/fsharpbinding/build.sh
-        ./build.sh
+       cd main
+       cd /external/fsharpbinding
+       ./build.sh
+       cd ..
+       cd ..
+       ./build.sh
