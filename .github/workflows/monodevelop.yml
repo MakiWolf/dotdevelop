@@ -119,7 +119,7 @@ jobs:
     - name: Checkout configure and build
       run: |
        cd main
-       cd /external/fsharpbinding
+       cd external/fsharpbinding
        ./build.sh
        cd ..
        cd ..
