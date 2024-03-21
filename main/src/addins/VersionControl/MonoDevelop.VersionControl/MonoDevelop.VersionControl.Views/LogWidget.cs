@@ -61,7 +61,7 @@ namespace MonoDevelop.VersionControl.Views
 		TreeView treeviewFiles;
 		TreeStore changedpathstore;
 		DocumentToolButton revertButton, revertToButton, refreshButton;
-		Gtk.SearchEntry searchEntry;
+		MonoDevelop.Components.SearchEntry searchEntry;
 		string currentFilter;
 
 		VersionControlDocumentInfo info;
@@ -158,13 +158,13 @@ namespace MonoDevelop.VersionControl.Views
 			refreshButton = new DocumentToolButton (Gtk.Stock.Refresh, GettextCatalog.GetString ("Refresh"));
 			refreshButton.Clicked += new EventHandler (RefreshClicked);
 
-			// searchEntry = new SearchEntry ();
-			// searchEntry.WidthRequest = 200;
-			// searchEntry.ForceFilterButtonVisible = true;
-			// searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
-			// searchEntry.Changed += HandleSearchEntryFilterChanged;
-			// searchEntry.Ready = true;
-			// searchEntry.Show ();
+			searchEntry = new MonoDevelop.Components.SearchEntry ();
+			searchEntry.WidthRequest = 200;
+			searchEntry.ForceFilterButtonVisible = true;
+			searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
+			searchEntry.Changed += HandleSearchEntryFilterChanged;
+			searchEntry.Ready = true;
+			searchEntry.Show ();
 
 			messageRenderer.Ellipsize = Pango.EllipsizeMode.End;
 			TreeViewColumn colRevMessage = new TreeViewColumn ();
@@ -408,7 +408,7 @@ namespace MonoDevelop.VersionControl.Views
 			filtering = true;
 			GLib.Timeout.Add (100, delegate {
 				filtering = false;
-				//currentFilter = searchEntry.Entry.Text;
+				currentFilter = searchEntry.Entry.Text;
 				SetLogSearchFilter (logstore, currentFilter);
 				UpdateHistory ();
 				return false;
