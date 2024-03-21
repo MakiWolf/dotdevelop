@@ -611,22 +611,20 @@ namespace MonoDevelop.VersionControl.Views
 			base.OnDestroyed ();
 		}
 		
+		bool IsDestroyed { get; set; }
+
 		static void DateFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			var renderer = (CellRendererText)cell;
 			var revision = (Revision)model.GetValue (iter, 0);
 			// Grab today's day and the start of tomorrow's day to make Today/Yesterday calculations.
 			var now = DateTime.Now;
-			// var age = new DateTime (now.Year, now.Month, now.Day).AddDays(1) - rev.Time;
-			// if (age.Days >= 0 && age.Days < 1) { // Check whether it's a commit that's less than a day away. Also discard future commits.
-			// 	day = GettextCatalog.GetString ("Today");
-			// } else if (age.Days < 2) { // Check whether it's a commit from yesterday.
-			// 	day = GettextCatalog.GetString ("Yesterday");
-			// } else {
-			// 	day = rev.Time.ToShortDateString ();
-			// }
-			//renderer.Text = string.Format ("{0} {1:HH:mm}", day, rev.Time);
-		}	
+			var age = new DateTime (now.Year, now.Month, now.Day).AddDays (1) - revision.Time;
+
+			renderer.Text = age.Days >= 2 ?
+				revision.Time.ToShortDateString () :
+				revision.Time.Humanize (utcDate: false, dateToCompareAgainst: now);
+		}
 		
 		static void GraphFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
