@@ -41,7 +41,7 @@ namespace MonoDevelop.AspNet.Commands
 		Button buttonCancel;
 		Button buttonOk;
 		Entry nameEntry;
-		ComboBox templateCombo;
+		ComboBoxText templateCombo;
 
 		public string ControllerName {
 			get	{
@@ -70,7 +70,7 @@ namespace MonoDevelop.AspNet.Commands
 			int templateIndex = 0;
 			foreach (string file in loadedTemplateList) {
 				string name = System.IO.Path.GetFileNameWithoutExtension (file);
-				//templateCombo.AppendText (name);
+				templateCombo.AppendText (name);
 				if (!foundEmptyTemplate) {
 					if (name == "Empty") {
 						templateCombo.Active = templateIndex;
@@ -101,7 +101,7 @@ namespace MonoDevelop.AspNet.Commands
 			AddActionWidget (buttonOk, ResponseType.Ok);
 
 			nameEntry = new Entry ();
-			//templateCombo = ComboBox.NewText ();
+			templateCombo = new Gtk.ComboBoxText ();
 
 			var nameLabel = new Label {
 				TextWithMnemonic = GettextCatalog.GetString ("_Name:"),

@@ -38,10 +38,10 @@ namespace MonoDevelop.AspNet.Execution
 		Entry ipAddress = new Entry { WidthChars = 39 }; // sized for IPv6
 		SpinButton portNumber = new SpinButton (0, Int16.MaxValue, 1) { WidthChars = 5} ;
 		CheckButton verboseCheck = new CheckButton ();
-		//readonly ComboBox sslMode = ComboBox.NewText ();
-		//readonly ComboBox sslProtocol = ComboBox.NewText ();
-		//readonly ComboBox keyType = ComboBox.NewText ();
-		//readonly ComboBox passwordOptions = ComboBox.NewText ();
+		readonly ComboBoxText sslMode = new Gtk.ComboBoxText ();
+		readonly ComboBoxText sslProtocol = new Gtk.ComboBoxText ();
+		readonly ComboBoxText keyType = new Gtk.ComboBoxText ();
+		readonly ComboBoxText passwordOptions = new Gtk.ComboBoxText ();
 		readonly FileEntry keyLocation = new FileEntry ();
 		readonly FileEntry certLocation = new FileEntry ();
 		readonly Entry passwordEntry = new Entry { InvisibleChar = '●' };
