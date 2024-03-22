@@ -30,6 +30,7 @@ using System;
 using System.Collections;
 using Gtk;
 using Gdk;
+using Cairo;
 using MonoDevelop.Ide.Fonts;
 using MonoDevelop.Ide;
 
@@ -450,144 +451,144 @@ namespace MonoDevelop.Components.Chart
 			return (((double) minTickStep) * (GetEnd (ad) - GetStart (ad))) / (double) GetAreaSize (ad);
 		}
 		
-//		protected override bool OnExposeEvent (Gdk.EventExpose args)
-//		{
-//			Gdk.Window win = GdkWindow;
-//			int rwidth, rheight;
-//			
-//			Cairo.Context ctx = CairoHelper.Create (win);
-//			
-//			win.GetSize (out rwidth, out rheight);
-//			
-//			if (autoStartY || autoEndY) {
-//				double nstartY = double.MaxValue;
-//				double nendY = double.MinValue;
-//				GetValueRange (AxisDimension.Y, out nstartY, out nendY);
-//				
-//				if (!autoStartY) nstartY = startY;
-//				if (!autoEndY) nendY = endY;
-//				if (nendY < nstartY) nendY = nstartY;
-//				
-//				if (nstartY != startY || nendY != endY) {
-//					yrangeChanged = true;
-//					startY = nstartY;
-//					endY = nendY;
-//				}
-//			}
-//			
-//			if (autoStartX || autoEndX) {
-//				double nstartX = double.MaxValue;
-//				double nendX = double.MinValue;
-//				GetValueRange (AxisDimension.X, out nstartX, out nendX);
-//				
-//				if (!autoStartX) nstartX = startX;
-//				if (!autoEndX) nendX = endX;
-//				if (nendX < nstartX) nendX = nstartX;
-//				
-//				if (nstartX != startX || nendX != endX) {
-//					xrangeChanged = true;
-//					startX = nstartX;
-//					endX = nendX;
-//				}
-//			}
-//			
-//			if (yrangeChanged) {
-//				FixOrigins ();
-//				int right = rwidth - 2 - AreaBorderWidth;
-//				left = AreaBorderWidth;
-//				left += MeasureAxisSize (AxisPosition.Left) + 1;
-//				right -= MeasureAxisSize (AxisPosition.Right) + 1;
-//				yrangeChanged = false;
-//				width = right - left + 1;
-//				if (width <= 0) width = 1;
-//			}
-//			
-//			if (xrangeChanged) {
-//				FixOrigins ();
-//				int bottom = rheight - 2 - AreaBorderWidth;
-//				top = AreaBorderWidth;
-//				bottom -= MeasureAxisSize (AxisPosition.Bottom);
-//				top += MeasureAxisSize (AxisPosition.Top);
-//				
-//				// Make room for cursor handles
-//				foreach (ChartCursor cursor in cursors) {
-//					if (cursor.Dimension == AxisDimension.X && top - AreaBorderWidth < cursor.HandleSize)
-//						top = cursor.HandleSize + AreaBorderWidth;
-//				}
-//				
-//				xrangeChanged = false;
-//				height = bottom - top + 1;
-//				if (height <= 0) height = 1;
-//			}
-//			
-//			if (AutoScaleMargin != 0 && height > 0) {
-//				double margin = (double)AutoScaleMargin * (endY - startY) / (double) height;
-//				if (autoStartY) startY -= margin;
-//				if (autoEndY) endY += margin;
-//			}
-//
-////			Console.WriteLine ("L:" + left + " T:" + top + " W:" + width + " H:" + height);
-//			
-//			// Draw the background
-//
-//			if (backgroundDisplay == BackgroundDisplay.Gradient) {
-//				ctx.Rectangle (left - 1, top - 1, width + 2, height + 2);
-//
-//				// FIXME: VV: Remove gradient features
-//				using (var pat = new Cairo.LinearGradient (left - 1, top - 1, left - 1, height + 2)) {
-//					pat.AddColorStop (0, backroundColor);
-//					Cairo.Color endc = new Cairo.Color (1,1,1);
-//					pat.AddColorStop (1, endc);
-//					ctx.SetSource (pat);
-//					ctx.Fill ();
-//				}
-//			} else {
-//				ctx.Rectangle (left - 1, top - 1, width + 2, height + 2);
-//				ctx.SetSourceColor (backroundColor);
-//				ctx.Fill ();
-//			}
-////			win.DrawRectangle (Style.WhiteGC, true, left - 1, top - 1, width + 2, height + 2);
+		protected override bool OnDrawn (Cairo.Context args)
+		{
+			Gdk.Window win = GdkWindow;
+			int rwidth, rheight;
+			
+			Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow);
+			
+			//win.GetSize (out rwidth, out rheight);
+			
+			if (autoStartY || autoEndY) {
+				double nstartY = double.MaxValue;
+				double nendY = double.MinValue;
+				GetValueRange (AxisDimension.Y, out nstartY, out nendY);
+				
+				if (!autoStartY) nstartY = startY;
+				if (!autoEndY) nendY = endY;
+				if (nendY < nstartY) nendY = nstartY;
+				
+				if (nstartY != startY || nendY != endY) {
+					yrangeChanged = true;
+					startY = nstartY;
+					endY = nendY;
+				}
+			}
+			
+			if (autoStartX || autoEndX) {
+				double nstartX = double.MaxValue;
+				double nendX = double.MinValue;
+				GetValueRange (AxisDimension.X, out nstartX, out nendX);
+				
+				if (!autoStartX) nstartX = startX;
+				if (!autoEndX) nendX = endX;
+				if (nendX < nstartX) nendX = nstartX;
+				
+				if (nstartX != startX || nendX != endX) {
+					xrangeChanged = true;
+					startX = nstartX;
+					endX = nendX;
+				}
+			}
+			
+			if (yrangeChanged) {
+				FixOrigins ();
+				//int right = rwidth - 2 - AreaBorderWidth;
+				left = AreaBorderWidth;
+				left += MeasureAxisSize (AxisPosition.Left) + 1;
+				//right -= MeasureAxisSize (AxisPosition.Right) + 1;
+				yrangeChanged = false;
+				//width = right - left + 1;
+				if (width <= 0) width = 1;
+			}
+			
+			if (xrangeChanged) {
+				FixOrigins ();
+				//int bottom = rheight - 2 - AreaBorderWidth;
+				top = AreaBorderWidth;
+				//bottom -= MeasureAxisSize (AxisPosition.Bottom);
+				top += MeasureAxisSize (AxisPosition.Top);
+				
+				// Make room for cursor handles
+				foreach (ChartCursor cursor in cursors) {
+					if (cursor.Dimension == AxisDimension.X && top - AreaBorderWidth < cursor.HandleSize)
+						top = cursor.HandleSize + AreaBorderWidth;
+				}
+				
+				xrangeChanged = false;
+				//height = bottom - top + 1;
+				if (height <= 0) height = 1;
+			}
+			
+			if (AutoScaleMargin != 0 && height > 0) {
+				double margin = (double)AutoScaleMargin * (endY - startY) / (double) height;
+				if (autoStartY) startY -= margin;
+				if (autoEndY) endY += margin;
+			}
+
+//			Console.WriteLine ("L:" + left + " T:" + top + " W:" + width + " H:" + height);
+			
+			// Draw the background
+
+			if (backgroundDisplay == BackgroundDisplay.Gradient) {
+				ctx.Rectangle (left - 1, top - 1, width + 2, height + 2);
+
+				// FIXME: VV: Remove gradient features
+				using (var pat = new Cairo.LinearGradient (left - 1, top - 1, left - 1, height + 2)) {
+					pat.AddColorStop (0, backroundColor);
+					Cairo.Color endc = new Cairo.Color (1,1,1);
+					pat.AddColorStop (1, endc);
+					ctx.SetSource (pat);
+					ctx.Fill ();
+				}
+			} else {
+				ctx.Rectangle (left - 1, top - 1, width + 2, height + 2);
+				ctx.SetSourceColor (backroundColor);
+				ctx.Fill ();
+			}
+//			win.DrawRectangle (Style.WhiteGC, true, left - 1, top - 1, width + 2, height + 2);
 //			win.DrawRectangle (Style.BlackGC, false, left - AreaBorderWidth, top - AreaBorderWidth, width + AreaBorderWidth*2, height + AreaBorderWidth*2);
-//			
-//			// Draw selected area
-//			
-//			if (enableSelection) {
-//				int sx, sy, ex, ey;
-//				GetPoint (selectionStart.Value, selectionStart.Value, out sx, out sy);
-//				GetPoint (selectionEnd.Value, selectionEnd.Value, out ex, out ey);
-//				if (sx > ex) {
-//					int tmp = sx; sx = ex; ex = tmp;
-//				}
+			
+			// Draw selected area
+			
+			if (enableSelection) {
+				int sx, sy, ex, ey;
+				GetPoint (selectionStart.Value, selectionStart.Value, out sx, out sy);
+				GetPoint (selectionEnd.Value, selectionEnd.Value, out ex, out ey);
+				if (sx > ex) {
+					int tmp = sx; sx = ex; ex = tmp;
+				}
 //				using (Gdk.GC sgc = new Gdk.GC (GdkWindow)) {
 //					sgc.RgbFgColor = new Color (225, 225, 225);
 //					win.DrawRectangle (sgc, true, sx, top, ex - sx, height + 1);
 //				}
-//			}
-//			
-//			// Draw axes
-//			
+			}
+			
+			// Draw axes
+			
 //			Gdk.GC gc = Style.BlackGC;
-//			
+			
 //			foreach (Axis ax in axis)
 //				DrawAxis (win, gc, ax);
-//			
-//			// Draw values
-//			foreach (Serie serie in series)
-//				if (serie.Visible)
-//					DrawSerie (ctx, serie);
-//
-//			// Draw cursors
-//			foreach (ChartCursor cursor in cursors)
-//				DrawCursor (cursor);
-//			
-//			// Draw cursor labels
-//			foreach (ChartCursor cursor in cursors)
-//				if (cursor.ShowValueLabel)
-//					DrawCursorLabel (cursor);
-//			
-//			((IDisposable)ctx).Dispose ();
-//			return true;
-//		}
+			
+			// Draw values
+			foreach (Serie serie in series)
+				if (serie.Visible)
+					DrawSerie (ctx, serie);
+
+			// Draw cursors
+			foreach (ChartCursor cursor in cursors)
+				DrawCursor (cursor);
+			
+			// Draw cursor labels
+			foreach (ChartCursor cursor in cursors)
+				if (cursor.ShowValueLabel)
+					DrawCursorLabel (cursor);
+			
+			((IDisposable)ctx).Dispose ();
+			return true;
+		}
 		
 		void GetValueRange (AxisDimension ad, out double min, out double max)
 		{
