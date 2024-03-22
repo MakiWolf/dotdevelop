@@ -50,11 +50,11 @@ namespace MonoDevelop.DotNetCore.Gui
 		EventBox configurationTableEventBox;
 		Table configurationTable;
 
-		ComboBox targetFrameworkComboBox;
+		ComboBoxText targetFrameworkComboBox;
 		Label targetFrameworkInformationLabel;
 		Label targetFrameworkLabel;
 
-		ComboBox authenticationComboBox;
+		ComboBoxText authenticationComboBox;
 		Label authenticationInformationLabel;
 		Label authenticationLabel;
 
@@ -99,9 +99,9 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void PopulateTargetFrameworks ()
 		{
-			// foreach (TargetFramework framework in wizardPage.TargetFrameworks) {
-			// 	targetFrameworkComboBox.AppendText (framework.GetDisplayName ());
-			// }
+			foreach (TargetFramework framework in wizardPage.TargetFrameworks) {
+			 	targetFrameworkComboBox.AppendText (framework.GetDisplayName ());
+			}
 
 			targetFrameworkComboBox.Active = wizardPage.SelectedTargetFrameworkIndex;
 		}
@@ -113,9 +113,9 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void PopulateAuthentications ()
 		{
-			// foreach (var authentication in wizardPage.SupportedAuthentications) {
-			// 	authenticationComboBox.AppendText (authentication.Description);
-			// }
+			foreach (var authentication in wizardPage.SupportedAuthentications) {
+			 	authenticationComboBox.AppendText (authentication.Description);
+			}
 
 			authenticationComboBox.Active = wizardPage.SelectedAuthenticationIndex;
 			authenticationInformationLabel.LabelProp = wizardPage.SupportedAuthentications [wizardPage.SelectedAuthenticationIndex].Information;
@@ -204,7 +204,7 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void AddFrameworkSelection()
 		{
-			//targetFrameworkComboBox = ComboBox.NewText ();
+			targetFrameworkComboBox = new global::Gtk.ComboBoxText();
 			targetFrameworkComboBox.WidthRequest = 350;
 			targetFrameworkComboBox.Name = "targetFrameworkComboBox";
 			configurationTable.Attach (targetFrameworkComboBox, 1, 2, 1, 2, AttachOptions.Fill, AttachOptions.Fill, 0, 0);
@@ -232,7 +232,7 @@ namespace MonoDevelop.DotNetCore.Gui
 
 		void AddAuthenticationSelection(uint primaryRow)
 		{
-			//authenticationComboBox = ComboBox.NewText ();
+			authenticationComboBox = new global::Gtk.ComboBoxText();
 			authenticationComboBox.WidthRequest = 350;
 			authenticationComboBox.Name = "authenticationComboBox";
 			configurationTable.Attach (authenticationComboBox, 1, 2, primaryRow, primaryRow + 1, AttachOptions.Fill, AttachOptions.Fill, 0, 0);
