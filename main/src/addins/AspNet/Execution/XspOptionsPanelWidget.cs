@@ -38,10 +38,10 @@ namespace MonoDevelop.AspNet.Execution
 		Entry ipAddress = new Entry { WidthChars = 39 }; // sized for IPv6
 		SpinButton portNumber = new SpinButton (0, Int16.MaxValue, 1) { WidthChars = 5} ;
 		CheckButton verboseCheck = new CheckButton ();
-		//readonly ComboBox sslMode = ComboBox.NewText ();
-		//readonly ComboBox sslProtocol = ComboBox.NewText ();
-		//readonly ComboBox keyType = ComboBox.NewText ();
-		//readonly ComboBox passwordOptions = ComboBox.NewText ();
+		readonly ComboBoxText sslMode = new Gtk.ComboBoxText ();
+		readonly ComboBoxText sslProtocol = new Gtk.ComboBoxText ();
+		readonly ComboBoxText keyType = new Gtk.ComboBoxText ();
+		readonly ComboBoxText passwordOptions = new Gtk.ComboBoxText ();
 		readonly FileEntry keyLocation = new FileEntry ();
 		readonly FileEntry certLocation = new FileEntry ();
 		readonly Entry passwordEntry = new Entry { InvisibleChar = '●' };
@@ -53,43 +53,43 @@ namespace MonoDevelop.AspNet.Execution
 			XspParameters xPar = project.XspParameters;
 			
 			//index should be equivalent to XspSslMode enum
-			//((ListStore) sslMode.Model).Clear ();
-			//sslMode.AppendText (GettextCatalog.GetString ("None"));
-			//sslMode.AppendText (GettextCatalog.GetString ("Enabled"));
-			//sslMode.AppendText (GettextCatalog.GetString ("Accept Client Certificates"));
-			//sslMode.AppendText (GettextCatalog.GetString ("Require Client Certificates"));
+			((ListStore) sslMode.Model).Clear ();
+			sslMode.AppendText (GettextCatalog.GetString ("None"));
+			sslMode.AppendText (GettextCatalog.GetString ("Enabled"));
+			sslMode.AppendText (GettextCatalog.GetString ("Accept Client Certificates"));
+			sslMode.AppendText (GettextCatalog.GetString ("Require Client Certificates"));
 			
 			//index should be equivalent to XspSslProtocol enum
-			//((ListStore) sslProtocol.Model).Clear ();
-			//sslProtocol.AppendText (GettextCatalog.GetString ("Default"));
+			((ListStore) sslProtocol.Model).Clear ();
+			sslProtocol.AppendText (GettextCatalog.GetString ("Default"));
 #pragma warning disable MD0005
-			//sslProtocol.AppendText ("TLS");
-			//sslProtocol.AppendText ("SSL 2");
-			//sslProtocol.AppendText ("SSL 3");
+			sslProtocol.AppendText ("TLS");
+			sslProtocol.AppendText ("SSL 2");
+			sslProtocol.AppendText ("SSL 3");
 #pragma warning restore MD0005
 
-			//((ListStore) keyType.Model).Clear ();
-			//keyType.AppendText (GettextCatalog.GetString ("None"));
+			((ListStore) keyType.Model).Clear ();
+			keyType.AppendText (GettextCatalog.GetString ("None"));
 #pragma warning disable MD0005
-			//keyType.AppendText ("Pkcs12");
-			//keyType.AppendText ("PVK");
+			keyType.AppendText ("Pkcs12");
+			keyType.AppendText ("PVK");
 #pragma warning restore MD0005
 
-			//((ListStore) passwordOptions.Model).Clear ();
-			//passwordOptions.AppendText (GettextCatalog.GetString ("None"));
-			//passwordOptions.AppendText (GettextCatalog.GetString ("Ask"));
-			//passwordOptions.AppendText (GettextCatalog.GetString ("Store (insecure)"));
+			((ListStore) passwordOptions.Model).Clear ();
+			passwordOptions.AppendText (GettextCatalog.GetString ("None"));
+			passwordOptions.AppendText (GettextCatalog.GetString ("Ask"));
+			passwordOptions.AppendText (GettextCatalog.GetString ("Store (insecure)"));
 			
 			//load all options
 			ipAddress.Text = xPar.Address;
 			portNumber.Value = xPar.Port;
 			verboseCheck.Active = xPar.Verbose;
-			//sslMode.Active = (int) xPar.SslMode;
-			//sslProtocol.Active = (int) xPar.SslProtocol;
-			//keyType.Active = (int) xPar.KeyType;
+			sslMode.Active = (int) xPar.SslMode;
+			sslProtocol.Active = (int) xPar.SslProtocol;
+			keyType.Active = (int) xPar.KeyType;
 			keyLocation.Path = xPar.PrivateKeyFile;
 			certLocation.Path = xPar.CertificateFile;
-			//passwordOptions.Active = (int) xPar.PasswordOptions;
+			passwordOptions.Active = (int) xPar.PasswordOptions;
 			passwordEntry.Text = xPar.PrivateKeyPassword;
 		}
 

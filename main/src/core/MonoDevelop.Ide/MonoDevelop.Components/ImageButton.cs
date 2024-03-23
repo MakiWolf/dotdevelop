@@ -102,10 +102,9 @@ namespace MonoDevelop.Components
 
 		protected override bool OnDrawn (Cairo.Context evnt)
 		{
-			//if (HasFocus && image != null) {
-			//	Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "button",
-			//	                      Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-			//}
+			if (HasFocus && image != null) {
+				StyleContext.RenderFocus (evnt, Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+			}
 
 			return base.OnDrawn (evnt);
 		}

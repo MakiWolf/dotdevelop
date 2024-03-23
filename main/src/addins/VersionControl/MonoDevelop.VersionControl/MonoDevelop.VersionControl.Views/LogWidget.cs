@@ -61,7 +61,7 @@ namespace MonoDevelop.VersionControl.Views
 		TreeView treeviewFiles;
 		TreeStore changedpathstore;
 		DocumentToolButton revertButton, revertToButton, refreshButton;
-		Gtk.SearchEntry searchEntry;
+		MonoDevelop.Components.SearchEntry searchEntry;
 		string currentFilter;
 
 		VersionControlDocumentInfo info;
@@ -158,13 +158,13 @@ namespace MonoDevelop.VersionControl.Views
 			refreshButton = new DocumentToolButton (Gtk.Stock.Refresh, GettextCatalog.GetString ("Refresh"));
 			refreshButton.Clicked += new EventHandler (RefreshClicked);
 
-			// searchEntry = new SearchEntry ();
-			// searchEntry.WidthRequest = 200;
-			// searchEntry.ForceFilterButtonVisible = true;
-			// searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
-			// searchEntry.Changed += HandleSearchEntryFilterChanged;
-			// searchEntry.Ready = true;
-			// searchEntry.Show ();
+			searchEntry = new MonoDevelop.Components.SearchEntry ();
+			searchEntry.WidthRequest = 200;
+			searchEntry.ForceFilterButtonVisible = true;
+			searchEntry.EmptyMessage = GettextCatalog.GetString ("Search");
+			searchEntry.Changed += HandleSearchEntryFilterChanged;
+			searchEntry.Ready = true;
+			searchEntry.Show ();
 
 			messageRenderer.Ellipsize = Pango.EllipsizeMode.End;
 			TreeViewColumn colRevMessage = new TreeViewColumn ();
@@ -408,7 +408,7 @@ namespace MonoDevelop.VersionControl.Views
 			filtering = true;
 			GLib.Timeout.Add (100, delegate {
 				filtering = false;
-				//currentFilter = searchEntry.Entry.Text;
+				currentFilter = searchEntry.Entry.Text;
 				SetLogSearchFilter (logstore, currentFilter);
 				UpdateHistory ();
 				return false;
@@ -583,7 +583,7 @@ namespace MonoDevelop.VersionControl.Views
 
 		protected override void OnDestroyed ()
 		{
-			//IsDestroyed = true;
+			IsDestroyed = true;
 			selectionCancellationTokenSource.Cancel ();
 
 			treeviewFiles.Selection.Changed -= SetDiff;
@@ -611,22 +611,20 @@ namespace MonoDevelop.VersionControl.Views
 			base.OnDestroyed ();
 		}
 		
+		bool IsDestroyed { get; set; }
+
 		static void DateFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
 			var renderer = (CellRendererText)cell;
 			var revision = (Revision)model.GetValue (iter, 0);
 			// Grab today's day and the start of tomorrow's day to make Today/Yesterday calculations.
 			var now = DateTime.Now;
-			// var age = new DateTime (now.Year, now.Month, now.Day).AddDays(1) - rev.Time;
-			// if (age.Days >= 0 && age.Days < 1) { // Check whether it's a commit that's less than a day away. Also discard future commits.
-			// 	day = GettextCatalog.GetString ("Today");
-			// } else if (age.Days < 2) { // Check whether it's a commit from yesterday.
-			// 	day = GettextCatalog.GetString ("Yesterday");
-			// } else {
-			// 	day = rev.Time.ToShortDateString ();
-			// }
-			//renderer.Text = string.Format ("{0} {1:HH:mm}", day, rev.Time);
-		}	
+			var age = new DateTime (now.Year, now.Month, now.Day).AddDays (1) - revision.Time;
+
+			renderer.Text = age.Days >= 2 ?
+				revision.Time.ToShortDateString () :
+				revision.Time.Humanize (utcDate: false, dateToCompareAgainst: now);
+		}
 		
 		static void GraphFunc (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
 		{
@@ -777,8 +775,8 @@ namespace MonoDevelop.VersionControl.Views
 			selectionCancellationTokenSource = new CancellationTokenSource ();
 			var token = selectionCancellationTokenSource.Token;
 			Task.Run (async () => await info.Repository.GetRevisionChangesAsync (d, token)).ContinueWith (result => {
-				//if (IsDestroyed)
-				//	return;
+				if (IsDestroyed)
+					return;
 				changedpathstore.Clear ();
 				revertButton.GetNativeWidget<Gtk.Widget> ().Sensitive = revertToButton.GetNativeWidget<Gtk.Widget> ().Sensitive = true;
 				Gtk.TreeIter selectIter = Gtk.TreeIter.Zero;

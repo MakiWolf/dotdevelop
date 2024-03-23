@@ -490,7 +490,7 @@ namespace MonoDevelop.Components
 					int focusY = topPadding - buttonPadding;
 					int focusHeight = Allocation.Height - topPadding - bottomPadding + buttonPadding * 2;
 
-					//Gtk.Style.PaintFocus (Style, GdkWindow, State, Allocation, this, "label", focusRect.X, focusY, focusRect.Width, focusHeight);
+					StyleContext.RenderFocus (evnt, focusRect.X, focusY, focusRect.Width, focusHeight);
 				}
 			}
 			return true;

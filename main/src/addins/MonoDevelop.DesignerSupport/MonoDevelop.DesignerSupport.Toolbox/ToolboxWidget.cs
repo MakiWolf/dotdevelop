@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Gtk;
+using Cairo;
 using Pango;
 using Gdk;
 using MonoDevelop.Ide;
@@ -205,122 +206,122 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 		const int ItemIconTextItemSpacing = 4;
 		const int IconModePadding = 2;
 
-		// protected override bool OnExposeEvent (Gdk.EventExpose e)
-		// {
-		// 	Cairo.Context cr = Gdk.CairoHelper.Create (e.Window);
+		protected override bool OnDrawn (Cairo.Context e)
+		{
+			Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow);
 
-		// 	Gdk.Rectangle area = e.Area;
+			//Gdk.Rectangle area = e.Area;
 
-		// 	if (this.categories.Count == 0 || !string.IsNullOrEmpty (CustomMessage)) {
-		// 		Pango.Layout messageLayout = new Pango.Layout (this.PangoContext);
-		// 		messageLayout.Alignment = Pango.Alignment.Center;
-		// 		messageLayout.Width = (int)(Allocation.Width * 2 / 3 * Pango.Scale.PangoScale);
-		// 		if (!string.IsNullOrEmpty (CustomMessage))
-		// 			messageLayout.SetText (CustomMessage);
-		// 		else
-		// 			messageLayout.SetText (MonoDevelop.Core.GettextCatalog.GetString ("There are no tools available for the current document."));
-		// 		cr.MoveTo (Allocation.Width * 1 / 6, 12);
-		// 		cr.SetSourceColor (Style.Text (StateType.Normal).ToCairoColor ());
-		// 		Pango.CairoHelper.ShowLayout (cr, messageLayout);
-		// 		messageLayout.Dispose ();
-		// 		((IDisposable)cr).Dispose ();
-		// 		return true;
-		// 	}
+			if (this.categories.Count == 0 || !string.IsNullOrEmpty (CustomMessage)) {
+				Pango.Layout messageLayout = new Pango.Layout (this.PangoContext);
+				messageLayout.Alignment = Pango.Alignment.Center;
+				messageLayout.Width = (int)(Allocation.Width * 2 / 3 * Pango.Scale.PangoScale);
+				if (!string.IsNullOrEmpty (CustomMessage))
+					messageLayout.SetText (CustomMessage);
+				else
+					messageLayout.SetText (MonoDevelop.Core.GettextCatalog.GetString ("There are no tools available for the current document."));
+				cr.MoveTo (Allocation.Width * 1 / 6, 12);
+				//cr.SetSourceColor (Style.Text (StateType.Normal).ToCairoColor ());
+				Pango.CairoHelper.ShowLayout (cr, messageLayout);
+				messageLayout.Dispose ();
+				((IDisposable)cr).Dispose ();
+				return true;
+			}
 
-		// 	var backColor = Style.Base (StateType.Normal).ToCairoColor ();
-		// 	cr.SetSourceColor (backColor);
-		// 	cr.Rectangle (area.X, area.Y, area.Width, area.Height);
-		// 	cr.Fill ();
+			//var backColor = Style.Base (StateType.Normal).ToCairoColor ();
+			//cr.SetSourceColor (backColor);
+			//cr.Rectangle (area.X, area.Y, area.Width, area.Height);
+			cr.Fill ();
 
-		// 	int xpos = (this.hAdjustement != null ? (int)this.hAdjustement.Value : 0);
-		// 	int vadjustment = (this.vAdjustement != null ? (int)this.vAdjustement.Value : 0);
-		// 	int ypos = -vadjustment;
-		// 	ToolboxWidgetCategory lastCategory = null;
-		// 	int lastCategoryYpos = 0;
-		// 	cr.LineWidth = 1;
+			int xpos = (this.hAdjustement != null ? (int)this.hAdjustement.Value : 0);
+			int vadjustment = (this.vAdjustement != null ? (int)this.vAdjustement.Value : 0);
+			int ypos = -vadjustment;
+			ToolboxWidgetCategory lastCategory = null;
+			int lastCategoryYpos = 0;
+			cr.LineWidth = 1;
 
-		// 	Iterate (ref xpos, ref ypos, (category, itemDimension) => {
-		// 		ProcessExpandAnimation (cr, lastCategory, lastCategoryYpos, backColor, area, ref ypos);
+			Iterate (ref xpos, ref ypos, (category, itemDimension) => {
+				//ProcessExpandAnimation (cr, lastCategory, lastCategoryYpos, backColor, area, ref ypos);
 
-		// 		if (!area.IntersectsWith (new Gdk.Rectangle (new Gdk.Point (xpos, ypos), itemDimension)))
-		// 			return true;
-		// 		cr.Rectangle (xpos, ypos, itemDimension.Width, itemDimension.Height);
-		// 		cr.SetSourceColor (Ide.Gui.Styles.PadCategoryBackgroundColor.ToCairoColor ());
-		// 		cr.Fill ();
+				//if (!area.IntersectsWith (new Gdk.Rectangle (new Gdk.Point (xpos, ypos), itemDimension)))
+				//	return true;
+				cr.Rectangle (xpos, ypos, itemDimension.Width, itemDimension.Height);
+				cr.SetSourceColor (Ide.Gui.Styles.PadCategoryBackgroundColor.ToCairoColor ());
+				cr.Fill ();
 
-		// 		if (lastCategory == null || lastCategory.IsExpanded || lastCategory.AnimatingExpand) {
-		// 			cr.MoveTo (xpos, ypos + 0.5);
-		// 			cr.LineTo (itemDimension.Width, ypos + 0.5);
-		// 		}
-		// 		cr.MoveTo (0, ypos + itemDimension.Height - 0.5);
-		// 		cr.LineTo (xpos + Allocation.Width, ypos + itemDimension.Height - 0.5);
-		// 		cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryBorderColor.ToCairoColor ());
-		// 		cr.Stroke ();
+				if (lastCategory == null || lastCategory.IsExpanded || lastCategory.AnimatingExpand) {
+					cr.MoveTo (xpos, ypos + 0.5);
+					cr.LineTo (itemDimension.Width, ypos + 0.5);
+				}
+				cr.MoveTo (0, ypos + itemDimension.Height - 0.5);
+				cr.LineTo (xpos + Allocation.Width, ypos + itemDimension.Height - 0.5);
+				cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryBorderColor.ToCairoColor ());
+				cr.Stroke ();
 
-		// 		headerLayout.SetMarkup (category.Text);
-		// 		int width, height;
-		// 		cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryLabelColor.ToCairoColor ());
-		// 		headerLayout.GetPixelSize (out width, out height);
-		// 		cr.MoveTo (xpos + CategoryLeftPadding, ypos + (double)(Math.Round ((double)(itemDimension.Height - height) / 2)));
-		// 		Pango.CairoHelper.ShowLayout (cr, headerLayout);
+				headerLayout.SetMarkup (category.Text);
+				int width, height;
+				cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryLabelColor.ToCairoColor ());
+				headerLayout.GetPixelSize (out width, out height);
+				cr.MoveTo (xpos + CategoryLeftPadding, ypos + (double)(Math.Round ((double)(itemDimension.Height - height) / 2)));
+				Pango.CairoHelper.ShowLayout (cr, headerLayout);
 
-		// 		var img = category.IsExpanded ? discloseUp : discloseDown;
-		// 		cr.DrawImage (this, img, Allocation.Width - img.Width - CategoryRightPadding, ypos + Math.Round ((itemDimension.Height - img.Height) / 2));
+				var img = category.IsExpanded ? discloseUp : discloseDown;
+				cr.DrawImage (this, img, Allocation.Width - img.Width - CategoryRightPadding, ypos + Math.Round ((itemDimension.Height - img.Height) / 2));
 
-		// 		lastCategory = category;
-		// 		lastCategoryYpos = ypos + itemDimension.Height;
+				lastCategory = category;
+				lastCategoryYpos = ypos + itemDimension.Height;
 
-		// 		return true;
-		// 	}, (curCategory, item, itemDimension) => {
-		// 		if (!area.IntersectsWith (new Gdk.Rectangle (new Gdk.Point (xpos, ypos), itemDimension)))
-		// 			return true;
+				return true;
+			}, (curCategory, item, itemDimension) => {
+				//if (!area.IntersectsWith (new Gdk.Rectangle (new Gdk.Point (xpos, ypos), itemDimension)))
+				//	return true;
 
-		// 		var icon = item.Icon;
-		// 		if (!icon.HasFixedSize) {
-		// 			var maxIconSize = Math.Min (itemDimension.Width, itemDimension.Height);
-		// 			var fittingIconSize = maxIconSize > 32 ? Xwt.IconSize.Large : maxIconSize > 16 ? Xwt.IconSize.Medium : Xwt.IconSize.Small;
-		// 			icon = item.Icon.WithSize (fittingIconSize);
-		// 		}
-		// 		if (item == SelectedItem) {
-		// 			icon = icon.WithStyles ("sel");
-		// 			cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
-		// 			cr.Rectangle (xpos, ypos, itemDimension.Width, itemDimension.Height);
-		// 			cr.Fill ();
-		// 		}
-		// 		if (listMode || !curCategory.CanIconizeItems) {
-		// 			cr.DrawImage (this, icon, xpos + ItemLeftPadding, ypos + Math.Round ((itemDimension.Height - icon.Height) / 2));
-		// 			layout.SetMarkup (item.Text);
-		// 			layout.Width = (int)((itemDimension.Width - ItemIconTextItemSpacing - iconSize.Width - ItemLeftPadding * 2) * Pango.Scale.PangoScale);
-		// 			layout.GetPixelSize (out var width, out var height);
-		// 			cr.SetSourceColor (Style.Text (item != SelectedItem ? StateType.Normal : StateType.Selected).ToCairoColor ());
-		// 			cr.MoveTo (xpos + ItemLeftPadding + iconSize.Width + ItemIconTextItemSpacing, ypos + Math.Round ((double)(itemDimension.Height - height) / 2));
-		// 			Pango.CairoHelper.ShowLayout (cr, layout);
-		// 		} else {
-		// 			cr.DrawImage (this, icon, xpos + Math.Round ((itemDimension.Width - icon.Width) / 2), ypos + Math.Round ((itemDimension.Height - icon.Height) / 2));
-		// 		}
+				var icon = item.Icon;
+				if (!icon.HasFixedSize) {
+					var maxIconSize = Math.Min (itemDimension.Width, itemDimension.Height);
+					var fittingIconSize = maxIconSize > 32 ? Xwt.IconSize.Large : maxIconSize > 16 ? Xwt.IconSize.Medium : Xwt.IconSize.Small;
+					icon = item.Icon.WithSize (fittingIconSize);
+				}
+				if (item == SelectedItem) {
+					icon = icon.WithStyles ("sel");
+					//cr.SetSourceColor (Style.Base (StateType.Selected).ToCairoColor ());
+					cr.Rectangle (xpos, ypos, itemDimension.Width, itemDimension.Height);
+					cr.Fill ();
+				}
+				if (listMode || !curCategory.CanIconizeItems) {
+					cr.DrawImage (this, icon, xpos + ItemLeftPadding, ypos + Math.Round ((itemDimension.Height - icon.Height) / 2));
+					layout.SetMarkup (item.Text);
+					layout.Width = (int)((itemDimension.Width - ItemIconTextItemSpacing - iconSize.Width - ItemLeftPadding * 2) * Pango.Scale.PangoScale);
+					layout.GetPixelSize (out var width, out var height);
+					//cr.SetSourceColor (Style.Text (item != SelectedItem ? StateType.Normal : StateType.Selected).ToCairoColor ());
+					cr.MoveTo (xpos + ItemLeftPadding + iconSize.Width + ItemIconTextItemSpacing, ypos + Math.Round ((double)(itemDimension.Height - height) / 2));
+					Pango.CairoHelper.ShowLayout (cr, layout);
+				} else {
+					cr.DrawImage (this, icon, xpos + Math.Round ((itemDimension.Width - icon.Width) / 2), ypos + Math.Round ((itemDimension.Height - icon.Height) / 2));
+				}
 
-		// 		if (item == mouseOverItem) {
-		// 			cr.SetSourceColor (Style.Dark (StateType.Prelight).ToCairoColor ());
-		// 			cr.Rectangle (xpos + 0.5, ypos + 0.5, itemDimension.Width - 1, itemDimension.Height - 1);
-		// 			cr.Stroke ();
-		// 		}
+				if (item == mouseOverItem) {
+					//cr.SetSourceColor (Style.Dark (StateType.Prelight).ToCairoColor ());
+					cr.Rectangle (xpos + 0.5, ypos + 0.5, itemDimension.Width - 1, itemDimension.Height - 1);
+					cr.Stroke ();
+				}
 
-		// 		return true;
-		// 	});
+				return true;
+			});
 
-		// 	ProcessExpandAnimation (cr, lastCategory, lastCategoryYpos, backColor, area, ref ypos);
+			//ProcessExpandAnimation (cr, lastCategory, lastCategoryYpos, backColor, area, ref ypos);
 
-		// 	if (lastCategory != null && lastCategory.AnimatingExpand) {
-		// 		// Closing line when animating the last group of the toolbox
-		// 		cr.MoveTo (area.X, ypos + 0.5);
-		// 		cr.RelLineTo (area.Width, 0);
-		// 		cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryBorderColor.ToCairoColor ());
-		// 		cr.Stroke ();
-		// 	}
+			if (lastCategory != null && lastCategory.AnimatingExpand) {
+				// Closing line when animating the last group of the toolbox
+				//cr.MoveTo (area.X, ypos + 0.5);
+				//cr.RelLineTo (area.Width, 0);
+				cr.SetSourceColor (MonoDevelop.Ide.Gui.Styles.PadCategoryBorderColor.ToCairoColor ());
+				cr.Stroke ();
+			}
 
-		// 	((IDisposable)cr).Dispose ();
-		// 	return true;
-		// }
+			((IDisposable)cr).Dispose ();
+			return true;
+		}
 
 		void ProcessExpandAnimation (Cairo.Context cr, ToolboxWidgetCategory lastCategory, int lastCategoryYpos, Cairo.Color backColor, Gdk.Rectangle area, ref int ypos)
 		{

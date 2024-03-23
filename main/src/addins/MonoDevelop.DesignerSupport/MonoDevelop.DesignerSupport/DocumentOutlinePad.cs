@@ -28,6 +28,7 @@
 
 using System;
 using Gtk;
+using Cairo;
 
 using MonoDevelop.Components.Docking;
 using MonoDevelop.Core;
@@ -207,16 +208,16 @@ namespace MonoDevelop.DesignerSupport
 				layout.SetText (text);
 			}
 
-//			protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-//			{
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
 //				if (evnt.Window != GdkWindow || layout == null) {
 //					return base.OnExposeEvent (evnt);
 //				}
 //				layout.Width = (int)(Allocation.Width * 2 / 3 * Pango.Scale.PangoScale);
 //				Gtk.Style.PaintLayout (Style, GdkWindow, State, false, evnt.Area,
 //				    this, null, Allocation.Width * 1 / 6 + Allocation.X , 12 + Allocation.Y, layout);
-//				return true;
-//			}
+				return true;
+			}
 
 			protected override void OnStyleSet (Gtk.Style previous_style)
 			{
