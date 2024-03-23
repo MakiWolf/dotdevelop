@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using MonoDevelop.Core.Execution;
 using MonoDevelop.Core;
 
@@ -81,9 +82,14 @@ namespace MonoDevelop.Platform
 
 		public override string DefaultMonospaceFont {
 			get {
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
 				try {
 					return (string) (Gio.GetGSettingsString ("org.gnome.desktop.interface","monospace-font-name"));
 				} catch (Exception) {
+					return "Monospace 11";
+				}
+				}
+				else {
 					return "Monospace 11";
 				}
 			}
@@ -91,9 +97,14 @@ namespace MonoDevelop.Platform
 
 		public override string DefaultSansFont {
 			get {
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
 				try {
 					return (string)(Gio.GetGSettingsString ("org.gnome.desktop.interface", "document-font-name"));
 				} catch (Exception) {
+					return "Sans 11";
+				}
+				}
+				else {
 					return "Sans 11";
 				}
 			}
