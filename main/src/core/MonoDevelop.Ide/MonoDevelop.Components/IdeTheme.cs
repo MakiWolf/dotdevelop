@@ -74,8 +74,8 @@ namespace MonoDevelop.Components
 
 		internal static void InitializeGtk (string progname, ref string[] args)
 		{
-			//if (Gtk.Settings.Default != null)
-			//	throw new InvalidOperationException ("Gtk already initialized!");
+			if (Gtk.Settings.Default != null)
+				throw new InvalidOperationException ("Gtk already initialized!");
 
 			IdeStartupTracker.StartupTracker.MarkSection ("PreGtkInitialization");
 #if MAC
@@ -102,10 +102,10 @@ namespace MonoDevelop.Components
 #endif
 			//HACK: we must initilize some Gtk rc before Gtk.Application is initialized on Mac/Windows
 			//      otherwise it will not be loaded correctly and theme switching won't work.
-			//if (!Platform.IsLinux)
-			//	UpdateGtkTheme ();
+			if (!Platform.IsLinux)
+				UpdateGtkTheme ();
 
-			//Gtk.Application.Init (BrandingService.ApplicationName, ref args);
+			Gtk.Application.Init (BrandingService.ApplicationName, ref args);
 
 			// Reset our environment after initialization on Mac
 			if (Platform.IsMac) {
@@ -135,8 +135,8 @@ namespace MonoDevelop.Components
 
 		internal static void SetupGtkTheme ()
 		{
-			//if (Gtk.Settings.Default == null)
-			//	return;
+			if (Gtk.Settings.Default == null)
+				return;
 			
 			if (Platform.IsLinux) {
 				DefaultTheme = Gtk.Settings.Default.ThemeName;
@@ -154,8 +154,8 @@ namespace MonoDevelop.Components
 			//       set the environment variables from InitializeGtk() and after Gtk initialization
 			//       we set the active theme from here. Otherwise Gtk will preload the default theme with
 			//       the Wimp engine, which can break our own configs.
-			//if (Platform.IsWindows)
-			//	UpdateGtkTheme ();
+			if (Platform.IsWindows)
+				UpdateGtkTheme ();
 		}
 
 		internal static void UpdateGtkTheme ()
@@ -165,27 +165,26 @@ namespace MonoDevelop.Components
 
 			string current_theme = IdeApp.Preferences.UserInterfaceThemeName;
 
-			//if (!Platform.IsLinux) {
-			//	UserInterfaceTheme = IdeApp.Preferences.UserInterfaceThemeName == "Dark" ? Theme.Dark : Theme.Light;
-			//	if (current_theme != UserInterfaceTheme.ToString ()) // Only theme names allowed on Win/Mac
-			//		current_theme = UserInterfaceTheme.ToString ();
-			//}
+			if (!Platform.IsLinux) {
+				UserInterfaceTheme = IdeApp.Preferences.UserInterfaceThemeName == "Dark" ? Theme.Dark : Theme.Light;
+				if (current_theme != UserInterfaceTheme.ToString ()) // Only theme names allowed on Win/Mac
+					current_theme = UserInterfaceTheme.ToString ();
+			}
 
 			var use_bundled_theme = false;
 
 			
 			// Use the bundled gtkrc only if the Xamarin theme is installed
-			//if (File.Exists (Path.Combine (Gtk.Rc.ModuleDir, "libxamarin.so")) || File.Exists (Path.Combine (Gtk.Rc.ModuleDir, "libxamarin.dll")))
-			//	use_bundled_theme = true;
+			if (File.Exists (Path.Combine (Gtk.Rc.ModuleDir, "libxamarin.so")) || File.Exists (Path.Combine (Gtk.Rc.ModuleDir, "libxamarin.dll")))
+				use_bundled_theme = true;
 			// on Windows we can't rely on Gtk.Rc.ModuleDir to be valid
 			// and test additionally the default installation dir
 			if (!use_bundled_theme && Platform.IsWindows) {
 				var gtkBasePath = Environment.GetEnvironmentVariable ("GTK_BASEPATH");
-				//if (String.IsNullOrEmpty (gtkBasePath))
-				gtkBasePath = "C:\\Users\\Marku\\AppData\\Local\\Gtk\\3.24.24";
-				//	gtkBasePath = "C:\\Program Files (x86)\\GtkSharp\\2.12\\";
-				//if (File.Exists (Path.Combine (gtkBasePath, "lib\\gtk-2.0\\2.10.0\\engines\\libxamarin.dll")))
-				  //  use_bundled_theme = true;
+				if (String.IsNullOrEmpty (gtkBasePath))
+					gtkBasePath = "C:\\Program Files (x86)\\GtkSharp\\2.12\\";
+				if (File.Exists (Path.Combine (gtkBasePath, "lib\\gtk-2.0\\2.10.0\\engines\\libxamarin.dll")))
+				    use_bundled_theme = true;
 			}
 			
 			if (use_bundled_theme) {
@@ -196,30 +195,30 @@ namespace MonoDevelop.Components
 				if (Platform.IsWindows) {
 					// HACK: Gtk Bug: Rc.ReparseAll () and the include "[rcfile]" gtkrc statement are broken on Windows.
 					//                We must provide our own XDG folder structure to switch bundled themes.
-					// var rc_themes = UserProfile.Current.ConfigDir.Combine ("share", "themes");
-					// var rc_theme_light = rc_themes.Combine ("Light", "gtk-2.0", "gtkrc");
-					// var rc_theme_dark = rc_themes.Combine ("Dark", "gtk-2.0", "gtkrc");
-					// if (!Directory.Exists (rc_theme_light.ParentDirectory))
-					// 	Directory.CreateDirectory (rc_theme_light.ParentDirectory);
-					// if (!Directory.Exists (rc_theme_dark.ParentDirectory))
-					// 	Directory.CreateDirectory (rc_theme_dark.ParentDirectory);
+					var rc_themes = UserProfile.Current.ConfigDir.Combine ("share", "themes");
+					var rc_theme_light = rc_themes.Combine ("Light", "gtk-2.0", "gtkrc");
+					var rc_theme_dark = rc_themes.Combine ("Dark", "gtk-2.0", "gtkrc");
+					if (!Directory.Exists (rc_theme_light.ParentDirectory))
+						Directory.CreateDirectory (rc_theme_light.ParentDirectory);
+					if (!Directory.Exists (rc_theme_dark.ParentDirectory))
+						Directory.CreateDirectory (rc_theme_dark.ParentDirectory);
 
-					// string gtkrc = PropertyService.EntryAssemblyPath.Combine ("gtkrc");
-					// File.Copy (gtkrc + ".win32", rc_theme_light, true);
-					// File.Copy (gtkrc + ".win32-dark", rc_theme_dark, true);
+					string gtkrc = PropertyService.EntryAssemblyPath.Combine ("gtkrc");
+					File.Copy (gtkrc + ".win32", rc_theme_light, true);
+					File.Copy (gtkrc + ".win32-dark", rc_theme_dark, true);
 
 					var themeDir = UserProfile.Current.ConfigDir;
-					// if (!themeDir.IsAbsolute)
-					// 	themeDir = themeDir.ToAbsolute (Environment.CurrentDirectory);
-					 Environment.SetEnvironmentVariable ("GTK_DATA_PREFIX", themeDir);
+					if (!themeDir.IsAbsolute)
+						themeDir = themeDir.ToAbsolute (Environment.CurrentDirectory);
+					Environment.SetEnvironmentVariable ("GTK_DATA_PREFIX", themeDir);
 
-					// // set the actual theme and reset the environment only after Gtk has been fully
-					// // initialized. See SetupGtkTheme ().
-					// if (Gtk.Settings.Default != null) {
-					// 	LoggingService.LogInfo ("GTK: Using Gtk theme from {0}", Path.Combine (Gtk.Rc.ThemeDir, current_theme));
-					// 	Gtk.Settings.Default.ThemeName = current_theme;
-					 	Environment.SetEnvironmentVariable ("GTK_DATA_PREFIX", DefaultGtkDataFolder);
-					// }
+					// set the actual theme and reset the environment only after Gtk has been fully
+					// initialized. See SetupGtkTheme ().
+					if (Gtk.Settings.Default != null) {
+						LoggingService.LogInfo ("GTK: Using Gtk theme from {0}", Path.Combine (Gtk.Rc.ThemeDir, current_theme));
+						Gtk.Settings.Default.ThemeName = current_theme;
+						Environment.SetEnvironmentVariable ("GTK_DATA_PREFIX", DefaultGtkDataFolder);
+					}
 
 				} else if (Platform.IsMac) {
 					
@@ -243,9 +242,9 @@ namespace MonoDevelop.Components
 						Environment.SetEnvironmentVariable ("GTK2_RC_FILES", DefaultGtk2RcFiles);
 				}
 
-			} else if (Gtk.Settings.Default != null) {
-				//LoggingService.LogInfo ("GTK: Using Gtk theme from {0}", Path.Combine (Gtk.Rc.ThemeDir, current_theme));
-				//Gtk.Settings.Default.ThemeName = current_theme;
+			} else if (Gtk.Settings.Default != null && current_theme != Gtk.Settings.Default.ThemeName) {
+				LoggingService.LogInfo ("GTK: Using Gtk theme from {0}", Path.Combine (Gtk.Rc.ThemeDir, current_theme));
+				Gtk.Settings.Default.ThemeName = current_theme;
 			}
 
 			// let Gtk realize the new theme
