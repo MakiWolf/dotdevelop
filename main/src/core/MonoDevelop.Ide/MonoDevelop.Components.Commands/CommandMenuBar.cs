@@ -44,15 +44,15 @@ namespace MonoDevelop.Components.Commands
 			get { return manager; }
 		}
 
-		protected override bool OnDrawn (Cairo.Context evnt)
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
 //			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
 //				context.SetSourceColor (Style.Light (StateType.Normal).ToCairoColor ());
-				evnt.Paint ();
+				cr.Paint ();
 //			}
 
 			foreach (Gtk.Widget child in Children)
-				child.Draw (evnt);
+				(this as Gtk.Container).PropagateDraw (child, cr);
 
 			return false;
 		}
