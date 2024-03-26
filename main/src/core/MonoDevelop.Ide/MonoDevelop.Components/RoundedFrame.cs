@@ -162,8 +162,8 @@ namespace MonoDevelop.Components
 			
 			using (Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
 				//DrawFrame (cr, evnt.Area);
-				//if (child != null) 
-				//	PropagateExpose (child, evnt);
+				if (child != null) 
+					PropagateDraw (child, evnt);
 				return false;
 			}
 		}
