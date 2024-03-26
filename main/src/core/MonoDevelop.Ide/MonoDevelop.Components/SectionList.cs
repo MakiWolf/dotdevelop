@@ -377,7 +377,7 @@ namespace MonoDevelop.Components
 				}
 			}
 			
-			//PropagateExpose (sections[activeIndex].Child, evnt);
+			PropagateDraw (sections[activeIndex].Child, evnt);
 			return true;// base.OnExposeEvent (evnt);
 		}
 
