@@ -29,6 +29,7 @@ using System;
 using System.Linq;
 using Gtk;
 using Gdk;
+using Cairo;
 using System.Collections.Generic;
 using Mono.TextEditor;
 using Mono.TextEditor.Utils;
@@ -170,9 +171,9 @@ namespace MonoDevelop.VersionControl.Views
 				}
 			}
 
-			ButtonAccessible GetNearestButton (Rectangle selectedBounds)
+			ButtonAccessible GetNearestButton (Gdk.Rectangle selectedBounds)
 			{
-				static int GetDelta (Rectangle rect1, Rectangle rect2)
+				static int GetDelta (Gdk.Rectangle rect1, Gdk.Rectangle rect2)
 				{
 					int d1 = Math.Abs (rect1.Top - rect2.Bottom);
 					int d2 = Math.Abs (rect1.Bottom - rect2.Top);
@@ -253,8 +254,8 @@ namespace MonoDevelop.VersionControl.Views
 				cr.LineTo (x - 2, y + 3);
 			}
 
-			// protected override bool OnExposeEvent (EventExpose evnt)
-			// {
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
 			// 	bool hideButton = widget.MainEditor.Document.IsReadOnly;
 			// 	using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
 			// 		cr.Rectangle (evnt.Region.Clipbox.X, evnt.Region.Clipbox.Y, evnt.Region.Clipbox.Width, evnt.Region.Clipbox.Height);
@@ -365,8 +366,8 @@ namespace MonoDevelop.VersionControl.Views
 			// 			}
 			// 		}
 			// 	}
-			// 	return true;
-			// }
+			 	return true;
+			}
 
 			internal void Refresh ()
 			{
@@ -470,7 +471,7 @@ namespace MonoDevelop.VersionControl.Views
 
 				public AccessibilityElementProxy Accessible { get; private set; }
 				public bool Visible { get; internal set; }
-				public Rectangle Bounds { get; private set; }
+				public Gdk.Rectangle Bounds { get; private set; }
 
 				public ButtonAccessible (MiddleArea widget, Hunk hunk)
 				{
@@ -494,11 +495,11 @@ namespace MonoDevelop.VersionControl.Views
 
 				public void SetBounds (int x, int y, int w, int h)
 				{
-					Accessible.FrameInGtkParent = Bounds = new Rectangle (x, y, w, h);
+					Accessible.FrameInGtkParent = Bounds = new Gdk.Rectangle (x, y, w, h);
 
 					var cocoaY = widget.Allocation.Height - y - h;
 
-					Accessible.FrameInParent = new Rectangle (x, cocoaY, w, h);
+					Accessible.FrameInParent = new Gdk.Rectangle (x, cocoaY, w, h);
 				}
 
 				void PerformPress (object sender, EventArgs e)
