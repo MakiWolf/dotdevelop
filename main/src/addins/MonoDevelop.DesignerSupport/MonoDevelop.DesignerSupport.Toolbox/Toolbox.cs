@@ -133,7 +133,7 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 			
 			fontChanger = new MonoDevelop.Ide.Gui.PadFontChanger (toolboxWidget, toolboxWidget.SetCustomFont, toolboxWidget.QueueResize);
 			
-			//this.toolboxWidget.DoPopupMenu = ShowPopup;
+			this.toolboxWidget.DoPopupMenu = ShowPopup;
 			scrolledWindow = new MonoDevelop.Components.CompactScrolledWindow ();
 			base.PackEnd (scrolledWindow, true, true, 0);
 			base.FocusChain = new Gtk.Widget [] { scrolledWindow };
