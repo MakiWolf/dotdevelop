@@ -339,18 +339,18 @@ namespace MonoDevelop.VersionControl.Views
 			}
 		}
 
-		// protected override bool OnExposeEvent (EventExpose evnt)
-		// {
-		// 	Gdk.GC gc = Style.DarkGC (State);
-		// 	evnt.Window.DrawLine (gc, Allocation.X, Allocation.Top, Allocation.X, Allocation.Bottom);
-		// 	evnt.Window.DrawLine (gc, Allocation.Right, Allocation.Top, Allocation.Right, Allocation.Bottom);
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			//Gdk.GC gc = Style.DarkGC (State);
+			//evnt.Window.DrawLine (gc, Allocation.X, Allocation.Top, Allocation.X, Allocation.Bottom);
+			//evnt.Window.DrawLine (gc, Allocation.Right, Allocation.Top, Allocation.Right, Allocation.Bottom);
 
-		// 	evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Y, Allocation.Right, Allocation.Y);
-		// 	evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Bottom, Allocation.Right, Allocation.Bottom);
+			//evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Y, Allocation.Right, Allocation.Y);
+			//evnt.Window.DrawLine (gc, Allocation.Left, Allocation.Bottom, Allocation.Right, Allocation.Bottom);
 
 
-		// 	return base.OnExposeEvent (evnt);
-		// }
+			return base.OnDrawn (evnt);
+		}
 
 		void JumpOverFoldings (ref int line)
 		{
