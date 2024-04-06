@@ -455,15 +455,15 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				//col.SetCellDataFunc (crp, RenderImage);
-				//col.SetCellDataFunc (crt, RenderText);
+				col.SetCellDataFunc (crp, RenderImage);
+				col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 				searchTreeview.AppendColumn (col);
 				col.Resizable = true;
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Declaring Type"), crt = new Gtk.CellRendererText ());
 				col.FixedWidth = 300;
 				col.Sizing = TreeViewColumnSizing.Fixed;
-				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 				col.Resizable = true;
 				searchTreeview.Model = resultListStore;
@@ -475,8 +475,8 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				//col.SetCellDataFunc (crp, RenderImage);
-				//col.SetCellDataFunc (crt, RenderText);
+				col.SetCellDataFunc (crp, RenderImage);
+				col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 
 				searchTreeview.AppendColumn (col);
@@ -484,7 +484,7 @@ namespace MonoDevelop.AssemblyBrowser
 				col.Sizing = TreeViewColumnSizing.Fixed;
 				col.Resizable = true;
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Parent"), crt = new Gtk.CellRendererText ());
-				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 
 				col.FixedWidth = 300;
@@ -499,8 +499,8 @@ namespace MonoDevelop.AssemblyBrowser
 				crt = new Gtk.CellRendererText ();
 				col.PackStart (crp, false);
 				col.PackStart (crt, true);
-				//col.SetCellDataFunc (crp, RenderImage);
-				//col.SetCellDataFunc (crt, RenderText);
+				col.SetCellDataFunc (crp, RenderImage);
+				col.SetCellDataFunc (crt, RenderText);
 				col.SortColumnId = 1;
 				searchTreeview.AppendColumn (col);
 				col.FixedWidth = 400;
@@ -508,7 +508,7 @@ namespace MonoDevelop.AssemblyBrowser
 				col.Resizable = true;
 
 				col = searchTreeview.AppendColumn (GettextCatalog.GetString ("Namespace"), crt = new Gtk.CellRendererText ());
-				//col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
+				col.SetCellDataFunc (crt, RenderDeclaringTypeOrNamespace);
 				col.SortColumnId = 2;
 				col.FixedWidth = 300;
 				col.Sizing = TreeViewColumnSizing.Fixed;
