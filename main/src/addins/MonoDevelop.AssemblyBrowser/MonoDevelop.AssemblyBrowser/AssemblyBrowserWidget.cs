@@ -518,60 +518,60 @@ namespace MonoDevelop.AssemblyBrowser
 			}
 		}
 
-		// void RenderDeclaringTypeOrNamespace (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		// {
-		// 	var ct = (Gtk.CellRendererText)cell;
-		// 	var entity = tree_model.GetValue (iter, 0) as IEntity;
-		// 	if (entity != null) {
-		// 		if (entity.DeclaringType != null) {
-		// 			ct.Text = entity.DeclaringType.FullName;
-		// 			return;
-		// 		}
-		// 		if (entity is ITypeDefinition type) {
-		// 			ct.Text = type.Namespace;
-		// 		} else {
-		// 			ct.Text = entity.DeclaringType?.Namespace ?? "";
-		// 		}
-		// 	}
-		// }
+		void RenderDeclaringTypeOrNamespace (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+		{
+			var ct = (Gtk.CellRendererText)cell;
+			var entity = tree_model.GetValue (iter, 0) as IEntity;
+			if (entity != null) {
+				if (entity.DeclaringType != null) {
+					ct.Text = entity.DeclaringType.FullName;
+					return;
+				}
+				if (entity is ITypeDefinition type) {
+					ct.Text = type.Namespace;
+				} else {
+					ct.Text = entity.DeclaringType?.Namespace ?? "";
+				}
+			}
+		}
 
-		// void RenderText (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		// {
-		// 	var ct = (Gtk.CellRendererText)cell;
-		// 	var entity = tree_model.GetValue (iter, 0) as INamedElement;
-		// 	if (entity != null)
-		// 		ct.Text = entity.Name;
-		// }
+		void RenderText (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+		{
+			var ct = (Gtk.CellRendererText)cell;
+			var entity = tree_model.GetValue (iter, 0) as INamedElement;
+			if (entity != null)
+				ct.Text = entity.Name;
+		}
 
-		// void RenderImage (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		// {
-		// 	var ct = (CellRendererImage)cell;
-		// 	var entity = tree_model.GetValue (iter, 0) as IEntity;
-		// 	if (entity is IEvent evt) {
-		// 		ct.Image = ImageService.GetIcon (EventDefinitionNodeBuilder.GetStockIcon (evt), Gtk.IconSize.Menu);
-		// 		return;
-		// 	}
+		void RenderImage (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+		{
+			var ct = (CellRendererImage)cell;
+			var entity = tree_model.GetValue (iter, 0) as IEntity;
+			if (entity is IEvent evt) {
+				ct.Image = ImageService.GetIcon (EventDefinitionNodeBuilder.GetStockIcon (evt), Gtk.IconSize.Menu);
+				return;
+			}
 
-		// 	if (entity is IField field) {
-		// 		ct.Image = ImageService.GetIcon (FieldDefinitionNodeBuilder.GetStockIcon (field), Gtk.IconSize.Menu);
-		// 		return;
-		// 	}
+			if (entity is IField field) {
+				ct.Image = ImageService.GetIcon (FieldDefinitionNodeBuilder.GetStockIcon (field), Gtk.IconSize.Menu);
+				return;
+			}
 
-		// 	if (entity is IMethod method) {
-		// 		ct.Image = ImageService.GetIcon (MethodDefinitionNodeBuilder.GetStockIcon (method), Gtk.IconSize.Menu);
-		// 		return;
-		// 	}
+			if (entity is IMethod method) {
+				ct.Image = ImageService.GetIcon (MethodDefinitionNodeBuilder.GetStockIcon (method), Gtk.IconSize.Menu);
+				return;
+			}
 
-		// 	if (entity is IProperty property) {
-		// 		ct.Image = ImageService.GetIcon (PropertyDefinitionNodeBuilder.GetStockIcon (property), Gtk.IconSize.Menu);
-		// 		return;
-		// 	}
+			if (entity is IProperty property) {
+				ct.Image = ImageService.GetIcon (PropertyDefinitionNodeBuilder.GetStockIcon (property), Gtk.IconSize.Menu);
+				return;
+			}
 				
-		// 	if (entity is ITypeDefinition type) {
-		// 		ct.Image = ImageService.GetIcon (TypeDefinitionNodeBuilder.GetStockIcon (type), Gtk.IconSize.Menu);
-		// 		return;
-		// 	}
-		// }
+			if (entity is ITypeDefinition type) {
+				ct.Image = ImageService.GetIcon (TypeDefinitionNodeBuilder.GetStockIcon (type), Gtk.IconSize.Menu);
+				return;
+			}
+		}
 
 		CancellationTokenSource searchTokenSource = new CancellationTokenSource ();
 
