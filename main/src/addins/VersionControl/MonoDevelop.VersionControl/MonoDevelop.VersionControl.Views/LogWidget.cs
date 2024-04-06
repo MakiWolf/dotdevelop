@@ -226,7 +226,7 @@ namespace MonoDevelop.VersionControl.Views
 			colChangedFile.Title = GettextCatalog.GetString ("File");
 			colChangedFile.PackStart (crp, false);
 			colChangedFile.PackStart (crt, true);
-			//colChangedFile.SetCellDataFunc (crp, HandleNodeCellDataFunc);
+			colChangedFile.SetCellDataFunc (crp, HandleNodeCellDataFunc);
 			colChangedFile.AddAttribute (crt, "text", 3);
 			treeviewFiles.AppendColumn (colChangedFile);
 
@@ -289,14 +289,14 @@ namespace MonoDevelop.VersionControl.Views
 			Ide.Gui.Styles.Changed += HandleStylesChanged;
 		}
 
-		// static void HandleNodeCellDataFunc (TreeViewColumn tree_column, CellRenderer cell, TreeModel tree_model, TreeIter iter)
-		// {
-		// 	var cri = (CellRendererImage)cell;
-		// 	var image = tree_model.GetValue (iter, 2) as Xwt.Drawing.Image;
-		// 	cri.Visible = image != null;
-		// 	if (image != null)
-		// 		cri.Image = image;
-		// }
+		static void HandleNodeCellDataFunc (TreeViewColumn tree_column, CellRenderer cell, ITreeModel tree_model, TreeIter iter)
+		{
+			var cri = (CellRendererImage)cell;
+			var image = tree_model.GetValue (iter, 2) as Xwt.Drawing.Image;
+			cri.Visible = image != null;
+			if (image != null)
+				cri.Image = image;
+		}
 
 		[GLib.ConnectBeforeAttribute]
 		void LabelRevision_ButtonPressEvent (object o, ButtonPressEventArgs args)
