@@ -170,10 +170,9 @@ namespace MonoDevelop.Components
        {
            base.OnDrawn(evnt);
 
-           //if(HasFocus && draw_focus) {
-           //    Style.PaintFocus(Style, GdkWindow, StateType.Normal, evnt.Area, this, "button",
-           //        0, 0, Allocation.Width, Allocation.Height);
-           //}
+           if(HasFocus && draw_focus) {
+               StyleContext.RenderFocus (evnt, 0, 0, Allocation.Width, Allocation.Height);
+           }
 
            return true;
        }
