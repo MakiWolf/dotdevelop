@@ -177,41 +177,41 @@ namespace MonoDevelop.AnalysisCore.Gui
 		const int xPadding = 4;
 		const int windowSize = 36;
 
-		// protected override Xwt.Point CalculateWindowLocation (Ide.Editor.TextEditor editor, TooltipItem item, Xwt.WindowFrame xwtWindow, int mouseX, int mouseY, Xwt.Point origin)
-		// {
-		// 	int w;
-		// 	double xalign;
-		// 	GetRequiredPosition (editor, xwtWindow, out w, out xalign);
-		// 	w += 10;
-		// 	var allocation = GetAllocation (editor);
+		protected override Xwt.Point CalculateWindowLocation (Ide.Editor.TextEditor editor, TooltipItem item, Xwt.WindowFrame xwtWindow, int mouseX, int mouseY, Xwt.Point origin)
+		{
+			int w;
+			double xalign;
+			GetRequiredPosition (editor, xwtWindow, out w, out xalign);
+			w += 10;
+			var allocation = GetAllocation (editor);
 
-		// 	var info = (TaggedTooltipInformation<CodeActions.CodeActionContainer>)item.Item;
-		// 	var loc = editor.OffsetToLocation (info.Tag.Span.Start);
-		// 	var p = editor.LocationToPoint (loc);
-		// 	var view = editor.GetContent<SourceEditorView> ();
-		// 	int x = (int)(p.X +  origin.X + allocation.X + xPadding);
-		// 	int y = (int)(p.Y + view.TextEditor.GetLineHeight (loc.Line) + origin.Y + allocation.Y + yPadding);
+			var info = (TaggedTooltipInformation<CodeActions.CodeActionContainer>)item.Item;
+			var loc = editor.OffsetToLocation (info.Tag.Span.Start);
+			var p = editor.LocationToPoint (loc);
+			var view = editor.GetContent<SourceEditorView> ();
+			int x = (int)(p.X +  origin.X + allocation.X + xPadding);
+			int y = (int)(p.Y + view.TextEditor.GetLineHeight (loc.Line) + origin.Y + allocation.Y + yPadding);
 
-		// 	Gtk.Widget widget = editor;
-		// 	var geometry = widget.Screen.GetUsableMonitorGeometry (widget.Screen.GetMonitorAtPoint (x, y));
+			Gtk.Widget widget = editor;
+			var geometry = widget.Screen.GetUsableMonitorGeometry (widget.Screen.GetMonitorAtPoint (x, y));
 
-		// 	if (x + w >= geometry.X + geometry.Width)
-		// 		x = geometry.X + geometry.Width - w;
-		// 	if (x < geometry.Left)
-		// 		x = geometry.Left;
+			if (x + w >= geometry.X + geometry.Width)
+				x = geometry.X + geometry.Width - w;
+			if (x < geometry.Left)
+				x = geometry.Left;
 
-		// 	if (info.Tag?.FloatingWidgetShown == true) {
-		// 		x += windowSize;
-		// 	}
+			if (info.Tag?.FloatingWidgetShown == true) {
+				x += windowSize;
+			}
 
-		// 	int h = (int)xwtWindow.Size.Height;
-		// 	if (y + h >= geometry.Y + geometry.Height)
-		// 		y = geometry.Y + geometry.Height - h;
-		// 	if (y < geometry.Top)
-		// 		y = geometry.Top;
+			int h = (int)xwtWindow.Size.Height;
+			if (y + h >= geometry.Y + geometry.Height)
+				y = geometry.Y + geometry.Height - h;
+			if (y < geometry.Top)
+				y = geometry.Top;
 
-		// 	return new Xwt.Point (x, y);
-		// }
+			return new Xwt.Point (x, y);
+		}
 
 		public override void ShowTooltipWindow (Ide.Editor.TextEditor editor, Components.Window tipWindow, TooltipItem item, Xwt.ModifierKeys modifierState, int mouseX, int mouseY)
 		{
@@ -242,19 +242,19 @@ namespace MonoDevelop.AnalysisCore.Gui
 		}
 
 		static FloatingQuickFixIconWidget floatingWidget;
-		// public override bool TryCloseTooltipWindow (Window tipWindow, TooltipCloseReason reason)
-		// {
-		// 	var window = (LanguageItemWindow)tipWindow;
-		// 	if (window.Tag is FloatingQuickFixIconWidget iconWidget) {
-		// 		if (reason != TooltipCloseReason.Force && iconWidget.IsMouseNear ()) {
-		// 			return false;
-		// 		}
-		// 		iconWidget.QueueDestroy (reason == TooltipCloseReason.Force ? 0u : 500);
-		// 	} else {
-		// 		window.Destroy ();
-		// 	}
-		// 	return true;
-		// }
+		public override bool TryCloseTooltipWindow (Window tipWindow, TooltipCloseReason reason)
+		{
+			var window = (LanguageItemWindow)tipWindow;
+			if (window.Tag is FloatingQuickFixIconWidget iconWidget) {
+				if (reason != TooltipCloseReason.Force && iconWidget.IsMouseNear ()) {
+					return false;
+				}
+				iconWidget.QueueDestroy (reason == TooltipCloseReason.Force ? 0u : 500);
+			} else {
+				window.Destroy ();
+			}
+			return true;
+		}
 
 		#endregion
 	}
