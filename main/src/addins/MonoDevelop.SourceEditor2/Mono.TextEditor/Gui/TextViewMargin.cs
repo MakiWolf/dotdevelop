@@ -37,6 +37,7 @@ using MonoDevelop.Components.AtkCocoaHelper;
 
 using Gdk;
 using Gtk;
+using Cairo;
 using System.Timers;
 using System.Diagnostics;
 using MonoDevelop.Components;
@@ -178,7 +179,7 @@ namespace Mono.TextEditor
 				return Margin.Document.Text;
 			}
 
-			Rectangle GetFrameForRange (AtkCocoa.Range range)
+			Gdk.Rectangle GetFrameForRange (AtkCocoa.Range range)
 			{
 				//ISyntaxHighlighting mode = Margin.Document.SyntaxMode != null && Margin.textEditor.Options.EnableSyntaxHighlighting ? Margin.Document.SyntaxMode : new SyntaxHighlighting(Margin.Document);
 
@@ -203,7 +204,7 @@ namespace Mono.TextEditor
 				rectangleHeight = yEnd - y;
 
 				// FIXME: Need to take scroll offset into consideration
-				return new Rectangle ((int)((xPos / Pango.Scale.PangoScale) + Margin.XOffset), (int)y, (int)rectangleWidth, (int)rectangleHeight);
+				return new Gdk.Rectangle ((int)((xPos / Pango.Scale.PangoScale) + Margin.XOffset), (int)y, (int)rectangleWidth, (int)rectangleHeight);
 			}
 
 			int GetLineForIndex (int index)
@@ -817,7 +818,7 @@ namespace Mono.TextEditor
 			GtkWorkarounds.SetImCursorLocation (
 				textEditor.IMContext,
 				textEditor.GdkWindow,
-				new Rectangle ((int)nonPreeditX, (int)nonPreeditY, 0, (int)(LineHeight - 1)));
+				new Gdk.Rectangle ((int)nonPreeditX, (int)nonPreeditY, 0, (int)(LineHeight - 1)));
 		}
 
 		public static Gdk.Rectangle EmptyRectangle = new Gdk.Rectangle (0, 0, 0, 0);
@@ -2271,14 +2272,14 @@ namespace Mono.TextEditor
 			cr.Restore ();
 		}
 
-		static internal ulong GetPixel (Color color)
+		static internal ulong GetPixel (Gdk.Color color)
 		{
 			return (((ulong)color.Red) << 32) | (((ulong)color.Green) << 16) | ((ulong)color.Blue);
 		}
 
 		static internal ulong GetPixel (HslColor color)
 		{
-			return GetPixel ((Color)color);
+			return GetPixel ((Gdk.Color)color);
 		}
 
 		static internal ulong GetPixel (Cairo.Color color)
@@ -2573,7 +2574,7 @@ namespace Mono.TextEditor
 
 		uint codeSegmentTooltipTimeoutId = 0;
 
-		internal void ShowCodeSegmentPreviewTooltip (ISegment segment, Rectangle hintRectangle, uint timeout = 650)
+		internal void ShowCodeSegmentPreviewTooltip (ISegment segment, Gdk.Rectangle hintRectangle, uint timeout = 650)
 		{
 			if (previewWindow != null && previewWindow.Segment.Equals (segment))
 				return;
@@ -2963,8 +2964,8 @@ namespace Mono.TextEditor
 
 						var pixelWidth = width / Pango.Scale.PangoScale + foldXMargin * 2;
 
-						var foldingRectangle = new Rectangle ((int)xPos, y, (int)pixelWidth, (int)LineHeight - 1);
-						yield return new KeyValuePair<Rectangle, FoldSegment> (foldingRectangle, folding);
+						var foldingRectangle = new Gdk.Rectangle ((int)xPos, y, (int)pixelWidth, (int)LineHeight - 1);
+						yield return new KeyValuePair<Gdk.Rectangle, FoldSegment> (foldingRectangle, folding);
 						xPos += pixelWidth;
 						if (folding.GetEndLine (textEditor.Document) != line) {
 							line = folding.GetEndLine (textEditor.Document);
