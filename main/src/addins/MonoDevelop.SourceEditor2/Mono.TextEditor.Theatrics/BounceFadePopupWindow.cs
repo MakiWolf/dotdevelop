@@ -88,7 +88,7 @@ namespace Mono.TextEditor.Theatrics
 		int x, y;
 		protected int width, height;
 		double vValue, hValue;
-//		protected Rectangle bounds;
+		protected Gdk.Rectangle bounds;
 
 		public virtual void Popup ()
 		{
@@ -97,13 +97,13 @@ namespace Mono.TextEditor.Theatrics
 				return;
 			}
 			editor.GdkWindow.GetOrigin (out x, out y);
-//			bounds = CalculateInitialBounds ();
-//			x = x + bounds.X - (int)(ExpandWidth / 2);
-//			y = y + bounds.Y - (int)(ExpandHeight / 2);
+			bounds = CalculateInitialBounds ();
+			x = x + bounds.X - (int)(ExpandWidth / 2);
+			y = y + bounds.Y - (int)(ExpandHeight / 2);
 			Move (x, y);
 			
-//			width = System.Math.Max (1, bounds.Width + (int)ExpandWidth);
-//			height = System.Math.Max (1, bounds.Height + (int)ExpandHeight);
+			width = System.Math.Max (1, bounds.Width + (int)ExpandWidth);
+			height = System.Math.Max (1, bounds.Height + (int)ExpandHeight);
 			Resize (width, height);
 			
 			
@@ -216,7 +216,7 @@ namespace Mono.TextEditor.Theatrics
 			}
 		}
 
-//		protected abstract Rectangle CalculateInitialBounds ();
+		protected abstract Gdk.Rectangle CalculateInitialBounds ();
 		
 		
 		
