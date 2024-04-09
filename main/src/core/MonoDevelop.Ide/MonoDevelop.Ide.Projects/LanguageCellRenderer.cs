@@ -27,6 +27,7 @@ using System;
 using System.Linq;
 using Gdk;
 using Gtk;
+using Cairo;
 using MonoDevelop.Components;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Ide.Templates;
@@ -35,7 +36,7 @@ namespace MonoDevelop.Ide.Projects
 {
 	class LanguageCellRenderer : CellRendererText
 	{
-		Rectangle languageRect;
+		Gdk.Rectangle languageRect;
 		int dropdownTriangleWidth = 8;
 		int dropdownTriangleHeight = 5;
 		const int dropdownTriangleRightHandPadding = 8;
@@ -94,7 +95,7 @@ namespace MonoDevelop.Ide.Projects
 				languageRightHandPadding + 10;
 		}
 
-		public Rectangle GetLanguageRect ()
+		public Gdk.Rectangle GetLanguageRect ()
 		{
 			return languageRect;
 		}
@@ -192,7 +193,7 @@ namespace MonoDevelop.Ide.Projects
 			ctx.Fill ();
 		}
 
-		Rectangle GetLanguageButtonRectangle (/*Drawable window, */Widget widget, Rectangle cell_area, int textHeight, int textWidth)
+		Gdk.Rectangle GetLanguageButtonRectangle (/*Drawable window, */Widget widget, Gdk.Rectangle cell_area, int textHeight, int textWidth)
 		{
 			int languageRectangleHeight = cell_area.Height - 8;
 			int languageRectangleWidth = textWidth + languageLeftHandPadding;
@@ -207,7 +208,7 @@ namespace MonoDevelop.Ide.Projects
 			var y = cell_area.Y + dy;
 			var x = cell_area.X + cell_area.Width - languageRectangleWidth - rightHandCellPadding;
 
-			return new Rectangle (x, y, languageRectangleWidth, languageRectangleHeight);
+			return new Gdk.Rectangle (x, y, languageRectangleWidth, languageRectangleHeight);
 		}
 
 		internal bool IsLanguageButtonPressed (EventButton button)
