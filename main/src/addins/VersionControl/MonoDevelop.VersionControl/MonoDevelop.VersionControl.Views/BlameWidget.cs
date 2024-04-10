@@ -297,11 +297,19 @@ namespace MonoDevelop.VersionControl.Views
 			return (dx != 0.0 || dy != 0.0) || base.OnScrollEvent (evnt);
 		}
 
-		// protected override void OnSizeRequested (ref Gtk.Requisition requisition)
-		// {
-		// 	base.OnSizeRequested (ref requisition);
-		// 	children.ForEach (child => child.Child.SizeRequest ());
-		// }
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			base.OnGetPreferredWidth (out minimum_width, out natural_width);
+			
+			children.ForEach (child => child.Child.SizeRequest ());
+		}
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			base.OnGetPreferredHeight (out minimum_height, out natural_height);
+			
+			children.ForEach (child => child.Child.SizeRequest ());
+		}
 
 		void HandleEditorExposeEvent (object o, PaintEventArgs args)
 		{
