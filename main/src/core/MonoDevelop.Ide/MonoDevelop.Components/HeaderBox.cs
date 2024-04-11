@@ -212,7 +212,7 @@ namespace MonoDevelop.Components
 			// var borderColor = new Gdk.GC (GdkWindow);
 			// borderColor.RgbFgColor = BorderColor != null ? BorderColor.Value : Style.Dark (Gtk.StateType.Normal);
 
-			// rect = Allocation;
+			rect = Allocation;
 			// for (int n=0; n<topMargin; n++)
 			// 	GdkWindow.DrawLine (borderColor, rect.X, rect.Y + n, rect.Right - 1, rect.Y + n);
 			
@@ -225,18 +225,18 @@ namespace MonoDevelop.Components
 			// for (int n=0; n<rightMargin; n++)
 			// 	GdkWindow.DrawLine (borderColor, rect.Right - n, rect.Y, rect.Right - n, rect.Bottom);
 
-			// if (showTopShadow) {
-			// 	// FIXME: VV: Remove gradient features
-			// 	using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
-			// 		cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, shadowSize);
-			// 		using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, rect.Y + shadowSize)) {
-			// 			pat.AddColorStop (0, new Cairo.Color (0, 0, 0, shadowStrengh));
-			// 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
-			// 			cr.SetSource (pat);
-			// 			cr.Fill ();
-			// 		}
-			// 	}
-			// }
+			if (showTopShadow) {
+			 	// FIXME: VV: Remove gradient features
+			 	using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+			 		cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, shadowSize);
+			 		using (Cairo.Gradient pat = new Cairo.LinearGradient (rect.X, rect.Y, rect.X, rect.Y + shadowSize)) {
+			 			pat.AddColorStop (0, new Cairo.Color (0, 0, 0, shadowStrengh));
+			 			pat.AddColorStop (1, new Cairo.Color (0, 0, 0, 0));
+			 			cr.SetSource (pat);
+			 			cr.Fill ();
+			 		}
+			 	}
+			}
 
 			//borderColor.Dispose ();
 			return res;
