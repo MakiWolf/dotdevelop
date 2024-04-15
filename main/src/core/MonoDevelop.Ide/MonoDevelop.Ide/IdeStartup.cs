@@ -169,10 +169,10 @@ namespace MonoDevelop.Ide
 
 			//default to Windows IME on Windows
 			//if (Platform.IsWindows && GtkWorkarounds.GtkMinorVersion >= 16) {
-				//var settings = Gtk.Settings.Default;
-				//var val = GtkWorkarounds.GetProperty (settings, "gtk-im-module");
-				//if (string.IsNullOrEmpty (val.Val as string))
-				//	GtkWorkarounds.SetProperty (settings, "gtk-im-module", new GLib.Value ("ime"));
+				var settings = Gtk.Settings.Default;
+				var val = GtkWorkarounds.GetProperty (settings, "gtk-im-module");
+				if (string.IsNullOrEmpty (val.Val as string))
+					GtkWorkarounds.SetProperty (settings, "gtk-im-module", new GLib.Value ("ime"));
 		//	}
 
 			DispatchService.Initialize ();
@@ -513,18 +513,18 @@ namespace MonoDevelop.Ide
 			string location = null;
 			Version version = null;
 			Version minVersion = new Version (2, 12, 22);
-			location = "C:\\Users\\Marku\\AppData\\Local\\Gtk\\3.24.24";
-			// using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
-			// 	if (key != null)
-			// 		location = key.GetValue (null) as string;
-			// }
-			// using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\Version")) {
-			// 	if (key != null)
-			// 		Version.TryParse (key.GetValue (null) as string, out version);
-			// }
+			//location = "C:\\Users\\Marku\\AppData\\Local\\Gtk\\3.24.24";
+			 using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
+			 	if (key != null)
+			 		location = key.GetValue (null) as string;
+			 }
+			 using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\Version")) {
+			 	if (key != null)
+			 		Version.TryParse (key.GetValue (null) as string, out version);
+			 }
 
 			//TODO: check build version of GTK# dlls in GAC
-			if (/*version == null || version < minVersion || */ location == null || !File.Exists (Path.Combine (location, "libgtk-3-0.dll"))) {
+			if (/*version == null || version < minVersion || */ location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-3-0.dll"))) {
 				LoggingService.LogError ("Did not find required GTK# installation");
 				string url = "http://monodevelop.com/Download";
 				string caption = "Fatal Error";
@@ -541,7 +541,7 @@ namespace MonoDevelop.Ide
 
 			LoggingService.LogInfo ("Found GTK# version " + version);
 
-			var path = Path.Combine (location);
+			var path = Path.Combine (location, @"bin");
 			try {
 				if (SetDllDirectory (path)) {
 					return true;

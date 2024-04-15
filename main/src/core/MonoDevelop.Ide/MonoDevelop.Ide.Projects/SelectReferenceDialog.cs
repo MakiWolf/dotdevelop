@@ -162,7 +162,7 @@ namespace MonoDevelop.Ide.Projects
 			return refTreeStore.AppendValues (txt, secondaryTxt, GetTypeText (refInfo), refInfo.Reference, refInfo, ImageService.GetIcon ("md-package", IconSize.Dnd));
 		}
 
-		[DllImport ("libgtk-win32-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgtk-3-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_notebook_set_action_widget (IntPtr notebook, IntPtr widget, int packType);
 
 		public SelectReferenceDialog ()

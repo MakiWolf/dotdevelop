@@ -419,10 +419,10 @@ namespace MacPlatform
 			return KernelInterop.TrySampleHostCpu (out value);
 		}
 
-		[DllImport("libgtk-win32-2.0-0.dll", CallingConvention=CallingConvention.Cdecl)]
+		[DllImport("libgtk-3-0.dll", CallingConvention=CallingConvention.Cdecl)]
 		static extern IntPtr gtk_get_current_event ();
 
-		[DllImport ("libgdk-win32-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgdk-3-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		static extern void gdk_event_free (IntPtr raw);
 
 		public TimeSpan GetEventTime (Gdk.EventKey eventKey)

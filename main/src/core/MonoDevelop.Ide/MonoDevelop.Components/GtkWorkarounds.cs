@@ -1504,12 +1504,12 @@ namespace MonoDevelop.Components
 		}
 
 #if MAC
-		[DllImport ("libgtk-win32-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgtk-3-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		static extern IntPtr gtk_get_current_event ();
 
 		public static IntPtr GetCurrentEventHandle () => gtk_get_current_event ();
 
-		[DllImport ("libgdk-win32-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgdk-3-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		static extern void gdk_event_free (IntPtr raw);
 
 		public static void FreeEvent (IntPtr raw)

@@ -41,7 +41,7 @@ namespace MonoDevelop.Platform
 	public static class GdkWin32
 	{
 		static readonly uint GotGdkEventsMessage = RegisterWindowMessage ("GDK_WIN32_GOT_EVENTS");
-		internal const string LIBGDK = "libgdk-win32-2.0-0.dll";
+		internal const string LIBGDK = "libgdk-3-0.dll";
 
 		[DllImport (LIBGDK, CallingConvention = CallingConvention.Cdecl)]
 		static extern IntPtr gdk_win32_drawable_get_handle (IntPtr drawable);
