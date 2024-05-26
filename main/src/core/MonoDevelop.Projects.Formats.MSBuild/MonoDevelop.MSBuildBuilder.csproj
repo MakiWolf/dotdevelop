@@ -47,7 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release' ">
-    <None Include="app.config">
+    <None Include="app.windows.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>MonoDevelop.MSBuildBuilder.exe.config</Link>
     </None>

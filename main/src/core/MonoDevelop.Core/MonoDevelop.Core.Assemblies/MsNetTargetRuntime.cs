@@ -179,13 +179,16 @@ namespace MonoDevelop.Core.Assemblies
 			if (instance != null)
 				return instance.MSBuildPath;
 
-			using (RegistryKey msb = Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\" + toolsVersion, false)) {
-				if (msb != null) {
-					if (msb.GetValue ("MSBuildToolsPath") is string path && File.Exists (Path.Combine (path, "MSBuild.exe")))
-						return path;
-				}
-				return null;
-			}
+			// using (RegistryKey msb = Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\" + toolsVersion, false)) {
+			// 	if (msb != null) {
+			// 		if (msb.GetValue ("MSBuildToolsPath") is string path && File.Exists (Path.Combine (path, "MSBuild.exe")))
+			// 			return path;
+			// 	}
+			// 	return null;
+			// }
+			
+			string msbuild = @"C:\Program Files (x86)\Mono\lib\mono\msbuild\Current\bin";
+			return msbuild;
 		}
 
 		public override string GetMSBuildToolsPath (string toolsVersion)
