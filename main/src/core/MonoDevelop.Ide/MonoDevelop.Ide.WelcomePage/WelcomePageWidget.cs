@@ -197,12 +197,12 @@ namespace MonoDevelop.Ide.WelcomePage
 					if (Owner.LogoImage != null) {
 						var lRect = new Gdk.Rectangle (Allocation.X, Allocation.Y, (int)Owner.LogoImage.Width, (int)Owner.LogoImage.Height);
 						//if (evnt.Region.RectIn (lRect) != OverlapType.Out)
-						//	context.DrawImage (this, Owner.LogoImage, Allocation.X, Allocation.Y);
+							context.DrawImage (this, Owner.LogoImage, Allocation.X, Allocation.Y);
 					
 						var bgRect = new Gdk.Rectangle (Allocation.X + (int)Owner.LogoImage.Width, Allocation.Y, Allocation.Width - (int)Owner.LogoImage.Width, (int)Owner.TopBorderImage.Height);
 						//if (evnt.Region.RectIn (bgRect) != OverlapType.Out)
-						//	for (int x = bgRect.X; x < bgRect.Right; x += (int)Owner.TopBorderImage.Width)
-						//		context.DrawImage (this, Owner.TopBorderImage.WithSize (Owner.TopBorderImage.Width, bgRect.Height), x, Allocation.Y);
+							for (int x = bgRect.X; x < bgRect.Right; x += (int)Owner.TopBorderImage.Width)
+								context.DrawImage (this, Owner.TopBorderImage.WithSize (Owner.TopBorderImage.Width, bgRect.Height), x, Allocation.Y);
 					}
 				}
 				

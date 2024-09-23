@@ -37,6 +37,7 @@ using MonoDevelop.Components.AtkCocoaHelper;
 
 using Gdk;
 using Gtk;
+using Cairo;
 using System.Timers;
 using System.Diagnostics;
 using MonoDevelop.Components;
@@ -178,7 +179,7 @@ namespace Mono.TextEditor
 				return Margin.Document.Text;
 			}
 
-			Rectangle GetFrameForRange (AtkCocoa.Range range)
+			Gdk.Rectangle GetFrameForRange (AtkCocoa.Range range)
 			{
 				//ISyntaxHighlighting mode = Margin.Document.SyntaxMode != null && Margin.textEditor.Options.EnableSyntaxHighlighting ? Margin.Document.SyntaxMode : new SyntaxHighlighting(Margin.Document);
 
@@ -203,7 +204,7 @@ namespace Mono.TextEditor
 				rectangleHeight = yEnd - y;
 
 				// FIXME: Need to take scroll offset into consideration
-				return new Rectangle ((int)((xPos / Pango.Scale.PangoScale) + Margin.XOffset), (int)y, (int)rectangleWidth, (int)rectangleHeight);
+				return new Gdk.Rectangle ((int)((xPos / Pango.Scale.PangoScale) + Margin.XOffset), (int)y, (int)rectangleWidth, (int)rectangleHeight);
 			}
 
 			int GetLineForIndex (int index)
@@ -817,7 +818,7 @@ namespace Mono.TextEditor
 			GtkWorkarounds.SetImCursorLocation (
 				textEditor.IMContext,
 				textEditor.GdkWindow,
-				new Rectangle ((int)nonPreeditX, (int)nonPreeditY, 0, (int)(LineHeight - 1)));
+				new Gdk.Rectangle ((int)nonPreeditX, (int)nonPreeditY, 0, (int)(LineHeight - 1)));
 		}
 
 		public static Gdk.Rectangle EmptyRectangle = new Gdk.Rectangle (0, 0, 0, 0);
@@ -848,78 +849,78 @@ namespace Mono.TextEditor
 
 		public void DrawCaret (Gdk.Window win, Gdk.Rectangle rect)
 		{
-//			if (!this.textEditor.IsInDrag && !(this.caretX >= 0 && (!this.textEditor.IsSomethingSelected || this.textEditor.SelectionRange.Length == 0)))
-//				return;
-//			if (win == null || Settings.Default.CursorBlink && !Caret.IsVisible || !caretBlink)
-//				return;
-//			using (Cairo.Context cr = Gdk.CairoHelper.Create (win)) {
-//				cr.Rectangle (XOffset, 0, textEditor.Allocation.Width - XOffset, textEditor.Allocation.Height);
-//				cr.Clip ();
-//				cr.LineWidth = System.Math.Max (1, System.Math.Floor (textEditor.Options.Zoom));
-//				cr.Antialias = Cairo.Antialias.None;
-//				var curRect = new Gdk.Rectangle ((int)caretX, (int)caretY, (int)this.charWidth, (int)LineHeight - 1);
-//				if (curRect != caretRectangle) {
-//					caretRectangle = curRect;
+			if (!this.textEditor.IsInDrag && !(this.caretX >= 0 && (!this.textEditor.IsSomethingSelected || this.textEditor.SelectionRange.Length == 0)))
+				return;
+			if (win == null || Settings.Default.CursorBlink && !Caret.IsVisible || !caretBlink)
+				return;
+			using (Cairo.Context cr = Gdk.CairoHelper.Create (win)) {
+				cr.Rectangle (XOffset, 0, textEditor.Allocation.Width - XOffset, textEditor.Allocation.Height);
+				cr.Clip ();
+				cr.LineWidth = System.Math.Max (1, System.Math.Floor (textEditor.Options.Zoom));
+				cr.Antialias = Cairo.Antialias.None;
+				var curRect = new Gdk.Rectangle ((int)caretX, (int)caretY, (int)this.charWidth, (int)LineHeight - 1);
+				if (curRect != caretRectangle) {
+					caretRectangle = curRect;
 //					textEditor.TextArea.QueueDrawArea (caretRectangle.X - (int)textEditor.Options.Zoom,
 //					               (int)(caretRectangle.Y + (-textEditor.VAdjustment.Value + caretVAdjustmentValue)),
 //				                    caretRectangle.Width + (int)textEditor.Options.Zoom,
 //					               caretRectangle.Height + 1);
-//					caretVAdjustmentValue = textEditor.VAdjustment.Value;
-//				}
-//
-//				var fgColor = SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.Foreground);
+					caretVAdjustmentValue = textEditor.VAdjustment.Value;
+				}
+
+				var fgColor = SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.Foreground);
 //				var bgColor = textEditor.ColorStyle.Default.CairoBackgroundColor;
-//				var line = Document.GetLine (Caret.Line);
-//				if (line != null) {
-//					foreach (var marker in Document.GetMarkers (line)) {
-//						var style = marker as StyleTextLineMarker;
-//						if (style == null)
-//							continue;
-//	//					if (style.IncludedStyles.HasFlag (StyleTextLineMarker.StyleFlag.BackgroundColor))
-//	//						bgColor = style.BackgroundColor;
-//						if (style.IncludedStyles.HasFlag (StyleTextLineMarker.StyleFlag.Color))
-//							fgColor = style.Color;
-//					}
-//				}
-//				/*
-//				var foreground = ((HslColor)fgColor).ToPixel ();
-//				var background = ((HslColor)color).ToPixel ();
-//				var caretColor = (foreground ^ background) & 0xFFFFFF;
-//				color = HslColor.FromPixel (caretColor);*/
-//				var color = fgColor;
-//
-//				switch (Caret.Mode) {
-//				case CaretMode.Insert:
-//					cr.DrawLine (color,
-//					             caretRectangle.X + 0.5,
-//					             caretRectangle.Y + 0.5,
-//					             caretRectangle.X + 0.5,
-//					             caretRectangle.Y + caretRectangle.Height);
-//					break;
-//				case CaretMode.Block:
-//					cr.SetSourceColor (color);
-//					cr.Rectangle (caretRectangle.X + 0.5, caretRectangle.Y + 0.5, caretRectangle.Width, caretRectangle.Height);
-//					cr.Fill ();
-//					char caretChar = GetCaretChar ();
-//					if (!char.IsWhiteSpace (caretChar) && caretChar != '\0') {
-//						using (var layout = textEditor.LayoutCache.RequestLayout ()) {
-//							layout.FontDescription = textEditor.Options.Font;
-//							layout.SetText (caretChar.ToString ());
-//							cr.MoveTo (caretRectangle.X, caretRectangle.Y);
-//							cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.Background));
-//							cr.ShowLayout (layout);
-//						}
-//					}
-//					break;
-//				case CaretMode.Underscore:
-//					cr.DrawLine (color,
-//					             caretRectangle.X + 0.5,
-//					             caretRectangle.Y + caretRectangle.Height + 0.5,
-//					             caretRectangle.X + caretRectangle.Width,
-//					             caretRectangle.Y + caretRectangle.Height + 0.5);
-//					break;
-//				}
-//			}
+				var line = Document.GetLine (Caret.Line);
+				if (line != null) {
+					foreach (var marker in Document.GetMarkers (line)) {
+						var style = marker as StyleTextLineMarker;
+						if (style == null)
+							continue;
+	//					if (style.IncludedStyles.HasFlag (StyleTextLineMarker.StyleFlag.BackgroundColor))
+	//						bgColor = style.BackgroundColor;
+						if (style.IncludedStyles.HasFlag (StyleTextLineMarker.StyleFlag.Color))
+							fgColor = style.Color;
+					}
+				}
+				/*
+				var foreground = ((HslColor)fgColor).ToPixel ();
+				var background = ((HslColor)color).ToPixel ();
+				var caretColor = (foreground ^ background) & 0xFFFFFF;
+				color = HslColor.FromPixel (caretColor);*/
+				var color = fgColor;
+
+				switch (Caret.Mode) {
+				case CaretMode.Insert:
+					cr.DrawLine (color,
+					             caretRectangle.X + 0.5,
+					             caretRectangle.Y + 0.5,
+					             caretRectangle.X + 0.5,
+					             caretRectangle.Y + caretRectangle.Height);
+					break;
+				case CaretMode.Block:
+					cr.SetSourceColor (color);
+					cr.Rectangle (caretRectangle.X + 0.5, caretRectangle.Y + 0.5, caretRectangle.Width, caretRectangle.Height);
+					cr.Fill ();
+					char caretChar = GetCaretChar ();
+					if (!char.IsWhiteSpace (caretChar) && caretChar != '\0') {
+						using (var layout = textEditor.LayoutCache.RequestLayout ()) {
+							layout.FontDescription = textEditor.Options.Font;
+							layout.SetText (caretChar.ToString ());
+							cr.MoveTo (caretRectangle.X, caretRectangle.Y);
+							cr.SetSourceColor (SyntaxHighlightingService.GetColor (textEditor.EditorTheme, EditorThemeColors.Background));
+							cr.ShowLayout (layout);
+						}
+					}
+					break;
+				case CaretMode.Underscore:
+					cr.DrawLine (color,
+					             caretRectangle.X + 0.5,
+					             caretRectangle.Y + caretRectangle.Height + 0.5,
+					             caretRectangle.X + caretRectangle.Width,
+					             caretRectangle.Y + caretRectangle.Height + 0.5);
+					break;
+				}
+			}
 		}
 
 		void GetSelectionOffsets (DocumentLine line, out int selectionStart, out int selectionEnd)
@@ -2271,14 +2272,14 @@ namespace Mono.TextEditor
 			cr.Restore ();
 		}
 
-		static internal ulong GetPixel (Color color)
+		static internal ulong GetPixel (Gdk.Color color)
 		{
 			return (((ulong)color.Red) << 32) | (((ulong)color.Green) << 16) | ((ulong)color.Blue);
 		}
 
 		static internal ulong GetPixel (HslColor color)
 		{
-			return GetPixel ((Color)color);
+			return GetPixel ((Gdk.Color)color);
 		}
 
 		static internal ulong GetPixel (Cairo.Color color)
@@ -2573,7 +2574,7 @@ namespace Mono.TextEditor
 
 		uint codeSegmentTooltipTimeoutId = 0;
 
-		internal void ShowCodeSegmentPreviewTooltip (ISegment segment, Rectangle hintRectangle, uint timeout = 650)
+		internal void ShowCodeSegmentPreviewTooltip (ISegment segment, Gdk.Rectangle hintRectangle, uint timeout = 650)
 		{
 			if (previewWindow != null && previewWindow.Segment.Equals (segment))
 				return;
@@ -2963,8 +2964,8 @@ namespace Mono.TextEditor
 
 						var pixelWidth = width / Pango.Scale.PangoScale + foldXMargin * 2;
 
-						var foldingRectangle = new Rectangle ((int)xPos, y, (int)pixelWidth, (int)LineHeight - 1);
-						yield return new KeyValuePair<Rectangle, FoldSegment> (foldingRectangle, folding);
+						var foldingRectangle = new Gdk.Rectangle ((int)xPos, y, (int)pixelWidth, (int)LineHeight - 1);
+						yield return new KeyValuePair<Gdk.Rectangle, FoldSegment> (foldingRectangle, folding);
 						xPos += pixelWidth;
 						if (folding.GetEndLine (textEditor.Document) != line) {
 							line = folding.GetEndLine (textEditor.Document);

@@ -27,6 +27,7 @@
 using System;
 using Gtk;
 using Gdk;
+using Cairo;
 using MonoDevelop.Core;
 
 namespace MonoDevelop.AssemblyBrowser
@@ -58,25 +59,25 @@ namespace MonoDevelop.AssemblyBrowser
 			base.OnDestroyed ();
 		}
 
-		// protected override bool OnExposeEvent (EventExpose evnt)
-		// {
-		// 	Gdk.Window win = evnt.Window;
-		// 	win.DrawRectangle (Style.BaseGC (string.IsNullOrEmpty (Markup) ? StateType.Insensitive : StateType.Normal), true, evnt.Area);
-		// 	int x = 0;
-		// 	int y = 0;
-		// 	if (string.IsNullOrEmpty (Markup)) {
-		// 		layout.SetMarkup (GettextCatalog.GetString ("No documentation available."));
-		// 		int width, height;
-		// 		layout.GetPixelSize (out width, out height);
-		// 		x = (Allocation.Width - width) / 2;
-		// 		y = (Allocation.Height - height) / 2;
-		// 	} else {
-		// 		layout.SetMarkup (Markup);
-		// 	}
-		// 	layout.Width = Allocation.Width * (int)Pango.Scale.PangoScale;
-		// 	win.DrawLayout (Style.TextGC (StateType.Normal), x, y, layout);
-		// 	return true;
-		// }
+		protected override bool OnDrawn (Cairo.Context evnt)
+		{
+			//Gdk.Window win = evnt.Window;
+			// win.DrawRectangle (Style.BaseGC (string.IsNullOrEmpty (Markup) ? StateType.Insensitive : StateType.Normal), true, evnt.Area);
+			// int x = 0;
+			// int y = 0;
+			// if (string.IsNullOrEmpty (Markup)) {
+			// 	layout.SetMarkup (GettextCatalog.GetString ("No documentation available."));
+			// 	int width, height;
+			// 	layout.GetPixelSize (out width, out height);
+			// 	x = (Allocation.Width - width) / 2;
+			// 	y = (Allocation.Height - height) / 2;
+			// } else {
+			// 	layout.SetMarkup (Markup);
+			// }
+			// layout.Width = Allocation.Width * (int)Pango.Scale.PangoScale;
+			// win.DrawLayout (Style.TextGC (StateType.Normal), x, y, layout);
+			return true;
+		}
 		
 		public void CalculateSize ()
 		{

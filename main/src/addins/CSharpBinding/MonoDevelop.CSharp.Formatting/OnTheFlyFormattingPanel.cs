@@ -49,8 +49,8 @@ namespace MonoDevelop.SourceEditor.OptionPanels
 		public override Control CreatePanelWidget ()
 		{
 			widget = new OnTheFlyFormattingPanelWidget ();
-			if (Xwt.Toolkit.CurrentEngine.Type != Xwt.ToolkitType.Gtk) {
-				LoggingService.LogError ("OnTheFlyFormattingPanel: Xwt.Toolkit.CurrentEngine.Type != Xwt.ToolkitType.Gtk - currently unsupported");
+			if (Xwt.Toolkit.CurrentEngine.Type != Xwt.ToolkitType.Gtk3) {
+				LoggingService.LogError ("OnTheFlyFormattingPanel: Xwt.Toolkit.CurrentEngine.Type != Xwt.ToolkitType.Gtk3 - currently unsupported");
 				return null;
 			}
 			return (Gtk.Widget)Xwt.Toolkit.CurrentEngine.GetNativeWidget (widget);

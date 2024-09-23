@@ -25,7 +25,7 @@ namespace Stetic
 		{
 			BinContainer bc = new BinContainer();
 //			bin.SizeRequested += new Gtk.SizeRequestedHandler(bc.OnSizeRequested);
-//			bin.SizeAllocated += new Gtk.SizeAllocatedHandler(bc.OnSizeAllocated);
+			bin.SizeAllocated += new Gtk.SizeAllocatedHandler(bc.OnSizeAllocated);
 			bin.Added += new Gtk.AddedHandler(bc.OnAdded);
 			return bc;
 		}
@@ -38,13 +38,13 @@ namespace Stetic
 //			}
 //		}
 
-//		private void OnSizeAllocated(object sender, Gtk.SizeAllocatedArgs args)
-//		{
+		private void OnSizeAllocated(object sender, Gtk.SizeAllocatedArgs args)
+		{
 //			if ((this.child != null))
 //			{
 //				this.child.Allocation = args.Allocation;
 //			}
-//		}
+		}
 
 		private void OnAdded(object sender, Gtk.AddedArgs args)
 		{

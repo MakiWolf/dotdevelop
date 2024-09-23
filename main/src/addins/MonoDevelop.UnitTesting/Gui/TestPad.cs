@@ -30,6 +30,7 @@ using System;
 using System.Collections;
 using Gtk;
 using Gdk;
+using Cairo;
 
 using MonoDevelop.Core;
 using MonoDevelop.Core.Execution;
@@ -1001,14 +1002,14 @@ namespace MonoDevelop.UnitTesting
 			set { padding = value; }
 		}
 		
-		// protected override bool OnExposeEvent (Gdk.EventExpose args)
-		// {
-		// 	using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
-		// 		gc.ClipRectangle = Allocation;
-		// 		GdkWindow.DrawLayout (gc, padding, padding, layout);
-		// 	}
-		// 	return true;
-		// }
+		protected override bool OnDrawn (Cairo.Context args)
+		{
+			//using (Gdk.GC gc = new Gdk.GC (GdkWindow)) {
+			//	gc.ClipRectangle = Allocation;
+			//	GdkWindow.DrawLayout (gc, padding, padding, layout);
+			//}
+			return true;
+		}
 		protected override void OnDestroyed ()
 		{
 			if (layout != null) {

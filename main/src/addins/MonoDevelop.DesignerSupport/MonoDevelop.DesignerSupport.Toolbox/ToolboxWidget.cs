@@ -873,34 +873,49 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 
 		#region Control size management
 		bool realSizeRequest;
-		// protected override void OnSizeRequested (ref Requisition requisition)
-		// {
-		// 	if (!realSizeRequest) {
-		// 		// Request a minimal width, to size recalculation infinite loops with
-		// 		// small widths, due to the vscrollbar being shown and hidden.
-		// 		requisition.Width = 50;
-		// 		requisition.Height = 0;
-		// 		return;
-		// 	}
-		// 	int xpos = 0;
-		// 	int ypos = 0;
-		// 	Iterate (ref xpos, ref ypos, null, null);
-		// 	requisition.Width = 50;
-		// 	requisition.Height = ypos;
-		// 	if (this.vAdjustement != null) {
-		// 		this.vAdjustement.SetBounds (0,
-		// 									 ypos,
-		// 									 20,
-		// 									 Allocation.Height,
-		// 									 Allocation.Height);
-		// 		if (ypos < Allocation.Height)
-		// 			this.vAdjustement.Value = 0;
-		// 		if (vAdjustement.Value + vAdjustement.PageSize > vAdjustement.Upper)
-		// 			vAdjustement.Value = vAdjustement.Upper - vAdjustement.PageSize;
-		// 		if (vAdjustement.Value < 0)
-		// 			vAdjustement.Value = 0;
-		// 	}
-		// }
+
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			base.OnGetPreferredWidth (out minimum_width, out natural_width);
+				if (!realSizeRequest) {
+		 		// Request a minimal width, to size recalculation infinite loops with
+		 		// small widths, due to the vscrollbar being shown and hidden.
+		 		minimum_width = 50;
+		 		//minimum_height = 0;
+		 		return;
+		 	}
+			minimum_width = 50;
+		}
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			base.OnGetPreferredHeight (out minimum_height, out natural_height);
+			if (!realSizeRequest) {
+		 		// Request a minimal width, to size recalculation infinite loops with
+		 		// small widths, due to the vscrollbar being shown and hidden.
+		 		//minimum_width = 50;
+		 		minimum_height = 0;
+		 		return;
+		 	}
+		 	int xpos = 0;
+		 	int ypos = 0;
+		 	Iterate (ref xpos, ref ypos, null, null);
+		 	//minimum_width = 50;
+		 	minimum_height = ypos;
+		 	if (this.vAdjustement != null) {
+		 		this.vAdjustement.SetBounds (0,
+		 									 ypos,
+		 									 20,
+		 									 minimum_height,
+		 									 minimum_height);
+		 		if (ypos < minimum_height)
+		 			this.vAdjustement.Value = 0;
+		 		if (vAdjustement.Value + vAdjustement.PageSize > vAdjustement.Upper)
+		 			vAdjustement.Value = vAdjustement.Upper - vAdjustement.PageSize;
+		 		if (vAdjustement.Value < 0)
+		 			vAdjustement.Value = 0;
+		 	}
+		}
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{

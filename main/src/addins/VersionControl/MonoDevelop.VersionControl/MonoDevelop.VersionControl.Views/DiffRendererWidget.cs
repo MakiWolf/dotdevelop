@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 using Gdk;
+using Cairo;
 using MonoDevelop.Ide;
 using MonoDevelop.Components;
 using System.Text;
@@ -119,6 +120,18 @@ namespace MonoDevelop.VersionControl.Views
 			QueueResize ();
 		}
 
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			base.OnGetPreferredWidth (out minimum_width, out natural_width);
+			minimum_width = natural_width;
+		}
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			base.OnGetPreferredHeight (out minimum_height, out natural_height);
+			minimum_height = natural_height;
+			
+		}
 		// protected override void OnSizeRequested (ref Requisition requisition)
 		// {
 		// 	base.OnSizeRequested (ref requisition);
@@ -160,8 +173,8 @@ namespace MonoDevelop.VersionControl.Views
 			return layout;
 		}
 
-// 		protected override bool OnExposeEvent (Gdk.EventExpose e)
-// 		{
+ 		protected override bool OnDrawn (Cairo.Context e)
+ 		{
 // 			var window = e.Window;
 // 			var widget = this;
 // 			ClearAccessibleLines ();
@@ -309,8 +322,8 @@ namespace MonoDevelop.VersionControl.Views
 // 				infoGC.Dispose ();
 // 			}
 // 			Accessible?.SetAccessibleChildren (accessibleLines.Select (l => l.Accessible).ToArray ());
-// 			return true;
-// 		}
+			return true;
+ 		}
 
 		void AddAccessibleLine (int x, int y, BlockType blockType, int lineNumber, ref bool replaceFirst, string text)
 		{
@@ -626,9 +639,9 @@ namespace MonoDevelop.VersionControl.Views
 
 			public void SetBounds (int x, int y, int w, int h)
 			{
-				Accessible.FrameInGtkParent = new Rectangle (x, y, w, h);
+				Accessible.FrameInGtkParent = new Gdk.Rectangle (x, y, w, h);
 				var cocoaY = widget.Allocation.Height - y - h;
-				Accessible.FrameInParent = new Rectangle (x, cocoaY, w, h);
+				Accessible.FrameInParent = new Gdk.Rectangle (x, cocoaY, w, h);
 			}
 
 			void PerformPress (object sender, EventArgs e)

@@ -185,34 +185,34 @@ namespace Mono.TextEditor.Theatrics
 			}
 			base.OnRemoved (widget);
 		}
-//		protected override void OnSizeAllocated (Rectangle allocation)
-//		{
-//			base.OnSizeAllocated (allocation);
-//
-//			int margin = BorderVisible ? 1 : 0;
-//			int vwidth = vScrollBar.Visible ? vScrollBar.Requisition.Width : 0;
-//			int hheight = hScrollBar.Visible ? hScrollBar.Requisition.Height : 0; 
-//			var childRectangle = new Rectangle (allocation.X + margin, allocation.Y + margin, allocation.Width - vwidth - margin*2, allocation.Height - hheight - margin*2);
-//
-//			if (Child != null) 
-//				Child.SizeAllocate (childRectangle);
-//			if (vScrollBar.Visible) {
-//				int vChildTopHeight = -1;
-//				foreach (var child in children.Where (child => child.ChildPosition == ChildPosition.Top)) {
-//					child.Child.SizeAllocate (new Rectangle (childRectangle.RightInside (), childRectangle.Y + vChildTopHeight, allocation.Width - vwidth, child.Child.Requisition.Height));
-//					vChildTopHeight += child.Child.Requisition.Height;
-//				}
-//				int v = vScrollBar is Scrollbar && hScrollBar.Visible ? hScrollBar.Requisition.Height : 0;
-//				vScrollBar.SizeAllocate (new Rectangle (childRectangle.X + childRectangle.Width + margin, childRectangle.Y + vChildTopHeight, vwidth, Allocation.Height - v - vChildTopHeight - margin));
-//				vAdjustment.Value = System.Math.Max (System.Math.Min (vAdjustment.Upper - vAdjustment.PageSize, vAdjustment.Value), vAdjustment.Lower);
-//			}
-//			
-//			if (hScrollBar.Visible) {
-//				int v = vScrollBar.Visible ? vScrollBar.Requisition.Width : 0;
-//				hScrollBar.SizeAllocate (new Rectangle (allocation.X, childRectangle.Y + childRectangle.Height + margin, allocation.Width - v, hheight));
-//				hScrollBar.Value = System.Math.Max (System.Math.Min (hAdjustment.Upper - hAdjustment.PageSize, hScrollBar.Value), hAdjustment.Lower);
-//			}
-//		}
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+		{
+			base.OnSizeAllocated (allocation);
+
+			int margin = BorderVisible ? 1 : 0;
+			int vwidth = vScrollBar.Visible ? vScrollBar.ChildRequisition.Width : 0;
+			int hheight = hScrollBar.Visible ? hScrollBar.ChildRequisition.Height : 0; 
+			var childRectangle = new Gdk.Rectangle (allocation.X + margin, allocation.Y + margin, allocation.Width - vwidth - margin*2, allocation.Height - hheight - margin*2);
+
+			if (Child != null) 
+			 	Child.SizeAllocate (childRectangle);
+			if (vScrollBar.Visible) {
+			 	int vChildTopHeight = -1;
+			 	foreach (var child in children.Where (child => child.ChildPosition == ChildPosition.Top)) {
+			 		child.Child.SizeAllocate (new Gdk.Rectangle (childRectangle.RightInside (), childRectangle.Y + vChildTopHeight, allocation.Width - vwidth, child.Child.ChildRequisition.Height));
+			 		vChildTopHeight += child.Child.ChildRequisition.Height;
+			 	}
+			 	int v = vScrollBar is Scrollbar && hScrollBar.Visible ? hScrollBar.ChildRequisition.Height : 0;
+			 	vScrollBar.SizeAllocate (new Gdk.Rectangle (childRectangle.X + childRectangle.Width + margin, childRectangle.Y + vChildTopHeight, vwidth, Allocation.Height - v - vChildTopHeight - margin));
+			 	vAdjustment.Value = System.Math.Max (System.Math.Min (vAdjustment.Upper - vAdjustment.PageSize, vAdjustment.Value), vAdjustment.Lower);
+			}
+			
+			if (hScrollBar.Visible) {
+			 	int v = vScrollBar.Visible ? vScrollBar.ChildRequisition.Width : 0;
+			 	hScrollBar.SizeAllocate (new Gdk.Rectangle (allocation.X, childRectangle.Y + childRectangle.Height + margin, allocation.Width - v, hheight));
+			 	hScrollBar.Value = System.Math.Max (System.Math.Min (hAdjustment.Upper - hAdjustment.PageSize, hScrollBar.Value), hAdjustment.Lower);
+			}
+		}
 		
 		static double Clamp (double min, double val, double max)
 		{

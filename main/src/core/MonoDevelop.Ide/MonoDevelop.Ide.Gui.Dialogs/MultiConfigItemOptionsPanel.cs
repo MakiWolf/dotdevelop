@@ -115,7 +115,8 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			configCombo.PackStart (cell, true);
 			configCombo.AddAttribute (cell, "text", 0);
 			combosBox.PackStart (configCombo, false, false, 0);
-			combosBox.PackStart (new Gtk.Label (GettextCatalog.GetString ("Platform:")), false, false, 0);
+			var platformLabel = new Gtk.Label (GettextCatalog.GetString ("Platform:"));
+			combosBox.PackStart (platformLabel, false, false, 0);
 			platformCombo = new Gtk.ComboBoxText ();
 			platformCombo.Name = "panelWidgetPlatformCombo";
 			combosBox.PackStart (platformCombo, false, false, 0);
@@ -127,10 +128,10 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 				configurationLabel,
 				GettextCatalog.GetString ("Select a configuration"));
 
-			//platformCombo.SetCommonAccessibilityAttributes (
-				//platformCombo.Name,
-				//platformLabel,
-				//GettextCatalog.GetString ("Select a platform"));
+			platformCombo.SetCommonAccessibilityAttributes (
+				platformCombo.Name,
+				platformLabel,
+				GettextCatalog.GetString ("Select a platform"));
 
 			cbox.Hidden += OnPageHidden;
 			cbox.Shown += OnPageShown;

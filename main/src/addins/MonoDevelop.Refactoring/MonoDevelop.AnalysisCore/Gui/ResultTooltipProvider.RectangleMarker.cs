@@ -30,6 +30,7 @@
 using MonoDevelop.Components;
 #endif
 
+using Cairo;
 using MonoDevelop.Ide.Editor;
 using MonoDevelop.Ide.Editor.Highlighting;
 
@@ -44,23 +45,23 @@ namespace MonoDevelop.AnalysisCore.Gui
 				WidthRequest = 16;
 			}
 
-			// protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-			// {
-			// 	using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
-			// 		const int triangleWidth = 8;
-			// 		const int triangleHeight = 4;
+			protected override bool OnDrawn (Cairo.Context evnt)
+			{
+				using (Cairo.Context cr = Gdk.CairoHelper.Create (GdkWindow)) {
+					const int triangleWidth = 8;
+					const int triangleHeight = 4;
 
-			// 		cr.SetSourceColor (SyntaxHighlightingService.GetColor (DefaultSourceEditorOptions.Instance.GetEditorTheme (), EditorThemeColors.LineNumbers));
-			// 		var topPosition = Allocation.Height / 2 - triangleHeight / 2;
+					cr.SetSourceColor (SyntaxHighlightingService.GetColor (DefaultSourceEditorOptions.Instance.GetEditorTheme (), EditorThemeColors.LineNumbers));
+					var topPosition = Allocation.Height / 2 - triangleHeight / 2;
 
-			// 		cr.MoveTo (Allocation.Width / 2 + triangleWidth / 2, topPosition);
-			// 		cr.LineTo (Allocation.Width / 2 - triangleWidth / 2, topPosition);
-			// 		cr.LineTo (Allocation.Width / 2, topPosition + triangleHeight);
-			// 		cr.LineTo (Allocation.Width / 2 + triangleWidth / 2, topPosition);
-			// 		cr.Fill ();
-			// 	}
-			// 	return true;
-			// }
+					cr.MoveTo (Allocation.Width / 2 + triangleWidth / 2, topPosition);
+					cr.LineTo (Allocation.Width / 2 - triangleWidth / 2, topPosition);
+					cr.LineTo (Allocation.Width / 2, topPosition + triangleHeight);
+					cr.LineTo (Allocation.Width / 2 + triangleWidth / 2, topPosition);
+					cr.Fill ();
+				}
+				return true;
+			}
 		}
 	}
 }

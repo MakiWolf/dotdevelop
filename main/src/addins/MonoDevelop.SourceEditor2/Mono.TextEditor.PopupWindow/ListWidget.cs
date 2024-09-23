@@ -193,7 +193,7 @@ namespace Mono.TextEditor.PopupWindow
 		protected override bool OnDrawn (Cairo.Context args)
 		{
 			base.OnDrawn (args);
-			//DrawList (args);
+			DrawList (args);
 	  		return true;
 		}
 		
