@@ -13,20 +13,20 @@
 	url = https://github.com/dotdevelop/mdtestharness.git
 [submodule "main/external/mono-addins"]
 	path = main/external/mono-addins
-	url = https://github.com/dotdevelop/mono-addins.git
+	url = https://github.com/MakiWolf/mono-addins.git
 	branch = dotdevelop_gtksharp
 [submodule "main/external/mono-tools"]
 	path = main/external/mono-tools
 	url = https://github.com/dotdevelop/mono-tools.git
 [submodule "main/external/nrefactory"]
 	path = main/external/nrefactory
-	url = https://github.com/dotdevelop/NRefactory.git
+	url = https://github.com/MakiWolf/NRefactory.git
 [submodule "main/external/sharpsvn-binary"]
 	path = main/external/sharpsvn-binary
 	url = https://github.com/dotdevelop/sharpsvn-binary.git
 [submodule "main/external/xwt"]
 	path = main/external/xwt
-	url = https://github.com/dotdevelop/xwt
+	url = https://github.com/MakiWolf/xwt
 	branch = dotdevelop
 [submodule "main/external/Xamarin.PropertyEditing"]
 	path = main/external/Xamarin.PropertyEditing
