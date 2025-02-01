@@ -45,54 +45,54 @@ namespace MonoDevelop.CSharp
 	{
 		private ICodeParser codeParser;
 		
-		[Obsolete]
-		public override ICodeParser CreateParser ()
-		{
-			if (codeParser == null)
-				codeParser = new CodeParser ();
-			return codeParser;
-		}
+		// [Obsolete]
+		// public override ICodeParser CreateParser ()
+		// {
+		// 	if (codeParser == null)
+		// 		codeParser = new CodeParser ();
+		// 	return codeParser;
+		// }
 		
-		public override CodeCompileUnit Parse (TextReader codeStream)
-		{
-			return ParseInternal (codeStream);
-		}
+		// public override CodeCompileUnit Parse (TextReader codeStream)
+		// {
+		// 	return ParseInternal (codeStream);
+		// }
 		
-		static readonly Lazy<IUnresolvedAssembly> mscorlib = new Lazy<IUnresolvedAssembly>(
-			delegate {					
-			return new CecilLoader ().LoadAssemblyFile(typeof(object).Assembly.Location);
-		});
+		// static readonly Lazy<IUnresolvedAssembly> mscorlib = new Lazy<IUnresolvedAssembly>(
+		// 	delegate {					
+		// 	return new CecilLoader ().LoadAssemblyFile(typeof(object).Assembly.Location);
+		// });
 		
-		static readonly Lazy<IUnresolvedAssembly> systemCore = new Lazy<IUnresolvedAssembly>(
-			delegate {
-			return new CecilLoader ().LoadAssemblyFile(typeof(System.Linq.Enumerable).Assembly.Location);
-		});
+		// static readonly Lazy<IUnresolvedAssembly> systemCore = new Lazy<IUnresolvedAssembly>(
+		// 	delegate {
+		// 	return new CecilLoader ().LoadAssemblyFile(typeof(System.Linq.Enumerable).Assembly.Location);
+		// });
 
-		static readonly Lazy<ICompilation> Compilation = new Lazy<ICompilation>(
-			delegate {
-				var project = new CSharpProjectContent().AddAssemblyReferences (new [] { mscorlib.Value, systemCore.Value });
-				return project.CreateCompilation();
-		});
+		// static readonly Lazy<ICompilation> Compilation = new Lazy<ICompilation>(
+		// 	delegate {
+		// 		var project = new CSharpProjectContent().AddAssemblyReferences (new [] { mscorlib.Value, systemCore.Value });
+		// 		return project.CreateCompilation();
+		// });
 
-		static CodeCompileUnit ParseInternal (TextReader codeStream)
-		{
-			var cs = codeStream.ReadToEnd ();
-			var tree = SyntaxTree.Parse (cs, "a.cs");
-			if (tree.Errors.Count > 0)
-				throw new ArgumentException ("Stream contained errors.");
+		// static CodeCompileUnit ParseInternal (TextReader codeStream)
+		// {
+		// 	var cs = codeStream.ReadToEnd ();
+		// 	var tree = SyntaxTree.Parse (cs, "a.cs");
+		// 	if (tree.Errors.Count > 0)
+		// 		throw new ArgumentException ("Stream contained errors.");
 
-			var convertVisitor = new CodeDomConvertVisitor ();
+		// 	var convertVisitor = new CodeDomConvertVisitor ();
 		
-			return convertVisitor.Convert (Compilation.Value, tree, tree.ToTypeSystem ());
-		}
+		// 	return convertVisitor.Convert (Compilation.Value, tree, tree.ToTypeSystem ());
+		// }
 		
-		private class CodeParser : ICodeParser
-		{
-			public CodeCompileUnit Parse (TextReader codeStream)
-			{
-				return ParseInternal (codeStream);
-			}
-		}
+		// private class CodeParser : ICodeParser
+		// {
+		// 	public CodeCompileUnit Parse (TextReader codeStream)
+		// 	{
+		// 		return ParseInternal (codeStream);
+		// 	}
+		// }
 	}
 	
 	

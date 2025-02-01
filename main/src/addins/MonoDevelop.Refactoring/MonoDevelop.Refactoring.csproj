@@ -7,6 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{100568FC-F4E8-439B-94AD-41D11724E45B}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\AddIns\MonoDevelop.Refactoring</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

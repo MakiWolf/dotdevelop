@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0EA3AD14-404A-4D3F-979B-F087E2E70C82}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\AddIns\DisplayBindings\AssemblyBrowser</OutputPath>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <!--

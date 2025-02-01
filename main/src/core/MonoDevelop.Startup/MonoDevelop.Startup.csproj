@@ -8,6 +8,7 @@
     <AssemblyName>MonoDevelop</AssemblyName>
     <ApplicationIcon>..\..\..\theme-icons\Windows\monodevelop.ico</ApplicationIcon>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <Commandlineparameters>-no-redirect</Commandlineparameters>
     <OutputPath>..\..\..\build\bin</OutputPath>
     <EnvironmentVariables>

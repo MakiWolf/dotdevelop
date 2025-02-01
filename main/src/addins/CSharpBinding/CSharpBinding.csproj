@@ -8,6 +8,7 @@
     <ProjectGuid>{07CC7654-27D6-421D-A64C-0FFA40456FA2}</ProjectGuid>
     <AssemblyName>MonoDevelop.CSharpBinding</AssemblyName>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\AddIns\CSharpBinding</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--
