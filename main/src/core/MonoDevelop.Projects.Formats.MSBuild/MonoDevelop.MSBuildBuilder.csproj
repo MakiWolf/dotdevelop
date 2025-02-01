@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MonoDevelop.Projects.MSBuild</RootNamespace>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
-     <RuntimeIdentifier>win</RuntimeIdentifier>
+     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <OutputPath>..\..\..\build\bin</OutputPath>
     <StartupObject>MonoDevelop.Projects.MSBuild.MainClass</StartupObject>
   </PropertyGroup>
@@ -48,7 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release' ">
-    <None Include="app.windows.config">
+    <None Include="app.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>MonoDevelop.MSBuildBuilder.exe.config</Link>
     </None>

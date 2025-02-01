@@ -11,6 +11,7 @@
     <AssemblyName>MonoDevelop.Debugger.PerfTests</AssemblyName>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <TestRunnerCommand>..\..\..\..\build\bin\mdtool.exe</TestRunnerCommand>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <OutputPath>..\..\..\..\build\tests</OutputPath>
   </PropertyGroup>
