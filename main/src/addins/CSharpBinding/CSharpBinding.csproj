@@ -6,6 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{07CC7654-27D6-421D-A64C-0FFA40456FA2}</ProjectGuid>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <AssemblyName>MonoDevelop.CSharpBinding</AssemblyName>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\CSharpBinding</OutputPath>

@@ -7,6 +7,7 @@
     <ProjectGuid>{BEFADF93-EE92-4806-9C0B-937B25311C95}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <TestRunnerCommand>..\..\..\..\build\bin\mdtool.exe</TestRunnerCommand>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <OutputPath>..\..\..\..\build\tests</OutputPath>
     <!--

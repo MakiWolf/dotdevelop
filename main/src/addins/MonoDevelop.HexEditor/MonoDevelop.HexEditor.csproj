@@ -7,6 +7,7 @@
     <ProjectGuid>{8EE34CBC-5D7C-4BB3-8B19-26D5522770F6}</ProjectGuid>
     <RootNamespace>MHex</RootNamespace>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>..\..\..\build\AddIns\DisplayBindings\HexEditor</OutputPath>
   </PropertyGroup>

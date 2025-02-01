@@ -6,6 +6,7 @@
     <ProjectGuid>{8A04FF99-5DFE-4E3D-A24F-72A621C8DDC6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <OutputPath>..\..\..\build\bin</OutputPath>
+     <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' " />

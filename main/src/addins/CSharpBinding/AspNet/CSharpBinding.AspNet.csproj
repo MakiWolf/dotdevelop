@@ -9,6 +9,7 @@
     <AssemblyName>MonoDevelop.CSharpBinding.AspNet</AssemblyName>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\AddIns\CSharpBinding</OutputPath>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <!--
     This needs to be ported to the new editor, and currently makes use of many deprecated APIs.
     -->

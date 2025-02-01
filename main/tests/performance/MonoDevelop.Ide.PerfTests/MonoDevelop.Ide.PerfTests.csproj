@@ -8,6 +8,7 @@
     <ProjectGuid>{58A31F94-E76F-4921-9D82-D6F7C9F12518}</ProjectGuid>
     <OutputType>Library</OutputType>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\tests</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

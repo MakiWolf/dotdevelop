@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7FCDB0D9-AA7D-44E4-BE74-55312B432389}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\AddIns\MonoDevelop.GtkCore</OutputPath>
     <!--
     This needs to be ported to Roslyn, and currently makes use of many, many deprecated APIs.

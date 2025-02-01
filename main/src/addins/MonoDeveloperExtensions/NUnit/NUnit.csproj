@@ -7,6 +7,7 @@
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <AssemblyName>MonoDeveloperExtensions_nunit</AssemblyName>
     <OutputPath>..\..\..\..\build\AddIns\MonoDeveloperExtensions\</OutputPath>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />

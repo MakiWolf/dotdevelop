@@ -7,6 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9E4BA410-8338-42EC-AF9C-422C35ECED81}</ProjectGuid>
     <TestRunnerCommand>..\..\..\build\bin\mdtool.exe</TestRunnerCommand>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\tests</OutputPath>

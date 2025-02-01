@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3FDB97B5-916E-4817-8098-41659687A8FF}</ProjectGuid>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>bin\$(Configuration)</OutputPath>

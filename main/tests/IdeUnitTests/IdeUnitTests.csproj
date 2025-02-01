@@ -8,6 +8,7 @@
     <ProjectGuid>{F7B2B155-7CF4-42C4-B5AF-63C0667D2E4F}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\build\tests</OutputPath>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <!--
     This contains tests for many deprecated editor APIs, disable deprecation warnings for now.
     -->

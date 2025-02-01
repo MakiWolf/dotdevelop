@@ -6,6 +6,7 @@
     <ProjectGuid>{CF789E43-7AAF-4690-BA32-ABD75DEEB087}</ProjectGuid>
     <RootNamespace>MonoDevelop.Core.Tests</RootNamespace>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\build\tests</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

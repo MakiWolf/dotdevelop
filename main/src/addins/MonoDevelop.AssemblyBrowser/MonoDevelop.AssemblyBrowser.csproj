@@ -7,6 +7,7 @@
     <ProjectGuid>{0EA3AD14-404A-4D3F-979B-F087E2E70C82}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\DisplayBindings\AssemblyBrowser</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <!--
     This needs to be ported to the new editor, and currently makes use of many deprecated APIs.

@@ -9,6 +9,7 @@
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\tests</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <DefineConstants>TRACE</DefineConstants>
     <!--
     This needs to be ported to the new editor, and currently makes use of many, many deprecated APIs.

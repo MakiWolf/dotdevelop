@@ -6,6 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\..\build\AddIns\MonoDevelop.PackageManagement</OutputPath>

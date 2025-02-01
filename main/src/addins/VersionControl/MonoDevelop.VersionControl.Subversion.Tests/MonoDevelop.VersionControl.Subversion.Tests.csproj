@@ -6,6 +6,7 @@
     <ProjectGuid>{ABB21D58-6EFA-49EA-9555-EDDEC8123DD6}</ProjectGuid>
     <TestRunnerCommand>..\..\..\..\build\bin\mdtool.exe</TestRunnerCommand>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\tests</OutputPath>
   </PropertyGroup>

@@ -9,6 +9,7 @@
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <TestRunnerCommand>..\..\build\bin\mdtool.exe</TestRunnerCommand>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\build\tests</OutputPath>
     <RARResolveFromOutputDirectory>true</RARResolveFromOutputDirectory>
     <!--

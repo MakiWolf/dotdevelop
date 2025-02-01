@@ -7,6 +7,7 @@
     <ProjectGuid>{7926DB5B-96A7-47A7-9870-DB42FA5C3548}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\AddIns\MonoDevelop.GtkCore</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

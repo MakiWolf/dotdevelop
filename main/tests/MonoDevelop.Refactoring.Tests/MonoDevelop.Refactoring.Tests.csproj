@@ -9,6 +9,7 @@
     <TestRunnerCommand>..\..\build\bin\mdtool.exe</TestRunnerCommand>
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <OutputPath>..\..\build\tests</OutputPath>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <!--
     This contains tests for many deprecated editor APIs, disable deprecation warnings for now.
     -->

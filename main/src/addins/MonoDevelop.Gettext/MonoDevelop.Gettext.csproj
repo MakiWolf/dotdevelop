@@ -7,6 +7,7 @@
     <ProjectGuid>{ADDC9D20-83C5-4245-9B46-2C5F6642CFBC}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\DisplayBindings\Gettext</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <!--
     This needs to be ported to the new editor, and currently makes use of many deprecated APIs.
     -->

@@ -8,6 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Mono.Instrumentation.Monitor</RootNamespace>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>..\..\..\build\bin</OutputPath>
     <PlatformTarget>x86</PlatformTarget>

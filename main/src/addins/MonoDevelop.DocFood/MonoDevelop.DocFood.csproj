@@ -7,6 +7,7 @@
     <ProjectGuid>{875D389F-48D1-4D46-BFC6-998837DD6AE0}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\BackendBindings\</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <!--
     This needs to be ported to the new editor, and currently makes use of many, many deprecated APIs.
     -->

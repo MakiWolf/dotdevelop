@@ -6,6 +6,7 @@
     <ProjectGuid>{E2CAB397-D00C-4D11-8F5F-E3A052092969}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\AddIns\VersionControl</OutputPath>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

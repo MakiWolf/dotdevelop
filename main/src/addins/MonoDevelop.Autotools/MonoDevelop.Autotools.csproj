@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CFC02FEC-BDF4-40B9-94D6-35E73F76A92E}</ProjectGuid>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\MonoDevelop.Autotools\</OutputPath>
   </PropertyGroup>

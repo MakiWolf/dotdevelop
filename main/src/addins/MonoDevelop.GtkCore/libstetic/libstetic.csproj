@@ -7,6 +7,7 @@
     <ProjectGuid>{F870E2E7-FA64-4B2F-968A-90B36AB7AAA9}</ProjectGuid>
     <RootNamespace>Stetic</RootNamespace>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\..\build\AddIns\MonoDevelop.GtkCore</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

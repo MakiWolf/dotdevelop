@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{75B9F2DF-4DEA-4007-965D-339563735EBE}</ProjectGuid>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\ChangeLogAddIn\</OutputPath>
   </PropertyGroup>

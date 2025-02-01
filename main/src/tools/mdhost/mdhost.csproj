@@ -5,7 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{BFE8691A-D323-4622-9021-7B8B27F81599}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+     <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+        <OutputType>Exe</OutputType>
     <AssemblyName>mdhost</AssemblyName>
     <RootNamespace>mdhost</RootNamespace>
     <OutputPath>..\..\..\build\bin\</OutputPath>

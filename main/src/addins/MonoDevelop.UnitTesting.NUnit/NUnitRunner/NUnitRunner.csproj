@@ -4,6 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0AF16AF1-0876-413E-9803-08BD33C19E00}</ProjectGuid>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\..\build\AddIns\MonoDevelop.UnitTesting\NUnit2</OutputPath>

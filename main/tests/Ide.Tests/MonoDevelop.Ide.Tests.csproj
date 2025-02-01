@@ -11,6 +11,7 @@
     <TestRunnerArgs>run-md-tests</TestRunnerArgs>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\build\tests</OutputPath>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--
     This contains tests for many deprecated editor APIs, disable deprecation warnings for now.

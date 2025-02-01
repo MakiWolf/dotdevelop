@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E33F7901-AA45-4C25-9868-DBB6CC8DC40C}</ProjectGuid>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\bin</OutputPath>
     <RootNamespace>MonoDevelop.ExtensionTools</RootNamespace>
   </PropertyGroup>

@@ -10,6 +10,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7525BB88-6142-4A26-93B9-A30C6983390A}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <BuildInfo>..\..\..\build\bin\buildinfo</BuildInfo>
     <VcRevision>..\..\..\vcrevision</VcRevision>
     <ConfigureScript>$(MSBuildProjectDirectory)\..\..\..\..\scripts\configure.cs</ConfigureScript>

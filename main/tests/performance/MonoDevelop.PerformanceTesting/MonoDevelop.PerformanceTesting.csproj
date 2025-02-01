@@ -9,6 +9,7 @@
     <RootNamespace>MonoDevelop.PerformanceTesting</RootNamespace>
     <AssemblyName>MonoDevelop.PerformanceTesting</AssemblyName>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
+      <RuntimeIdentifier>win</RuntimeIdentifier>
     <OutputPath>..\..\..\build\tests</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />

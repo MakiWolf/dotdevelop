@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA15FC26-A7E7-4932-93B7-65FAE6D5DD33}</ProjectGuid>
     <RootNamespace>MonoDevelop.Debugger</RootNamespace>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\MonoDevelop.Debugger.Gdb</OutputPath>
   </PropertyGroup>
