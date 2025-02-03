@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor;
-using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
-using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+//using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
+//using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Formatting.Rules;
 using Microsoft.CodeAnalysis.LanguageServices;
@@ -89,26 +89,26 @@ namespace MonoDevelop.Ide.Completion.Presentation
 
 			_differenceSelectorService = CompositionManager.Instance.GetExportedValue<ITextDifferencingSelectorService> ();
 
-			var container = languageBuffer.CurrentSnapshot.AsText ().Container;
-			var registration = Workspace.GetWorkspaceRegistration (container);
+			//var container = languageBuffer.CurrentSnapshot.AsText ().Container;
+			//var registration = Workspace.GetWorkspaceRegistration (container);
 			_hostType = GetHostType ();
 
-			if (registration.Workspace == null)
-			{
-				registration.WorkspaceChanged += Registration_WorkspaceChanged;
-			}
-			else
-			{
+			//if (registration.Workspace == null)
+			//{
+			//	registration.WorkspaceChanged += Registration_WorkspaceChanged;
+			//}
+			//else
+			//{
 				FinishInitialization ();
-			}
+			//}
 		}
 
 		private void Registration_WorkspaceChanged (object sender, EventArgs e)
 		{
-			var container = LanguageBuffer.CurrentSnapshot.AsText ().Container;
-			var registration = Workspace.GetWorkspaceRegistration (container);
+			//var container = LanguageBuffer.CurrentSnapshot.AsText ().Container;
+			//var registration = Workspace.GetWorkspaceRegistration (container);
 
-			registration.WorkspaceChanged -= Registration_WorkspaceChanged;
+			//registration.WorkspaceChanged -= Registration_WorkspaceChanged;
 
 			FinishInitialization ();
 		}
@@ -166,30 +166,30 @@ namespace MonoDevelop.Ide.Completion.Presentation
 
 			var subjectBuffer = (IProjectionBuffer)this.GetOpenTextBuffer ();
 			var originalSnapshot = LanguageBuffer.CurrentSnapshot;
-			var originalText = originalSnapshot.AsText ();
+			//var originalText = originalSnapshot.AsText ();
 
-			var changes = newText.GetTextChanges (originalText);
+			//var changes = newText.GetTextChanges (originalText);
 
-			IEnumerable<int> affectedVisibleSpanIndices = null;
-			var editorVisibleSpansInOriginal = SharedPools.Default<List<TextSpan>> ().AllocateAndClear ();
+			// IEnumerable<int> affectedVisibleSpanIndices = null;
+			// var editorVisibleSpansInOriginal = SharedPools.Default<List<TextSpan>> ().AllocateAndClear ();
 
-			try {
-				var originalDocument = _workspace.CurrentSolution.GetDocument (this.Id);
+			// try {
+			// 	var originalDocument = _workspace.CurrentSolution.GetDocument (this.Id);
 
-				editorVisibleSpansInOriginal.AddRange (GetEditorVisibleSpans ());
-				var newChanges = FilterTextChanges (originalText, editorVisibleSpansInOriginal, changes).ToList ();
-				if (newChanges.Count == 0) {
+			// 	editorVisibleSpansInOriginal.AddRange (GetEditorVisibleSpans ());
+			// 	var newChanges = FilterTextChanges (originalText, editorVisibleSpansInOriginal, changes).ToList ();
+			// 	if (newChanges.Count == 0) {
 					// no change to apply
 					return;
-				}
+				//}
 
-				ApplyChanges (subjectBuffer, newChanges, editorVisibleSpansInOriginal, out affectedVisibleSpanIndices);
-				AdjustIndentation (subjectBuffer, affectedVisibleSpanIndices);
-			}
-			finally {
-				SharedPools.Default<HashSet<int>> ().ClearAndFree ((HashSet<int>)affectedVisibleSpanIndices);
-				SharedPools.Default<List<TextSpan>> ().ClearAndFree (editorVisibleSpansInOriginal);
-			}
+				//ApplyChanges (subjectBuffer, newChanges, editorVisibleSpansInOriginal, out affectedVisibleSpanIndices);
+				//AdjustIndentation (subjectBuffer, affectedVisibleSpanIndices);
+			//}
+			//finally {
+			//	SharedPools.Default<HashSet<int>> ().ClearAndFree ((HashSet<int>)affectedVisibleSpanIndices);
+			//	SharedPools.Default<List<TextSpan>> ().ClearAndFree (editorVisibleSpansInOriginal);
+			//}
 		}
 
 		private IEnumerable<TextChange> FilterTextChanges (SourceText originalText, List<TextSpan> editorVisibleSpansInOriginal, IReadOnlyList<TextChange> changes)
@@ -274,11 +274,11 @@ namespace MonoDevelop.Ide.Completion.Presentation
 				var rightText = changeInOriginalText.NewText;
 				var offsetInOriginalText = changeInOriginalText.Span.Start;
 
-				if (TryGetSubTextChanges (originalText, visibleSpanInOriginalText, leftText, rightText, offsetInOriginalText, changes.Object)) {
+				//if (TryGetSubTextChanges (originalText, visibleSpanInOriginalText, leftText, rightText, offsetInOriginalText, changes.Object)) {
 					return changes.Object.ToList ();
-				}
+				//}
 
-				return GetSubTextChanges (originalText, visibleSpanInOriginalText, leftText, rightText, offsetInOriginalText);
+				//return GetSubTextChanges (originalText, visibleSpanInOriginalText, leftText, rightText, offsetInOriginalText);
 			}
 		}
 
@@ -312,29 +312,31 @@ namespace MonoDevelop.Ide.Completion.Presentation
 			}
 		}
 
-		private IEnumerable<TextChange> GetSubTextChanges (
-			SourceText originalText, TextSpan visibleSpanInOriginalText, string leftText, string rightText, int offsetInOriginalText)
-		{
+	//	private IEnumerable<TextChange> GetSubTextChanges (
+	//		SourceText originalText, TextSpan visibleSpanInOriginalText, string leftText, string rightText, int offsetInOriginalText)
+	//	{
 			// these are expensive. but hopefully we don't hit this as much except the boundary cases.
-			using (var leftPool = SharedPools.Default<List<ValueTuple<int, int>>> ().GetPooledObject ())
-			using (var rightPool = SharedPools.Default<List<ValueTuple<int, int>>> ().GetPooledObject ()) {
-				var leftReplacementMap = leftPool.Object;
-				var rightReplacementMap = rightPool.Object;
-				GetTextWithReplacements (leftText, rightText, leftReplacementMap, rightReplacementMap, out var leftTextWithReplacement, out var rightTextWithReplacement);
+			//using (var leftPool = SharedPools.Default<List<ValueTuple<int, int>>> ().GetPooledObject ())
+			//using (var rightPool = SharedPools.Default<List<ValueTuple<int, int>>> ().GetPooledObject ()) {
+				//var leftReplacementMap = leftPool.Object;
+				//var rightReplacementMap = rightPool.Object;
+				//GetTextWithReplacements (leftText, rightText, leftReplacementMap, rightReplacementMap, out var leftTextWithReplacement, out var rightTextWithReplacement);
 
-				var diffResult = DiffStrings (leftTextWithReplacement, rightTextWithReplacement);
+				//var diffResult = DiffStrings (leftTextWithReplacement, rightTextWithReplacement);
 
-				foreach (var difference in diffResult) {
-					var spanInLeftText = AdjustSpan (diffResult.LeftDecomposition.GetSpanInOriginal (difference.Left), leftReplacementMap);
-					var spanInRightText = AdjustSpan (diffResult.RightDecomposition.GetSpanInOriginal (difference.Right), rightReplacementMap);
+				//foreach (var difference in diffResult) {
+					//var spanInLeftText = AdjustSpan (diffResult.LeftDecomposition.GetSpanInOriginal (difference.Left), leftReplacementMap);
+					//var spanInRightText = AdjustSpan (diffResult.RightDecomposition.GetSpanInOriginal (difference.Right), rightReplacementMap);
 
-					var spanInOriginalText = new TextSpan (offsetInOriginalText + spanInLeftText.Start, spanInLeftText.Length);
-					if (TryGetSubTextChange (originalText, visibleSpanInOriginalText, rightText, spanInOriginalText, spanInRightText.ToTextSpan (), out var textChange)) {
-						yield return textChange;
-					}
-				}
-			}
-		}
+					//var spanInOriginalText = new TextSpan (offsetInOriginalText + spanInLeftText.Start, spanInLeftText.Length);
+					//if (TryGetSubTextChange (originalText, visibleSpanInOriginalText, rightText, spanInOriginalText, spanInRightText.ToTextSpan (), out var textChange)) {
+					//	yield return textChange;
+					//}
+				//}
+				
+			//}
+		
+		//}
 
 		private bool TryGetWhitespaceOnlyChanges (string leftText, string rightText, List<TextSpan> spansInLeftText, List<TextSpan> spansInRightText)
 		{
@@ -487,16 +489,16 @@ namespace MonoDevelop.Ide.Completion.Presentation
 			throw ExceptionUtilities.Unreachable;
 		}
 
-		private IHierarchicalDifferenceCollection DiffStrings (string leftTextWithReplacement, string rightTextWithReplacement)
-		{
-			var document = LanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChangesSafe ();
+		//private IHierarchicalDifferenceCollection DiffStrings (string leftTextWithReplacement, string rightTextWithReplacement)
+		//{
+			//var document = LanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChangesSafe ();
 
-			var diffService = _differenceSelectorService.GetTextDifferencingService (
-				_workspace.Services.GetLanguageServices (document.Project.Language).GetService<IContentTypeLanguageService> ().GetDefaultContentType ());
+			//var diffService = _differenceSelectorService.GetTextDifferencingService (
+			//	_workspace.Services.GetLanguageServices (document.Project.Language).GetService<IContentTypeLanguageService> ().GetDefaultContentType ());
 
-			diffService = diffService ?? _differenceSelectorService.DefaultTextDifferencingService;
-			return diffService.DiffStrings (leftTextWithReplacement, rightTextWithReplacement, s_venusEditOptions.DifferenceOptions);
-		}
+			//diffService = diffService ?? _differenceSelectorService.DefaultTextDifferencingService;
+			//return diffService.DiffStrings (leftTextWithReplacement, rightTextWithReplacement, s_venusEditOptions.DifferenceOptions);
+		//}
 
 		private void GetTextWithReplacements (
 			string leftText, string rightText,
@@ -578,14 +580,15 @@ namespace MonoDevelop.Ide.Completion.Presentation
 			return Span.FromBounds (start, end);
 		}
 
-		public IEnumerable<TextSpan> GetEditorVisibleSpans ()
-		{
-			return DataBuffer.CurrentSnapshot
-				.GetSourceSpans ()
-				.Where (ss => ss.Snapshot.TextBuffer == LanguageBuffer)
-				.Select (s => s.Span.ToTextSpan ())
-				.OrderBy (s => s.Start);
-		}
+		 public IEnumerable<TextSpan> GetEditorVisibleSpans ()
+		 {
+			return null;
+		// 	return DataBuffer.CurrentSnapshot
+		// 		.GetSourceSpans ()
+		// 		.Where (ss => ss.Snapshot.TextBuffer == LanguageBuffer)
+		// 		.Select (s => s.Span.ToTextSpan ())
+		// 		.OrderBy (s => s.Start);
+		 }
 
 		private static void ApplyChanges (
 			IProjectionBuffer subjectBuffer,
@@ -618,7 +621,7 @@ namespace MonoDevelop.Ide.Completion.Presentation
 					affectedSpans.Add (currentVisibleSpanIndex);
 				}
 
-				edit.ApplyAndLogExceptions ();
+				//edit.ApplyAndLogExceptions ();
 			}
 		}
 
@@ -635,7 +638,7 @@ namespace MonoDevelop.Ide.Completion.Presentation
 			}
 
 			var originalText = document.GetTextAsync (CancellationToken.None).WaitAndGetResult (CancellationToken.None);
-			Debug.Assert (object.ReferenceEquals (originalText, snapshot.AsText ()));
+			//Debug.Assert (object.ReferenceEquals (originalText, snapshot.AsText ()));
 
 			var root = document.GetSyntaxRootSynchronously (CancellationToken.None);
 
@@ -680,16 +683,16 @@ namespace MonoDevelop.Ide.Completion.Presentation
 				var formattingRules = venusFormattingRules.Concat (Formatter.GetDefaultFormattingRules (document));
 
 				var workspace = document.Project.Solution.Workspace;
-				var changes = Formatter.GetFormattedTextChanges (
-					root, new TextSpan [] { CommonFormattingHelpers.GetFormattingSpan (root, visibleSpan) },
-					workspace, options, formattingRules, CancellationToken.None);
+				//var changes = Formatter.GetFormattedTextChanges (
+				//	root, new TextSpan [] { CommonFormattingHelpers.GetFormattingSpan (root, visibleSpan) },
+				//	workspace, options, formattingRules, CancellationToken.None);
 
 				visibleSpans.Add (visibleSpan);
-				var newChanges = FilterTextChanges (document.GetTextAsync (CancellationToken.None).WaitAndGetResult (CancellationToken.None), visibleSpans, new ReadOnlyCollection<TextChange>(changes)).Where (t => visibleSpan.Contains (t.Span));
+				//var newChanges = FilterTextChanges (document.GetTextAsync (CancellationToken.None).WaitAndGetResult (CancellationToken.None), visibleSpans, new ReadOnlyCollection<TextChange>(changes)).Where (t => visibleSpan.Contains (t.Span));
 
-				foreach (var change in newChanges) {
-					edit.Replace (new Span(change.Span.Start, change.Span.Length), change.NewText);
-				}
+				//foreach (var change in newChanges) {
+				//	edit.Replace (new Span(change.Span.Start, change.Span.Length), change.NewText);
+				//}
 			}
 		}
 

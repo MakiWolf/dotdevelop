@@ -62,7 +62,7 @@ namespace MonoDevelop.CSharp
 			this.editorOperations = editorOperations;
 
 			this.joinableTaskContext = joinableTaskContext;
-			textContainer = view.TextBuffer.AsTextContainer ();
+			//textContainer = view.TextBuffer.AsTextContainer ();
 			registration = Microsoft.CodeAnalysis.Workspace.GetWorkspaceRegistration (textContainer);
 			registration.WorkspaceChanged += WorkspaceChanged;
 
@@ -129,10 +129,10 @@ namespace MonoDevelop.CSharp
 			lastOffset = offset;
 			lastOwnerProjects = ownerProjects.ToList ();//clone
 
-			var roslynDocument = snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
-			if (roslynDocument != null) {
-				Update (roslynDocument, position.BufferPosition.Position);
-			}
+			//var roslynDocument = snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
+			//if (roslynDocument != null) {
+			//	Update (roslynDocument, position.BufferPosition.Position);
+			//}
 		}
 
 		public event EventHandler<DocumentPathChangedEventArgs> PathChanged;

@@ -40,7 +40,7 @@ using MonoDevelop.Ide;
 using MonoDevelop.Ide.Gui;
 using Microsoft.VisualStudio.Platform;
 using Microsoft.VisualStudio.Text;
-using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
+//using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using MonoDevelop.Ide.CodeTemplates;
 using System.Linq;
@@ -286,12 +286,12 @@ namespace MonoDevelop.Ide.CodeCompletion
 
 				if (CompletionItem.Rules.FormatOnCommit) {
 					var spanToFormat = triggerSnapshotSpan.TranslateTo (currentBuffer.CurrentSnapshot, SpanTrackingMode.EdgeInclusive);
-					var formattingService = context.AnalysisDocument.GetLanguageService<IEditorFormattingService> ();
+					//var formattingService = context.AnalysisDocument.GetLanguageService<IEditorFormattingService> ();
 
-					if (formattingService != null) {
-						var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, spanToFormat.Span.ToTextSpan (), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
-						editor.ApplyTextChanges (changes);
-					}
+					//if (formattingService != null) {
+						//var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, spanToFormat.Span.ToTextSpan (), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
+						//editor.ApplyTextChanges (changes);
+					//}
 				}
 			}
 		}

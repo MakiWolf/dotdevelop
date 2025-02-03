@@ -290,18 +290,18 @@ namespace MonoDevelop.Ide.RoslynServices
 
 			var bufferGraph = factory.BufferGraphFactoryService.CreateBufferGraph (projectionBuffer);
 
-			if (document.TryGetText(out var sourceText) && sourceText.Container.TryGetTextBuffer() is ITextBuffer languageBuffer) {
-				var secondarySnapshot = languageBuffer.CurrentSnapshot;
-				var snapshotSpanInSecondaryBuffer = new SnapshotSpan (secondarySnapshot, new Span (spanInSecondaryBuffer.Start, spanInSecondaryBuffer.Length));
-				var topBufferSnapshotSpan = bufferGraph.MapUpToSnapshot (
-					snapshotSpanInSecondaryBuffer,
-					SpanTrackingMode.EdgeExclusive,
-					projectionBuffer.CurrentSnapshot).FirstOrDefault();
-				if (topBufferSnapshotSpan != default) {
-					spanInPrimaryBuffer = new TextSpan (topBufferSnapshotSpan.Start, topBufferSnapshotSpan.Length);
-					return true;
-				}
-			}
+			//if (document.TryGetText(out var sourceText) && sourceText.Container.TryGetTextBuffer() is ITextBuffer languageBuffer) {
+				//var secondarySnapshot = languageBuffer.CurrentSnapshot;
+				//var snapshotSpanInSecondaryBuffer = new SnapshotSpan (secondarySnapshot, new Span (spanInSecondaryBuffer.Start, spanInSecondaryBuffer.Length));
+				//var topBufferSnapshotSpan = bufferGraph.MapUpToSnapshot (
+					//snapshotSpanInSecondaryBuffer,
+					//SpanTrackingMode.EdgeExclusive,
+					//projectionBuffer.CurrentSnapshot).FirstOrDefault();
+				//if (topBufferSnapshotSpan != default) {
+				//	spanInPrimaryBuffer = new TextSpan (topBufferSnapshotSpan.Start, topBufferSnapshotSpan.Length);
+				//	return true;
+				//}
+			//}
 
 			return false;
 		}

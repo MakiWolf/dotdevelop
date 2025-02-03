@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+//using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.ExtractInterface;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServices;
@@ -36,55 +36,55 @@ using Microsoft.CodeAnalysis.Notification;
 
 namespace MonoDevelop.Refactoring.ExtractInterface
 {
-	[ExportWorkspaceService (typeof (IExtractInterfaceOptionsService), ServiceLayer.Default), Shared]
-	class ExtractInterfaceOptionsService : IExtractInterfaceOptionsService
+	//[ExportWorkspaceService (typeof (IExtractInterfaceOptionsService), ServiceLayer.Default), Shared]
+	class ExtractInterfaceOptionsService //: IExtractInterfaceOptionsService
 	{
-		readonly IThreadingContext threadingContext;
+		//readonly IThreadingContext threadingContext;
 
-		[ImportingConstructor]
-		public ExtractInterfaceOptionsService (IThreadingContext threadingContext)
-		{
-			this.threadingContext = threadingContext;
-		}
+		// [ImportingConstructor]
+		// public ExtractInterfaceOptionsService (IThreadingContext threadingContext)
+		// {
+		// 	this.threadingContext = threadingContext;
+		// }
 
-		public async Task<ExtractInterfaceOptionsResult> GetExtractInterfaceOptionsAsync (
-			ISyntaxFactsService syntaxFactsService,
-			INotificationService notificationService,
-			List<ISymbol> extractableMembers,
-			string defaultInterfaceName,
-			List<string> conflictingTypeNames,
-			string defaultNamespace,
-			string generatedNameTypeParameterSuffix,
-			string languageName)
-		{
-			await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync ();
+		// public async Task<ExtractInterfaceOptionsResult> GetExtractInterfaceOptionsAsync (
+		// 	ISyntaxFactsService syntaxFactsService,
+		// 	INotificationService notificationService,
+		// 	List<ISymbol> extractableMembers,
+		// 	string defaultInterfaceName,
+		// 	List<string> conflictingTypeNames,
+		// 	string defaultNamespace,
+		// 	string generatedNameTypeParameterSuffix,
+		// 	string languageName)
+		// {
+		// 	await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync ();
 
-			using (var dialog = new ExtractInterfaceDialog ()) {
+		// 	using (var dialog = new ExtractInterfaceDialog ()) {
 
-				dialog.Init (
-					syntaxFactsService,
-					notificationService,
-					extractableMembers,
-					defaultInterfaceName,
-					conflictingTypeNames,
-					defaultNamespace,
-					generatedNameTypeParameterSuffix,
-					languageName);
+		// 		dialog.Init (
+		// 			syntaxFactsService,
+		// 			notificationService,
+		// 			extractableMembers,
+		// 			defaultInterfaceName,
+		// 			conflictingTypeNames,
+		// 			defaultNamespace,
+		// 			generatedNameTypeParameterSuffix,
+		// 			languageName);
 
-				bool performChange = dialog.Run () == Xwt.Command.Ok;
-				if (!performChange)
-					return ExtractInterfaceOptionsResult.Cancelled;
+		// 		bool performChange = dialog.Run () == Xwt.Command.Ok;
+		// 		if (!performChange)
+		// 			return ExtractInterfaceOptionsResult.Cancelled;
 
-				return new ExtractInterfaceOptionsResult (
-					false,
-					dialog.IncludedMembers.AsImmutable (),
-					dialog.InterfaceName,
-					dialog.FileName,
-					dialog.UseSameFile
-						? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
-						: ExtractInterfaceOptionsResult.ExtractLocation.NewFile
-				);
-			}
-		}
+		// 		return new ExtractInterfaceOptionsResult (
+		// 			false,
+		// 			dialog.IncludedMembers.AsImmutable (),
+		// 			dialog.InterfaceName,
+		// 			dialog.FileName,
+		// 			dialog.UseSameFile
+		// 				? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
+		// 				: ExtractInterfaceOptionsResult.ExtractLocation.NewFile
+		// 		);
+		// 	}
+		// }
 	}
 }

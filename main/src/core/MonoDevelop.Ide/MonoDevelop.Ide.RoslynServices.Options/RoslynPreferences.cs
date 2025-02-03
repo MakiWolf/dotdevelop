@@ -29,9 +29,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Completion;
-using Microsoft.CodeAnalysis.Editor.Options;
-using Microsoft.CodeAnalysis.Editor.Shared.Options;
-using Microsoft.CodeAnalysis.Editor.Implementation.TodoComments;
+//using Microsoft.CodeAnalysis.Editor.Options;
+//using Microsoft.CodeAnalysis.Editor.Shared.Options;
+//using Microsoft.CodeAnalysis.Editor.Implementation.TodoComments;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.Options;
@@ -95,29 +95,29 @@ namespace MonoDevelop.Ide.RoslynServices.Options
 				this.language = language;
 				roslynPreferences = preferences;
 
-				AutoFormattingOnCloseBrace = preferences.Wrap<bool> (
-					new OptionKey (FeatureOnOffOptions.AutoFormattingOnCloseBrace, language),
-					language + ".AutoFormattingOnCloseBrace"
-				);
+				// AutoFormattingOnCloseBrace = preferences.Wrap<bool> (
+				// 	new OptionKey (FeatureOnOffOptions.AutoFormattingOnCloseBrace, language),
+				// 	language + ".AutoFormattingOnCloseBrace"
+				// );
 
 				AutoFormattingOnReturn = preferences.Wrap<bool> (
 					new OptionKey (FormattingOptions.AutoFormattingOnReturn, language),
 					language + ".AutoFormattingOnReturn"
 				);
 
-				AutoFormattingOnSemicolon = preferences.Wrap<bool> (
-					new OptionKey (FeatureOnOffOptions.AutoFormattingOnSemicolon, language),
-					language + ".AutoFormattingOnSemicolon"
-				);
-				AutoFormattingOnTyping = preferences.Wrap<bool> (
-					new OptionKey (FeatureOnOffOptions.AutoFormattingOnTyping, language),
-					language + ".AutoFormattingOnTyping"
-				);
+				// AutoFormattingOnSemicolon = preferences.Wrap<bool> (
+				// 	new OptionKey (FeatureOnOffOptions.AutoFormattingOnSemicolon, language),
+				// 	language + ".AutoFormattingOnSemicolon"
+				// );
+				// AutoFormattingOnTyping = preferences.Wrap<bool> (
+				// 	new OptionKey (FeatureOnOffOptions.AutoFormattingOnTyping, language),
+				// 	language + ".AutoFormattingOnTyping"
+				// );
 
-				FormatOnPaste = preferences.Wrap<bool> (
-					new OptionKey (FeatureOnOffOptions.FormatOnPaste, language),
-					language + ".FormatOnPaste"
-				);
+				// FormatOnPaste = preferences.Wrap<bool> (
+				// 	new OptionKey (FeatureOnOffOptions.FormatOnPaste, language),
+				// 	language + ".FormatOnPaste"
+				// );
 
 				PlaceSystemNamespaceFirst = preferences.Wrap<bool> (
 					new OptionKey (Microsoft.CodeAnalysis.Editing.GenerationOptions.PlaceSystemNamespaceFirst, language),

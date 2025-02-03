@@ -121,7 +121,7 @@ namespace MonoDevelop.CSharp.Highlighting
 				int leadOffset = selectionRange.EndOffset;
 				var text = editor.GetTextAt (selectionRange);
 
-				var formattingService = context.AnalysisDocument.GetLanguageService<IEditorFormattingService> ();
+				//var formattingService = context.AnalysisDocument.GetLanguageService<IEditorFormattingService> ();
 
 
 				if (editor.Options.GenerateFormattingUndoStep) {
@@ -132,24 +132,24 @@ namespace MonoDevelop.CSharp.Highlighting
 						editor.ReplaceText (anchorOffset, 1, start + text + end);
 						editor.SetSelection (anchorOffset + start.Length, leadOffset + start.Length + end.Length);
 					}
-					if (unicodeKey == '{') {
-						if (formattingService != null) {
-							var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, TextSpan.FromBounds (anchorOffset + start.Length - 1, leadOffset + start.Length + end.Length), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
-							editor.ApplyTextChanges (changes);
-						}
-					}
+					//if (unicodeKey == '{') {
+						//if (formattingService != null) {
+							//var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, TextSpan.FromBounds (anchorOffset + start.Length - 1, leadOffset + start.Length + end.Length), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
+							//editor.ApplyTextChanges (changes);
+						//}
+					//}
 				} else {
 					using (var undo = editor.OpenUndoGroup ()) {
 						editor.InsertText (anchorOffset, start);
 						editor.InsertText (leadOffset >= anchorOffset ? leadOffset + start.Length : leadOffset, end);
-						if (unicodeKey == '{') {
-							if (formattingService != null) {
-								var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, TextSpan.FromBounds (anchorOffset + start.Length, leadOffset + start.Length), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
-								editor.ApplyTextChanges (changes);
-							}
-						} else {
+						//if (unicodeKey == '{') {
+							//if (formattingService != null) {
+							//	var changes = formattingService.GetFormattingChangesAsync (context.AnalysisDocument, TextSpan.FromBounds (anchorOffset + start.Length, leadOffset + start.Length), CancellationToken.None).WaitAndGetResult (CancellationToken.None);
+								//editor.ApplyTextChanges (changes);
+							//}
+						//} else {
 							editor.SetSelection (anchorOffset + start.Length, leadOffset + start.Length + end.Length);
-						}
+						//}
 					}
 				}
 			}

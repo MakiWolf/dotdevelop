@@ -30,7 +30,7 @@ using MonoDevelop.Ide.Gui.Dialogs;
 using Xwt;
 using Microsoft.CodeAnalysis.Options;
 using MonoDevelop.Ide.TypeSystem;
-using Microsoft.CodeAnalysis.Editor.Shared.Options;
+//using Microsoft.CodeAnalysis.Editor.Shared.Options;
 using Microsoft.CodeAnalysis;
 using System;
 using MonoDevelop.Ide;

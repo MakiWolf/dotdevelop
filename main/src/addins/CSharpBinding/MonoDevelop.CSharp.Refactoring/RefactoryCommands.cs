@@ -43,8 +43,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Editor.Shared;
-using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
+//using Microsoft.CodeAnalysis.Editor.Shared;
+//using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.OrganizeImports;
 using Microsoft.CodeAnalysis.RemoveUnnecessaryImports;
@@ -94,11 +94,11 @@ namespace MonoDevelop.CSharp.Refactoring
 				return false;
 			}
 
-			if (workspace.Kind == WorkspaceKind.MiscellaneousFiles) {
+			//if (workspace.Kind == WorkspaceKind.MiscellaneousFiles) {
 				return false;
-			}
+			//}
 
-			return workspace.Services.GetService<ITextBufferSupportsFeatureService> ().SupportsRefactorings (textBuffer);
+			//return workspace.Services.GetService<ITextBufferSupportsFeatureService> ().SupportsRefactorings (textBuffer);
 		}
 
 		internal static async Task SortAndRemoveUnusedImports (Document originalDocument, CancellationToken cancellationToken)
@@ -116,9 +116,9 @@ namespace MonoDevelop.CSharp.Refactoring
 			var resultDocument = await organizeImportsService.OrganizeImportsAsync (removedImportsDocument, cancellationToken);
 
 			// Apply the document change if needed
-			if (resultDocument != originalDocument) {
-				workspace.ApplyDocumentChanges (resultDocument, cancellationToken);
-			}
+			//if (resultDocument != originalDocument) {
+				//workspace.ApplyDocumentChanges (resultDocument, cancellationToken);
+			//}
 		}
 	}
 

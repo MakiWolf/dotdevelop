@@ -4,23 +4,23 @@ using System.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editor.Implementation.Debugging;
+//using Microsoft.CodeAnalysis.Editor.Implementation.Debugging;
 using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Debugging
 {
-	[ExportLanguageService (typeof (ILanguageDebugInfoService), LanguageNames.CSharp), Shared]
-	internal partial class CSharpLanguageDebugInfoService : ILanguageDebugInfoService
+	//[ExportLanguageService (typeof (ILanguageDebugInfoService), LanguageNames.CSharp), Shared]
+	internal partial class CSharpLanguageDebugInfoService // : ILanguageDebugInfoService
 	{
-		public Task<DebugLocationInfo> GetLocationInfoAsync (Document document, int position, CancellationToken cancellationToken)
-		{
-			return LocationInfoGetter.GetInfoAsync (document, position, cancellationToken);
-		}
+		// public Task<DebugLocationInfo> GetLocationInfoAsync (Document document, int position, CancellationToken cancellationToken)
+		// {
+		// 	return LocationInfoGetter.GetInfoAsync (document, position, cancellationToken);
+		// }
 
-		public Task<DebugDataTipInfo> GetDataTipInfoAsync (
-			Document document, int position, CancellationToken cancellationToken)
-		{
-			return DataTipInfoGetter.GetInfoAsync (document, position, cancellationToken);
-		}
+		// public Task<DebugDataTipInfo> GetDataTipInfoAsync (
+		// 	Document document, int position, CancellationToken cancellationToken)
+		// {
+		// 	return DataTipInfoGetter.GetInfoAsync (document, position, cancellationToken);
+		// }
 	}
 }

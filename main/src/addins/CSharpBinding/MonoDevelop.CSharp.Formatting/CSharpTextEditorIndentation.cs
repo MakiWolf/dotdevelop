@@ -828,12 +828,12 @@ namespace MonoDevelop.CSharp.Formatting
 			var line = Editor.GetLineByOffset (cursor);
 			var doc = DocumentContext.AnalysisDocument;
 
-			var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
-			if (formattingService != null && formattingService.SupportsFormatOnReturn) {
-				var changes = await formattingService.GetFormattingChangesOnReturnAsync (doc, cursor, default);
-				if (changes != null)
-					Editor.ApplyTextChanges (changes);
-			}
+			//var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
+			//if (formattingService != null && formattingService.SupportsFormatOnReturn) {
+			//	var changes = await formattingService.GetFormattingChangesOnReturnAsync (doc, cursor, default);
+			//	if (changes != null)
+			//		Editor.ApplyTextChanges (changes);
+			//}
 			Editor.FixVirtualIndentation ();
 		}
 

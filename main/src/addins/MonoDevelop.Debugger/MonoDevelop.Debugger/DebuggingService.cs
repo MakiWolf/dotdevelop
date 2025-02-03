@@ -1437,13 +1437,13 @@ namespace MonoDevelop.Debugger
 				return null;
 
 			var currentSnapshot = textBuffer.CurrentSnapshot;
-			var roslynDocument = currentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
-			if (roslynDocument == null)
-				return null;
+			//var roslynDocument = currentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+			//if (roslynDocument == null)
+			//	return null;
 
-			var model = roslynDocument.GetSemanticModelAsync ().WaitAndGetResult ();
-			if (model == null)
-				return null;
+			//var model = roslynDocument.GetSemanticModelAsync ().WaitAndGetResult ();
+			//if (model == null)
+			//	return null;
 
 			int index = identifier.LastIndexOf ("`", System.StringComparison.Ordinal);
 			int arity = 0;
@@ -1456,16 +1456,16 @@ namespace MonoDevelop.Debugger
 				identifier = identifier.Remove (index);
 			}
 			var line = currentSnapshot.GetLineFromLineNumber (sourceLocation.Line - 1);
-			foreach (var symbol in model.LookupSymbols (line.Start.Position + sourceLocation.Column - 1, name: identifier)) {
-				var typeSymbol = symbol as Microsoft.CodeAnalysis.INamedTypeSymbol;
-				if (typeSymbol != null && (arity == 0 || arity == typeSymbol.Arity)) {
-					return symbol;
-				}
-				var namespaceSymbol = symbol as Microsoft.CodeAnalysis.INamespaceSymbol;
-				if (namespaceSymbol != null) {
-					return namespaceSymbol;
-				}
-			}
+			// foreach (var symbol in model.LookupSymbols (line.Start.Position + sourceLocation.Column - 1, name: identifier)) {
+			// 	var typeSymbol = symbol as Microsoft.CodeAnalysis.INamedTypeSymbol;
+			// 	if (typeSymbol != null && (arity == 0 || arity == typeSymbol.Arity)) {
+			// 		return symbol;
+			// 	}
+			// 	var namespaceSymbol = symbol as Microsoft.CodeAnalysis.INamespaceSymbol;
+			// 	if (namespaceSymbol != null) {
+			// 		return namespaceSymbol;
+			// 	}
+			// }
 			return null;
 		}
 

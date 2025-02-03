@@ -27,7 +27,7 @@ using System;
 using System.Composition;
 using System.Linq;
 using Microsoft.CodeAnalysis.Editor;
-using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+//using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
@@ -37,42 +37,42 @@ using MonoDevelop.Ide.Gui.Components;
 namespace MonoDevelop.Ide.RoslynServices
 {
 	[ExportWorkspaceService (typeof (IInfoBarService), layer: ServiceLayer.Host), Shared]
-	sealed class MonoDevelopInfoBarService : ForegroundThreadAffinitizedObject, IInfoBarService
+	sealed class MonoDevelopInfoBarService : /* ForegroundThreadAffinitizedObject,*/ IInfoBarService
 	{
-		readonly IForegroundNotificationService _foregroundNotificationService;
+		//readonly IForegroundNotificationService _foregroundNotificationService;
 		readonly IAsynchronousOperationListener _listener;
 
-		[ImportingConstructor]
-		public MonoDevelopInfoBarService (IThreadingContext threadingContext, IForegroundNotificationService foregroundNotificationService, IAsynchronousOperationListenerProvider listenerProvider)
-			: base (threadingContext)
-		{
-			_foregroundNotificationService = foregroundNotificationService;
-			_listener = listenerProvider.GetListener (FeatureAttribute.InfoBar);
-		}
+		// [ImportingConstructor]
+		// public MonoDevelopInfoBarService (IThreadingContext threadingContext, IForegroundNotificationService foregroundNotificationService, IAsynchronousOperationListenerProvider listenerProvider)
+		// 	: base (threadingContext)
+		// {
+		// 	_foregroundNotificationService = foregroundNotificationService;
+		// 	_listener = listenerProvider.GetListener (FeatureAttribute.InfoBar);
+		// }
 
 		public void ShowInfoBarInActiveView (string message, params InfoBarUI [] items)
 		{
-			ThisCanBeCalledOnAnyThread ();
+			//ThisCanBeCalledOnAnyThread ();
 			ShowInfoBar (activeView: true, message: message, items: items);
 		}
 
 		public void ShowInfoBarInGlobalView (string message, params InfoBarUI [] items)
 		{
-			ThisCanBeCalledOnAnyThread ();
+			//ThisCanBeCalledOnAnyThread ();
 			ShowInfoBar (activeView: false, message: message, items: items);
 		}
 
 		void ShowInfoBar (bool activeView, string message, params InfoBarUI [] items)
 		{
 			// We can be called from any thread since errors can occur anywhere, however we can only construct and InfoBar from the UI thread.
-			_foregroundNotificationService.RegisterNotification (() => {
-				if (TryGetInfoBarHost (activeView, out var infoBarHost)) {
-					var options = new InfoBarOptions (message) {
-						Items = ToUIItems (items)
-					};
-					infoBarHost.AddInfoBar (options);
-				}
-			}, _listener.BeginAsyncOperation (nameof (ShowInfoBar)));
+			// _foregroundNotificationService.RegisterNotification (() => {
+			// 	if (TryGetInfoBarHost (activeView, out var infoBarHost)) {
+			// 		var options = new InfoBarOptions (message) {
+			// 			Items = ToUIItems (items)
+			// 		};
+			// 		infoBarHost.AddInfoBar (options);
+			// 	}
+			// }, _listener.BeginAsyncOperation (nameof (ShowInfoBar)));
 
 			static InfoBarItem [] ToUIItems (InfoBarUI [] items)
 				=> items?.Select (x => new InfoBarItem (x.Title, ToUIKind (x.Kind), x.Action, x.CloseAfterAction)).ToArray ();
@@ -96,7 +96,7 @@ namespace MonoDevelop.Ide.RoslynServices
 
 		bool TryGetInfoBarHost (bool activeView, out IInfoBarHost infoBarHost)
 		{
-			AssertIsForeground ();
+			//AssertIsForeground ();
 
 			infoBarHost = null;
 			if (!IdeApp.IsInitialized || IdeApp.Workbench == null)

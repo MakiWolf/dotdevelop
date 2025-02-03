@@ -86,27 +86,27 @@ namespace MonoDevelop.CSharp.Formatting
 			try {
 				var document = context.AnalysisDocument;
 
-				var formattingService = document.GetLanguageService<IEditorFormattingService> ();
-				if (formattingService == null || !formattingService.SupportsFormatSelection)
+				//var formattingService = document.GetLanguageService<IEditorFormattingService> ();
+				//if (formattingService == null || !formattingService.SupportsFormatSelection)
+				//	return;
+
+				// var formattingRules = new List<AbstractFormattingRule> ();
+				// formattingRules.Add (ContainedDocumentPreserveFormattingRule.Instance);
+				// formattingRules.AddRange (Formatter.GetDefaultFormattingRules (document));
+
+				// var workspace = document.Project.Solution.Workspace;
+				// var root = await document.GetSyntaxRootAsync (cancellationToken).ConfigureAwait (false);
+				// var options = await document.GetOptionsAsync (cancellationToken).ConfigureAwait (false);
+				// var changes = Formatter.GetFormattedTextChanges (
+				// 	root, new TextSpan [] { new TextSpan (startSegment.Offset, endSegment.EndOffset - startSegment.Offset) },
+				// 	workspace, options, formattingRules, cancellationToken);
+
+				// if (changes == null)
 					return;
-
-				var formattingRules = new List<AbstractFormattingRule> ();
-				formattingRules.Add (ContainedDocumentPreserveFormattingRule.Instance);
-				formattingRules.AddRange (Formatter.GetDefaultFormattingRules (document));
-
-				var workspace = document.Project.Solution.Workspace;
-				var root = await document.GetSyntaxRootAsync (cancellationToken).ConfigureAwait (false);
-				var options = await document.GetOptionsAsync (cancellationToken).ConfigureAwait (false);
-				var changes = Formatter.GetFormattedTextChanges (
-					root, new TextSpan [] { new TextSpan (startSegment.Offset, endSegment.EndOffset - startSegment.Offset) },
-					workspace, options, formattingRules, cancellationToken);
-
-				if (changes == null)
-					return;
-				await Runtime.RunInMainThread (delegate {
-					editor.ApplyTextChanges (changes);
-					editor.FixVirtualIndentation ();
-				});
+				// await Runtime.RunInMainThread (delegate {
+				// 	editor.ApplyTextChanges (changes);
+				// 	editor.FixVirtualIndentation ();
+				// });
 			} catch (Exception e) {
 				LoggingService.LogError ("Error while indenting", e);
 			}
@@ -115,15 +115,15 @@ namespace MonoDevelop.CSharp.Formatting
 		{
 			var doc = context.AnalysisDocument;
 
-			var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
-			if (formattingService == null || !formattingService.SupportsFormatSelection)
-				return;
+			//var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
+			//if (formattingService == null || !formattingService.SupportsFormatSelection)
+			//	return;
 
-			var changes = await formattingService.GetFormattingChangesAsync (doc, new TextSpan (startOffset, length), default (System.Threading.CancellationToken));
-			if (changes == null)
+			//var changes = await formattingService.GetFormattingChangesAsync (doc, new TextSpan (startOffset, length), default (System.Threading.CancellationToken));
+			//if (changes == null)
 				return;
-			editor.ApplyTextChanges (changes);
-			editor.FixVirtualIndentation ();
+			//editor.ApplyTextChanges (changes);
+			//editor.FixVirtualIndentation ();
 		}
 
 		public static string FormatText (Microsoft.CodeAnalysis.Options.OptionSet optionSet, string input, int startOffset, int endOffset)

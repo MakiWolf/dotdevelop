@@ -30,60 +30,60 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
-using Microsoft.CodeAnalysis.Editor.Implementation.Workspaces;
-using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+//using Microsoft.CodeAnalysis.Editor.Implementation.Workspaces;
+//using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Roslyn.Utilities;
 using System.Threading;
 using Microsoft.VisualStudio.Threading;
 
 namespace MonoDevelop.Ide.RoslynServices
 {
-	[ExportWorkspaceService(typeof(IWorkspaceTaskSchedulerFactory), ServiceLayer.Host), Shared]
-	class MonoDevelopTaskSchedulerFactory : EditorTaskSchedulerFactory
+	//[ExportWorkspaceService(typeof(IWorkspaceTaskSchedulerFactory), ServiceLayer.Host), Shared]
+	class MonoDevelopTaskSchedulerFactory //: EditorTaskSchedulerFactory
 	{
-		readonly IThreadingContext _threadingContext;
+		//readonly IThreadingContext _threadingContext;
 
-		[ImportingConstructor]
-		[Obsolete (MefConstruction.ImportingConstructorMessage, error: true)]
-		public MonoDevelopTaskSchedulerFactory (IThreadingContext threadingContext, IAsynchronousOperationListenerProvider listenerProvider) : base (listenerProvider)
-		{
-			_threadingContext = threadingContext;
-		}
+// 		[ImportingConstructor]
+// 		[Obsolete (MefConstruction.ImportingConstructorMessage, error: true)]
+// 		public MonoDevelopTaskSchedulerFactory (/*IThreadingContext threadingContext,*/ IAsynchronousOperationListenerProvider listenerProvider) : base (listenerProvider)
+// 		{
+// 			_threadingContext = threadingContext;
+// 		}
+// ///new
+// 		public /*override*/ IWorkspaceTaskScheduler CreateEventingTaskQueue ()
+// 		{
+// 			return new WorkspaceTaskQueue(this, new JoinableTaskFactoryTaskScheduler(_threadingContext.JoinableTaskFactory));
+// 		}
 
-		public override IWorkspaceTaskScheduler CreateEventingTaskQueue ()
-		{
-			return new WorkspaceTaskQueue(this, new JoinableTaskFactoryTaskScheduler(_threadingContext.JoinableTaskFactory));
-		}
+// 		class JoinableTaskFactoryTaskScheduler : TaskScheduler
+// 		{
+// 			readonly JoinableTaskFactory _joinableTaskFactory;
 
-		class JoinableTaskFactoryTaskScheduler : TaskScheduler
-		{
-			readonly JoinableTaskFactory _joinableTaskFactory;
+// 			public JoinableTaskFactoryTaskScheduler (JoinableTaskFactory joinableTaskFactory)
+// 			{
+// 				_joinableTaskFactory = joinableTaskFactory;
+// 			}
 
-			public JoinableTaskFactoryTaskScheduler (JoinableTaskFactory joinableTaskFactory)
-			{
-				_joinableTaskFactory = joinableTaskFactory;
-			}
+// 			public override int MaximumConcurrencyLevel => 1;
 
-			public override int MaximumConcurrencyLevel => 1;
+// 			protected override IEnumerable<Task> GetScheduledTasks () => null;
 
-			protected override IEnumerable<Task> GetScheduledTasks () => null;
+// 			protected override void QueueTask (Task task)
+// 			{
+// 				_joinableTaskFactory.RunAsync (async () => {
+// 					await _joinableTaskFactory.SwitchToMainThreadAsync (alwaysYield: true);
+// 					TryExecuteTask (task);
+// 				});
+// 			}
 
-			protected override void QueueTask (Task task)
-			{
-				_joinableTaskFactory.RunAsync (async () => {
-					await _joinableTaskFactory.SwitchToMainThreadAsync (alwaysYield: true);
-					TryExecuteTask (task);
-				});
-			}
+// 			protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
+// 			{
+// 				if (_joinableTaskFactory.Context.IsOnMainThread) {
+// 					return TryExecuteTask (task);
+// 				}
 
-			protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
-			{
-				if (_joinableTaskFactory.Context.IsOnMainThread) {
-					return TryExecuteTask (task);
-				}
-
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 	}
 }

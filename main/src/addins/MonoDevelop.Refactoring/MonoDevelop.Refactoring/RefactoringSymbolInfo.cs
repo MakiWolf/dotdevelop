@@ -145,17 +145,17 @@ namespace MonoDevelop.Refactoring
 
 		private static async Task<RefactoringSymbolInfo> GetSymbolInfoAsync (ITextView textView, int offset, CancellationToken cancellationToken = default)
 		{
-			var analysisDocument = textView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+			//var analysisDocument = textView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
 
-			if (analysisDocument == null)
+			//if (analysisDocument == null)
 				return Empty;
 
-			if (Runtime.IsMainThread) {
+			//if (Runtime.IsMainThread) {
 				//InternalGetSymbolInfoAsync can be CPU heavy, go to ThreadPool if we are on UI thread
-				return await Task.Run (() => InternalGetSymbolInfoAsync (analysisDocument, offset, cancellationToken));
-			}
+				//return await Task.Run (() => InternalGetSymbolInfoAsync (analysisDocument, offset, cancellationToken));
+			//}
 
-			return await InternalGetSymbolInfoAsync (analysisDocument, offset, cancellationToken);
+			//return await InternalGetSymbolInfoAsync (analysisDocument, offset, cancellationToken);
 		}
 	}
 

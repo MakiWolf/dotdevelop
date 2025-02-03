@@ -37,13 +37,13 @@ namespace MonoDevelop.Ide.Editor.Extension
 	[Obsolete]
 	class TagCommentsTextEditorExtension : TextEditorExtension, IQuickTaskProvider
 	{
-		ITodoListProvider todoListProvider = CompositionManager.Instance.GetExportedValue<ITodoListProvider> ();
+		//ITodoListProvider todoListProvider = CompositionManager.Instance.GetExportedValue<ITodoListProvider> ();
 		CancellationTokenSource src = new CancellationTokenSource ();
 		bool isDisposed;
 
 		protected override void Initialize ()
 		{
-			todoListProvider.TodoListUpdated += OnTodoListUpdated;
+			//todoListProvider.TodoListUpdated += OnTodoListUpdated;
 		}
 
 		public override void Dispose ()
@@ -54,7 +54,7 @@ namespace MonoDevelop.Ide.Editor.Extension
 
 			this.tasks = ImmutableArray<QuickTask>.Empty;
 			OnTasksUpdated (EventArgs.Empty);
-			todoListProvider.TodoListUpdated -= OnTodoListUpdated;
+			//todoListProvider.TodoListUpdated -= OnTodoListUpdated;
 			base.Dispose ();
 		}
 
@@ -66,45 +66,45 @@ namespace MonoDevelop.Ide.Editor.Extension
 		protected virtual void OnTasksUpdated (EventArgs e) => TasksUpdated?.Invoke (this, e);
 		public ImmutableArray<QuickTask> QuickTasks => tasks;
 
-		void OnTodoListUpdated (object sender, TodoItemsUpdatedArgs args)
-		{
-			src.Cancel ();
-			src = new CancellationTokenSource ();
-			var token = src.Token;
-			if (DocumentContext.AnalysisDocument == null || DocumentContext.AnalysisDocument.Id != args.DocumentId)
-				return;
+		// void OnTodoListUpdated (object sender, TodoItemsUpdatedArgs args)
+		// {
+		// 	src.Cancel ();
+		// 	src = new CancellationTokenSource ();
+		// 	var token = src.Token;
+		// 	if (DocumentContext.AnalysisDocument == null || DocumentContext.AnalysisDocument.Id != args.DocumentId)
+		// 		return;
 
-			var ws = args.Workspace as MonoDevelopWorkspace;
-			if (ws == null) {
-				// could be WebEditorRoslynWorkspace
-				return;
-			}
+		// 	var ws = args.Workspace as MonoDevelopWorkspace;
+		// 	if (ws == null) {
+		// 		// could be WebEditorRoslynWorkspace
+		// 		return;
+		// 	}
 
-			var doc = ws.GetDocument (args.DocumentId);
-			if (doc == null)
-				return;
+		// 	var doc = ws.GetDocument (args.DocumentId);
+		// 	if (doc == null)
+		// 		return;
 
-			var project = ws.GetMonoProject (args.ProjectId);
-			if (project == null)
-				return;
+		// 	var project = ws.GetMonoProject (args.ProjectId);
+		// 	if (project == null)
+		// 		return;
 
-			var newTasks = ImmutableArray.CreateBuilder<QuickTask> (args.TodoItems.Length);
-			Runtime.RunInMainThread (() => {
-				foreach (var todoItem in args.TodoItems) {
-					if (token.IsCancellationRequested)
-						return;
+		// 	var newTasks = ImmutableArray.CreateBuilder<QuickTask> (args.TodoItems.Length);
+		// 	Runtime.RunInMainThread (() => {
+		// 		foreach (var todoItem in args.TodoItems) {
+		// 			if (token.IsCancellationRequested)
+		// 				return;
 
-					var offset = Editor.LocationToOffset (todoItem.MappedLine + 1, todoItem.MappedColumn + 1);
-					var newTask = new QuickTask (todoItem.Message, offset, DiagnosticSeverity.Info);
-					newTasks.Add (newTask);
-				}
+		// 			var offset = Editor.LocationToOffset (todoItem.MappedLine + 1, todoItem.MappedColumn + 1);
+		// 			var newTask = new QuickTask (todoItem.Message, offset, DiagnosticSeverity.Info);
+		// 			newTasks.Add (newTask);
+		// 		}
 
-				if (token.IsCancellationRequested || isDisposed)
-					return;
-				tasks = newTasks.MoveToImmutable ();
-				OnTasksUpdated (EventArgs.Empty);
-			});
-		}
+		// 		if (token.IsCancellationRequested || isDisposed)
+		// 			return;
+		// 		tasks = newTasks.MoveToImmutable ();
+		// 		OnTasksUpdated (EventArgs.Empty);
+		// 	});
+		// }
 		#endregion
 	}
 }

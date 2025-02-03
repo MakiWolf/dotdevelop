@@ -26,7 +26,7 @@
 using System;
 using System.Composition;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editor.Shared;
+//using Microsoft.CodeAnalysis.Editor.Shared;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.Text;
 using MonoDevelop.Ide;
@@ -34,8 +34,8 @@ using MonoDevelop.Ide.TypeSystem;
 
 namespace MonoDevelop.Ide.RoslynServices
 {
-	[ExportWorkspaceService (typeof (ITextBufferSupportsFeatureService), ServiceLayer.Host), Shared]
-	internal sealed class MonoDevelopDocumentSupportsFeatureService : ITextBufferSupportsFeatureService
+	//[ExportWorkspaceService (typeof (ITextBufferSupportsFeatureService), ServiceLayer.Host), Shared]
+	internal sealed class MonoDevelopDocumentSupportsFeatureService //new : ITextBufferSupportsFeatureService
 	{
 		public bool SupportsCodeFixes (ITextBuffer textBuffer) => !IsContainedBuffer (textBuffer);
 		public bool SupportsNavigationToAnyPosition (ITextBuffer textBuffer) => !IsContainedBuffer (textBuffer);

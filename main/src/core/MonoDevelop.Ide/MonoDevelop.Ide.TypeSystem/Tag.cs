@@ -83,29 +83,29 @@ namespace MonoDevelop.Ide.TypeSystem
 
 	internal static class TodoItemExtensions
 	{
-		public static Tag ToTag (this TodoItem item)
-		{
-			var message = item.Message;
-			var index = message.IndexOf (':');
+		// public static Tag ToTag (this TodoItem item)
+		// {
+		// 	var message = item.Message;
+		// 	var index = message.IndexOf (':');
 
-			string tag = string.Empty;
+		// 	string tag = string.Empty;
 
-			// Slow path if we don't have a colon
-			if (index == -1) {
-				foreach (var tagComment in Tasks.CommentTag.SpecialCommentTags) {
-					if (message.StartsWith (tagComment.Tag, StringComparison.OrdinalIgnoreCase)) {
-						tag = message;
-						break;
-					}
-				}
-			} else {
-				tag = message.Substring (0, index);
-			}
+		// 	// Slow path if we don't have a colon
+		// 	if (index == -1) {
+		// 		foreach (var tagComment in Tasks.CommentTag.SpecialCommentTags) {
+		// 			if (message.StartsWith (tagComment.Tag, StringComparison.OrdinalIgnoreCase)) {
+		// 				tag = message;
+		// 				break;
+		// 			}
+		// 		}
+		// 	} else {
+		// 		tag = message.Substring (0, index);
+		// 	}
 
-			int line = item.MappedLine + 1;
-			int column = item.MappedColumn + 1;
+		// 	int line = item.MappedLine + 1;
+		// 	int column = item.MappedColumn + 1;
 
-			return new Tag (tag, message, new Editor.DocumentRegion (line, column, line, column));
-		}
+		// 	return new Tag (tag, message, new Editor.DocumentRegion (line, column, line, column));
+		// }
 	}
 }

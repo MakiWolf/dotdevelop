@@ -30,7 +30,7 @@ using MonoDevelop.TextEditor;
 namespace MonoDevelop.CSharp
 {
 	[Export (typeof(IEditorContentProvider))]
-	[ContentType(ContentTypeNames.CSharpContentType)]
+	//[ContentType(ContentTypeNames.CSharpContentType)]
 	[TextViewRole(PredefinedTextViewRoles.PrimaryDocument)]
 	[Order(Before="Default")]
 	sealed class CSharpPathedDocumentExtensionProvider : EditorContentInstanceProvider<CSharpPathedDocumentExtension>

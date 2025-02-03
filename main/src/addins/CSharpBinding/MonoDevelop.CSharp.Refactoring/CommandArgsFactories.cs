@@ -25,13 +25,13 @@
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
-using Microsoft.CodeAnalysis.Editor.Commanding.Commands;
+//using Microsoft.CodeAnalysis.Editor.Commanding.Commands;
 
 namespace MonoDevelop.CSharp.Refactoring
 {
 	static class CommandArgsFactories
 	{
-		public static SortAndRemoveUnnecessaryImportsCommandArgs CreateSortAndRemoveUnnecessaryImportsCommandArgs (ITextView v, ITextBuffer b)
-			=> new SortAndRemoveUnnecessaryImportsCommandArgs (v, b);
+		//public static SortAndRemoveUnnecessaryImportsCommandArgs CreateSortAndRemoveUnnecessaryImportsCommandArgs (ITextView v, ITextBuffer b)
+		//	=> new SortAndRemoveUnnecessaryImportsCommandArgs (v, b);
 	}
 }

@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor;
-using Microsoft.CodeAnalysis.Editor.Implementation.TodoComments;
+//using Microsoft.CodeAnalysis.Editor.Implementation.TodoComments;
 using MonoDevelop.Core;
 using MonoDevelop.Ide.TypeSystem;
 using MonoDevelop.Projects;
@@ -46,8 +46,8 @@ namespace MonoDevelop.Ide.Tasks
 		public static void Initialize ()
 		{
 			Runtime.ServiceProvider.WhenServiceInitialized<CompositionManager> (compositionManager => {
-				var todoListProvider = compositionManager.GetExportedValue<ITodoListProvider> ();
-				todoListProvider.TodoListUpdated += OnTodoListUpdated;
+				//var todoListProvider = compositionManager.GetExportedValue<ITodoListProvider> ();
+				//todoListProvider.TodoListUpdated += OnTodoListUpdated;
 			});
 
 			Runtime.ServiceProvider.WhenServiceInitialized<RootWorkspace> (workspace => {
@@ -78,32 +78,32 @@ namespace MonoDevelop.Ide.Tasks
 		}
 
 		static object lockObject = new object ();
-		static Dictionary<object, TodoItemsUpdatedArgs> cachedUntilViewCreated = new Dictionary<object, TodoItemsUpdatedArgs> ();
+		//static Dictionary<object, TodoItemsUpdatedArgs> cachedUntilViewCreated = new Dictionary<object, TodoItemsUpdatedArgs> ();
 
 		internal static void LoadCachedContents ()
 		{
 			lock (lockObject) {
-				if (cachedUntilViewCreated == null)
+				//if (cachedUntilViewCreated == null)
 					return;
 
-				if (triggerLoad == null || triggerLoad.Invoke (cachedUntilViewCreated.Count)) {
-					var changes = cachedUntilViewCreated.Values.Select (x => ToCommentTaskChange (x)).Where (x => x != null).ToList ();
-					IdeServices.TaskService.InformCommentTasks (new CommentTasksChangedEventArgs (changes));
-					cachedUntilViewCreated = null;
-					triggerLoad = null;
-				}
+				// if (triggerLoad == null || triggerLoad.Invoke (cachedUntilViewCreated.Count)) {
+				// 	var changes = cachedUntilViewCreated.Values.Select (x => ToCommentTaskChange (x)).Where (x => x != null).ToList ();
+				// 	IdeServices.TaskService.InformCommentTasks (new CommentTasksChangedEventArgs (changes));
+				// 	cachedUntilViewCreated = null;
+				// 	triggerLoad = null;
+				// }
 			}
 		}
 
-		public static CommentTaskChange ToCommentTaskChange (TodoItemsUpdatedArgs args)
-		{
-			if (!TryGetDocument (args, out var doc, out var project))
-				return null;
+		// public static CommentTaskChange ToCommentTaskChange (TodoItemsUpdatedArgs args)
+		// {
+		// 	if (!TryGetDocument (args, out var doc, out var project))
+		// 		return null;
 
-			var file = doc.FilePath;
-			var tags = args.TodoItems.Length == 0 ? (IReadOnlyList<Tag>)null : args.TodoItems.SelectAsArray (x => x.ToTag ());
-			return new CommentTaskChange (file, tags, project);
-		}
+		// 	var file = doc.FilePath;
+		// 	var tags = args.TodoItems.Length == 0 ? (IReadOnlyList<Tag>)null : args.TodoItems.SelectAsArray (x => x.ToTag ());
+		// 	return new CommentTaskChange (file, tags, project);
+		// }
 
 		// Test helper utilities so we can test multiple tests for cached
 		#region Test Helpers
@@ -111,7 +111,7 @@ namespace MonoDevelop.Ide.Tasks
 		internal static void ResetCachedContents (Func<int, bool> shouldTriggerLoad)
 		{
 			lock (lockObject) {
-				cachedUntilViewCreated = new Dictionary<object, TodoItemsUpdatedArgs> ();
+				//cachedUntilViewCreated = new Dictionary<object, TodoItemsUpdatedArgs> ();
 				triggerLoad = shouldTriggerLoad;
 			}
 		}
@@ -119,40 +119,40 @@ namespace MonoDevelop.Ide.Tasks
 		internal static int GetCachedContentsCount ()
 		{
 			lock (lockObject) {
-				if (cachedUntilViewCreated == null)
+				//if (cachedUntilViewCreated == null)
 					return -1;
-				return cachedUntilViewCreated.Count;
+				//return cachedUntilViewCreated.Count;
 			}
 		}
 
 		#endregion
 
-		static bool TryCache (TodoItemsUpdatedArgs args)
-		{
-			if (cachedUntilViewCreated == null)
-				return false;
+		// static bool TryCache (TodoItemsUpdatedArgs args)
+		// {
+		// 	if (cachedUntilViewCreated == null)
+		// 		return false;
 
-			lock (lockObject) {
-				if (cachedUntilViewCreated == null)
-					return false;
+		// 	lock (lockObject) {
+		// 		if (cachedUntilViewCreated == null)
+		// 			return false;
 
-				cachedUntilViewCreated [args.Id] = args;
+		// 		cachedUntilViewCreated [args.Id] = args;
 
-				if (triggerLoad != null)
-					LoadCachedContents ();
-				return true;
-			}
-		}
+		// 		if (triggerLoad != null)
+		// 			LoadCachedContents ();
+		// 		return true;
+		// 	}
+		// }
 
-		static void OnTodoListUpdated (object sender, TodoItemsUpdatedArgs args)
-		{
-			if (TryCache (args))
-				return;
+		// static void OnTodoListUpdated (object sender, TodoItemsUpdatedArgs args)
+		// {
+		// 	if (TryCache (args))
+		// 		return;
 
-			var change = ToCommentTaskChange (args);
-			if (change != null)
-				IdeServices.TaskService.InformCommentTasks (new CommentTasksChangedEventArgs (new [] { change }));
-		}
+		// 	var change = ToCommentTaskChange (args);
+		// 	if (change != null)
+		// 		IdeServices.TaskService.InformCommentTasks (new CommentTasksChangedEventArgs (new [] { change }));
+		// }
 
 		static async void OnSolutionLoaded (object sender, SolutionEventArgs args)
 		{
@@ -166,10 +166,10 @@ namespace MonoDevelop.Ide.Tasks
 				var ws = IdeApp.TypeSystemService.GetWorkspace (sol);
 
 				lock (lockObject) {
-					if (cachedUntilViewCreated == null)
+					//if (cachedUntilViewCreated == null)
 						return;
 
-					cachedUntilViewCreated = cachedUntilViewCreated.Where (x => x.Value.Workspace != ws).ToDictionary (x => x.Key, x => x.Value);
+					//cachedUntilViewCreated = cachedUntilViewCreated.Where (x => x.Value.Workspace != ws).ToDictionary (x => x.Key, x => x.Value);
 				}
 			}
 		}
@@ -177,7 +177,7 @@ namespace MonoDevelop.Ide.Tasks
 		static void UpdateWorkspaceOptions (Microsoft.CodeAnalysis.Workspace ws)
 		{
 			// Roslyn uses | as separator.
-			ws.Options = ws.Options.WithChangedOption (TodoCommentOptions.TokenList, CommentTag.ToString (CommentTag.SpecialCommentTags, "|"));
+			//ws.Options = ws.Options.WithChangedOption (TodoCommentOptions.TokenList, CommentTag.ToString (CommentTag.SpecialCommentTags, "|"));
 		}
 
 		static void OnSpecialTagsChanged (object sender, EventArgs args)

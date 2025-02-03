@@ -38,7 +38,7 @@ using MonoDevelop.Ide.Editor;
 using MonoDevelop.Ide.Editor.Extension;
 using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.Editor.Shared.Options;
+//using Microsoft.CodeAnalysis.Editor.Shared.Options;
 
 namespace MonoDevelop.CSharp.Formatting
 {
@@ -109,23 +109,23 @@ namespace MonoDevelop.CSharp.Formatting
 			if (doc == null)
 				return;
 			var options = await doc.GetOptionsAsync ();
-			if (!options.GetOption (FeatureOnOffOptions.FormatOnPaste, doc.Project.Language))
+			//if (!options.GetOption (FeatureOnOffOptions.FormatOnPaste, doc.Project.Language))
+			//	return;
+
+			//var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
+			//if (formattingService == null || !formattingService.SupportsFormatOnPaste)
+			//	return;
+			//var text = await doc.GetTextAsync ();
+			//if (offset + length > text.Length) {
+			//	LoggingService.LogError ($"CSharpTextPasteHandler.PostFormatPastedText out of range {offset}/{length} in a document of length {text.Length} (editor length {indent.Editor.Length}).");
+			//	return;
+			//}
+			//var changes = await formattingService.GetFormattingChangesOnPasteAsync (doc, new TextSpan (offset, length), default (CancellationToken));
+			//if (changes == null)
 				return;
 
-			var formattingService = doc.GetLanguageService<IEditorFormattingService> ();
-			if (formattingService == null || !formattingService.SupportsFormatOnPaste)
-				return;
-			var text = await doc.GetTextAsync ();
-			if (offset + length > text.Length) {
-				LoggingService.LogError ($"CSharpTextPasteHandler.PostFormatPastedText out of range {offset}/{length} in a document of length {text.Length} (editor length {indent.Editor.Length}).");
-				return;
-			}
-			var changes = await formattingService.GetFormattingChangesOnPasteAsync (doc, new TextSpan (offset, length), default (CancellationToken));
-			if (changes == null)
-				return;
-
-			indent.Editor.ApplyTextChanges (changes);
-			indent.Editor.FixVirtualIndentation ();
+			//indent.Editor.ApplyTextChanges (changes);
+			//indent.Editor.FixVirtualIndentation ();
 		}
 
 	}

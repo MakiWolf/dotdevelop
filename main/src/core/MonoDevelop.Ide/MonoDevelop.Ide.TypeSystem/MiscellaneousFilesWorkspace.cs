@@ -119,33 +119,33 @@ namespace MonoDevelop.Ide.TypeSystem
 		/// <summary>
 		/// This should be called when a new document is opened in the IDE.
 		/// </summary>
-		public void OnDocumentOpened (string filePath, ITextBuffer buffer)
-		{
-			var textContainer = buffer?.AsTextContainer ();
-			if (!IsSupportedDocument (filePath) || textContainer == null) {
-				return;
-			}
+		// public void OnDocumentOpened (string filePath, ITextBuffer buffer) //bbbbbbb
+		// {
+		// 	var textContainer = buffer?.AsTextContainer ();
+		// 	if (!IsSupportedDocument (filePath) || textContainer == null) {
+		// 		return;
+		// 	}
 
-			var workspaceRegistration = GetWorkspaceRegistration (textContainer);
+		// 	var workspaceRegistration = GetWorkspaceRegistration (textContainer);
 
-			// Check if the document is already registered as open
-			if (openDocuments.ContainsKey (workspaceRegistration))
-				return;
+		// 	// Check if the document is already registered as open
+		// 	if (openDocuments.ContainsKey (workspaceRegistration))
+		// 		return;
 
-			workspaceRegistration.WorkspaceChanged += Registration_WorkspaceChanged;
+		// 	workspaceRegistration.WorkspaceChanged += Registration_WorkspaceChanged;
 
-			var openDocumentInfo = new OpenDocumentInfo {
-				SourceTextContainer = textContainer,
-				FilePath = filePath
-			};
-			openDocuments[workspaceRegistration] = openDocumentInfo;
+		// 	var openDocumentInfo = new OpenDocumentInfo {
+		// 		SourceTextContainer = textContainer,
+		// 		FilePath = filePath
+		// 	};
+		// 	openDocuments[workspaceRegistration] = openDocumentInfo;
 
-			if (workspaceRegistration.Workspace != null) {
-				return;
-			}
+		// 	if (workspaceRegistration.Workspace != null) {
+		// 		return;
+		// 	}
 
-			AddDocument (workspaceRegistration, openDocumentInfo);
-		}
+		// 	AddDocument (workspaceRegistration, openDocumentInfo);
+		// }
 
 		/// <summary>
 		/// This is called by Roslyn when a SourceTextContainer's document is added or removed from a workspace
@@ -176,20 +176,20 @@ namespace MonoDevelop.Ide.TypeSystem
 		/// <summary>
 		/// This should be called when an open document in the IDE is closed.
 		/// </summary>
-		public void OnDocumentClosed (string filePath, ITextBuffer buffer)
-		{
-			var textContainer = buffer?.AsTextContainer ();
-			if (!IsSupportedDocument (filePath) || textContainer == null) {
-				return;
-			}
+		// public void OnDocumentClosed (string filePath, ITextBuffer buffer)
+		// {
+		// 	var textContainer = buffer?.AsTextContainer ();
+		// 	if (!IsSupportedDocument (filePath) || textContainer == null) {
+		// 		return;
+		// 	}
 
-			var workspaceRegistration = GetWorkspaceRegistration (textContainer);
-			workspaceRegistration.WorkspaceChanged -= Registration_WorkspaceChanged;
+		// 	var workspaceRegistration = GetWorkspaceRegistration (textContainer);
+		// 	workspaceRegistration.WorkspaceChanged -= Registration_WorkspaceChanged;
 
-			if (openDocuments.TryRemove (workspaceRegistration, out var openDocumentInfo)) {
-				RemoveDocument (openDocumentInfo);
-			}
-		}
+		// 	if (openDocuments.TryRemove (workspaceRegistration, out var openDocumentInfo)) {
+		// 		RemoveDocument (openDocumentInfo);
+		// 	}
+		// }
 
 		/// <summary>
 		/// Create a new DocumentId and a new Document, add that to the workspace and open in the text container
@@ -217,7 +217,7 @@ namespace MonoDevelop.Ide.TypeSystem
 				loader: TextLoader.From (sourceTextContainer, VersionStamp.Create ()));
 
 			OnDocumentAdded (documentInfo);
-			OnDocumentOpened (documentId, sourceTextContainer);
+			//OnDocumentOpened (documentId, sourceTextContainer);
 
 			ProjectId CreateScriptProject ()
 			{
@@ -254,7 +254,7 @@ namespace MonoDevelop.Ide.TypeSystem
 		{
 			var documentId = openDocumentInfo.DocumentId;
 			if (documentId != null) {
-				OnDocumentClosed (documentId, EmptyTextLoader.Instance);
+				//OnDocumentClosed (documentId, EmptyTextLoader.Instance);
 				OnDocumentRemoved (documentId);
 				openDocumentInfo.DocumentId = null;
 
@@ -296,20 +296,20 @@ namespace MonoDevelop.Ide.TypeSystem
 		{
 			var openDocument = openDocuments.FirstOrDefault (doc => doc.Value.DocumentId == id);
 			if (openDocument.Value != null) {
-				var textBuffer = openDocument.Value.SourceTextContainer.GetTextBuffer ();
-				SetText (textBuffer, text.ToString ());
+				//var textBuffer = openDocument.Value.SourceTextContainer.GetTextBuffer ();
+				//SetText (textBuffer, text.ToString ());
 			}
 		}
 
-		static void SetText (ITextBuffer textBuffer, string content)
-		{
-			content = content ?? "";
+		// static void SetText (ITextBuffer textBuffer, string content)
+		// {
+		// 	content = content ?? "";
 
-			using (var edit = textBuffer.CreateEdit (EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: 1)) {
-				edit.Replace (0, textBuffer.CurrentSnapshot.Length, content);
-				edit.Apply ();
-			}
-		}
+		// 	using (var edit = textBuffer.CreateEdit (EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: 1)) {
+		// 		edit.Replace (0, textBuffer.CurrentSnapshot.Length, content);
+		// 		edit.Apply ();
+		// 	}
+		// }
 
 		class EmptyTextLoader : TextLoader
 		{

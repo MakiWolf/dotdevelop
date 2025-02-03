@@ -16,14 +16,14 @@ namespace MonoDevelop.Ide.Completion.Presentation
 		public static Document GetOpenDocumentInCurrentContextWithChangesSafe (this ITextSnapshot textSnapshot)
 		{
 			Document document = null;
-			try {
-				document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
-			} catch {
-				try {
-					document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
-				} catch {
-				}
-			}
+			// try {
+			// 	document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+			// } catch {
+			// 	try {
+			// 		document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+			// 	} catch {
+			// 	}
+			// }
 
 			return document;
 		}

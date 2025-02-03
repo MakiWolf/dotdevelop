@@ -2,48 +2,48 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editor.Host;
+//using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.CodeAnalysis.Notification;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using MonoDevelop.Ide.TypeSystem;
 
 namespace MonoDevelop.Ide.Composition
 {
-	[Export (typeof (IWaitIndicator))]
-	internal class RoslynWaitIndicator : IWaitIndicator
+	//[Export (typeof (IWaitIndicator))]
+	internal class RoslynWaitIndicator //: IWaitIndicator
 	{
-		public WaitIndicatorResult Wait (string title, string message, bool allowCancel, Action<IWaitContext> action)
-		{
-			using (var waitContext = StartWait (title, message, allowCancel)) {
-				action (waitContext);
-			}
+		// public WaitIndicatorResult Wait (string title, string message, bool allowCancel, Action<IWaitContext> action)
+		// {
+		// 	using (var waitContext = StartWait (title, message, allowCancel)) {
+		// 		action (waitContext);
+		// 	}
 
-			return WaitIndicatorResult.Completed;
-		}
+		// 	return WaitIndicatorResult.Completed;
+		// }
 
-		public WaitIndicatorResult Wait (string title, string message, bool allowCancel, bool showProgress, Action<IWaitContext> action)
-		{
-			using (var waitContext = StartWait (title, message, allowCancel, showProgress)) {
-				action (waitContext);
-			}
+		// public WaitIndicatorResult Wait (string title, string message, bool allowCancel, bool showProgress, Action<IWaitContext> action)
+		// {
+		// 	using (var waitContext = StartWait (title, message, allowCancel, showProgress)) {
+		// 		action (waitContext);
+		// 	}
 
-			return WaitIndicatorResult.Completed;
-		}
+		// 	return WaitIndicatorResult.Completed;
+		// }
 
-		public IWaitContext StartWait (string title, string message, bool allowCancel)
-		{
-			//FIXME: get IGlobalOperationNotificationService working
-			//var service = MonoDevelopWorkspace.HostServices.GetService<IGlobalOperationNotificationService> ();
-			return new WaitContext (null, title, message, allowCancel);
-		}
+		// public IWaitContext StartWait (string title, string message, bool allowCancel)
+		// {
+		// 	//FIXME: get IGlobalOperationNotificationService working
+		// 	//var service = MonoDevelopWorkspace.HostServices.GetService<IGlobalOperationNotificationService> ();
+		// 	return new WaitContext (null, title, message, allowCancel);
+		// }
 
-		public IWaitContext StartWait (string title, string message, bool allowCancel, bool showProgress)
-		{
-			//var service = MonoDevelopWorkspace.HostServices.GetService<IGlobalOperationNotificationService> ();
-			return new WaitContext (null, title, message, allowCancel);
-		}
+		// public IWaitContext StartWait (string title, string message, bool allowCancel, bool showProgress)
+		// {
+		// 	//var service = MonoDevelopWorkspace.HostServices.GetService<IGlobalOperationNotificationService> ();
+		// 	return new WaitContext (null, title, message, allowCancel);
+		// }
 
-		private sealed class WaitContext : IWaitContext
+		private sealed class WaitContext //: IWaitContext
 		{
 			//private readonly GlobalOperationRegistration registration;
 

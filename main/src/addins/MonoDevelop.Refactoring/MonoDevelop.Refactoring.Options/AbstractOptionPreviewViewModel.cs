@@ -33,7 +33,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeStyle;
-using Microsoft.CodeAnalysis.Editor.Shared.Preview;
+//using Microsoft.CodeAnalysis.Editor.Shared.Preview;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Options;
@@ -50,7 +50,7 @@ namespace MonoDevelop.Refactoring.Options
 	internal abstract class AbstractOptionPreviewViewModel : AbstractNotifyPropertyChanged, IDisposable
 	{
 		private Ide.Editor.TextEditor _textViewHost;
-		private PreviewWorkspace curWorkspace;
+		//private PreviewWorkspace curWorkspace;
 		private Microsoft.CodeAnalysis.Project project;
 
 		public List<object> Items { get; set; }
@@ -122,9 +122,9 @@ namespace MonoDevelop.Refactoring.Options
 
 		public async void UpdatePreview (string text)
 		{
-			var workspace = new PreviewWorkspace (Ide.Composition.CompositionManager.Instance.HostServices);
+			//var workspace = new PreviewWorkspace (Ide.Composition.CompositionManager.Instance.HostServices);
 			var fileName = string.Format ("project.{0}", Language == "C#" ? "csproj" : "vbproj");
-			project = workspace.CurrentSolution.AddProject (fileName, "assembly.dll", Language);
+			//project = workspace.CurrentSolution.AddProject (fileName, "assembly.dll", Language);
 
 			// use the mscorlib, system, and system.core that are loaded in the current process.
 			string [] references =
@@ -134,21 +134,21 @@ namespace MonoDevelop.Refactoring.Options
 				"System.Core"
 			};
 
-			var metadataService = workspace.Services.GetService<IMetadataService> ();
+			//var metadataService = workspace.Services.GetService<IMetadataService> ();
 
-			var referenceAssemblies = Thread.GetDomain ().GetAssemblies ()
-				.Where (x => references.Contains (x.GetName (true).Name, StringComparer.OrdinalIgnoreCase))
-				.Select (a => metadataService.GetReference (a.Location, MetadataReferenceProperties.Assembly));
+			//var referenceAssemblies = Thread.GetDomain ().GetAssemblies ()
+			//	.Where (x => references.Contains (x.GetName (true).Name, StringComparer.OrdinalIgnoreCase))
+			//	.Select (a => metadataService.GetReference (a.Location, MetadataReferenceProperties.Assembly));
 
-			project = project.WithMetadataReferences (referenceAssemblies);
+			//project = project.WithMetadataReferences (referenceAssemblies);
 
 			var document = project.AddDocument ("document.cs", SourceText.From (text, Encoding.UTF8));
 			var formatted = Formatter.FormatAsync (document, this.Options).WaitAndGetResult (CancellationToken.None);
-			workspace.TryApplyChanges (project.Solution);
+			//workspace.TryApplyChanges (project.Solution);
 
 			TextViewHost.MimeType = "text/x-csharp";
 			TextViewHost.Text = (await document.GetTextAsync ()).ToString ();
-			TextViewHost.DocumentContext = new MyDocumentContext (workspace, document);
+			//TextViewHost.DocumentContext = new MyDocumentContext (workspace, document);
 
 			TextViewHost.IsReadOnly = false;
 			for (int i = 1; i <= TextViewHost.LineCount; i++) {
@@ -160,23 +160,23 @@ namespace MonoDevelop.Refactoring.Options
 				}
 			}
 			TextViewHost.IsReadOnly = true;
-			if (curWorkspace != null) {
-				curWorkspace.Dispose ();
-			}
+			//if (curWorkspace != null) {
+			//	curWorkspace.Dispose ();
+			//}
 
-			this.curWorkspace = workspace;
+			//this.curWorkspace = workspace;
 		}
 
 		class MyDocumentContext : DocumentContext
 		{
-			private PreviewWorkspace workspace;
+			//private PreviewWorkspace workspace;
 			private Document document;
 
-			public MyDocumentContext (PreviewWorkspace workspace, Document document)
-			{
-				this.workspace = workspace;
-				this.document = document;
-			}
+			//public MyDocumentContext (PreviewWorkspace workspace, Document document)
+			//{
+			//	this.workspace = workspace;
+			//	this.document = document;
+			//}
 
 			public override string Name => document.Name;
 
@@ -243,10 +243,10 @@ namespace MonoDevelop.Refactoring.Options
 				_textViewHost.Dispose ();
 				_textViewHost = null;
 			}
-			if (curWorkspace != null) {
-				curWorkspace.Dispose ();
-				curWorkspace = null;
-			}
+			//if (curWorkspace != null) {
+			//	curWorkspace.Dispose ();
+			//	curWorkspace = null;
+			//}
 		}
 
 		private void UpdateDocument (string text)

@@ -46,23 +46,23 @@ namespace MonoDevelop.CSharp.Completion
 		async Task<DebugDataTipInfo> IDebuggerExpressionResolver.ResolveExpressionAsync (IReadonlyTextDocument editor, DocumentContext doc, int offset, CancellationToken cancellationToken)
 		{
 			var analysisDocument = doc.AnalysisDocument;
-			if (analysisDocument == null)
-				return default (DebugDataTipInfo);
-			var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
-			if (debugInfoService == null)
+			//if (analysisDocument == null)
+			//	return default (DebugDataTipInfo);
+			//var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
+			//if (debugInfoService == null)
 				return default (DebugDataTipInfo);
 
-			var tipInfo = await debugInfoService.GetDataTipInfoAsync (analysisDocument, offset, cancellationToken).ConfigureAwait (false);
-			var text = tipInfo.Text;
-			if (text == null && !tipInfo.IsDefault)
-				text = editor.GetTextAt (tipInfo.Span.Start, tipInfo.Span.Length);
+			// var tipInfo = await debugInfoService.GetDataTipInfoAsync (analysisDocument, offset, cancellationToken).ConfigureAwait (false);
+			// var text = tipInfo.Text;
+			// if (text == null && !tipInfo.IsDefault)
+			// 	text = editor.GetTextAt (tipInfo.Span.Start, tipInfo.Span.Length);
 
-			var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
-			var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
-			var syntaxNode = root.FindNode (tipInfo.Span);
-			if (syntaxNode == null)
-				return new DebugDataTipInfo (tipInfo.Span, text);
-			return GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
+			// var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
+			// var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
+			// var syntaxNode = root.FindNode (tipInfo.Span);
+			// if (syntaxNode == null)
+			// 	return new DebugDataTipInfo (tipInfo.Span, text);
+			// return GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
 		}
 
 		static DebugDataTipInfo GetInfo (SyntaxNode root, SemanticModel semanticModel, SyntaxNode node, string textOpt, CancellationToken cancellationToken)

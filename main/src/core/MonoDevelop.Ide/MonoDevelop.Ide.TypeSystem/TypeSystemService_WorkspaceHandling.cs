@@ -325,7 +325,7 @@ namespace MonoDevelop.Ide.TypeSystem
 			// Only use misc workspace with the new editor; old editor has its own
 			if (reference.HandleMiscWorkspace) {
 				// If the primary workspace didn't claim the document notify the miscellaneous workspace
-				miscellaneousFilesWorkspace.OnDocumentOpened (reference.FilePath, reference.TextBuffer);
+				//miscellaneousFilesWorkspace.OnDocumentOpened (reference.FilePath, reference.TextBuffer);
 			}
 		}
 
@@ -356,19 +356,19 @@ namespace MonoDevelop.Ide.TypeSystem
 						if (solConf == null || !solConf.BuildEnabledForItem (p))
 							continue;
 						if (p == p.ParentSolution.StartupItem) {
-							workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
+							//workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
 							return true;
 						}
 						bestDoc = documentId;
 					} else if (documentId.ProjectId == projectId) {
-						workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
+						//workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
 						return true;
 					}
 				}
 			}
 
 			if (bestDoc != null) {
-				workspace.InformDocumentOpen (bestDoc, textBuffer.AsTextContainer ());
+				//workspace.InformDocumentOpen (bestDoc, textBuffer.AsTextContainer ());
 				return true;
 			}
 			return false;
@@ -384,10 +384,10 @@ namespace MonoDevelop.Ide.TypeSystem
 						continue;
 
 					if (workspace.CurrentSolution.ContainsAdditionalDocument (documentId)) {
-						workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
+						//workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
 						opened = true;
 					} else if (workspace.CurrentSolution.ContainsAnalyzerConfigDocument (documentId)) {
-						workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
+						//workspace.InformDocumentOpen (documentId, textBuffer.AsTextContainer ());
 						opened = true;
 					}
 				}
@@ -409,14 +409,14 @@ namespace MonoDevelop.Ide.TypeSystem
 				// In the common case the primary workspace will own the document, so shut down
 				// miscellaneous workspace first to avoid adding and then immediately removing
 				// the document to the miscellaneous workspace
-				miscellaneousFilesWorkspace.OnDocumentClosed (reference.FilePath, reference.TextBuffer);
+				//miscellaneousFilesWorkspace.OnDocumentClosed (reference.FilePath, reference.TextBuffer);
 			}
 
 			var solution = (reference.Owner as SolutionItem)?.ParentSolution;
-			if (solution != null)
-				TryCloseDocumentInWorkspace (reference.FilePath, reference.TextBuffer.AsTextContainer (), solution);
-			else
-				TryCloseDocumentInAllWorkspaces (reference.FilePath, reference.TextBuffer.AsTextContainer ());
+			//if (solution != null)
+				//TryCloseDocumentInWorkspace (reference.FilePath, reference.TextBuffer.AsTextContainer (), solution);
+			//else
+				//TryCloseDocumentInAllWorkspaces (reference.FilePath, reference.TextBuffer.AsTextContainer ());
 		}
 
 		private void TryCloseDocumentInWorkspace (FilePath filePath, SourceTextContainer container, MonoDevelop.Projects.Solution solution)

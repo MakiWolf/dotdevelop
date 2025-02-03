@@ -31,7 +31,7 @@ using MonoDevelop.TextEditor;
 namespace MonoDevelop.CSharp
 {
 	[Export (typeof (IEditorContentProvider))]
-	[ContentType (ContentTypeNames.CSharpContentType)]
+	//[ContentType (ContentTypeNames.CSharpContentType)]
 	[TextViewRole (PredefinedTextViewRoles.PrimaryDocument)]
 	class CSharpOutlineTextEditorExtensionProvider : EditorContentInstanceProvider<CSharpOutlineTextEditorExtension>
 	{

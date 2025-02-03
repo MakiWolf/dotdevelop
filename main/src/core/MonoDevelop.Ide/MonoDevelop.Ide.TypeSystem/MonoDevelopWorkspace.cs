@@ -743,12 +743,12 @@ namespace MonoDevelop.Ide.TypeSystem
 				return;
 			}
 			if (IsDocumentOpen (id)) {
-				var textBuffer = (await document.GetTextAsync (CancellationToken.None)).Container.TryGetTextBuffer ();
+				//var textBuffer = (await document.GetTextAsync (CancellationToken.None)).Container.TryGetTextBuffer ();
 
-				if (textBuffer != null) {
-					UpdateText (text, textBuffer, Microsoft.VisualStudio.Text.EditOptions.DefaultMinimalChange);
+				//if (textBuffer != null) {
+					//UpdateText (text, textBuffer, Microsoft.VisualStudio.Text.EditOptions.DefaultMinimalChange);
 					return;
-				}
+				//}
 			}
 			Projection projection = null;
 			FilePath filePath;

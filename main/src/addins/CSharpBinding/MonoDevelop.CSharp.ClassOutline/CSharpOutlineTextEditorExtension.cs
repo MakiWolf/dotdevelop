@@ -95,7 +95,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 
 		void UpdateAnalysisDocument (object sender, Microsoft.VisualStudio.Text.TextContentChangedEventArgs e)
 		{
-			providedAnalysisDocument = textView.TextSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+			//providedAnalysisDocument = textView.TextSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
 			outlineReady = true; // we need this to compensate for the old behaviour 
 			UpdateDocumentOutline (this, e);
 		}

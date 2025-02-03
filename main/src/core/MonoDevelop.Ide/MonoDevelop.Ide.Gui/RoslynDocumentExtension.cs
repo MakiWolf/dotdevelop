@@ -168,12 +168,12 @@ namespace MonoDevelop.Ide.Gui
 			get {
 				if (analysisDocument == null) {
 					var textBuffer = TextBuffer;
-					if (textBuffer != null && textBuffer.AsTextContainer() is SourceTextContainer container) {
-						var document = container.GetOpenDocumentInCurrentContext ();
-						if (document != null) {
-							return document;
-						}
-					}
+					//if (textBuffer != null && textBuffer.AsTextContainer() is SourceTextContainer container) {
+					//	var document = container.GetOpenDocumentInCurrentContext ();
+					//	if (document != null) {
+					//		return document;
+					//	}
+					//}
 
 					return null;
 				}

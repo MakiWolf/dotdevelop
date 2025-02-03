@@ -87,22 +87,22 @@ namespace MonoDevelop.Ide.Editor.Extension
 			if (!enabled)
 				return;
 			var analysisDocument = DocumentContext?.AnalysisDocument;
-			if (analysisDocument == null)
+			//if (analysisDocument == null)
 				return;
-			var lineSeparatorService = DocumentContext?.RoslynWorkspace?.Services.GetLanguageServices (analysisDocument.Project.Language).GetService<ILineSeparatorService> ();
-			if (lineSeparatorService == null)
-				return;
-			var token = src.Token;
-			var separators = await lineSeparatorService.GetLineSeparatorsAsync (analysisDocument, new TextSpan (0, Editor.Length), token);
-			if (token.IsCancellationRequested)
-				return;
-			RemoveMarkers ();
-			foreach (var s in separators) {
-				var line = Editor.GetLineByOffset (s.Start);
-				var marker = Editor.TextMarkerFactory.CreateLineSeparatorMarker (Editor);
-				Editor.AddMarker (line, marker);
-				markers.Add (marker);
-			}
+			//var lineSeparatorService = DocumentContext?.RoslynWorkspace?.Services.GetLanguageServices (analysisDocument.Project.Language).GetService<ILineSeparatorService> ();
+			//if (lineSeparatorService == null)
+			//	return;
+			//var token = src.Token;
+			//var separators = await lineSeparatorService.GetLineSeparatorsAsync (analysisDocument, new TextSpan (0, Editor.Length), token);
+			//if (token.IsCancellationRequested)
+			//	return;
+			//RemoveMarkers ();
+			// foreach (var s in separators) {
+			// 	var line = Editor.GetLineByOffset (s.Start);
+			// 	var marker = Editor.TextMarkerFactory.CreateLineSeparatorMarker (Editor);
+			// 	Editor.AddMarker (line, marker);
+			// 	markers.Add (marker);
+			// }
 		}
 
 		void RemoveMarkers ()

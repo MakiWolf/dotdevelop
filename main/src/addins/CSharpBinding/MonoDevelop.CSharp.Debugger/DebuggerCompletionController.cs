@@ -58,10 +58,10 @@ namespace MonoDevelop.CSharp.Debugger
 		{
 			if (typeof (IDebuggerCompletionProvider).IsAssignableFrom (type)) {
 				var textBuffer = Controller.GetContent<ITextBuffer> ();
-				var analysisDocument = textBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
-				if (analysisDocument == null)
+				//var analysisDocument = textBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges ();
+				//if (analysisDocument == null)
 					return null;
-				return new DebuggerCompletionProvider (analysisDocument, textBuffer);
+				//return new DebuggerCompletionProvider (analysisDocument, textBuffer);
 			}
 			return base.OnGetContent (type);
 		}
@@ -134,38 +134,38 @@ namespace MonoDevelop.CSharp.Debugger
 			var newTextBuffer = PlatformCatalog.Instance.TextBufferFactoryService.CreateTextBuffer (text, textBuffer.ContentType);
 			var snapshot = newTextBuffer.CurrentSnapshot;
 
-			try {
+			//try {
 				//Workaround Mono bug: https://github.com/mono/mono/issues/8700
-				snapshot.AsText ();
-			} catch (Exception) {
-			}
+			//	snapshot.AsText ();
+			//} catch (Exception) {
+			//}
 
 			// Fork the solution using this new primary buffer for the document and all of its linked documents.
-			var forkedSolution = solution.WithDocumentText (document.Id, snapshot.AsText (), PreservationMode.PreserveIdentity);
-			foreach (var link in document.GetLinkedDocumentIds ()) {
-				forkedSolution = forkedSolution.WithDocumentText (link, snapshot.AsText (), PreservationMode.PreserveIdentity);
-			}
+			//var forkedSolution = solution.WithDocumentText (document.Id, snapshot.AsText (), PreservationMode.PreserveIdentity);
+			//foreach (var link in document.GetLinkedDocumentIds ()) {
+			//	forkedSolution = forkedSolution.WithDocumentText (link, snapshot.AsText (), PreservationMode.PreserveIdentity);
+			//}
 
 			// Put it into a new workspace, and open it and its related documents
 			// with the projection buffer as the text.
-			var forkedWorkspace = new DebuggerIntellisenseWorkspace (forkedSolution);
-			forkedWorkspace.OpenDocument (document.Id, newTextBuffer.AsTextContainer ());
-			foreach (var link in document.GetLinkedDocumentIds ()) {
-				forkedWorkspace.OpenDocument (link, newTextBuffer.AsTextContainer ());
-			}
-			var cs = forkedWorkspace.Services.GetLanguageServices (LanguageNames.CSharp).GetService<CompletionService> ();
-			var trigger = new CompletionTrigger (CompletionTriggerKind.Invoke, '\0');
-			var roslynCompletions = await cs.GetCompletionsAsync (forkedWorkspace.CurrentSolution.GetDocument (document.Id), insertOffset + exp.Length, trigger, cancellationToken: token).ConfigureAwait (false);
-			if (roslynCompletions == null)
+			//var forkedWorkspace = new DebuggerIntellisenseWorkspace (forkedSolution);
+			//forkedWorkspace.OpenDocument (document.Id, newTextBuffer.AsTextContainer ());
+			//foreach (var link in document.GetLinkedDocumentIds ()) {
+			//	forkedWorkspace.OpenDocument (link, newTextBuffer.AsTextContainer ());
+			//}
+			//var cs = forkedWorkspace.Services.GetLanguageServices (LanguageNames.CSharp).GetService<CompletionService> ();
+			// var trigger = new CompletionTrigger (CompletionTriggerKind.Invoke, '\0');
+			// var roslynCompletions = await cs.GetCompletionsAsync (forkedWorkspace.CurrentSolution.GetDocument (document.Id), insertOffset + exp.Length, trigger, cancellationToken: token).ConfigureAwait (false);
+			// if (roslynCompletions == null)
 				return null;
-			var result = new Mono.Debugging.Client.CompletionData ();
-			foreach (var roslynCompletion in roslynCompletions.Items) {
-				if (roslynCompletion.Tags.Contains (WellKnownTags.Snippet))
-					continue;
-				result.Items.Add (new Mono.Debugging.Client.CompletionItem (roslynCompletion.DisplayText, RoslynTagsToDebuggerFlags (roslynCompletion.Tags)));
-			}
-			result.ExpressionLength = roslynCompletions.Span.Length;
-			return result;
+			// var result = new Mono.Debugging.Client.CompletionData ();
+			// foreach (var roslynCompletion in roslynCompletions.Items) {
+			// 	if (roslynCompletion.Tags.Contains (WellKnownTags.Snippet))
+			// 		continue;
+			// 	result.Items.Add (new Mono.Debugging.Client.CompletionItem (roslynCompletion.DisplayText, RoslynTagsToDebuggerFlags (roslynCompletion.Tags)));
+			// }
+			// result.ExpressionLength = roslynCompletions.Span.Length;
+			// return result;
 		}
 
 		static ObjectValueFlags RoslynTagsToDebuggerFlags (ImmutableArray<string> tags)

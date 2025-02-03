@@ -24,13 +24,13 @@
 
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
-using Microsoft.CodeAnalysis.Editor.Commanding.Commands;
+//using Microsoft.CodeAnalysis.Editor.Commanding.Commands;
 
 namespace MonoDevelop.Refactoring
 {
 	static class CommandArgsFactories
 	{
-		public static GoToImplementationCommandArgs CreateGoToImplementationCommandArgs (ITextView v, ITextBuffer b)
-			=> new GoToImplementationCommandArgs (v, b);
+		//public static GoToImplementationCommandArgs CreateGoToImplementationCommandArgs (ITextView v, ITextBuffer b)
+		//	=> new GoToImplementationCommandArgs (v, b);
 	}
 }

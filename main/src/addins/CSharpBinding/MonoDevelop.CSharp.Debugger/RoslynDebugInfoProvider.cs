@@ -23,81 +23,81 @@ namespace MonoDevelop.CSharp.Debugger
 	{
 		public async Task<DataTipInfo> GetDebugInfoAsync (SnapshotPoint snapshotPoint, CancellationToken cancellationToken)
 		{
-			var analysisDocument = snapshotPoint.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
+			//var analysisDocument = snapshotPoint.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
 
             IProjectionSnapshot projectionSnapshot = null;
-            if (analysisDocument == null) {
-				projectionSnapshot = snapshotPoint.Snapshot as IProjectionSnapshot;
-				if (projectionSnapshot != null) {
-					snapshotPoint = projectionSnapshot.MapToSourceSnapshot (snapshotPoint.Position);
-					analysisDocument = snapshotPoint.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
-				}
-			}
+            //if (analysisDocument == null) {
+				//projectionSnapshot = snapshotPoint.Snapshot as IProjectionSnapshot;
+				//if (projectionSnapshot != null) {
+				//	snapshotPoint = projectionSnapshot.MapToSourceSnapshot (snapshotPoint.Position);
+					//analysisDocument = snapshotPoint.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
+				//}
+			//}
 
-			if (analysisDocument == null)
+			//if (analysisDocument == null)
+			//	return default (DataTipInfo);
+
+			//var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
+			//if (debugInfoService == null)
 				return default (DataTipInfo);
 
-			var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
-			if (debugInfoService == null)
-				return default (DataTipInfo);
+			//var tipInfo = await debugInfoService.GetDataTipInfoAsync (analysisDocument, snapshotPoint.Position, cancellationToken).ConfigureAwait (false);
+			//var text = tipInfo.Text;
+			//if (text == null && !tipInfo.IsDefault)
+			//	text = snapshotPoint.Snapshot.GetText (tipInfo.Span.Start, tipInfo.Span.Length);
 
-			var tipInfo = await debugInfoService.GetDataTipInfoAsync (analysisDocument, snapshotPoint.Position, cancellationToken).ConfigureAwait (false);
-			var text = tipInfo.Text;
-			if (text == null && !tipInfo.IsDefault)
-				text = snapshotPoint.Snapshot.GetText (tipInfo.Span.Start, tipInfo.Span.Length);
+			// var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
+			// var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
+			// var syntaxNode = root.FindNode (tipInfo.Span);
+			// DebugDataTipInfo debugDataTipInfo;
 
-			var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
-			var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
-			var syntaxNode = root.FindNode (tipInfo.Span);
-			DebugDataTipInfo debugDataTipInfo;
+			// if (syntaxNode == null)
+			// 	debugDataTipInfo = new DebugDataTipInfo (tipInfo.Span, text);
+			// else
+			// 	debugDataTipInfo = GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
 
-			if (syntaxNode == null)
-				debugDataTipInfo = new DebugDataTipInfo (tipInfo.Span, text);
-			else
-				debugDataTipInfo = GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
+			// ITrackingSpan trackingSpan;
 
-			ITrackingSpan trackingSpan;
+			// if (projectionSnapshot != null) {
+			// 	var originalSpan = projectionSnapshot.MapFromSourceSnapshot (new SnapshotSpan (snapshotPoint.Snapshot, debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length)).FirstOrDefault ();
+			// 	if (originalSpan == default)
+			// 		return default;
 
-			if (projectionSnapshot != null) {
-				var originalSpan = projectionSnapshot.MapFromSourceSnapshot (new SnapshotSpan (snapshotPoint.Snapshot, debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length)).FirstOrDefault ();
-				if (originalSpan == default)
-					return default;
+			// 	trackingSpan = projectionSnapshot.CreateTrackingSpan (originalSpan, SpanTrackingMode.EdgeInclusive);
+			// } else {
+			// 	var originalSpan = new Span (debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length);
+			// 	trackingSpan = snapshotPoint.Snapshot.CreateTrackingSpan (originalSpan, SpanTrackingMode.EdgeInclusive);
+			// }
 
-				trackingSpan = projectionSnapshot.CreateTrackingSpan (originalSpan, SpanTrackingMode.EdgeInclusive);
-			} else {
-				var originalSpan = new Span (debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length);
-				trackingSpan = snapshotPoint.Snapshot.CreateTrackingSpan (originalSpan, SpanTrackingMode.EdgeInclusive);
-			}
-
-			return new DataTipInfo (trackingSpan, debugDataTipInfo.Text);
+			// return new DataTipInfo (trackingSpan, debugDataTipInfo.Text);
 		}
 
 		public async Task<DataTipInfo> GetDebugInfoAsync (SnapshotSpan snapshotSpan, CancellationToken cancellationToken)
 		{
-			var analysisDocument = snapshotSpan.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
-			if (analysisDocument == null)
+			//var analysisDocument = snapshotSpan.Snapshot.AsText ().GetOpenDocumentInCurrentContextWithChanges ();
+			//if (analysisDocument == null)
+			//	return default (DataTipInfo);
+
+			//var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
+			//if (debugInfoService == null)
 				return default (DataTipInfo);
 
-			var debugInfoService = analysisDocument.GetLanguageService<Microsoft.CodeAnalysis.Editor.Implementation.Debugging.ILanguageDebugInfoService> ();
-			if (debugInfoService == null)
-				return default (DataTipInfo);
+			//var span = new TextSpan (snapshotSpan.Start, snapshotSpan.Length);
+			//var text = snapshotSpan.GetText ();
 
-			var span = new TextSpan (snapshotSpan.Start, snapshotSpan.Length);
-			var text = snapshotSpan.GetText ();
+			//var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
+			///var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
+			//var syntaxNode = root.FindNode (span);
+			//DebugDataTipInfo debugDataTipInfo;
 
-			var semanticModel = await analysisDocument.GetSemanticModelAsync (cancellationToken).ConfigureAwait (false);
-			var root = await semanticModel.SyntaxTree.GetRootAsync (cancellationToken).ConfigureAwait (false);
-			var syntaxNode = root.FindNode (span);
-			DebugDataTipInfo debugDataTipInfo;
+			//if (syntaxNode == null)
+			//	debugDataTipInfo = new DebugDataTipInfo (span, text);
+			//else
+			//	debugDataTipInfo = GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
 
-			if (syntaxNode == null)
-				debugDataTipInfo = new DebugDataTipInfo (span, text);
-			else
-				debugDataTipInfo = GetInfo (root, semanticModel, syntaxNode, text, cancellationToken);
+			//var trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan (debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length, SpanTrackingMode.EdgeInclusive);
 
-			var trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan (debugDataTipInfo.Span.Start, debugDataTipInfo.Span.Length, SpanTrackingMode.EdgeInclusive);
-
-			return new DataTipInfo (trackingSpan, debugDataTipInfo.Text);
+			//return new DataTipInfo (trackingSpan, debugDataTipInfo.Text);
 		}
 
 		static DebugDataTipInfo GetInfo (SyntaxNode root, SemanticModel semanticModel, SyntaxNode node, string textOpt, CancellationToken cancellationToken)
