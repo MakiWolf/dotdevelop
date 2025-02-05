@@ -21,6 +21,7 @@
     <Externalconsole>true</Externalconsole>
     <StartProgram>$(MSBuildProjectDirectory)\..\..\..\build\bin\MonoDevelop.exe</StartProgram>
     <StartWorkingDirectory>$(MSBuildProjectDirectory)\..\..\..\build\bin</StartWorkingDirectory>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
   </PropertyGroup>
   <Target Name="Clean">
     <RemoveDir Directories="..\bin\" />

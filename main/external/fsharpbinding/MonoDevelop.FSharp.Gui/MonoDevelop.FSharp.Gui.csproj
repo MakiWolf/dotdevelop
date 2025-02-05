@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>$(MDFrameworkVersion)</TargetFrameworkVersion>
     <OutputPath>..\..\..\build\AddIns\FSharpBinding</OutputPath>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+     <RuntimeIdentifier>win</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
