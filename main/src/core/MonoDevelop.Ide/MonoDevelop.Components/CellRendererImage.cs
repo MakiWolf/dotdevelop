@@ -149,6 +149,9 @@ namespace MonoDevelop.Components
 		 		//} else {
 		 			ignoreSelection = false;
 		 		//}
+				//} else {
+				//	ignoreSelection = false;
+				//}
 		 	}
 
 		 	var img = GetImage ();
