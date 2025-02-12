@@ -27,6 +27,8 @@ using System;
 using System.Linq;
 using Gdk;
 using Gtk;
+using GLib;
+using Pango;
 using Cairo;
 using MonoDevelop.Components;
 using MonoDevelop.Ide.Gui;
@@ -100,21 +102,21 @@ namespace MonoDevelop.Ide.Projects
 			return languageRect;
 		}
 
-		// public override void GetSize (Widget widget, ref Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-		// {
-		// 	base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+		 protected override void OnGetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+		 {
+		 	base.OnGetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
 
-		// 	textWidth = GetTextWidth (widget);
-		// 	int languageRectangleWidth = textWidth + languageLeftHandPadding;
-		// 	if (TemplateHasMultipleLanguages ()) {
-		// 		languageRectangleWidth += languageRightHandPadding + dropdownTriangleWidth + dropdownTriangleRightHandPadding;
-		// 	} else {
-		// 		languageRectangleWidth += languageRightHandPadding;
-		// 		languageRectangleWidth = Math.Max (languageRectangleWidth, minLanguageRectWidth);
-		// 	}
+		 	textWidth = GetTextWidth (widget);
+		 	int languageRectangleWidth = textWidth + languageLeftHandPadding;
+		 	if (TemplateHasMultipleLanguages ()) {
+		 		languageRectangleWidth += languageRightHandPadding + dropdownTriangleWidth + dropdownTriangleRightHandPadding;
+		 	} else {
+		 		languageRectangleWidth += languageRightHandPadding;
+		 		languageRectangleWidth = Math.Max (languageRectangleWidth, minLanguageRectWidth);
+		 	}
 
-		// 	width = languageRectangleWidth + rightHandCellPadding;
-		// }
+		 	width = languageRectangleWidth + rightHandCellPadding;
+		 }
 
 		int GetTextWidth (Widget widget)
 		{
@@ -137,48 +139,47 @@ namespace MonoDevelop.Ide.Projects
 			}
 		}
 
-//		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-//		{
-//			if (Template == null) {
-//				return;
-//			}
-//
-//			if (!RenderRecentTemplate && (!Template.AvailableLanguages.Any () || !IsTemplateRowSelected (widget, flags))) {
-//				return;
-//			}
-//
+		protected override void OnRender (Cairo.Context ctx, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, /*Gdk.Rectangle expose_area,*/ CellRendererState flags)
+		{
+			if (Template == null) {
+				return;
+			}
+
+			if (!RenderRecentTemplate && (!Template.AvailableLanguages.Any () || !IsTemplateRowSelected (widget, flags))) {
+				return;
+			}
 //			using (var ctx = CairoHelper.Create (window)) {
-//				using (var layout = new Pango.Layout (widget.PangoContext)) {
-//					int textHeight = 0;
-//
-//					SetMarkup (layout, GetSelectedLanguage ());
-//					layout.GetPixelSize (out textWidth, out textHeight);
-//
-//					languageRect = GetLanguageButtonRectangle (window, widget, cell_area, textHeight, textWidth);
-//
-//					StateType state = StateType.Normal;
-//					if (!RenderRecentTemplate) {
-//						RoundBorder (ctx, languageRect.X, languageRect.Y, languageRect.Width, languageRect.Height);
-//						SetSourceColor (ctx, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToCairoColor ());
-//						ctx.Fill ();
-//					} else {
-//						state = GetState (widget, flags);
-//					}
-//
-//					int tw = TemplateHasMultipleLanguages () ? textWidth + dropdownTriangleWidth + 2 : textWidth;
-//					int languageTextX = languageRect.X + ((languageRect.Width - tw) / 2);
-//					int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2;
-//
-//					window.DrawLayout (widget.Style.TextGC (state), languageTextX, languageTextY, layout);
-//
-//					if (TemplateHasMultipleLanguages ()) {
-//						int triangleX = languageTextX + textWidth + languageRightHandPadding;
-//						int triangleY = languageRect.Y + (languageRect.Height - dropdownTriangleHeight) / 2;
-//						DrawTriangle (ctx, triangleX, triangleY);
-//					}
-//				}
+				using (var layout = new Pango.Layout (widget.PangoContext)) {
+					int textHeight = 0;
+
+					SetMarkup (layout, GetSelectedLanguage ());
+					layout.GetPixelSize (out textWidth, out textHeight);
+
+					languageRect = GetLanguageButtonRectangle (ctx, widget, cell_area, textHeight, textWidth);
+
+					StateType state = StateType.Normal;
+					if (!RenderRecentTemplate) {
+						RoundBorder (ctx, languageRect.X, languageRect.Y, languageRect.Width, languageRect.Height);
+						SetSourceColor (ctx, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToCairoColor ());
+						ctx.Fill ();
+					} else {
+						state = GetState (widget, flags);
+					}
+
+					int tw = TemplateHasMultipleLanguages () ? textWidth + dropdownTriangleWidth + 2 : textWidth;
+					int languageTextX = languageRect.X + ((languageRect.Width - tw) / 2);
+					int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2;
+					
+					//ctx.DrawLayout (widget.Style.TextGC (state), languageTextX, languageTextY, layout);
+
+					if (TemplateHasMultipleLanguages ()) {
+						int triangleX = languageTextX + textWidth + languageRightHandPadding;
+						int triangleY = languageRect.Y + (languageRect.Height - dropdownTriangleHeight) / 2;
+						DrawTriangle (ctx, triangleX, triangleY);
+					}
+				}
 //			}
-//		}
+		}
 
 		void DrawTriangle (Cairo.Context ctx, int x, int y)
 		{
@@ -193,7 +194,7 @@ namespace MonoDevelop.Ide.Projects
 			ctx.Fill ();
 		}
 
-		Gdk.Rectangle GetLanguageButtonRectangle (/*Drawable window, */Widget widget, Gdk.Rectangle cell_area, int textHeight, int textWidth)
+		Gdk.Rectangle GetLanguageButtonRectangle (Cairo.Context window, Widget widget, Gdk.Rectangle cell_area, int textHeight, int textWidth)
 		{
 			int languageRectangleHeight = cell_area.Height - 8;
 			int languageRectangleWidth = textWidth + languageLeftHandPadding;
