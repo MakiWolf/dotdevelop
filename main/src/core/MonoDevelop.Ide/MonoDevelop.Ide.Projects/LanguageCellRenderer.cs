@@ -160,7 +160,7 @@ namespace MonoDevelop.Ide.Projects
 					StateType state = StateType.Normal;
 					if (!RenderRecentTemplate) {
 						RoundBorder (ctx, languageRect.X, languageRect.Y, languageRect.Width, languageRect.Height);
-						SetSourceColor (ctx, Styles.NewProjectDialog.TemplateLanguageButtonBackground.ToCairoColor ());
+						SetSourceColor (ctx, new Cairo.Color (15, 69, 19, 1.0));
 						ctx.Fill ();
 					} else {
 						state = GetState (widget, flags);
@@ -169,8 +169,10 @@ namespace MonoDevelop.Ide.Projects
 					int tw = TemplateHasMultipleLanguages () ? textWidth + dropdownTriangleWidth + 2 : textWidth;
 					int languageTextX = languageRect.X + ((languageRect.Width - tw) / 2);
 					int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2;
-					
 					//ctx.DrawLayout (widget.Style.TextGC (state), languageTextX, languageTextY, layout);
+					ctx.MoveTo(languageTextX, languageTextY);
+					ctx.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
+					Pango.CairoHelper.ShowLayout(ctx, layout);
 
 					if (TemplateHasMultipleLanguages ()) {
 						int triangleX = languageTextX + textWidth + languageRightHandPadding;
@@ -186,7 +188,7 @@ namespace MonoDevelop.Ide.Projects
 			int width = dropdownTriangleWidth;
 			int height = dropdownTriangleHeight;
 
-			SetSourceColor (ctx, Styles.NewProjectDialog.TemplateLanguageButtonTriangle.ToCairoColor ());
+			SetSourceColor (ctx, new Cairo.Color (0, 0, 0, 1.0));
 			ctx.MoveTo (x, y);
 			ctx.LineTo (x + width, y);
 			ctx.LineTo (x + (width / 2), y + height);
