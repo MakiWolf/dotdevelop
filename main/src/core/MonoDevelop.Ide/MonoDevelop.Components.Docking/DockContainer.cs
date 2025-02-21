@@ -170,7 +170,7 @@ namespace MonoDevelop.Components.Docking
 			layout.SizeAllocate (rect);
 
 			usedSplitters = 0;
-			layout.DrawSeparators (Gdk.Rectangle.Zero, null, 0, DrawSeparatorOperation.Allocate, null);
+			layout.DrawSeparators (null, null, 0, DrawSeparatorOperation.Allocate, null);
 		}
 
 		int usedSplitters;
@@ -211,9 +211,9 @@ namespace MonoDevelop.Components.Docking
 		protected override bool OnDrawn (Context cr)
 		{
 			bool res = base.OnDrawn (cr);
-			var area = Allocation;
+			//var area = Allocation;
 			if (layout != null) {
-				layout.Draw (area, null, 0);
+				layout.Draw (cr, null, 0);
 			}
 			return res;
 		}

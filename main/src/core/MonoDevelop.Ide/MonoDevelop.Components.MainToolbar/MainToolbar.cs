@@ -381,6 +381,7 @@ namespace MonoDevelop.Components.MainToolbar
 		protected override bool OnDrawn (Cairo.Context evnt)
 		{
 			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+				context.Rectangle(0, 0, AllocatedWidth, AllocatedHeight);
 				//context.Rectangle (
 				//	evnt.Area.X,
 				//	evnt.Area.Y,

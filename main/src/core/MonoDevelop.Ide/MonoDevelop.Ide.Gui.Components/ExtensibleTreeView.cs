@@ -2820,53 +2820,53 @@ namespace MonoDevelop.Ide.Gui.Components
 			return resized;
 		}
 
-		// public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-		// {
-		// 	base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+		protected override void OnGetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+		{
+		 	base.OnGetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
 		// 	/*			if (overlayBottomLeft != null || overlayBottomRight != null)
 		// 		height += overlayOverflow;
 		// 	if (overlayTopLeft != null || overlayTopRight != null)
 		// 		height += overlayOverflow;
 		// 	if (overlayBottomRight != null || overlayTopRight != null)
 		// 		width += overlayOverflow;*/
-		// }
+		}
 
 		const int overlayOverflow = 2;
 
-		// protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
-		// {
-		// 	base.Render (window, widget, background_area, cell_area, expose_area, flags);
+		protected override void OnRender (Cairo.Context ctx, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gtk.CellRendererState flags)
+		{
+		 	base.OnRender (ctx, widget, background_area, cell_area, flags);
 
-		// 	if (overlayBottomLeft != null || overlayBottomRight != null || overlayTopLeft != null || overlayTopRight != null) {
-		// 		int x, y;
-		// 		Xwt.Drawing.Image image;
-		// 		GetImageInfo (cell_area, out image, out x, out y);
+		 	if (overlayBottomLeft != null || overlayBottomRight != null || overlayTopLeft != null || overlayTopRight != null) {
+		 		int x, y;
+		 		Xwt.Drawing.Image image;
+		 		GetImageInfo (cell_area, out image, out x, out y);
 
-		// 		if (image == null)
-		// 			return;
+		 		if (image == null)
+		 			return;
 
-		// 		bool selected = (flags & Gtk.CellRendererState.Selected) != 0;
+		 		bool selected = (flags & Gtk.CellRendererState.Selected) != 0;
 
 		// 		using (var ctx = Gdk.CairoHelper.Create (window)) {
-		// 			if (overlayBottomLeft != null && overlayBottomLeft != NullImage) {
-		// 				var img = selected ? overlayBottomLeft.WithStyles ("sel") : overlayBottomLeft;
-		// 				ctx.DrawImage (widget, img, x - overlayOverflow, y + image.Height - img.Height + overlayOverflow);
-		// 			}
-		// 			if (overlayBottomRight != null && overlayBottomRight != NullImage) {
-		// 				var img = selected ? overlayBottomRight.WithStyles ("sel") : overlayBottomRight;
-		// 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y + image.Height - img.Height + overlayOverflow);
-		// 			}
-		// 			if (overlayTopLeft != null && overlayTopLeft != NullImage) {
-		// 				var img = selected ? overlayTopLeft.WithStyles ("sel") : overlayTopLeft;
-		// 				ctx.DrawImage (widget, img, x - overlayOverflow, y - overlayOverflow);
-		// 			}
-		// 			if (overlayTopRight != null && overlayTopRight != NullImage) {
-		// 				var img = selected ? overlayTopRight.WithStyles ("sel") : overlayTopRight;
-		// 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y - overlayOverflow);
-		// 			}
-		// 		}
+		 			if (overlayBottomLeft != null && overlayBottomLeft != NullImage) {
+		 				var img = selected ? overlayBottomLeft.WithStyles ("sel") : overlayBottomLeft;
+		 				ctx.DrawImage (widget, img, x - overlayOverflow, y + image.Height - img.Height + overlayOverflow);
+		 			}
+		 			if (overlayBottomRight != null && overlayBottomRight != NullImage) {
+		 				var img = selected ? overlayBottomRight.WithStyles ("sel") : overlayBottomRight;
+		 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y + image.Height - img.Height + overlayOverflow);
+		 			}
+		 			if (overlayTopLeft != null && overlayTopLeft != NullImage) {
+						var img = selected ? overlayTopLeft.WithStyles ("sel") : overlayTopLeft;
+						ctx.DrawImage (widget, img, x - overlayOverflow, y - overlayOverflow);
+		 			}
+		 			if (overlayTopRight != null && overlayTopRight != NullImage) {
+		 				var img = selected ? overlayTopRight.WithStyles ("sel") : overlayTopRight;
+		 				ctx.DrawImage (widget, img, x + image.Width - img.Width + overlayOverflow, y - overlayOverflow);
+		 			}
+		 		}
 		// 	}
-		// }
+		}
 	}
 
 	class NodeHashtable: Dictionary<object,object>

@@ -843,7 +843,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public void Draw (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex)
+		public void Draw (Cairo.Context exposedArea, DockGroup currentHandleGrp, int currentHandleIndex)
 		{
 			if (type != DockGroupType.Tabbed) {
 				DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, DrawSeparatorOperation.Draw, false, null);
@@ -855,12 +855,12 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, List<Gdk.Rectangle> areasList)
+		public void DrawSeparators (Cairo.Context cr, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, List<Gdk.Rectangle> areasList)
 		{
-			DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, true, areasList);
+			DrawSeparators (cr, currentHandleGrp, currentHandleIndex, oper, true, areasList);
 		}
 		
-		void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
+		void DrawSeparators (Cairo.Context cr, DockGroup currentHandleGrp, int currentHandleIndex, DrawSeparatorOperation oper, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
 		{
 			if (type == DockGroupType.Tabbed || VisibleObjects.Count == 0)
 				return;
@@ -884,7 +884,7 @@ namespace MonoDevelop.Components.Docking
 				DockObject ob = VisibleObjects [n];
 				DockGroup grp = ob as DockGroup;
 				if (grp != null && drawChildrenSep)
-					grp.DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, oper, areasList);
+					grp.DrawSeparators (cr, currentHandleGrp, currentHandleIndex, oper, areasList);
 				if (ob != last) {
 					if (horiz)
 						x += ob.Allocation.Width + Frame.HandlePadding;
@@ -901,6 +901,8 @@ namespace MonoDevelop.Components.Docking
 						break;
 					case DrawSeparatorOperation.Draw:
 //						Frame.Container.GdkWindow.DrawRectangle (hgc, true, x, y, hw, hh);
+						cr.Rectangle(x, y, hw, hh);
+                        cr.Fill();
 						break;
 					case DrawSeparatorOperation.Allocate:
 						Frame.Container.AllocateSplitter (this, n, new Gdk.Rectangle (x, y, hw, hh));
