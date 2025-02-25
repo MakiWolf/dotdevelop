@@ -46,7 +46,7 @@ namespace Mono.TextEditor
 {
 	[System.ComponentModel.Category("Mono.TextEditor")]
 	[System.ComponentModel.ToolboxItem(true)]
-	partial class MonoTextEditor : Container
+	partial class MonoTextEditor :  Gtk.Container, Gtk.IScrollableImplementor
 	{
 		readonly TextArea textArea;
 
@@ -86,7 +86,7 @@ namespace Mono.TextEditor
 			uiThread = Thread.CurrentThread;
 			GtkWorkarounds.FixContainerLeak (this);
 			this.HasWindow = false;
-			LayoutCache = new LayoutCache (this);
+			LayoutCache = new LayoutCache (this);	             
 			this.textArea = new TextArea (doc, options, initialMode);
 			this.textArea.Initialize (this, doc, options, initialMode);
 			this.textArea.EditorOptionsChanged += (sender, e) => OptionsChanged (sender, e);
@@ -143,25 +143,60 @@ namespace Mono.TextEditor
 			vAdjustement = null;
 			hAdjustement = null;
 		}
+		
+		bool Gtk.IScrollableImplementor.GetBorder (out Gtk.Border border) {
+			border = default;
+			return true;
+		}
+
+		Gtk.Adjustment hadjustment;
+		public Gtk.Adjustment Hadjustment {
+			get {
+				return hadjustment;
+			}
+			set {
+				hadjustment = value;
+				if (vadjustment != null) {
+					OnSetScrollAdjustments (value, vadjustment);
+				}
+			}
+		}
+
+		Gtk.Adjustment vadjustment;
+		public Gtk.Adjustment Vadjustment {
+			get {
+				return vadjustment;
+			}
+			set {
+				vadjustment = value;
+				if (hadjustment != null) {
+					OnSetScrollAdjustments (hadjustment, value);
+				}
+			}
+		}
+
+		public Gtk.ScrollablePolicy HscrollPolicy { get; set; }
+
+		public Gtk.ScrollablePolicy VscrollPolicy { get; set; }
 
 		Adjustment hAdjustement;
 		Adjustment vAdjustement;
-//		protected override void OnSetScrollAdjustments (Adjustment hAdjustement, Adjustment vAdjustement)
-//		{
-//			UnregisterAdjustments ();
-//			this.vAdjustement = vAdjustement;
-//			this.hAdjustement = hAdjustement;
-//			base.OnSetScrollAdjustments (hAdjustement, vAdjustement);
-//			textArea.SetTextEditorScrollAdjustments (hAdjustement, vAdjustement);
-//			if (hAdjustement != null) {
-//				hAdjustement.ValueChanged += HandleAdjustmentValueChange;
-//			}
-//
-//			if (vAdjustement != null) {
-//				vAdjustement.ValueChanged += HandleAdjustmentValueChange;
-//			}
-//			OnScrollAdjustmentsSet ();
-//		}
+		protected virtual void OnSetScrollAdjustments (Adjustment hAdjustement, Adjustment vAdjustement)
+ 		{
+ 			UnregisterAdjustments ();
+ 			this.vAdjustement = vAdjustement;
+ 			this.hAdjustement = hAdjustement;
+ 			//base.OnSetScrollAdjustments (hAdjustement, vAdjustement);
+ 			textArea.SetTextEditorScrollAdjustments (hAdjustement, vAdjustement);
+ 			if (hAdjustement != null) {
+ 				hAdjustement.ValueChanged += HandleAdjustmentValueChange;
+ 			}
+
+ 			if (vAdjustement != null) {
+ 				vAdjustement.ValueChanged += HandleAdjustmentValueChange;
+ 			}
+ 			OnScrollAdjustmentsSet ();
+ 		}
 
 		void HandleAdjustmentValueChange (object sender, EventArgs e)
 		{

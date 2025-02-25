@@ -33,6 +33,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Xml;
 using Gtk;
+using Cairo;
 
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Core;
@@ -224,7 +225,7 @@ namespace MonoDevelop.AssemblyBrowser
 
 			documentationScrolledWindow.PackStart (inspectEditor, true, true, 0);
 
-			//this.ExposeEvent += HPaneExpose;
+			this.Drawn += HPaneExpose;
 			hpaned1 = hpaned1.ReplaceWithWidget (new HPanedThin (), true);
 			hpaned1.Position = 271;
 
@@ -912,14 +913,14 @@ namespace MonoDevelop.AssemblyBrowser
 		}
 
 		int oldSize2 = -1;
-		// void HPaneExpose (object sender, Gtk.ExposeEventArgs args)
-		// {
-		// 	int size = this.Allocation.Width;
-		// 	if (size == oldSize2)
-		// 		return;
-		// 	oldSize2 = size;
-		// 	this.hpaned1.Position = Math.Min (350, this.Allocation.Width * 2 / 3);
-		// }
+		void HPaneExpose (object sender, Gtk.DrawnArgs args)
+		{
+		 	int size = this.Allocation.Width;
+		 	if (size == oldSize2)
+		 		return;
+		 	oldSize2 = size;
+		 	this.hpaned1.Position = Math.Min (350, this.Allocation.Width * 2 / 3);
+		}
 		
 		internal void Open (string url, AssemblyLoader? currentAssembly = null, bool expandNode = true)
 		{
@@ -1132,7 +1133,7 @@ namespace MonoDevelop.AssemblyBrowser
 //			this.searchInCombobox.Changed -= SearchInComboboxhandleChanged;
 //			this.searchEntry.Changed -= SearchEntryhandleChanged;
 			this.searchTreeview.RowActivated -= SearchTreeviewhandleRowActivated;
-			//hpaned1.ExposeEvent -= HPaneExpose;
+			hpaned1.Drawn -= HPaneExpose;
 			base.OnDestroyed ();
 		}
 

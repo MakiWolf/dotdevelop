@@ -1561,18 +1561,18 @@ namespace Mono.TextEditor
 		{
 			var undo = OpenUndoGroup ();
 			int dragOffset = Document.LocationToOffset (dragCaretPos);
-//			if (context.Action == DragAction.Move) {
-//				if (CanEdit (Caret.Line) && !selection.IsEmpty) {
-//					var selectionRange = selection.GetSelectionRange (textEditorData);
-//					if (selectionRange.Offset < dragOffset)
-//						dragOffset -= selectionRange.Length;
-//					Caret.PreserveSelection = true;
-//					textEditorData.DeleteSelection (selection);
-//					Caret.PreserveSelection = false;
-//
-//					selection = MonoDevelop.Ide.Editor.Selection.Empty;
-//				}
-//			}
+			if ( context.SelectedAction == DragAction.Move) {
+				if (CanEdit (Caret.Line) && !selection.IsEmpty) {
+					var selectionRange = selection.GetSelectionRange (textEditorData);
+					if (selectionRange.Offset < dragOffset)
+						dragOffset -= selectionRange.Length;
+					Caret.PreserveSelection = true;
+					textEditorData.DeleteSelection (selection);
+					Caret.PreserveSelection = false;
+
+					selection = MonoDevelop.Ide.Editor.Selection.Empty;
+				}
+			}
 			if (selection_data.Length > 0 && selection_data.Format == 8) {
 				Caret.Offset = dragOffset;
 				if (CanEdit (dragCaretPos.Line)) {

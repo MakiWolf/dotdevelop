@@ -196,9 +196,15 @@ namespace MonoDevelop.SourceEditor
 		
 		class Border : Gtk.DrawingArea
 		{
-			protected override bool OnDrawn (Cairo.Context evnt)
+			protected override bool OnDrawn (Cairo.Context ctx)
 			{
 				//evnt.Window.DrawRectangle (this.Style.DarkGC (State), true, evnt.Area);
+				int radius = 3;
+				var x = Allocation.X;
+				var y = Allocation.Y + 9 - 6;
+				ctx.RoundedRectangle(x, y, Allocation.Width - 1, Allocation.Height - y, radius, CairoCorners.TopLeft | CairoCorners.TopRight);
+				//ctx.SetSourceColor(VisualStyle.PadBackgroundColor.Value.ToCairoColor());
+				ctx.Fill();
 				return true;
 			}
 		}
@@ -274,19 +280,27 @@ namespace MonoDevelop.SourceEditor
 					return;
 				suppressScrollbar = value;
 
-//				if (suppressScrollbar) {
+	//			if (suppressScrollbar) {
 //					scrolledWindow.VScrollbar.SizeRequested += SuppressSize;
-//					scrolledWindow.VScrollbar.ExposeEvent += SuppressExpose;
-//				} else {
+//					scrolledWindow.VScrollbar.Drawn += SuppressExpose;
+//					int width, height;
+// 			scrolledWindow.VScrollbar.GetSizeRequest (out width, out height);
+			//scrolledWindow.VScrollbar.SetSizeRequest (width, height);
+					
+	//			} else {
 //					scrolledWindow.VScrollbar.SizeRequested -= SuppressSize;
-//					scrolledWindow.VScrollbar.ExposeEvent -= SuppressExpose;
-//				}
+				//	scrolledWindow.VScrollbar.Drawn -= SuppressExpose;
+				//	int width, height;
+		//	scrolledWindow.VScrollbar.GetSizeRequest (out width, out height);
+		//	scrolledWindow.VScrollbar.SetSizeRequest (width, height);
+					
+	//			}
 			}
 
 //			[GLib.ConnectBefore]
-//			static void SuppressExpose (object o, ExposeEventArgs args)
+//			static void SuppressExpose (object o, Gtk.DrawnArgs args)
 //			{
-//				args.RetVal = true;
+//				args.Cr.Fill ();
 //			}
 
 //			[GLib.ConnectBefore]
@@ -336,8 +350,8 @@ namespace MonoDevelop.SourceEditor
 				SetSuppressScrollbar (false);
 				QuickTaskStrip.EnableFancyFeatures.Changed -= FancyFeaturesChanged;
 				scrolledWindow.ButtonPressEvent -= PrepareEvent;
-//				scrolledWindow.Vadjustment.Destroy ();
-//				scrolledWindow.Hadjustment.Destroy ();
+				scrolledWindow.Vadjustment.Dispose ();
+				scrolledWindow.Hadjustment.Dispose ();
 				scrolledWindow.Destroy ();
 				scrolledWindow = null;
 				strip.Destroy ();

@@ -1087,23 +1087,23 @@ namespace MonoDevelop.Ide.Gui.Pads
 		{
 			public int PreferedMaxWidth { get; set; }
 
-//			public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-//			{
-//				int originalWrapWidth = WrapWidth;
-//				WrapWidth = -1;
-//				// First calculate Width with WrapWidth=-1 which will give us
-//				// Width of text in one line(without wrapping)
-//				base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-//				int oneLineWidth = width;
-//				WrapWidth = originalWrapWidth;
-//				// originalWrapWidth(aka WrapWidth) equals to actual width of Column if oneLineWidth is bigger
-//				// then column width/height we must recalculate, because Height is atm for one line
-//				// and not multipline that WrapWidth creates...
-//				if (oneLineWidth > originalWrapWidth) {
-//					base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
-//				}
-//				width = Math.Min (oneLineWidth, PreferedMaxWidth);
-//			}
+			protected override void OnGetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+			{
+				int originalWrapWidth = WrapWidth;
+				WrapWidth = -1;
+				// First calculate Width with WrapWidth=-1 which will give us
+				// Width of text in one line(without wrapping)
+				base.OnGetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+				int oneLineWidth = width;
+				WrapWidth = originalWrapWidth;
+				// originalWrapWidth(aka WrapWidth) equals to actual width of Column if oneLineWidth is bigger
+				// then column width/height we must recalculate, because Height is atm for one line
+				// and not multipline that WrapWidth creates...
+				if (oneLineWidth > originalWrapWidth) {
+					base.OnGetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
+				}
+				width = Math.Min (oneLineWidth, PreferedMaxWidth);
+			}
 		}
 	}
 
