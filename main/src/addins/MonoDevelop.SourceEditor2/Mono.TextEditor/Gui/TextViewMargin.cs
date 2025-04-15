@@ -2756,9 +2756,9 @@ namespace Mono.TextEditor
 				ShowCodeSegmentPreviewTooltip (TextSegment.Invalid, Gdk.Rectangle.Zero);
 				string link = GetLink != null ? GetLink (args) : null;
 
-				//if (!String.IsNullOrEmpty (link)) {
+				if (!String.IsNullOrEmpty (link)) {
 					base.cursor = textLinkCursor.Value;
-				//} else {
+				}// else {
 					//base.cursor = hoverResult.HasCursor ? hoverResult.Cursor : GetDefaultTextCursor ();
 				//}
 				return;

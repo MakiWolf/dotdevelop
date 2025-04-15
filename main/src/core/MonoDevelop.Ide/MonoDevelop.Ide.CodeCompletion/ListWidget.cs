@@ -99,8 +99,44 @@ namespace MonoDevelop.Ide.CodeCompletion
 	}
 
 	[Obsolete]
-	class ListWidget : Gtk.DrawingArea
+	class ListWidget : Gtk.DrawingArea, Gtk.IScrollableImplementor
 	{
+
+		bool Gtk.IScrollableImplementor.GetBorder (out Gtk.Border border) {
+			border = default;
+			return true;
+		}
+
+		Gtk.Adjustment hadjustment;
+		public Gtk.Adjustment Hadjustment {
+			get {
+				return hadjustment;
+			}
+			set {
+				hadjustment = value;
+				if (vadjustment != null) {
+					OnSetScrollAdjustments (value, vadjustment);
+				}
+			}
+		}
+
+		Gtk.Adjustment vadjustment;
+		public Gtk.Adjustment Vadjustment {
+			get {
+				return vadjustment;
+			}
+			set {
+				vadjustment = value;
+				if (hadjustment != null) {
+					OnSetScrollAdjustments (hadjustment, value);
+				}
+			}
+		}
+
+		public Gtk.ScrollablePolicy HscrollPolicy { get; set; }
+
+		public Gtk.ScrollablePolicy VscrollPolicy { get; set; }
+
 		const int minSize = 400;
 		const int maxListWidth = 800;
 		const int rows = 13;
@@ -213,17 +249,17 @@ namespace MonoDevelop.Ide.CodeCompletion
 			}
 		}
 
-//		protected override void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
-//		{
-//			if (this.vadj != null)
-//				this.vadj.ValueChanged -= HandleValueChanged;
-//			this.vadj = vadj;
+		protected virtual void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
+		{
+			if (this.vadj != null)
+				this.vadj.ValueChanged -= HandleValueChanged;
+			this.vadj = vadj;
 //			base.OnSetScrollAdjustments (hadj, vadj);
-//			if (this.vadj != null) {
-//				this.vadj.ValueChanged += HandleValueChanged;
-//				SetAdjustments ();
-//			}
-//		}
+			if (this.vadj != null) {
+				this.vadj.ValueChanged += HandleValueChanged;
+				SetAdjustments ();
+			}
+		}
 
 		void HandleValueChanged (object sender, EventArgs e)
 		{
@@ -403,7 +439,10 @@ namespace MonoDevelop.Ide.CodeCompletion
 				var alloc = Allocation;
 				int width = alloc.Width;
 				int height = alloc.Height;
-				//context.Rectangle (args.Area.X, args.Area.Y, args.Area.Width, args.Area.Height);
+				int winWidth = Window.FrameExtents.Width;
+				int winHeight = Window.FrameExtents.Height;
+//				context.Rectangle (args.Area.X, args.Area.Y, args.Area.Width, args.Area.Height);
+				context.Rectangle (0, 0, winWidth, winHeight);
 				var backgroundColor = Styles.CodeCompletion.BackgroundColor.ToCairoColor ();
 				var textColor = Styles.CodeCompletion.TextColor.ToCairoColor ();
 				var categoryColor = Styles.CodeCompletion.CategoryColor.ToCairoColor ();

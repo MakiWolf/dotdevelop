@@ -350,8 +350,8 @@ namespace MonoDevelop.SourceEditor
 				SetSuppressScrollbar (false);
 				QuickTaskStrip.EnableFancyFeatures.Changed -= FancyFeaturesChanged;
 				scrolledWindow.ButtonPressEvent -= PrepareEvent;
-				scrolledWindow.Vadjustment.Dispose ();
-				scrolledWindow.Hadjustment.Dispose ();
+				//scrolledWindow.Vadjustment.Dispose ();
+				//scrolledWindow.Hadjustment.Dispose ();
 				scrolledWindow.Destroy ();
 				scrolledWindow = null;
 				strip.Destroy ();

@@ -917,7 +917,7 @@ namespace Mono.TextEditor
 				Y = Allocation.Y,
 				Width = Allocation.Width,
 				Height = Allocation.Height,
-//				Wclass = WindowClass.InputOutput,
+				Wclass = Gdk.WindowWindowClass.InputOutput,
 				Visual = this.Visual,
 //				Colormap = this.Colormap,
 				EventMask = (int)(this.Events | Gdk.EventMask.ExposureMask),

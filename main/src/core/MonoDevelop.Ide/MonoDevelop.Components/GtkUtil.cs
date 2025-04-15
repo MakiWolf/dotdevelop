@@ -972,18 +972,18 @@ namespace MonoDevelop.Components
 			col.CellSetCellData (tree.Model, iter, false, false);
 			int x = 0;
 			int th = 0;
-			// CellRenderer[] renderers = col.CellRenderers;
-			// foreach (CellRenderer cr in renderers) {
-			// 	int sp, wi, he, xo, yo;
-			// 	col.CellGetPosition (cr, out sp, out wi);
-			// 	Gdk.Rectangle crect = new Gdk.Rectangle (x, rect.Y, wi, rect.Height);
-			// 	cr.GetSize (tree, ref crect, out xo, out yo, out wi, out he);
-			// 	if (cr != renderers [renderers.Length - 1])
-			// 		x += crect.Width + col.Spacing + 1;
-			// 	else
-			// 		x += wi + 1;
-			// 	if (he > th) th = he;
-			// }
+			CellRenderer[] renderers = col.Cells;
+			foreach (CellRenderer cr in renderers) {
+			 	int sp, wi, he, xo, yo;
+			 	col.CellGetPosition (cr, out sp, out wi);
+			 	Gdk.Rectangle crect = new Gdk.Rectangle (x, rect.Y, wi, rect.Height);
+			 	//cr.GetSize (tree, ref crect, out xo, out yo, out wi, out he);
+			 	if (cr != renderers [renderers.Length - 1])
+			 		x += crect.Width + col.Spacing + 1;
+			 	else
+			 		x += wi + 1;
+			 	//if (he > th) th = he;
+			}
 			SetSizeRequest (x, th + 2);
 		}
 		

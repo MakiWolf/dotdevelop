@@ -74,9 +74,9 @@ namespace MonoDevelop.AnalysisCore.Gui
 			if (results.Count == 0)
 				return null;
 			var sb = StringBuilderCache.Allocate ();
-			// sb.Append ("<span font='");
-			// sb.Append (IdeServices.FontService.SansFontName);
-			// sb.Append ("' size='small'>");
+			sb.Append ("<span font='");
+			sb.Append (IdeServices.FontService.SansFontName);
+			sb.Append ("' size='small'>");
 			int minOffset = int.MaxValue;
 			int maxOffset = -1;
 			bool floatingWidgetShown = false;

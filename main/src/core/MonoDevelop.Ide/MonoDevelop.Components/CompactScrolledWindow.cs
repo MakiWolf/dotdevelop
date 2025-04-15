@@ -116,9 +116,9 @@ namespace MonoDevelop.Components
 			}
 		}
 
-		protected override bool OnDrawn (Cairo.Context evnt)
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
-			var ret = base.OnDrawn (evnt);
+			var ret = base.OnDrawn (cr);
 			if (!showBorderLine)
 				return ret;
 
@@ -147,7 +147,7 @@ namespace MonoDevelop.Components
 			var halfLineWidth = lineWidth / 2.0;
 
 			//draw the border lines
-			using (var cr = Gdk.CairoHelper.Create (GdkWindow)) {
+			//using (var cr = Gdk.CairoHelper.Create (GdkWindow)) {
 				//Gdk.CairoHelper.Region (cr, evnt.Region);
 				cr.Clip ();
 				
@@ -176,7 +176,7 @@ namespace MonoDevelop.Components
 				}
 
 				cr.Stroke ();
-			}
+			//}
 			
 			return ret;
 		}

@@ -223,8 +223,43 @@ namespace MonoDevelop.Components
 			return base.OnEnterNotifyEvent (evnt);
 		}
 
-		internal class ListWidget: DrawingArea
+		internal class ListWidget: DrawingArea, Gtk.IScrollableImplementor
 		{
+			bool Gtk.IScrollableImplementor.GetBorder (out Gtk.Border border) {
+			border = default;
+			return true;
+			}
+
+		Gtk.Adjustment hadjustment;
+		public Gtk.Adjustment Hadjustment {
+			get {
+				return hadjustment;
+			}
+			set {
+				hadjustment = value;
+				if (vadjustment != null) {
+					OnSetScrollAdjustments (value, vadjustment);
+				}
+			}
+		}
+
+		Gtk.Adjustment vadjustment;
+		public Gtk.Adjustment Vadjustment {
+			get {
+				return vadjustment;
+			}
+			set {
+				vadjustment = value;
+				if (hadjustment != null) {
+					OnSetScrollAdjustments (hadjustment, value);
+				}
+			}
+		}
+
+		public Gtk.ScrollablePolicy HscrollPolicy { get; set; }
+
+		public Gtk.ScrollablePolicy VscrollPolicy { get; set; }
+
 			const int leftXAlignment = 1;
 			const int padding = 4;
 			const int iconTextDistance = 4;
@@ -462,7 +497,10 @@ namespace MonoDevelop.Components
 
 			void DrawList ()
 			{
-				int winWidth = 0, winHeight = 0;
+				
+				//int winWidth = 0, winHeight = 0;
+				int winWidth = Window.FrameExtents.Width;
+				int winHeight = Window.FrameExtents.Height;
 //				GdkWindow.GetSize (out winWidth, out winHeight);
 
 				int lineWidth = winWidth - leftXAlignment * 2;
@@ -485,35 +523,49 @@ namespace MonoDevelop.Components
 					layout.GetPixelSize (out wi, out he);
 					typos = he < rowHeight ? ypos + (rowHeight - he) / 2 : ypos;
 					iypos = iconHeight < rowHeight ? ypos + (rowHeight - iconHeight) / 2 : ypos;
-					
+					using (Cairo.Context evnt = Gdk.CairoHelper.Create (GdkWindow)) {
 					if (n == selection) {
 						if (!disableSelection) {
+							 evnt.Rectangle(leftXAlignment, ypos, lineWidth, rowHeight);
+                       		 evnt.Fill();
+							evnt.MoveTo(xpos + iconWidth + iconTextDistance, typos);
+							evnt.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
+							Pango.CairoHelper.ShowLayout(evnt, layout);
 //							GdkWindow.DrawRectangle (Style.BaseGC (StateType.Selected), 
 //								true, leftXAlignment, ypos, lineWidth, rowHeight);
 //							GdkWindow.DrawLayout (Style.TextGC (StateType.Selected), 
 //							                      xpos + iconWidth + iconTextDistance, typos, layout);
 							if (icon != null)
 								icon = icon.WithStyles ("sel");
-						} //else {
+						} else {
+							 evnt.Rectangle(leftXAlignment, ypos, lineWidth, rowHeight);
+                       		 evnt.Fill();
+							evnt.MoveTo(xpos + iconWidth + iconTextDistance, typos);
+							evnt.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
+							Pango.CairoHelper.ShowLayout(evnt, layout);
 //							GdkWindow.DrawRectangle (Style.BaseGC (StateType.Selected), 
 //								false, leftXAlignment, ypos, lineWidth, rowHeight);
 //							GdkWindow.DrawLayout (Style.TextGC (StateType.Normal), 
 //							                      xpos + iconWidth + iconTextDistance, typos, layout);
-//						}
-					} //else
+						}
+					} else {
+						evnt.MoveTo(xpos + iconWidth + iconTextDistance, typos);
+							evnt.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
+							Pango.CairoHelper.ShowLayout(evnt, layout);
 //						GdkWindow.DrawLayout (Style.TextGC (StateType.Normal), 
 //						                      xpos + iconWidth + iconTextDistance, typos, layout);
-					
-//					if (icon != null) {
+					}
+					if (icon != null) {
 //						using (var ctx = Gdk.CairoHelper.Create (this.GdkWindow))
-//							ctx.DrawImage (this, icon, xpos, iypos);
-//					}
+							evnt.DrawImage (this, icon, xpos, iypos);
+					}
 					
 					ypos += rowHeight;
 					n++;
 					
 //reset the markup or it carries over to the next SetText
 					layout.SetMarkup (string.Empty);
+				}
 				}
 			}
 
@@ -622,18 +674,18 @@ namespace MonoDevelop.Components
 			Adjustment hAdjustment;
 			Adjustment vAdjustment;
 
-//			protected override void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
-//			{
-//				hAdjustment = hadj;
-//				vAdjustment = vadj;
-//				if (vAdjustment != null)
-//					vAdjustment.ValueChanged += delegate {
-//						if (selection > -1)
-//							Selection = GetRowByPosition (curMouseY);
-//						QueueDraw ();
-//					};
-//				base.OnSetScrollAdjustments (hadj, vadj);
-//			}
+			protected virtual void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
+			{
+				hAdjustment = hadj;
+				vAdjustment = vadj;
+				if (vAdjustment != null)
+					vAdjustment.ValueChanged += delegate {
+						if (selection > -1)
+							Selection = GetRowByPosition (curMouseY);
+						QueueDraw ();
+					};
+				//base.OnSetScrollAdjustments (hadj, vadj);
+			}
 
 			internal virtual void OnSelectItem (EventArgs e)
 			{

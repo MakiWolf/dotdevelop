@@ -1401,11 +1401,11 @@ namespace MonoDevelop.Ide.Gui.Components
 				selectionLength = editTextLength - selectionStart;
 			// This will apply the selection as soon as possible
 			GLib.Idle.Add (() => {
-				//var editable = currentLabelEditable;
-				//if (editable == null)
+				var editable = currentLabelEditable;
+				if (editable == null)
 					return false;
 
-				//editable.SelectRegion (selectionStart, selectionStart + selectionLength);
+				editable.SelectRegion (selectionStart, selectionStart + selectionLength);
 				return false;
 			});
 			// Ensure we set all our state variables before calling SetCursor
@@ -1470,7 +1470,7 @@ namespace MonoDevelop.Ide.Gui.Components
 		{
 			editingText = false;
 			text_render.Editable = false;
-			//currentLabelEditable = null;
+			currentLabelEditable = null;
 
 			TreeNodeNavigator node = (TreeNodeNavigator) GetSelectedNode ();
 			if (node == null)
@@ -2173,15 +2173,15 @@ namespace MonoDevelop.Ide.Gui.Components
 			IsDestroyed = true;
 			IdeApp.Preferences.CustomPadFont.Changed -= CustomFontPropertyChanged;
 			if (pix_render != null) {
-				//pix_render.Destroy ();
+				pix_render.Dispose ();
 				pix_render = null;
 			}
 			if (complete_column != null) {
-				//complete_column.Destroy ();
+				complete_column.Dispose ();
 				complete_column = null;
 			}
 			if (text_render != null) {
-				//text_render.Destroy ();
+				text_render.Dispose ();
 				text_render = null;
 			}
 
@@ -2529,7 +2529,8 @@ namespace MonoDevelop.Ide.Gui.Components
 						//fgColor = widget.Style.Text (IdeTheme.UserInterfaceTheme == Theme.Light ? Gtk.StateType.Selected : Gtk.StateType.Normal);
 					//else
 						//fgColor = widget.Style.Text (Gtk.StateType.Insensitive);
-					//newmarkup = "<span foreground='" + fgColor.GetHex () + "'>" + TextMarkup + "</span>";
+					//newmarkup = "<span foreground='" + fgColor.GetHex () + "'>" + TextMarkup + "</span>";			
+					newmarkup = "<span>" + TextMarkup + "</span>";			
 				}
 
 				if (!string.IsNullOrEmpty (SecondaryTextMarkup)) {
@@ -2542,42 +2543,45 @@ namespace MonoDevelop.Ide.Gui.Components
 				layout.SetMarkup (newmarkup);
 			}
 
-			// protected override void Render (Gdk.Drawable window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, Gtk.CellRendererState flags)
-			// {
-			// 	Gtk.StateType st = Gtk.StateType.Normal;
-			// 	if ((flags & Gtk.CellRendererState.Prelit) != 0)
-			// 		st = Gtk.StateType.Prelight;
-			// 	if ((flags & Gtk.CellRendererState.Focused) != 0)
-			// 		st = Gtk.StateType.Normal;
-			// 	if ((flags & Gtk.CellRendererState.Insensitive) != 0)
-			// 		st = Gtk.StateType.Insensitive;
-			// 	if ((flags & Gtk.CellRendererState.Selected) != 0)
-			// 		st = widget.HasFocus ? Gtk.StateType.Selected : Gtk.StateType.Active;
+			protected override void OnRender (Cairo.Context window, Gtk.Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gtk.CellRendererState flags)
+			{
+				Gtk.StateFlags st = Gtk.StateFlags.Normal;
+				// if ((flags & Gtk.CellRendererState.Prelit) != 0)
+				// 	st = Gtk.StateType.Prelight;
+				// if ((flags & Gtk.CellRendererState.Focused) != 0)
+				// 	st = Gtk.StateType.Normal;
+				// if ((flags & Gtk.CellRendererState.Insensitive) != 0)
+				// 	st = Gtk.StateType.Insensitive;
+				 if ((flags & Gtk.CellRendererState.Selected) != 0)
+				 	st = widget.HasFocus ? Gtk.StateFlags.Selected : Gtk.StateFlags.Active;
 
-			// 	SetupLayout (widget, flags);
+				SetupLayout (widget, flags);
 
-			// 	int w, h;
-			// 	layout.GetPixelSize (out w, out h);
+				int w, h;
+				layout.GetPixelSize (out w, out h);
 
-			// 	int tx = cell_area.X + (int)Xpad;
-			// 	int ty = cell_area.Y + (cell_area.Height - h) / 2;
+				int tx = cell_area.X + (int)Xpad;
+				int ty = cell_area.Y + (cell_area.Height - h) / 2;
 
-			// 	bool hasStatusIcon = StatusIcon != CellRendererImage.NullImage && StatusIcon != null;
+				bool hasStatusIcon = StatusIcon != CellRendererImage.NullImage && StatusIcon != null;
 
-			// 	if (hasStatusIcon) {
-			// 		var img = GetResized (StatusIcon, zoom);
-			// 		if (st == Gtk.StateType.Selected)
-			// 			img = img.WithStyles ("sel");
-			// 		var x = tx + w + StatusIconSpacing;
-			// 		using (var ctx = Gdk.CairoHelper.Create (window)) {
-			// 			ctx.DrawImage (widget, img, x, cell_area.Y + (cell_area.Height - img.Height) / 2);
-			// 		}
-			// 	}
+				if (hasStatusIcon) {
+					var img = GetResized (StatusIcon, zoom);
+					if (st == Gtk.StateFlags.Selected)
+						img = img.WithStyles ("sel");
+					var x = tx + w + StatusIconSpacing;
+					//using (var ctx = Gdk.CairoHelper.Create (window)) {
+						window.DrawImage (widget, img, x, cell_area.Y + (cell_area.Height - img.Height) / 2);
+					//}
+				}
 
-			// 	window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
+				//window.DrawLayout (widget.Style.TextGC (st), tx, ty, layout);
+				window.MoveTo(tx, ty);
+					window.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
+					Pango.CairoHelper.ShowLayout(window, layout);
 
-			// 	hasStatusIcon = false;
-			// }
+				hasStatusIcon = false;
+			}
 
 			public Gdk.Rectangle GetStatusIconArea (Gtk.Widget widget, Gdk.Rectangle cell_area)
 			{
@@ -2592,20 +2596,20 @@ namespace MonoDevelop.Ide.Gui.Components
 				return new Gdk.Rectangle (x, cell_area.Y, (int) iconSize.Width, (int) cell_area.Height);
 			}
 
-			// public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
-			// {
-			// 	SetupLayout (widget);
+			protected override void OnGetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
+			{
+			 	SetupLayout (widget);
 
-			// 	x_offset = y_offset = 0;
+			 	x_offset = y_offset = 0;
 
-			// 	layout.GetPixelSize (out width, out height);
-			// 	width += (int)Xpad * 2;
+			 	layout.GetPixelSize (out width, out height);
+			 	width += (int)Xpad * 2;
 
-			// 	if (StatusIcon != CellRendererImage.NullImage && StatusIcon != null) {
-			// 		var iconSize = GetZoomedIconSize (StatusIcon, zoom);
-			// 		width += (int)iconSize.Width + StatusIconSpacing;
-			// 	}
-			// }
+			 	if (StatusIcon != CellRendererImage.NullImage && StatusIcon != null) {
+			 		var iconSize = GetZoomedIconSize (StatusIcon, zoom);
+			 		width += (int)iconSize.Width + StatusIconSpacing;
+			 	}
+			}
 
 			protected override void OnEditingStarted (Gtk.ICellEditable editable, string path)
 			{

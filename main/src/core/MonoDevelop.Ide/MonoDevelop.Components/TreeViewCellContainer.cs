@@ -76,6 +76,18 @@ namespace MonoDevelop.Components
 			// Do nothing.
 		}
 
+		protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+        {
+			
+			base.OnGetPreferredWidth(out minimum_width, out natural_width);
+        }
+
+        protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+        {
+			
+			base.OnGetPreferredHeight(out minimum_height, out natural_height);
+        }
+
 //		protected override void OnSizeRequested (ref Requisition requisition)
 //		{
 //			base.OnSizeRequested (ref requisition);

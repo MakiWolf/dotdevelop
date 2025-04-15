@@ -113,13 +113,13 @@ namespace MonoDevelop.Refactoring
 			var loc = doc.OffsetToLocation (replaceChange.Offset);
 			
 			string text = string.Format (GettextCatalog.GetString ("(Line:{0}, Column:{1})"), loc.Line, loc.Column);
-			//if (treeviewPreview.Selection.IterIsSelected (iter)) {
+			if (treeviewPreview.Selection.IterIsSelected (iter)) {
 				cellRendererText.Text = text;
-			//} else {
+			} else {
 				//var color = Style.Text (StateType.Insensitive);
 				//var c = string.Format ("#{0:X02}{1:X02}{2:X02}", color.Red / 256, color.Green / 256, color.Blue / 256);
 				//cellRendererText.Markup = "<span foreground=\"" + c + "\">" + text + "</span>";
-			//}
+			}
 		}
 		
 		void SetDiffCellData (Gtk.TreeViewColumn tree_column, Gtk.CellRenderer cell, Gtk.ITreeModel model, Gtk.TreeIter iter)
@@ -267,8 +267,8 @@ namespace MonoDevelop.Refactoring
 				}
 			}
 
-			// protected override void Render (Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-			// {
+			protected override void OnRender (Cairo.Context window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, CellRendererState flags)
+			{
 			// 	if (isDisposed)
 			// 		return;
 			// 	try {
@@ -339,20 +339,20 @@ namespace MonoDevelop.Refactoring
 			// 	} catch (Exception e) {
 			// 		Console.WriteLine (e);
 			// 	}
-			// }
+			}
 
-			// public override void GetSize (Widget widget, ref Rectangle cell_area, out int x_offset, out int y_offset, out int c_width, out int c_height)
-			// {
-			// 	x_offset = y_offset = 0;
-			// 	c_width = width;
-			// 	c_height = height;
+			protected override void OnGetSize (Widget widget, ref Rectangle cell_area, out int x_offset, out int y_offset, out int c_width, out int c_height)
+			{
+			 	x_offset = y_offset = 0;
+			 	c_width = width;
+			 	c_height = height;
 
-			// 	if (diffMode) {
-			// 		// Add some spacing for the margin
-			// 		c_width += 4;
-			// 		c_height += 4;
-			// 	}
-			// }
+			 	if (diffMode) {
+			 		// Add some spacing for the margin
+			 		c_width += 4;
+			 		c_height += 4;
+			 	}
+			}
 
 			StateType GetState (CellRendererState flags)
 			{

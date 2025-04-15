@@ -34,8 +34,44 @@ using Cairo;
 
 namespace Mono.TextEditor.PopupWindow
 {
-	class ListWidget<T> : Gtk.DrawingArea
+	class ListWidget<T> : Gtk.DrawingArea, Gtk.IScrollableImplementor
 	{
+
+		bool Gtk.IScrollableImplementor.GetBorder (out Gtk.Border border) {
+			border = default;
+			return true;
+		}
+
+		Gtk.Adjustment hadjustment;
+		public Gtk.Adjustment Hadjustment {
+			get {
+				return hadjustment;
+			}
+			set {
+				hadjustment = value;
+				if (vadjustment != null) {
+					OnSetScrollAdjustments (value, vadjustment);
+				}
+			}
+		}
+
+		Gtk.Adjustment vadjustment;
+		public Gtk.Adjustment Vadjustment {
+			get {
+				return vadjustment;
+			}
+			set {
+				vadjustment = value;
+				if (hadjustment != null) {
+					OnSetScrollAdjustments (hadjustment, value);
+				}
+			}
+		}
+
+		public Gtk.ScrollablePolicy HscrollPolicy { get; set; }
+
+		public Gtk.ScrollablePolicy VscrollPolicy { get; set; }
+
 		int margin = 0;
 		int padding = 4;
 		int listWidth = 300;
@@ -167,14 +203,14 @@ namespace Mono.TextEditor.PopupWindow
 		Adjustment hadj;
 		Adjustment vadj;
 
-//		protected override void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
-//		{
-//			this.hadj = hadj;
-//			this.vadj = vadj;
-//			if (this.vadj != null)
-//				this.vadj.ValueChanged += (sender, e) => QueueDraw ();
+		protected virtual void OnSetScrollAdjustments (Adjustment hadj, Adjustment vadj)
+		{
+			this.hadj = hadj;
+			this.vadj = vadj;
+			if (this.vadj != null)
+				this.vadj.ValueChanged += (sender, e) => QueueDraw ();
 //			base.OnSetScrollAdjustments (hadj, vadj);
-//		}
+		}
 
 		void SetAdjustments (Gdk.Rectangle allocation)
 		{
@@ -211,12 +247,13 @@ namespace Mono.TextEditor.PopupWindow
 		void DrawList (Cairo.Context args)
 		{
 			var window = GdkWindow;
-			
-			int winWidth, winHeight;
+			int winWidth = Window.FrameExtents.Width;
+			int winHeight = Window.FrameExtents.Height;
+//			int winWidth, winHeight;
 //			window.GetSize (out winWidth, out winHeight);
 			
 			int ypos = margin;
-//			int lineWidth = winWidth - margin*2;
+			int lineWidth = winWidth - margin*2;
 			int xpos = margin + padding;
 
 			using (var cr = this.CreateXwtContext ()) {
@@ -227,67 +264,67 @@ namespace Mono.TextEditor.PopupWindow
 				int n = 0;
 				n = (int)(vadj.Value / rowHeight);
 
-//				while (ypos < winHeight - margin && n < win.DataProvider.Count) {
-//					bool hasMarkup = false;
-//					IMarkupListDataProvider<T> markupListDataProvider = win.DataProvider as IMarkupListDataProvider<T>;
-//					if (markupListDataProvider != null) {
-//						if (markupListDataProvider.HasMarkup (n)) {
-//							layout.Markup = (markupListDataProvider.GetMarkup (n) ?? "&lt;null&gt;");
-//							hasMarkup = true;
-//						}
-//					}
+				while (ypos < winHeight - margin && n < win.DataProvider.Count) {
+					bool hasMarkup = false;
+					IMarkupListDataProvider<T> markupListDataProvider = win.DataProvider as IMarkupListDataProvider<T>;
+					if (markupListDataProvider != null) {
+						if (markupListDataProvider.HasMarkup (n)) {
+							layout.Markup = (markupListDataProvider.GetMarkup (n) ?? "&lt;null&gt;");
+							hasMarkup = true;
+						}
+					}
 //				
-//					if (!hasMarkup)
-//						layout.Text = (win.DataProvider.GetText (n) ?? "<null>");
+					if (!hasMarkup)
+						layout.Text = (win.DataProvider.GetText (n) ?? "<null>");
 //				
-//					Xwt.Drawing.Image icon = win.DataProvider.GetIcon (n);
-//					int iconHeight, iconWidth;
+					Xwt.Drawing.Image icon = win.DataProvider.GetIcon (n);
+					int iconHeight, iconWidth;
 //				
-//					if (icon != null) {
-//						iconWidth = (int)icon.Width;
-//						iconHeight = (int)icon.Height;
-//					} else if (!Gtk.Icon.SizeLookup (Gtk.IconSize.Menu, out iconWidth, out iconHeight)) {
-//						iconHeight = iconWidth = 24;
-//					}
+					if (icon != null) {
+						iconWidth = (int)icon.Width;
+						iconHeight = (int)icon.Height;
+					} else if (!Gtk.Icon.SizeLookup (Gtk.IconSize.Menu, out iconWidth, out iconHeight)) {
+						iconHeight = iconWidth = 24;
+					}
 //				
-//					var s = layout.GetSize ();
-//					int typos, iypos;
-//					int he = (int)s.Height;
+					var s = layout.GetSize ();
+					int typos, iypos;
+					int he = (int)s.Height;
 //
-//					typos = he < rowHeight ? ypos + (rowHeight - he) / 2 : ypos;
-//					iypos = iconHeight < rowHeight ? ypos + (rowHeight - iconHeight) / 2 : ypos;
+					typos = he < rowHeight ? ypos + (rowHeight - he) / 2 : ypos;
+					iypos = iconHeight < rowHeight ? ypos + (rowHeight - iconHeight) / 2 : ypos;
 //				
-//					if (n == selection) {
-//						if (!disableSelection) {
-//							cr.Rectangle (margin, ypos, lineWidth, he + padding);
+					if (n == selection) {
+						if (!disableSelection) {
+							cr.Rectangle (margin, ypos, lineWidth, he + padding);
 //							cr.SetColor (this.Style.Base (StateType.Selected).ToXwtColor ());
-//							cr.Fill ();
+							cr.Fill ();
 //
 //							cr.SetColor (this.Style.Text (StateType.Selected).ToXwtColor ());
-//							cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
-//						} else {
-//							cr.Rectangle (margin, ypos, lineWidth, he + padding);
+							cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
+						} else {
+							cr.Rectangle (margin, ypos, lineWidth, he + padding);
 //							cr.SetColor (this.Style.Base (StateType.Selected).ToXwtColor ());
-//							cr.Stroke ();
-//
+							cr.Stroke ();
+
 //							cr.SetColor (textColor);
-//							cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
-//						}
-//					} else {
+							cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
+						}
+					} else {
 //						cr.SetColor (textColor);
-//						cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
-//					}
+						cr.DrawTextLayout (layout, xpos + iconWidth + 2, typos);
+					}
 //				
-//					if (icon != null)
-//						cr.DrawImage (icon, xpos, iypos);
+					if (icon != null)
+						cr.DrawImage (icon, xpos, iypos);
 //				
-//					ypos += rowHeight;
-//					n++;
+					ypos += rowHeight;
+					n++;
 //				
 //					//reset the markup or it carries over to the next SetText
-//					if (hasMarkup)
-//						layout.Markup = string.Empty;
-//				}
+					if (hasMarkup)
+						layout.Markup = string.Empty;
+				}
 			}
 		}
 		
