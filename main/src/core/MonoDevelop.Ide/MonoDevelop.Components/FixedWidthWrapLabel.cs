@@ -178,13 +178,13 @@ namespace MonoDevelop.Components
 		{
 			UpdateLayout ();
 			//if (evnt.Window != GdkWindow) {
-			//	return base.OnExposeEvent (evnt);
+				return base.OnDrawn (evnt);
 			//}
            
 			//Gtk.Style.PaintLayout (Style, GdkWindow, State, false, evnt.Area, 
 			//    this, null, Allocation.X, Allocation.Y, layout);
 			
-			return true;
+			//return true;
 		}
         
 		public string Markup {

@@ -366,6 +366,7 @@ namespace MonoDevelop.Components.Docking
 //			using (var ctx = CairoHelper.Create (args.Event.Window)) {
 				var ctx = args.Cr;
 //				ctx.SetSourceColor (w.StyleContext.GetBackgroundColor(s).ToCairoColor ());
+				ctx.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
 				ctx.Paint ();
 //			}
 		}

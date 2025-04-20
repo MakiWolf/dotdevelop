@@ -449,7 +449,7 @@ namespace MonoDevelop.Ide.Gui.Components
 			NodeBuilder[] chain = nav.BuilderChain;
 			bool foundHandler = false;
 
-			//DragOperation oper = ctx.Action == Gdk.DragAction.Copy ? DragOperation.Copy : DragOperation.Move;
+			DragOperation oper = ctx.SelectedAction == Gdk.DragAction.Copy ? DragOperation.Copy : DragOperation.Move;
 			DropPosition dropPos;
 			if (pos == Gtk.TreeViewDropPosition.After)
 				dropPos = DropPosition.After;
@@ -465,16 +465,16 @@ namespace MonoDevelop.Ide.Gui.Components
 					try {
 						NodeCommandHandler handler = nb.CommandHandler;
 						handler.SetCurrentNode (nav);
-						// if (handler.CanDropMultipleNodes (obj, oper, dropPos)) {
-						// 	foundHandler = true;
-						// 	if (drop) {
-						// 		if (!updatesLocked) {
-						// 			LockUpdates ();
-						// 			updatesLocked = true;
-						// 		}
-						// 		handler.OnMultipleNodeDrop (obj, oper, dropPos);
-						// 	}
-						// }
+						 if (handler.CanDropMultipleNodes (obj, oper, dropPos)) {
+						 	foundHandler = true;
+						 	if (drop) {
+						 		if (!updatesLocked) {
+						 			LockUpdates ();
+						 			updatesLocked = true;
+						 		}
+						 		handler.OnMultipleNodeDrop (obj, oper, dropPos);
+						 	}
+						 }
 					} catch (Exception ex) {
 						LoggingService.LogError (ex.ToString ());
 					}
@@ -2510,7 +2510,12 @@ namespace MonoDevelop.Ide.Gui.Components
 					if (scaledFont != null)
 						scaledFont.Dispose ();
 					scaledFont = (customFont ?? parent.widget.Style.FontDesc).Copy ();
-					scaledFont.Size = (int)(customFont.Size * Zoom);
+					try {
+						scaledFont.Size = (int)(customFont.Size * Zoom);
+					}
+					catch {
+						Console.WriteLine("Exception in scaledFont.Size = (int)(customFont.Size * Zoom) in file ExtensibleTreeView.cs");
+					}
 					if (layout != null)
 						layout.FontDescription = scaledFont;
 				}
@@ -2557,9 +2562,13 @@ namespace MonoDevelop.Ide.Gui.Components
 
 				SetupLayout (widget, flags);
 
-				int w, h;
-				layout.GetPixelSize (out w, out h);
-
+				int w =0, h=0;
+				try {
+					layout.GetPixelSize (out w, out h);
+				}
+				catch {
+					Console.WriteLine("Exception in layout.GetPixelSize (out w, out h); in file ExtensibleTreeView.cs");
+				}
 				int tx = cell_area.X + (int)Xpad;
 				int ty = cell_area.Y + (cell_area.Height - h) / 2;
 

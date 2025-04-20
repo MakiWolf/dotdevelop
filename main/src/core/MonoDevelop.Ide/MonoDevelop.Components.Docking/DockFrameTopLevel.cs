@@ -131,6 +131,8 @@ namespace MonoDevelop.Components.Docking
 					Application.Invoke ((o, args) => {
 						var pos = frame.GetScreenCoordinates (new Gdk.Point (x, y));
 						IdeServices.DesktopService.PlaceWindow (ContainerWindow, pos.X, pos.Y, width, height);
+						ContainerWindow.Move(pos.X, pos.Y);
+						ContainerWindow.Resize(width, height);
 						repositionRequested = false;
 					});
 				}

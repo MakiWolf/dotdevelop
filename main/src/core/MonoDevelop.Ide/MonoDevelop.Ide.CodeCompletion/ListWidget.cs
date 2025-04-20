@@ -417,7 +417,9 @@ namespace MonoDevelop.Ide.CodeCompletion
 		{
 			if (!buttonPressed)
 				return base.OnMotionNotifyEvent (e);
-			int winWidth, winHeight;
+//			int winWidth, winHeight;
+			int width = Window.FrameExtents.Width;
+			int height = Window.FrameExtents.Height;
 //			this.GdkWindow.GetSize (out winWidth, out winHeight);
 			SelectedItemIndex = GetRowByPosition ((int)e.Y);
 			return true;

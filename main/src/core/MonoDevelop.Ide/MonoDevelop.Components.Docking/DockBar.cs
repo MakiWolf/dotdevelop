@@ -62,7 +62,7 @@ namespace MonoDevelop.Components.Docking
 			filler = new Label ();
 			filler.WidthRequest = 4;
 			filler.HeightRequest = 4;
-			box.PackEnd (filler, false, true, 0);
+			box.PackEnd (filler, true, true, 0);
 			
 			ShowAll ();
 			UpdateVisibility ();

@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="../../../../build/bin/MonoDevelop.Ide.dll" />
-    
+    <widget-library name="../../../../build/bin/Mono.TextEditor.dll" />
     <widget-library name="../../../../build/AddIns/MonoDevelop.DesignerSupport/MonoDevelop.DesignerSupport.dll" internal="true" />
   </import>
   <widget class="Gtk.Dialog" id="MonoDevelop.DesignerSupport.Toolbox.ComponentSelectorDialog" design-size="642 433">
@@ -80,6 +80,7 @@
                           <widget class="MonoDevelop.Components.ImageView" id="imageview1">
                             <property name="MemberName" />
                             <property name="IconId">gtk-add</property>
+                            <property name="IconSize">Menu</property>
                           </widget>
                           <packing>
                             <property name="Position">0</property>

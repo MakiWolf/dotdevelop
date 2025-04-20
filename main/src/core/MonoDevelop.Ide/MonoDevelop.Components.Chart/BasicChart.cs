@@ -457,7 +457,8 @@ namespace MonoDevelop.Components.Chart
 			int rwidth, rheight;
 			
 			Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow);
-			
+			rwidth = win.FrameExtents.Width;
+			rheight = win.FrameExtents.Height;
 			//win.GetSize (out rwidth, out rheight);
 			
 			if (autoStartY || autoEndY) {
@@ -494,20 +495,20 @@ namespace MonoDevelop.Components.Chart
 			
 			if (yrangeChanged) {
 				FixOrigins ();
-				//int right = rwidth - 2 - AreaBorderWidth;
+				int right = rwidth - 2 - AreaBorderWidth;
 				left = AreaBorderWidth;
 				left += MeasureAxisSize (AxisPosition.Left) + 1;
-				//right -= MeasureAxisSize (AxisPosition.Right) + 1;
+				right -= MeasureAxisSize (AxisPosition.Right) + 1;
 				yrangeChanged = false;
-				//width = right - left + 1;
+				width = right - left + 1;
 				if (width <= 0) width = 1;
 			}
 			
 			if (xrangeChanged) {
 				FixOrigins ();
-				//int bottom = rheight - 2 - AreaBorderWidth;
+				int bottom = rheight - 2 - AreaBorderWidth;
 				top = AreaBorderWidth;
-				//bottom -= MeasureAxisSize (AxisPosition.Bottom);
+				bottom -= MeasureAxisSize (AxisPosition.Bottom);
 				top += MeasureAxisSize (AxisPosition.Top);
 				
 				// Make room for cursor handles
@@ -517,7 +518,7 @@ namespace MonoDevelop.Components.Chart
 				}
 				
 				xrangeChanged = false;
-				//height = bottom - top + 1;
+				height = bottom - top + 1;
 				if (height <= 0) height = 1;
 			}
 			

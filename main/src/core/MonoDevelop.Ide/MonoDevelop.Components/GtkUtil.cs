@@ -1004,31 +1004,31 @@ namespace MonoDevelop.Components
 			}
 			col.CellSetCellData (tree.Model, iter, false, false);
 
-			// foreach (CellRenderer cr in col.CellRenderers) {
-			// 	if (!cr.Visible)
-			// 		continue;
+			foreach (CellRenderer cr in col.Cells) {
+			 	if (!cr.Visible)
+			 		continue;
 
-			// 	if (cr is CellRendererText) {
-			// 		hasFgColor = ((CellRendererText)cr).GetCellForegroundSet ();
-			// 		save = ((CellRendererText)cr).ForegroundGdk;
+			 	if (cr is CellRendererText) {
+			 		hasFgColor = ((CellRendererText)cr).GetCellForegroundSet ();
+			 		save = ((CellRendererText)cr).ForegroundGdk;
 			// 		((CellRendererText)cr).ForegroundGdk = Style.Foreground (State);
-			// 	}
+			 	}
 
-			// 	int sp, wi, he, xo, yo;
-			// 	col.CellGetPosition (cr, out sp, out wi);
-			// 	Gdk.Rectangle bgrect = new Gdk.Rectangle (x, expose.Y, wi, expose.Height - 2);
+			 	int sp, wi, he, xo, yo;
+			 	col.CellGetPosition (cr, out sp, out wi);
+			 	Gdk.Rectangle bgrect = new Gdk.Rectangle (x, expose.Y, wi, expose.Height - 2);
 			// 	cr.GetSize (tree, ref bgrect, out xo, out yo, out wi, out he);
-			// 	int leftMargin = (int) ((bgrect.Width - wi) * cr.Xalign);
+			 	int leftMargin = (int) ((bgrect.Width - wi) * cr.Xalign);
 			// 	int topMargin = (int) ((bgrect.Height - he) * cr.Yalign);
 			// 	Gdk.Rectangle cellrect = new Gdk.Rectangle (bgrect.X + leftMargin, bgrect.Y + topMargin + 1, wi, he);
 			// 	cr.Render (this.GdkWindow, this, bgrect, cellrect, expose, CellRendererState.Focused);
-			// 	x += bgrect.Width + col.Spacing + 1;
+			 	x += bgrect.Width + col.Spacing + 1;
 
-			// 	if (cr is CellRendererText) {
-			// 		((CellRendererText)cr).ForegroundGdk = save;
-			// 		((CellRendererText)cr).SetCellForegroundSet (hasFgColor);
-			// 	}
-			// }
+			 	if (cr is CellRendererText) {
+			 		((CellRendererText)cr).ForegroundGdk = save;
+			 		((CellRendererText)cr).SetCellForegroundSet (hasFgColor);
+			 	}
+			}
 
 			return true;
 		}

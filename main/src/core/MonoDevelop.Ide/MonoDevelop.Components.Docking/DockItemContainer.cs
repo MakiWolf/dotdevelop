@@ -144,7 +144,7 @@ namespace MonoDevelop.Components.Docking
 				item.GetToolbar (DockPositionType.Right).SetStyle (VisualStyle);
 				item.GetToolbar (DockPositionType.Bottom).SetStyle (VisualStyle);
 
-				if (VisualStyle.TabStyle == DockTabStyle.Normal)
+				//if (VisualStyle.TabStyle == DockTabStyle.Normal)
 					ModifyBg (StateType.Normal, VisualStyle.PadBackgroundColor.Value.ToGdkColor ());
 				//else 
 					//ModifyBg (StateType.Normal, Style.Background(StateType.Normal));

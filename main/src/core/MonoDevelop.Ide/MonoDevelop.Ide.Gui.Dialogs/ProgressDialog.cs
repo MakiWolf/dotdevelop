@@ -58,6 +58,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			this.Build ();
 			this.Title = BrandingService.ApplicationName;
 			this.componentsWindowParent = parent; 
+			this.Resizable = false;
 			//HasSeparator = false;
 			ActionArea.Hide ();
 			DefaultHeight = 5;

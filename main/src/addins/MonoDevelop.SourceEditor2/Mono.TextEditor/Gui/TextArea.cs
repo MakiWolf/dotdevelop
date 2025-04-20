@@ -930,7 +930,7 @@ namespace Mono.TextEditor
 //			GdkWindow.Background = Style.Background (StateType.Normal);
 //			Style = Style.Attach (GdkWindow);
 
-//			imContext.ClientWindow = this.GdkWindow;
+			imContext.ClientWindow = this.Window;
 			Caret.PositionChanged += CaretPositionChanged;
 
 			SetWidgetBgFromStyle ();

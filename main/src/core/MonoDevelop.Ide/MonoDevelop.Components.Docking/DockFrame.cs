@@ -950,7 +950,7 @@ namespace MonoDevelop.Components.Docking
 				w.Parent = this;
 				w.Size = new Size (width, height);
 				Requisition r = w.SizeRequest ();
-//				w.Allocation = new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height);
+				w.SetAllocation(new Gdk.Rectangle (Allocation.X + x, Allocation.Y + y, r.Width, r.Height));
 				topLevels.Add (w);
 			}
 		}

@@ -65,7 +65,7 @@ namespace Mono.TextEditor.PopupWindow
 //				Colormap = Screen.RgbColormap;
 //				SupportsAlpha = false;
 //			} else
-				SupportsAlpha = true;
+				SupportsAlpha = false;
 		}
 		
 		protected override void OnScreenChanged (Gdk.Screen previous_screen)

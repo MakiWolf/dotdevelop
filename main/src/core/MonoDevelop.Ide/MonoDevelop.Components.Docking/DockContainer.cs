@@ -381,7 +381,7 @@ namespace MonoDevelop.Components.Docking
 			attributes.Height = Allocation.Height;
 			attributes.Width = Allocation.Width;
 			attributes.WindowType = Gdk.WindowType.Child;
-//			attributes.Wclass = Gdk.WindowClass.InputOutput;
+			attributes.Wclass = Gdk.WindowWindowClass.InputOutput;
 			attributes.Visual = Visual;
 //			attributes.Colormap = Colormap;
 			attributes.EventMask = (int)(Events |
