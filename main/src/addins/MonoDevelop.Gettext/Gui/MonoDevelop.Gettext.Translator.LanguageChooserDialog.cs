@@ -43,7 +43,7 @@ namespace MonoDevelop.Gettext.Translator
 			this.Gravity = ((global::Gdk.Gravity)(5));
 			this.SkipTaskbarHint = true;
 			// Internal child MonoDevelop.Gettext.Translator.LanguageChooserDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -205,7 +205,7 @@ namespace MonoDevelop.Gettext.Translator
 			w19.Expand = false;
 			w19.Fill = false;
 			// Internal child MonoDevelop.Gettext.Translator.LanguageChooserDialog.ActionArea
-			global::Gtk.HButtonBox w20 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w20 = this.ActionArea;
 			w20.Name = "MonoDevelop.Gettext.LanguageChooserDialog_ActionArea";
 			w20.Spacing = 6;
 			w20.BorderWidth = ((uint)(5));

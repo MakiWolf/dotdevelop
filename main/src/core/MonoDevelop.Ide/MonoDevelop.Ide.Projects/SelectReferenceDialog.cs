@@ -164,7 +164,7 @@ namespace MonoDevelop.Ide.Projects
 			return refTreeStore.AppendValues (txt, secondaryTxt, GetTypeText (refInfo), refInfo.Reference, refInfo, ImageService.GetIcon ("md-package", IconSize.Dnd));
 		}
 
-		[DllImport ("libgtk-win32-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport ("libgtk-3-0.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_notebook_set_action_widget (IntPtr notebook, IntPtr widget, int packType);
 
 		public SelectReferenceDialog ()
@@ -592,15 +592,15 @@ namespace MonoDevelop.Ide.Projects
 
 		protected override void OnRender (Cairo.Context window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, CellRendererState flags)
 		{
-		 	StateType st = StateType.Normal;
+		 	Gtk.StateFlags st = StateFlags.Normal;
 		 	if ((flags & CellRendererState.Prelit) != 0)
-		 		st = StateType.Prelight;
+		 		st = StateFlags.Prelight;
 		 	if ((flags & CellRendererState.Focused) != 0)
-		 		st = StateType.Normal;
+		 		st = StateFlags.Normal;
 		 	if ((flags & CellRendererState.Insensitive) != 0)
-		 		st = StateType.Insensitive;
+		 		st = StateFlags.Insensitive;
 		 	if ((flags & CellRendererState.Selected) != 0)
-		 		st = widget.HasFocus ? StateType.Selected : Gtk.StateType.Active;
+		 		st = widget.HasFocus ? Gtk.StateFlags.Selected : Gtk.StateFlags.Active;
 
 		 	SetupLayout (widget, flags);
 

@@ -34,7 +34,7 @@ namespace MonoDevelop.VersionControl.Git
 			this.Title = global::Mono.Unix.Catalog.GetString ("Remote Source");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.VersionControl.Git.EditRemoteDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -138,7 +138,7 @@ namespace MonoDevelop.VersionControl.Git
 			w10.Expand = false;
 			w10.Fill = false;
 			// Internal child MonoDevelop.VersionControl.Git.EditRemoteDialog.ActionArea
-			global::Gtk.HButtonBox w11 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w11 = this.ActionArea;
 			w11.Name = "dialog1_ActionArea";
 			w11.Spacing = 10;
 			w11.BorderWidth = ((uint)(5));

@@ -47,7 +47,7 @@ namespace MonoDevelop.Ide.Projects
 			this.Title = global::Mono.Unix.Catalog.GetString ("Add File to Folder");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.Ide.Projects.AddExternalFileDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -205,7 +205,7 @@ namespace MonoDevelop.Ide.Projects
 			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox1]));
 			w17.Position = 0;
 			// Internal child MonoDevelop.Ide.Projects.AddExternalFileDialog.ActionArea
-			global::Gtk.HButtonBox w18 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w18 = this.ActionArea;
 			w18.Name = "dialog1_ActionArea";
 			w18.Spacing = 10;
 			w18.BorderWidth = ((uint)(11));

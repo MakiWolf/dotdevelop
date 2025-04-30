@@ -67,7 +67,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.Title = global::Mono.Unix.Catalog.GetString ("Repository Certified by an Unknown Authority");
 			this.Modal = true;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.SslServerTrustDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -340,7 +340,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox1]));
 			w26.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.SslServerTrustDialog.ActionArea
-			global::Gtk.HButtonBox w27 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w27 = this.ActionArea;
 			w27.Events = ((global::Gdk.EventMask)(256));
 			w27.Name = "MonoDevelop.VersionControl.Subversion.SslServerTrustDialog_ActionArea";
 			w27.Spacing = 10;

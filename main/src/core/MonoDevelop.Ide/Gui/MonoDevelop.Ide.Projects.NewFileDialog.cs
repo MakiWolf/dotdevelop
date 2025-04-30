@@ -58,7 +58,7 @@ namespace MonoDevelop.Ide.Projects
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.Ide.Projects.NewFileDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.Spacing = 6;
 			w1.BorderWidth = ((uint)(2));
@@ -79,6 +79,7 @@ namespace MonoDevelop.Ide.Projects
 			this.scrolledwindow1.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child scrolledwindow1.Gtk.Container+ContainerChild
 			this.catView = new global::Gtk.TreeView ();
+			this.catView.Expand = true;
 			this.catView.WidthRequest = 160;
 			this.catView.CanFocus = true;
 			this.catView.Name = "catView";
@@ -250,7 +251,7 @@ namespace MonoDevelop.Ide.Projects
 			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w24.Position = 0;
 			// Internal child MonoDevelop.Ide.Projects.NewFileDialog.ActionArea
-			global::Gtk.HButtonBox w25 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w25 = this.ActionArea;
 			w25.Name = "dialog1_ActionArea";
 			w25.Spacing = 6;
 			w25.BorderWidth = ((uint)(5));

@@ -115,7 +115,7 @@ namespace MonoDevelop.Ide.Gui.Shell
 					// and the Fg color is used for the label.
 					w.ModifyFg (StateType.Prelight, textColor);
 					w.ModifyFg (StateType.Active, textColor);
-				} else
+				} //else
 					//w.ModifyText (StateType.Normal, textColor);
 				w.ModifyFg (StateType.Normal, textColor);
 			};

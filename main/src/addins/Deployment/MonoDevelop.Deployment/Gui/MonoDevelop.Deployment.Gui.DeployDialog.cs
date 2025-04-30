@@ -119,7 +119,7 @@ namespace MonoDevelop.Deployment.Gui
 			this.Title = global::Mono.Unix.Catalog.GetString ("Create Package");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.Deployment.Gui.DeployDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -562,7 +562,7 @@ namespace MonoDevelop.Deployment.Gui
 			global::Gtk.Box.BoxChild w47 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox1]));
 			w47.Position = 0;
 			// Internal child MonoDevelop.Deployment.Gui.DeployDialog.ActionArea
-			global::Gtk.HButtonBox w48 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w48 = this.ActionArea;
 			w48.Name = "MonoDevelop.Deployment.DeployDialog_ActionArea";
 			w48.Spacing = 6;
 			w48.BorderWidth = ((uint)(5));

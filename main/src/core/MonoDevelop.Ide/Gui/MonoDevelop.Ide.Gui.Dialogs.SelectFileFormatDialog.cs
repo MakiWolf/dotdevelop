@@ -45,7 +45,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			this.Title = global::Mono.Unix.Catalog.GetString ("Select File Format");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.Ide.Gui.Dialogs.SelectFileFormatDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -192,7 +192,7 @@ namespace MonoDevelop.Ide.Gui.Dialogs
 			w16.Expand = false;
 			w16.Fill = false;
 			// Internal child MonoDevelop.Ide.Gui.Dialogs.SelectFileFormatDialog.ActionArea
-			global::Gtk.HButtonBox w17 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w17 = this.ActionArea;
 			w17.Name = "dialog1_ActionArea";
 			w17.Spacing = 10;
 			w17.BorderWidth = ((uint)(5));

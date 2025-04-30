@@ -615,7 +615,7 @@ namespace MonoDevelop.Components.PropertyGrid
 					if (r != currentEditorRow) {
 						var bounds = GetInactiveEditorBounds (r);
 
-//						cell.Render (GdkWindow, ctx, bounds, state);
+						cell.Render (ctx, bounds, state);
 
 						if (r.IsExpandable) {
 							var img = r.Expanded ? discloseUp : discloseDown;

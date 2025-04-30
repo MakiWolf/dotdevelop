@@ -41,9 +41,7 @@ using System.Linq;
 using MonoDevelop.Components;
 using MonoDevelop.Components.AutoTest;
 using System.ComponentModel;
-#if GTK3
-using TreeModel = Gtk.ITreeModel;
-#endif
+
 
 namespace MonoDevelop.Ide.Projects
 {
@@ -79,6 +77,7 @@ namespace MonoDevelop.Ide.Projects
 
 			BorderWidth = 6;
 //			HasSeparator = false;
+			this.Resizable = false;
 			InitializeComponents ();
 
 			nameEntry.GrabFocus ();

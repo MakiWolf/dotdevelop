@@ -34,7 +34,7 @@ namespace MonoDevelop.Ide.Projects
 			this.BorderWidth = ((uint)(6));
 			this.Resizable = false;
 			// Internal child MonoDevelop.Ide.Projects.ExportSolutionDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.Spacing = 6;
@@ -123,7 +123,7 @@ namespace MonoDevelop.Ide.Projects
 			w9.Expand = false;
 			w9.Fill = false;
 			// Internal child MonoDevelop.Ide.Projects.ExportSolutionDialog.ActionArea
-			global::Gtk.HButtonBox w10 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w10 = this.ActionArea;
 			w10.Name = "MonoDevelop.Ide.ExportProjectDialog_ActionArea";
 			w10.Spacing = 6;
 			w10.BorderWidth = ((uint)(5));

@@ -25,7 +25,7 @@ namespace MonoDevelop.Debugger
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(3));
 			// Internal child MonoDevelop.Debugger.AttachToProcessDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -103,7 +103,7 @@ namespace MonoDevelop.Debugger
 			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w10.Position = 0;
 			// Internal child MonoDevelop.Debugger.AttachToProcessDialog.ActionArea
-			global::Gtk.HButtonBox w11 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w11 = this.ActionArea;
 			w11.Name = "dialog1_ActionArea";
 			w11.Spacing = 6;
 			w11.BorderWidth = ((uint)(5));

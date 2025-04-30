@@ -44,7 +44,7 @@ namespace MonoDevelop.Refactoring.SignatureChange
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.Refactoring.SignatureChange.SignatureChangeDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.Spacing = 6;
 			w1.BorderWidth = ((uint)(2));
@@ -167,7 +167,7 @@ namespace MonoDevelop.Refactoring.SignatureChange
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w14.Position = 0;
 			// Internal child MonoDevelop.Refactoring.SignatureChange.SignatureChangeDialog.ActionArea
-			global::Gtk.HButtonBox w15 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w15 = this.ActionArea;
 			w15.Name = "dialog1_ActionArea";
 			w15.Spacing = 10;
 			w15.BorderWidth = ((uint)(5));

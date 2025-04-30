@@ -142,18 +142,18 @@ namespace MonoDevelop.Components.PropertyGrid
 			layout.GetPixelSize (out width, out height);
 		}
 
-		// public virtual void Render (Drawable window, Cairo.Context ctx, Rectangle bounds, StateType state)
-		// {
-		// 	int w, h;
-		// 	layout.GetPixelSize (out w, out h);
-		// 	int dy = (bounds.Height - h) / 2;
+		public virtual void Render (Cairo.Context ctx, Gdk.Rectangle bounds, StateType state)
+		{
+		 	int w, h;
+		 	layout.GetPixelSize (out w, out h);
+		 	int dy = (bounds.Height - h) / 2;
 
-		// 	ctx.Save ();
+		 	ctx.Save ();
 		// 	ctx.SetSourceColor (container.Style.Text (state).ToCairoColor ());
-		// 	ctx.MoveTo (bounds.X, dy + bounds.Y);
-		// 	Pango.CairoHelper.ShowLayout (ctx, layout);
-		// 	ctx.Restore ();
-		// }
+		 	ctx.MoveTo (bounds.X, dy + bounds.Y);
+		 	Pango.CairoHelper.ShowLayout (ctx, layout);
+		 	ctx.Restore ();
+		}
 		
 		protected virtual IPropertyEditor CreateEditor (Gdk.Rectangle cellArea, StateType state)
 		{
@@ -354,7 +354,7 @@ namespace MonoDevelop.Components.PropertyGrid
 			rect.Inflate (-3, 0);// Add some margin
 
 			//using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-			//	cell.Render (GdkWindow, ctx, rect, StateType.Normal);
+				cell.Render (evnt, rect, StateType.Normal);
 			//}
 			return res;
 		}

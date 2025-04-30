@@ -42,7 +42,7 @@ namespace MonoDevelop.Gettext
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.Gettext.TranslationProjectOptionsDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -248,7 +248,7 @@ namespace MonoDevelop.Gettext
 			w23.Expand = false;
 			w23.Fill = false;
 			// Internal child MonoDevelop.Gettext.TranslationProjectOptionsDialog.ActionArea
-			global::Gtk.HButtonBox w24 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w24 = this.ActionArea;
 			w24.Name = "dialog1_ActionArea";
 			w24.Spacing = 6;
 			w24.BorderWidth = ((uint)(5));

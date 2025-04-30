@@ -195,6 +195,7 @@ namespace MonoDevelop.Components.Docking
 				// Add space for the separator
 				if (Orientation == Gtk.Orientation.Horizontal)
 					min_height++;
+					natural_height++;
 			}
 		}
 
@@ -206,6 +207,7 @@ namespace MonoDevelop.Components.Docking
 				// Add space for the separator
 				if (Orientation == Gtk.Orientation.Vertical)
 					min_width++;
+					natural_width++;
 			}
 		}
 

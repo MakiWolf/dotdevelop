@@ -58,7 +58,7 @@ namespace MonoDevelop.ChangeLogAddIn
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.ChangeLogAddIn.AddLogEntryDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.Spacing = 6;
@@ -243,7 +243,7 @@ namespace MonoDevelop.ChangeLogAddIn
 			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
 			w21.Position = 0;
 			// Internal child MonoDevelop.ChangeLogAddIn.AddLogEntryDialog.ActionArea
-			global::Gtk.HButtonBox w22 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w22 = this.ActionArea;
 			w22.Events = ((global::Gdk.EventMask)(256));
 			w22.Name = "ChangeLogAddIn.AddLogEntryDialog_ActionArea";
 			w22.Spacing = 6;

@@ -29,7 +29,7 @@ namespace MonoDevelop.Autotools
 			this.Resizable = false;
 //			this.AllowGrow = false;
 			// Internal child MonoDevelop.Autotools.GenerateMakefilesDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -151,7 +151,7 @@ namespace MonoDevelop.Autotools
 			w13.Expand = false;
 			w13.Fill = false;
 			// Internal child MonoDevelop.Autotools.GenerateMakefilesDialog.ActionArea
-			global::Gtk.HButtonBox w14 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w14 = this.ActionArea;
 			w14.Name = "dialog1_ActionArea";
 			w14.Spacing = 6;
 			w14.BorderWidth = ((uint)(5));

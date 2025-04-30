@@ -265,9 +265,9 @@ namespace MonoDevelop.Ide.Projects
 					continue;
 				if (pos - lastPos > 0)
 					result.Append (GLib.Markup.EscapeText (text.Substring (lastPos, pos - lastPos)));
-				result.Append ("<span foreground=\"");
+				//result.Append ("<span foreground=\"");
 				//result.Append (color.ToPangoString ());
-				result.Append ("\">");
+				//result.Append ("\">");
 				result.Append (GLib.Markup.EscapeText (text[pos].ToString ()));
 				result.Append ("</span>");
 				lastPos = pos + 1;

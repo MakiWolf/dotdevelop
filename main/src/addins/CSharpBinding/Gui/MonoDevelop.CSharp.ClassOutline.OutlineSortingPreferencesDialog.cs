@@ -25,7 +25,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 			this.DestroyWithParent = true;
 			// Internal child MonoDevelop.CSharp.ClassOutline.OutlineSortingPreferencesDialog.VBox
 #if GTK3
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 #else
 			global::Gtk.VBox w1 = this.VBox;
 #endif
@@ -58,7 +58,7 @@ namespace MonoDevelop.CSharp.ClassOutline
 			w4.Position = 0;
 			// Internal child MonoDevelop.CSharp.ClassOutline.OutlineSortingPreferencesDialog.ActionArea
 #if GTK3
-			global::Gtk.HButtonBox w5 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w5 = this.ActionArea;
 #else
 			global::Gtk.HButtonBox w5 = this.ActionArea;
 #endif

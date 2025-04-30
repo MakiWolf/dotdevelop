@@ -23,7 +23,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.Name = "MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Client Certificate Required");
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -106,7 +106,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			w9.Expand = false;
 			w9.Fill = false;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificateDialog.ActionArea
-			global::Gtk.HButtonBox w10 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w10 = this.ActionArea;
 			w10.Events = ((global::Gdk.EventMask)(256));
 			w10.Name = "MonoDevelop.VersionControl.Subversion.ClientCertificateDialog_ActionArea";
 			w10.Spacing = 10;

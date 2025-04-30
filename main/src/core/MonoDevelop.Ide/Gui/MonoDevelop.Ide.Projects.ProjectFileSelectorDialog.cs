@@ -41,7 +41,7 @@ namespace MonoDevelop.Ide.Projects
 			this.Title = global::Mono.Unix.Catalog.GetString ("Select Project File...");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.Ide.Projects.ProjectFileSelectorDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -142,7 +142,7 @@ namespace MonoDevelop.Ide.Projects
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(w1 [this.hpaned1]));
 			w14.Position = 0;
 			// Internal child MonoDevelop.Ide.Projects.ProjectFileSelectorDialog.ActionArea
-			global::Gtk.HButtonBox w15 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w15 = this.ActionArea;
 			w15.Name = "dialog1_ActionArea";
 			w15.Spacing = 6;
 			w15.BorderWidth = ((uint)(5));

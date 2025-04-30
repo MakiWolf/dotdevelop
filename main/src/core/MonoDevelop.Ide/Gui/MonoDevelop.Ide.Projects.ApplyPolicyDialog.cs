@@ -29,7 +29,7 @@ namespace MonoDevelop.Ide.Projects
 			this.Title = global::Mono.Unix.Catalog.GetString ("Apply Policies");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.Ide.Projects.ApplyPolicyDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -160,7 +160,7 @@ namespace MonoDevelop.Ide.Projects
 			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox3]));
 			w16.Position = 0;
 			// Internal child MonoDevelop.Ide.Projects.ApplyPolicyDialog.ActionArea
-			global::Gtk.HButtonBox w17 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w17 = this.ActionArea;
 			w17.Name = "dialog1_ActionArea";
 			w17.Spacing = 10;
 			w17.BorderWidth = ((uint)(5));

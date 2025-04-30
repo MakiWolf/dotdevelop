@@ -77,7 +77,7 @@ namespace MonoDevelop.WebReferences.Dialogs
 			this.Title = global::Mono.Unix.Catalog.GetString ("Add Web Reference");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.WebReferences.Dialogs.WebReferenceDialog.VBox
-			global::Gtk.VBox w2 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w2 = this.ContentArea;
 			w2.Events = ((global::Gdk.EventMask)(256));
 			w2.Name = "dlgWindow";
 			w2.BorderWidth = ((uint)(2));
@@ -244,7 +244,7 @@ namespace MonoDevelop.WebReferences.Dialogs
 			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(w2 [this.vbxContainer]));
 			w17.Position = 0;
 			// Internal child MonoDevelop.WebReferences.Dialogs.WebReferenceDialog.ActionArea
-			global::Gtk.HButtonBox w18 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w18 = this.ActionArea;
 			w18.Events = ((global::Gdk.EventMask)(256));
 			w18.Name = "pnlActionArea";
 			w18.Spacing = 6;

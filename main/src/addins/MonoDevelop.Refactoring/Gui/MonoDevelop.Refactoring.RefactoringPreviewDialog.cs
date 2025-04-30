@@ -25,7 +25,7 @@ namespace MonoDevelop.Refactoring
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.Refactoring.RefactoringPreviewDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -59,7 +59,7 @@ namespace MonoDevelop.Refactoring
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w5.Position = 0;
 			// Internal child MonoDevelop.Refactoring.RefactoringPreviewDialog.ActionArea
-			global::Gtk.HButtonBox w6 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w6 = this.ActionArea;
 			w6.Name = "dialog1_ActionArea";
 			w6.Spacing = 10;
 			w6.BorderWidth = ((uint)(5));

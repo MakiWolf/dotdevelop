@@ -23,7 +23,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			this.Name = "MonoDevelop.VersionControl.Subversion.Gui.ClientCertificatePasswordDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Password for client certificate");
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificatePasswordDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -110,7 +110,7 @@ namespace MonoDevelop.VersionControl.Subversion.Gui
 			w9.Expand = false;
 			w9.Fill = false;
 			// Internal child MonoDevelop.VersionControl.Subversion.Gui.ClientCertificatePasswordDialog.ActionArea
-			global::Gtk.HButtonBox w10 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w10 = this.ActionArea;
 			w10.Events = ((global::Gdk.EventMask)(256));
 			w10.Name = "MonoDevelop.VersionControl.Subversion.ClientCertificatePasswordDialog_ActionArea";
 			w10.Spacing = 10;

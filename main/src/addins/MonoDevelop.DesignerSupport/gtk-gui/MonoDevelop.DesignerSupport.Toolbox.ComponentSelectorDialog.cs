@@ -46,7 +46,7 @@ namespace MonoDevelop.DesignerSupport.Toolbox
 			Title = Catalog.GetString ("Toolbox Item Selector");
 			WindowPosition = WindowPosition.CenterOnParent;
 			// Internal child MonoDevelop.DesignerSupport.Toolbox.ComponentSelectorDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = 2;
 			// Container child dialog1_VBox.Gtk.Box+BoxChild

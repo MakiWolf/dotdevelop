@@ -28,7 +28,7 @@ namespace MonoDevelop.CSharp.Formatting
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.CSharp.Formatting.NewFormattingProfileDialog.VBox
 #if GTK3
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 #else
 			global::Gtk.VBox w1 = this.VBox;
 #endif
@@ -91,7 +91,7 @@ namespace MonoDevelop.CSharp.Formatting
 			w6.Fill = false;
 			// Internal child MonoDevelop.CSharp.Formatting.NewFormattingProfileDialog.ActionArea
 #if GTK3
-			global::Gtk.HButtonBox w7 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w7 = this.ActionArea;
 #else
 			global::Gtk.HButtonBox w7 = this.ActionArea;
 #endif

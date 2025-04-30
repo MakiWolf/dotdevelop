@@ -27,7 +27,7 @@ namespace MonoDevelop.VersionControl.Git
 			this.Name = "MonoDevelop.VersionControl.Git.MergeDialog";
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child MonoDevelop.VersionControl.Git.MergeDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -86,7 +86,7 @@ namespace MonoDevelop.VersionControl.Git
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
 			w7.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Git.MergeDialog.ActionArea
-			global::Gtk.HButtonBox w8 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w8 = this.ActionArea;
 			w8.Name = "dialog1_ActionArea";
 			w8.Spacing = 10;
 			w8.BorderWidth = ((uint)(5));

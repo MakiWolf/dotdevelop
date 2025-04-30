@@ -978,11 +978,13 @@ namespace MonoDevelop.Components
 			 	col.CellGetPosition (cr, out sp, out wi);
 			 	Gdk.Rectangle crect = new Gdk.Rectangle (x, rect.Y, wi, rect.Height);
 			 	//cr.GetSize (tree, ref crect, out xo, out yo, out wi, out he);
+				wi = crect.Width;
+				he = crect.Height;
 			 	if (cr != renderers [renderers.Length - 1])
 			 		x += crect.Width + col.Spacing + 1;
 			 	else
 			 		x += wi + 1;
-			 	//if (he > th) th = he;
+			 	if (he > th) th = he;
 			}
 			SetSizeRequest (x, th + 2);
 		}
@@ -1018,10 +1020,13 @@ namespace MonoDevelop.Components
 			 	col.CellGetPosition (cr, out sp, out wi);
 			 	Gdk.Rectangle bgrect = new Gdk.Rectangle (x, expose.Y, wi, expose.Height - 2);
 			// 	cr.GetSize (tree, ref bgrect, out xo, out yo, out wi, out he);
+				wi = bgrect.Width;
+				he = bgrect.Height;
 			 	int leftMargin = (int) ((bgrect.Width - wi) * cr.Xalign);
-			// 	int topMargin = (int) ((bgrect.Height - he) * cr.Yalign);
-			// 	Gdk.Rectangle cellrect = new Gdk.Rectangle (bgrect.X + leftMargin, bgrect.Y + topMargin + 1, wi, he);
+			 	int topMargin = (int) ((bgrect.Height - he) * cr.Yalign);
+			 	Gdk.Rectangle cellrect = new Gdk.Rectangle (bgrect.X + leftMargin, bgrect.Y + topMargin + 1, wi, he);
 			// 	cr.Render (this.GdkWindow, this, bgrect, cellrect, expose, CellRendererState.Focused);
+				cr.Render (evnt, this, bgrect, cellrect, expose, CellRendererState.Focused);
 			 	x += bgrect.Width + col.Spacing + 1;
 
 			 	if (cr is CellRendererText) {

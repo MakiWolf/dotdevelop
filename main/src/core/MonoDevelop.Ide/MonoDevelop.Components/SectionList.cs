@@ -106,7 +106,7 @@ namespace MonoDevelop.Components
 			
 			var attributes = new Gdk.WindowAttr () {
 				WindowType = Gdk.WindowType.Child,
-//				Wclass = Gdk.WindowClass.InputOnly,
+				Wclass = Gdk.WindowWindowClass.InputOnly,
 				EventMask = (int) (
 					EventMask.EnterNotifyMask |
 					EventMask.LeaveNotifyMask |

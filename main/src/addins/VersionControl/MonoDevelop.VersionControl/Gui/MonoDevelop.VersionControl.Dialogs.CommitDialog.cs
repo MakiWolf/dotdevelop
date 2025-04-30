@@ -27,7 +27,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.BorderWidth = ((uint)(6));
 			// Internal child MonoDevelop.VersionControl.Dialogs.CommitDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog_VBox";
 			w1.Spacing = 6;
@@ -119,7 +119,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(w1 [this.mainBox]));
 			w11.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Dialogs.CommitDialog.ActionArea
-			global::Gtk.HButtonBox w12 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w12 = this.ActionArea;
 			w12.Events = ((global::Gdk.EventMask)(256));
 			w12.Name = "VersionControlAddIn.CommitDialog_ActionArea";
 			w12.Spacing = 6;

@@ -25,7 +25,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			this.BorderWidth = ((uint)(6));
 			this.DefaultWidth = 500;
 			// Internal child MonoDevelop.VersionControl.Dialogs.EditRepositoryDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(256));
 			w1.Name = "dialog-vbox3";
 			w1.Spacing = 6;
@@ -104,7 +104,7 @@ namespace MonoDevelop.VersionControl.Dialogs
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox1]));
 			w9.Position = 0;
 			// Internal child MonoDevelop.VersionControl.Dialogs.EditRepositoryDialog.ActionArea
-			global::Gtk.HButtonBox w10 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w10 = this.ActionArea;
 			w10.Events = ((global::Gdk.EventMask)(256));
 			w10.Name = "GtkDialog_ActionArea";
 			w10.Spacing = 10;

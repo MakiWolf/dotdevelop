@@ -92,7 +92,7 @@ namespace MonoDevelop.Deployment
 			this.Resizable = false;
 //			this.AllowGrow = false;
 			// Internal child MonoDevelop.Deployment.FileReplaceDialog.VBox
-			global::Gtk.VBox w1 = (Gtk.VBox)this.ContentArea;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.Spacing = 4;
 			w1.BorderWidth = ((uint)(2));
@@ -418,7 +418,7 @@ namespace MonoDevelop.Deployment
 			global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(w1 [this.hbox2]));
 			w37.Position = 2;
 			// Internal child MonoDevelop.Deployment.FileReplaceDialog.ActionArea
-			global::Gtk.HButtonBox w38 = (Gtk.HButtonBox)this.ActionArea;
+			global::Gtk.ButtonBox w38 = this.ActionArea;
 			w38.Name = "dialog1_ActionArea";
 			w38.Spacing = 6;
 			w38.BorderWidth = ((uint)(5));
