@@ -90,18 +90,14 @@ namespace MonoDevelop.Components.Docking
 			base.OnDestroyed ();
 		}
 
-		protected override void OnGetPreferredHeight (out int min_height, out int natural_height)
-		{
-			base.OnGetPreferredHeight (out min_height, out natural_height);
+        protected override void OnGetPreferredHeight(out int min_height, out int natural_height)
+        {
+			min_height = natural_height = (int) primary.Height;
+        }
 
-			min_height = (int) primary.Height;
-		}
-
-		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
-		{
-			base.OnGetPreferredWidth (out min_width, out natural_width);
-
-			min_width = (int) primary.Width;
+        protected override void OnGetPreferredWidth(out int min_width, out int natural_width)
+        {
+			min_width = natural_width = (int) primary.Width;
 		}
 
 		protected override bool OnDrawn (Context context)
@@ -120,8 +116,8 @@ namespace MonoDevelop.Components.Docking
 		void RenderIcon (Cairo.Context context, Xwt.Drawing.Image surface, double opacity)
 		{
 			context.DrawImage (this, surface.WithAlpha (opacity),
-			                          Allocation.X + (Allocation.Width - surface.Width) / 2,
-			                          Allocation.Y + (Allocation.Height - surface.Height) / 2);
+			                          (Allocation.Width - surface.Width) / 2,
+			                          (Allocation.Height - surface.Height) / 2);
 		}
 	}
 

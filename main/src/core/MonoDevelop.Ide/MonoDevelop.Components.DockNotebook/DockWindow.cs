@@ -152,9 +152,9 @@ namespace MonoDevelop.Components.DockNotebook
 		{
 			base.OnRealized ();
 			// A small delay to make sure the window is fully rendered before showing it
-			GdkWindow.Opacity = 0;
+			Window.Opacity = 0;
 			GLib.Timeout.Add (120, delegate {
-				GdkWindow.Opacity = 1;
+				Window.Opacity = 1;
 				return false;
 			});
 		}

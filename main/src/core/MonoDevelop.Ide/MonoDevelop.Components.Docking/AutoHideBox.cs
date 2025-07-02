@@ -100,11 +100,11 @@ namespace MonoDevelop.Components.Docking
 			
 			if (horiz) {
 				fr = new HBox ();
-				sepBox.Realized += delegate { sepBox.GdkWindow.Cursor = resizeCursorW; };
+				sepBox.Realized += delegate { sepBox.Window.Cursor = resizeCursorW; };
 				sepBox.WidthRequest = gripSize;
 			} else {
 				fr = new VBox ();
-				sepBox.Realized += delegate { sepBox.GdkWindow.Cursor = resizeCursorH; };
+				sepBox.Realized += delegate { sepBox.Window.Cursor = resizeCursorH; };
 				sepBox.HeightRequest = gripSize;
 			}
 			fr.Accessible.SetShouldIgnore (true);
@@ -397,22 +397,22 @@ namespace MonoDevelop.Components.Docking
 		
 		protected override void OnGetPreferredHeight (out int min_height, out int natural_height)
 		{
-			base.OnGetPreferredHeight (out min_height, out natural_height);
+			//base.OnGetPreferredHeight (out min_height, out natural_height);
 			if (scrollMode || Child == null) {
-				min_height = 0;
+				min_height = natural_height = 0;
 			}
 			else
-				min_height = Child.SizeRequest ().Height;
+				Child.GetPreferredHeight(out min_height, out natural_height);
 		}
 
 		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
 		{
-			base.OnGetPreferredWidth (out min_width, out natural_width);
+			//base.OnGetPreferredWidth (out min_width, out natural_width);
 			if (scrollMode || Child == null) {
-				min_width = 0;
+				min_width = natural_width = 0;
 			}
 			else
-				min_width = Child.SizeRequest ().Width;
+				Child.GetPreferredWidth(out min_width, out natural_width);
 		}
 
 		protected override void OnSizeAllocated (Rectangle alloc)

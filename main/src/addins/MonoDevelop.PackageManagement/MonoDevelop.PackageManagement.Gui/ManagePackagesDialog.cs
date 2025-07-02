@@ -119,7 +119,7 @@ namespace MonoDevelop.PackageManagement
 
 		void UpdateTabAccessibility ()
 		{
-			if (tabGroup.Surface.ToolkitEngine.Type == ToolkitType.Gtk) {
+			if (tabGroup.Surface.ToolkitEngine.Type == ToolkitType.Gtk3) {
 				if (consolidateLabel.Parent.Surface.NativeWidget is Gtk.Container a11yGroup) {
 					a11yGroup.Accessible.SetRole (AtkCocoa.Roles.AXTabGroup);
 					var children = a11yGroup.Children;
@@ -214,7 +214,7 @@ namespace MonoDevelop.PackageManagement
 			packagesListView.RowActivated += PackagesListRowActivated;
 			packagesListView.VerticalScrollControl.ValueChanged += PackagesListViewScrollValueChanged;
 
-			if (Toolkit.CurrentEngine.Type == ToolkitType.Gtk) {
+			if (Toolkit.CurrentEngine.Type == ToolkitType.Gtk3) {
 				// TODO: unlike Xwt.TreeView, Xwt.ListView has no UseAlternatingRowColors property
 				var gtkTreeView = packagesListView.Surface.NativeWidget as Gtk.Widget;
 				if (gtkTreeView is Gtk.ScrolledWindow scroll)

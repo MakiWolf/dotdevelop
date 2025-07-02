@@ -245,22 +245,10 @@ namespace MonoDevelop.Components.Docking
 
 				// Dark separator
 				switch (Position) {
-				case PositionType.Left:
-					ctx.MoveTo (alloc.X + alloc.Width - 0.5, alloc.Y);
-					ctx.RelLineTo (0, Allocation.Height);
-					break;
-				case PositionType.Right:
-					ctx.MoveTo (alloc.X + 0.5, alloc.Y);
-					ctx.RelLineTo (0, Allocation.Height);
-					break;
-				case PositionType.Top:
-					ctx.MoveTo (alloc.X, alloc.Y + alloc.Height + 0.5);
-					ctx.RelLineTo (Allocation.Width, 0);
-					break;
-				case PositionType.Bottom:
-					ctx.MoveTo (alloc.X, alloc.Y + 0.5);
-					ctx.RelLineTo (Allocation.Width, 0);
-					break;
+				case PositionType.Left:ctx.MoveTo (AllocatedWidth - 0.5, 0); ctx.RelLineTo (0, AllocatedHeight); break;
+				case PositionType.Right: ctx.MoveTo (0.5, 0); ctx.RelLineTo (0, AllocatedHeight); break;
+				case PositionType.Top: ctx.MoveTo (0, AllocatedHeight + 0.5); ctx.RelLineTo (AllocatedWidth, 0); break;
+				case PositionType.Bottom: ctx.MoveTo (0, 0.5); ctx.RelLineTo (AllocatedWidth, 0); break;
 				}
 
 				ctx.SetSourceColor (Styles.DockSeparatorColor.ToCairoColor ());

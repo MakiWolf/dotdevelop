@@ -32,15 +32,15 @@ namespace MonoDevelop.Components
 {
 	public static class PangoUtil
 	{
-		internal const string LIBGTK          = "libgtk-3-0.dll";
-		internal const string LIBATK          = "libatk-1.0-0.dll";
-		internal const string LIBGLIB         = "libglib-2.0-0.dll";
-		internal const string LIBGDK          = "libgdk-3-0.dll";
-		internal const string LIBGOBJECT      = "libgobject-2.0-0.dll";
-		internal const string LIBPANGO        = "libpango-1.0-0.dll";
-		internal const string LIBPANGOCAIRO   = "libpangocairo-1.0-0.dll";
-		internal const string LIBQUARTZ       = "libgtk-quartz-2.0.dylib";
-		internal const string LIBGTKGLUE      = "libgtksharpglue-3.so";
+		internal const string LIBGTK          = "libgtk-3.so.0";
+		internal const string LIBATK          = "libatk-1.0.so.0";
+		internal const string LIBGLIB         = "libglib-2.0.so.0";
+		internal const string LIBGDK          = "libgdk-3.so.0";
+		internal const string LIBGOBJECT      = "libgobject-2.0.so.0";
+		internal const string LIBPANGO        = "libpango-1.0.so.0";
+		internal const string LIBPANGOCAIRO   = "libpangocairo-1.0.so.0";
+		//internal const string LIBQUARTZ       = "libgtk-quartz-2.0.dylib";
+		//internal const string LIBGTKGLUE      = "libgtksharpglue-3.so";
 
 		/// <summary>
 		/// This doesn't leak Pango layouts, unlike some other ways to create them in GTK# &lt;= 2.12.11

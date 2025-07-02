@@ -75,7 +75,7 @@ namespace MonoDevelop.Ide.Gui
 
 	public class Log
 	{
-		const string LIBGLIB = "libglib-2.0-0.dll";
+		const string LIBGLIB = "libglib-2.0.so.0";
 		static Hashtable handlers;
 
 		static void EnsureHash ()

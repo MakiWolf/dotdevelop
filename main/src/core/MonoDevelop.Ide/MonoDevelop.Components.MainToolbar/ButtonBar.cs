@@ -186,11 +186,11 @@ namespace MonoDevelop.Components.MainToolbar
 			min_width = VisibleButtons.Sum (b => b.Visible ? (!b.IsSeparator ? (int)btnNormalOriginal[0].Width : SeparatorSpacing) : 0);
 		}
 
-		protected override bool OnDrawn (Cairo.Context evnt)
+		protected override bool OnDrawn (Cairo.Context context)
 		{
 			ScaleImages (Allocation.Height);
 
-			using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
+			//using (var context = Gdk.CairoHelper.Create (GdkWindow)) {
 				double x = Allocation.X, y = Allocation.Y;
 				for (int i = 0; i < VisibleButtons.Length; i++) {
 					bool nextIsSeparator = (i < VisibleButtons.Length - 1 && VisibleButtons[i + 1].IsSeparator) || i == VisibleButtons.Length - 1;
@@ -210,11 +210,11 @@ namespace MonoDevelop.Components.MainToolbar
 					var icon = ImageService.GetIcon (button.Image, IconSize.Menu);
 					if (!Sensitive || !button.Enabled)
 						icon = icon.WithAlpha (0.4);
-					context.DrawImage (this, icon, Math.Truncate (x + (img.Width - icon.Width) / 2), Math.Truncate (y + (img.Height - icon.Height) / 2));
+					context.DrawImage (this, icon, Math.Truncate ((img.Width - icon.Width) / 2), Math.Truncate ((img.Height - icon.Height) / 2));
 					x += img.Width;
 				}
-			}
-			return base.OnDrawn (evnt);
+			//}
+			return base.OnDrawn (context);
 		}
 
 		Xwt.Drawing.Image ExpandImageVertically (Xwt.Drawing.Image img, int newHeight)

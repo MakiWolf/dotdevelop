@@ -198,7 +198,8 @@ namespace MonoDevelop.Components.Docking
 			if (IsRealized && labelWidget?.Visible == true) {
 				var font = IdeServices.FontService.SansFont.CopyModified (null, Pango.Weight.Bold);
 				font.AbsoluteSize = Pango.Units.FromPixels (11);
-				//labelWidget.ModifyFont (font);
+				labelWidget.ModifyFont (font);
+				labelWidget.ModifyFg (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
 				//labelWidget.ModifyText (StateType.Normal, (active ? visualStyle.PadTitleLabelColor.Value : visualStyle.InactivePadTitleLabelColor.Value).ToGdkColor ());
 			}
 
@@ -442,8 +443,8 @@ namespace MonoDevelop.Components.Docking
 			} else if (!evnt.TriggersContextMenu () && evnt.Button == 1) {
 				frame.DockInPlaceholder (item);
 				frame.HidePlaceholder ();
-				if (GdkWindow != null)
-					GdkWindow.Cursor = null;
+				if (Window != null)
+					Window.Cursor = null;
 				frame.Toplevel.KeyPressEvent -= HeaderKeyPress;
 				frame.Toplevel.KeyReleaseEvent -= HeaderKeyRelease;
 			}
@@ -482,7 +483,7 @@ namespace MonoDevelop.Components.Docking
 		{
 			if (tabPressed && !item.Behavior.HasFlag (DockItemBehavior.NoGrip) && Math.Abs (evnt.X - pressX) > 3 && Math.Abs (evnt.Y - pressY) > 3) {
 				frame.ShowPlaceholder (item);
-				GdkWindow.Cursor = fleurCursor;
+				Window.Cursor = fleurCursor;
 				frame.Toplevel.KeyPressEvent += HeaderKeyPress;
 				frame.Toplevel.KeyReleaseEvent += HeaderKeyRelease;
 				allowPlaceholderDocking = true;
@@ -789,7 +790,8 @@ namespace MonoDevelop.Components.Docking
 			var y = Allocation.Y;
 
 			ctx.Rectangle (x, y + 1, Allocation.Width, Allocation.Height - 1);
-			ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+			//ctx.SetSourceColor (Styles.DockBarBackground.ToCairoColor ());
+			ctx.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
 			ctx.Fill ();
 
 			/*

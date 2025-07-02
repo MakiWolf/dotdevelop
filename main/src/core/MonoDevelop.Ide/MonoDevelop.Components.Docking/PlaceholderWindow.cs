@@ -77,7 +77,7 @@ namespace MonoDevelop.Components.Docking
 		protected override void OnRealized ()
 		{
 			base.OnRealized ();
-			GdkWindow.Opacity = 0.6;
+			Window.Opacity = 0.6;
 		}
 		
 		void CreateShape (int width, int height)

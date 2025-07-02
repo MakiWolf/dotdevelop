@@ -568,9 +568,9 @@ namespace MonoDevelop.Components
 			Gdk.ModifierType modifier = evt.State;
 			byte grp = evt.Group;
 
-			if (GtkMinorVersion >= 20) {
+			//if (GtkMinorVersion >= 20) {
 				gdk_keymap_add_virtual_modifiers (keymap.Handle, ref modifier);
-			}
+			//}
 
 			//full key mapping
 			uint keyval;
@@ -965,7 +965,7 @@ namespace MonoDevelop.Components
 		{
 			Xwt.GtkBackend.GtkWorkarounds.SetLinkHandler (label,urlHandler);
 #if DD_GTK3_CHECK_FOR_REMOVE
-			if (GtkMinorVersion >= 18)
+			//if (GtkMinorVersion >= 18)
 				new UrlHandlerClosure (urlHandler).ConnectTo (label);
 #endif
 		}
@@ -989,8 +989,7 @@ namespace MonoDevelop.Components
 
 			public void ConnectTo (Gtk.Label label)
 			{
-				var signal = GLib.Signal.Lookup (label, "activate-link", typeof(ActivateLinkEventArgs));
-				signal.AddDelegate (new EventHandler<ActivateLinkEventArgs> (HandleLink));
+				label.AddSignalHandler ("activate-link", new EventHandler<ActivateLinkEventArgs> (HandleLink), typeof(ActivateLinkEventArgs));
 			}
 
 			class ActivateLinkEventArgs : GLib.SignalArgs

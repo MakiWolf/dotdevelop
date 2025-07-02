@@ -267,27 +267,35 @@ namespace MonoDevelop.Components.Docking
 			child = null;
 		}
 
-		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
-		{
-			if (child != null) {
-				min_width = child.SizeRequest ().Width;
+		 protected override void OnGetPreferredWidth(out int min_width, out int natural_width)
+        {
+            if (child != null)
+            {
+                child.GetPreferredWidth(out min_width, out natural_width);
 				min_width += leftMargin + rightMargin + leftPadding + rightPadding;
-			} else {
-				min_width = 0;
-			}
-			natural_width = min_width;
-		}
+                natural_width = min_width;
+            }
+            else
+            {
+                natural_width = min_width = 0;
+            }
+        }
 
-		protected override void OnGetPreferredHeight (out int min_height, out int natural_height)
-		{
-			if (child != null) {
-				min_height = child.SizeRequest ().Height;
-				min_height += topMargin + bottomMargin + topPadding + bottomPadding;
-			} else {
-				min_height = 0;
-			}
-			natural_height = min_height;
-		}
+        protected override void OnGetPreferredHeight(out int min_height, out int natural_height)
+        {
+            if (child != null)
+            {
+                child.GetPreferredHeight(out min_height, out natural_height);
+                min_height += topMargin + bottomMargin + topPadding + bottomPadding;
+                natural_height = min_height;
+            }
+            else
+            {
+                natural_height = min_height = 0;
+            }
+        }
+
+       
 
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{

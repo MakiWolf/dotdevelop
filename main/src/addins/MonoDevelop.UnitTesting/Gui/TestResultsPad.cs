@@ -744,9 +744,9 @@ namespace MonoDevelop.UnitTesting
 					int curLine = 1;
 					const int maxLineLength = 255;
 					const int maxLineNumber = 255;
-					//sb.Append ("<span font='");
-					//sb.Append (IdeServices.FontService.MonospaceFontName);
-					//sb.Append ("'>");
+					sb.Append ("<span font='");
+					sb.Append (IdeServices.FontService.MonospaceFontName);
+					sb.Append ("'>");
 					using (var sr = new StringReader (Escape(result.Message))) {
 						while (null != (curLineText = sr.ReadLine ())) {
 							if (curLineText == null) continue;

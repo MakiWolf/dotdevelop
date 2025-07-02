@@ -173,6 +173,7 @@ namespace MonoDevelop.Components.AtkCocoaHelper
 
 		void HandleSignalAttachment (Action<GLib.Signal, EventHandler<GLib.SignalArgs>> action)
 		{
+			owner.AddSignalHandler ("request-actions", new EventHandler<GLib.SignalArgs> (RequestActionsHandler), typeof(GLib.SignalArgs));
 //			var signal = GLib.Signal.Lookup (owner, "request-actions", typeof (GLib.SignalArgs));
 //			action (signal, new EventHandler<GLib.SignalArgs> (RequestActionsHandler));
 

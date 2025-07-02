@@ -45,7 +45,8 @@ namespace MonoDevelop.Components.Extensions
 			toolbar.GradientBackground = true;
 			toolbar.SetMargins (0, 1, 0, 0);
 			MainBox.PackStart (toolbar, false, false, 0);
-			((Gtk.Box.BoxChild)MainBox [toolbar]).Position = 0;
+			MainBox.ReorderChild(toolbar,0);
+			//((Gtk.Box.BoxChild)MainBox [toolbar]).Position = 0;
 		}
 
 		public void SetHeaderContent (IWidgetBackend backend)

@@ -55,6 +55,7 @@ namespace MonoDevelop.Components
 
 			using (var ctx = CairoHelper.Create (GdkWindow)) {
 				//ctx.SetSourceColor (Style.Text (State).ToCairoColor ());
+				ctx.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.9));
 				ctx.MoveTo (tx, ty);
 
 				// In order to get the same result as in MonoDevelop.Components.DockNotebook.TabStrip.DrawTab()
@@ -70,9 +71,10 @@ namespace MonoDevelop.Components
 
 				using (var lg = new LinearGradient (tx + w - 1, 0, tx + w, 0)) {
 					//var color = Style.Text (State).ToCairoColor ();
-					//lg.AddColorStop (0, color);
+					lg.AddColorStop (0, new Cairo.Color(0,0,0,1));
 					//color.A = 0.99;
 					//lg.AddColorStop (1, color);
+					lg.AddColorStop (1, new Cairo.Color(0,0,0,1));
 					ctx.SetSource (lg);
 					Pango.CairoHelper.ShowLayout (ctx, la);
 				}

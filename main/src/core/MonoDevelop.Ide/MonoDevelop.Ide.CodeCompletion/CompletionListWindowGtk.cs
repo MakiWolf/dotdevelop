@@ -353,15 +353,15 @@ namespace MonoDevelop.Ide.CodeCompletion
 				return false;
 
 			Gdk.Rectangle rect = list.GetRowArea (item);
-			if (rect.IsEmpty || rect.Bottom < (int)list.VAdjustment.Value || rect.Y > list.Allocation.Height + (int)list.VAdjustment.Value)
-				return false;
+			//if (rect.IsEmpty || rect.Bottom < (int)list.VAdjustment.Value || rect.Y > list.Allocation.Height + (int)list.VAdjustment.Value)
+			// 	return false;
 
 			int ox;
 			int oy;
 			base.GdkWindow.GetOrigin (out ox, out oy);
 			declarationviewwindow.MaximumYTopBound = oy;
 			int y = rect.Y + Theme.Padding - (int)list.VAdjustment.Value;
-			declarationviewwindow.ShowPopup (this, new Gdk.Rectangle (0, Math.Min (Allocation.Height, Math.Max (0, y)), Allocation.Width, rect.Height), PopupPosition.Left);
+			//declarationviewwindow.ShowPopup (this, new Gdk.Rectangle (0, Math.Min (Allocation.Height, Math.Max (0, y)), Allocation.Width, rect.Height), PopupPosition.Left);
 			return true;
 		}
 

@@ -984,6 +984,7 @@ namespace MonoDevelop.UnitTesting
 		
 		public HeaderLabel ()
 		{
+			HasWindow = true;
 			//WidgetFlags |= WidgetFlags.NoWindow;
 			layout = new Pango.Layout (this.PangoContext);
 		}

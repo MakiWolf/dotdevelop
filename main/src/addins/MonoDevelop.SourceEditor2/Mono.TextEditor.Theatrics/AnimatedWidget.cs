@@ -125,7 +125,7 @@ namespace Mono.TextEditor.Theatrics
 			
 			Gdk.WindowAttr attributes = new Gdk.WindowAttr ();
 			attributes.WindowType = Gdk.WindowType.Child;
-//			attributes.Wclass = Gdk.WindowClass.InputOutput;
+			attributes.Wclass = Gdk.WindowWindowClass.InputOutput;
 			attributes.EventMask = (int)Gdk.EventMask.ExposureMask;
 			GdkWindow = new Gdk.Window (Parent.GdkWindow, attributes, 0);
 			GdkWindow.UserData = Handle;

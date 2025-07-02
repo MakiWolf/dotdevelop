@@ -174,11 +174,11 @@ namespace MonoDevelop.Components
 			targetRect = targetRectangle.ToXwtRectangle ();
 			targetPosition = position;
 			Gdk.Window targetWindow;
-			if (evt != null) {
-				eventProvided = true;
-				targetWindow = evt.Window;
-			} else
-				targetWindow = parent.GdkWindow;
+			 if (evt != null) {
+			 	eventProvided = true;
+			 	targetWindow = evt.Window;
+			 } else
+				targetWindow = parent.Window;
 
 			if (targetWindow != null) {
 				int x, y;
@@ -202,7 +202,7 @@ namespace MonoDevelop.Components
 		{
 			Opacity = 0;
 			RepositionWindow ();
-			Show ();
+			Show (); //
 			Opacity = 1;
 		}
 
@@ -305,8 +305,9 @@ namespace MonoDevelop.Components
 
 		public virtual void RepositionWindow (Rectangle? newTargetRect = null)
 		{
-			if (!HasParent)
-				return;
+			
+			//if (!HasParent)
+			//	return;
 
 			if (newTargetRect.HasValue)
 				targetRect = newTargetRect.Value;

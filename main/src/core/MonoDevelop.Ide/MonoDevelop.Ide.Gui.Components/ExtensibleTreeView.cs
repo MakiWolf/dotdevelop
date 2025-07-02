@@ -194,7 +194,7 @@ namespace MonoDevelop.Ide.Gui.Components
 
 		void UpdateFont ()
 		{
-			//text_render.CustomFont = IdeApp.Preferences.CustomPadFont ?? tree.Style.FontDescription;
+			text_render.CustomFont = IdeApp.Preferences.CustomPadFont ?? tree.Style.FontDesc;
 			tree.ColumnsAutosize ();
 		}
 

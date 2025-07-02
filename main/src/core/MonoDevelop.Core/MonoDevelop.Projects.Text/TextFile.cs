@@ -41,7 +41,7 @@ namespace MonoDevelop.Projects.Text
 {
 	public class TextFile: ITextFile
 	{
-		const string LIBGLIB = "libglib-2.0-0.dll";
+		const string LIBGLIB = "libglib-2.0.so.0";
 
 		FilePath name;
 		StringBuilder text;

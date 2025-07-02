@@ -86,7 +86,7 @@ namespace MonoDevelop.Ide
 
 			const int defaultPriority = 0;
 
-			[DllImport ("libglib-2.0-0.dll", CallingConvention = CallingConvention.Cdecl)]
+			[DllImport ("libglib-2.0.so.0", CallingConvention = CallingConvention.Cdecl)]
 			static extern uint g_timeout_add_full (int priority, uint interval, GSourceFuncInternal d, IntPtr data, GLib.DestroyNotify notify);
 
 			class ExceptionWithStackTraceWithoutThrowing : Exception

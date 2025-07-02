@@ -135,22 +135,20 @@ namespace MonoDevelop.Components.Docking
 		
 		protected override void OnGetPreferredWidth (out int min_width, out int natural_width)
 		{
-			min_width = 0;
+			 base.OnGetPreferredWidth(out min_width, out natural_width);
 			if (layout != null) {
 				LayoutWidgets ();
-				min_width = layout.SizeRequest ().Width;
-			}
-			natural_width = min_width;
+                min_width = natural_width = layout.SizeRequest().Width;
+            }
 		}
 
 		protected override void OnGetPreferredHeight (out int min_height, out int natural_height)
 		{
-			min_height = 0;
+			 base.OnGetPreferredHeight(out min_height, out natural_height);
 			if (layout != null) {
 				LayoutWidgets ();
-				min_height = layout.SizeRequest ().Height;
+				min_height = natural_height = layout.SizeRequest().Height;
 			}
-			natural_height = min_height;
 		}
 		
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
@@ -159,8 +157,8 @@ namespace MonoDevelop.Components.Docking
 			if (layout == null)
 				return;
 			
-			if (this.GdkWindow != null)
-				this.GdkWindow.MoveResize (rect);
+			if (this.Window != null)
+				this.Window.MoveResize (rect);
 			
 			// This container has its own window, so allocation of children
 			// is relative to 0,0
@@ -395,12 +393,12 @@ namespace MonoDevelop.Components.Docking
 				Gdk.WindowAttributesType.Y |
 //				Gdk.WindowAttributesType.Colormap |
 				Gdk.WindowAttributesType.Visual;
-			GdkWindow = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
-			GdkWindow.UserData = Handle;
+			Window = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
+			Window.UserData = Handle;
 
-			Style = Style.Attach (GdkWindow);
-			Style.SetBackground (GdkWindow, State);
-			this.HasWindow = true;
+			Style = Style.Attach (Window);
+			Style.SetBackground (Window, State);
+			HasWindow = true;
 
 			//GdkWindow.SetBackPixmap (null, true);
 
@@ -409,10 +407,10 @@ namespace MonoDevelop.Components.Docking
 		
 		protected override void OnUnrealized ()
 		{
-			if (this.GdkWindow != null) {
-				this.GdkWindow.UserData = IntPtr.Zero;
-				this.GdkWindow.Destroy ();
-				this.HasWindow = false;
+			if (this.Window != null) {
+				this.Window.UserData = IntPtr.Zero;
+				this.Window.Destroy ();
+				HasWindow = false;
 			}
 			base.OnUnrealized ();
 		}
@@ -440,12 +438,12 @@ namespace MonoDevelop.Components.Docking
 				placeholderWindow.AllowDocking = allowDocking;
 
 				int ox, oy;
-				GdkWindow.GetOrigin (out ox, out oy);
+				Window.GetOrigin (out ox, out oy);
 
 				int tw, th;
 				padTitleWindow.GetSize (out tw, out th);
 				padTitleWindow.Move (ox + px - tw / 2, oy + py - th / 2);
-				padTitleWindow.GdkWindow.KeepAbove = true;
+				padTitleWindow.Window.KeepAbove = true;
 
 				DockDelegate dockDelegate;
 				Gdk.Rectangle rect;
@@ -563,15 +561,15 @@ namespace MonoDevelop.Components.Docking
 			protected override bool OnEnterNotifyEvent (EventCrossing evnt)
 			{
 				if (Allocation.Height > Allocation.Width)
-					GdkWindow.Cursor = hresizeCursor;
+					Window.Cursor = hresizeCursor;
 				else
-					GdkWindow.Cursor = vresizeCursor;
+					Window.Cursor = vresizeCursor;
 				return base.OnEnterNotifyEvent (evnt);
 			}
 
 			protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
 			{
-				GdkWindow.Cursor = null;
+				Window.Cursor = null;
 				return base.OnLeaveNotifyEvent (evnt);
 			}
 

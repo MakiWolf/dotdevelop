@@ -42,7 +42,7 @@ namespace MonoDevelop.ExtensionTools
 
 		public Task<int> Run (string[] arguments)
 		{
-			Xwt.Application.Initialize (ToolkitType.Gtk);
+			Xwt.Application.Initialize (ToolkitType.Gtk3);
 #if MAC
 			var dir = Path.GetDirectoryName (typeof (Application).Assembly.Location);
 			if (ObjCRuntime.Dlfcn.dlopen (Path.Combine (dir, "libxammac.dylib"), 0) == IntPtr.Zero) {

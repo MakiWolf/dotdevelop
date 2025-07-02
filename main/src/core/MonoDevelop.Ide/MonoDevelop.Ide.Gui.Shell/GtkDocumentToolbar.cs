@@ -159,9 +159,9 @@ namespace MonoDevelop.Ide.Gui.Shell
 			{
 			}
 
-			protected override bool OnDrawn (Cairo.Context evnt)
+			protected override bool OnDrawn (Cairo.Context ctx)
 			{
-				using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+				//using (var ctx = Gdk.CairoHelper.Create (GdkWindow)) {
 					ctx.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 					ctx.SetSourceColor (Styles.BreadcrumbBackgroundColor.ToCairoColor ());
 					ctx.Fill ();
@@ -171,8 +171,8 @@ namespace MonoDevelop.Ide.Gui.Shell
 					ctx.SetSourceColor (Styles.BreadcrumbBottomBorderColor.ToCairoColor ());
 					ctx.LineWidth = 1;
 					ctx.Stroke ();
-				}
-				return base.OnDrawn (evnt);
+				//}
+				return base.OnDrawn (ctx);
 			}
 		}
 	}

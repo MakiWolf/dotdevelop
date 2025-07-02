@@ -102,7 +102,7 @@ namespace MonoDevelop.Components.MainToolbar
 			return runtime == null || runtime.IsSeparator;
 		}
 
-		void RuntimeRenderCell (/*CellLayout layout,*/ CellRenderer cell, ITreeModel model, TreeIter iter)
+		void RuntimeRenderCell (ICellLayout layout, CellRenderer cell, ITreeModel model, TreeIter iter)
 		{
 			var runtime = (IRuntimeModel)model.GetValue (iter, 0);
 			var renderer = (CellRendererText) cell;
@@ -172,7 +172,7 @@ namespace MonoDevelop.Components.MainToolbar
 			if (Platform.IsWindows)
 				ctx.Ellipsize = Pango.EllipsizeMode.Middle;
 			runtimeCombo.PackStart (ctx, true);
-//			runtimeCombo.SetCellDataFunc (ctx, RuntimeRenderCell);
+			runtimeCombo.SetCellDataFunc (ctx, RuntimeRenderCell);
 			runtimeCombo.RowSeparatorFunc = RuntimeIsSeparator;
 			runtimeCombo.TooltipText = GettextCatalog.GetString ("The device on which to deploy and launch the projects when running or debugging.");
 
